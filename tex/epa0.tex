@@ -57,7 +57,7 @@ la paginación varía, aunque nunca en más de una página.\par
 
 \vglue 2pc
 
-\def\epaversion{\the\year.%
+\def\timestamp{\the\year.%
  \ifnum\month<10 0\fi \the\month.%
  \ifnum\day<10 0\fi\the\day:%
   \count255=\time \divide\count255 by 60
@@ -65,6 +65,10 @@ la paginación varía, aunque nunca en más de una página.\par
   \multiply\count255 by 60 \advance\count255 by -\time
   \multiply\count255 by -1
  \ifnum\count255<10 0\fi \the\count255}
+
+\def\epaversion{\the\year%
+ \ifnum\month<10 0\fi \the\month%
+ \ifnum\day<10 0\fi\the\day}
 
  {\lmtwo El problema aparente}\par
  {\sl Una teoría del conocimiento}\par
