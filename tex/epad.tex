@@ -1,7 +1,5 @@
 % EPAD.TEX (RMCG19970304)
 
-\newpage
-
 \title2 La dinámica
 
 \title3 La ecuación dinámica
@@ -178,8 +176,6 @@ desde el estado $S_0$. Es decir:
  $$ Z^{|A}_{S_0}\!\bigl(I(0), I(1), \ldots, I(\tau)\bigr) = |O(\tau) ,$$
 que se calcula como hemos visto arriba.
 
-\goodpage
-
 \title4 Extensión probabilística
 
 La extensión probabilística de la función de transferencia, notada
@@ -256,14 +252,14 @@ Y, por lo tanto,
 Con lo que se demuestra que:
  $Z^{|A}_{S_0} = Z^{|A'}_{S'_0} \implies |Z^{|A}_{S_0} = |Z^{|A'}_{S'_0}$.
 
-\goodpage
-
 \title4 Extensión temporal
 
 La extensión en el tiempo de la función de transferencia, notada
 $\vec{Z}^{|A}_{S_0}$, es la función que devuelve, en vez del valor final
 $|O(\tau)$ como $Z^{|A}_{S_0}$, toda la secuencia
  $|O(0), |O(1), \ldots, |O(\tau)$.
+
+\goodpage
 
 \labeled\title3 El comportamiento
 
@@ -399,6 +395,7 @@ también se deduce que:
     \prl \ID_{\st C} \F_B
     \prl \op{Cross}_{\st C,\st B} \ID_{\inp C}
     \prl \ID_{\st B} \F_C .$$
+\vskip-22pt
 % Composición en serie
 \MTbeginfigure(150,60);
  \MT: pickup thin_pen;
@@ -617,6 +614,7 @@ también se deduce que:
     \prl \prl \ID_{\st B} \op{Cross}_{\st C,\inp B} \ID_{\inp C}
     \prl \F_B \F_C
     \prl \prl \ID_{\st B} \op{Cross}_{\out B,\st C} \ID_{\out C} .$$
+\vskip-6pt
 % Composición en paralelo
 \MTbeginfigure(120,80);
  \MT: pickup thin_pen;
@@ -698,7 +696,7 @@ en la expresión que calcula $|O^{|A}$,  tenemos que:
    \sum_{\dot{o}_0 \ddot{o}_0}
     \P|B_{\dot{S}_0 \dot{I}_0 \dot{n}_0 \dot{o}_0}
     \P|C_{\ddot{S}_0 \ddot{I}_0 \ddot{n}_0 \ddot{o}_0}
- = \cr \qquad\qquad =
+ = \cr \noalign{\vskip0pt plus 55pt\break} \qquad\qquad =
   \biggl(
    \sum_{\dot{s}_\tau \dot{n}_\tau}
     \P|B_{\dot{s}_\tau \dot{I}_\tau \dot{n}_\tau \dot{o}_\tau} \cdot
