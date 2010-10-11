@@ -26,13 +26,23 @@
 
 \font\logo=logo10 \def\METAFONT{{\logo METAFONT}}
 
-\def\pdfRed{\pdfliteral{0 1 1 0 k}}
-\def\pdfBlack{\pdfliteral{0 0 0 1 k}}
-\def\pdfWhite{\pdfliteral{0 0 0 0 k}}
+\font\ptitlefont=texnansi-lmssbx10 at 70pt
+\font\psubtitlefont=texnansi-lmss10 at 40pt
+\font\pauthorfont=texnansi-lmss10 at 50pt
+\font\pboldtextfont=texnansi-lmssbx10 at 12pt
+\font\ptextfont=texnansi-lmss10 at 12pt
+
+\def\pdfBlack{\pdfliteral{0 0 0 1 k 0 0 0 1 K}}
+\def\pdfWhite{\pdfliteral{0 0 0 0 k 0 0 0 0 K}}
+\def\pdfRed{\pdfliteral{0 1 1 0 k 0 1 1 0 K}}
+\def\pdfBlue{\pdfliteral{1 1 0 0 k 1 1 0 0 K}}
+\def\pdfGreen{\pdfliteral{1 0 1 0 k 1 0 1 0 K}}
+\def\pdfCinnamon{\pdfliteral{0 0.49 1 0.52 k 0 0.49 1 0.52 K}}
 
 \catcode`\@=11
 
 % Layout
+% 22cm x 14cm (22 cm = 623.622047 bp, 14 cm = 396.850394 bp)
 
 \newdimen\hpage \newdimen\vpage 
 
@@ -56,6 +66,17 @@
 %\raggedbottom
 
 \def\breakif#1{\vskip#1\baselineskip \penalty-250 \vskip-#1\baselineskip}
+
+\def\background{\pdfcode
+  \pdfliteral{q}% save current graphic state in the stack
+  \pdfCinnamon
+  \pdfliteral{-49 -568 m}%
+  \pdfliteral{348 -568 l}%
+  \pdfliteral{348 57 l}%
+  \pdfliteral{-49 57 l}%
+  \pdfliteral{-49 -568 l}%
+  \pdfliteral{b Q}% close, stroke, fill, and restore graphic state
+ \pdfendcode}
 
 %\colors      % OPTIONAL COLORS
 \def\RED{\ifx\Yellow\relax\else

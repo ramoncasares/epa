@@ -220,39 +220,25 @@ en mayor o menor grado, por esta epistemología de carácter subjetivista son:
 
 \break % Contraportada
 
-% 22cm x 14cm (22 cm = 623.622047 bp, 14 cm = 396.850394 bp)
-\vsize=\vpage \advance\vsize-72bp \voffset=36bp \advance\voffset-1in
-\hsize=\hpage \advance\hsize-72bp \hoffset=36bp \advance\hoffset-1in
-
-\pdfliteral{q}% save current graphic state in the stack
-%\pdfliteral{0 1 1 0 k 0 1 1 0 K}% set red
-%\pdfliteral{1 1 0 0 k 1 1 0 0 K}% set blue
-%\pdfliteral{1 0 1 0 k 1 0 1 0 K}% set green
-\pdfliteral{0 0.49 1 0.52 k 0 0.49 1 0.52 K}% set cinnamon
-\pdfliteral{-36 -588 m}% moves to the origin, 72 * 8 = 576
-\pdfliteral{361 -588 l}%  72 * 5 = 360
-\pdfliteral{361 36 l}%
-\pdfliteral{-36 36 l}%
-\pdfliteral{-36 -588 l}% 
-\pdfliteral{b Q}% close, stroke, fill, and restore graphic state
-
+\background
 \pdfWhite
 \input ean13
-\font\cpboldtextfont=texnansi-lmssbx10 at 12pt
-\font\cptextfont=texnansi-lmss10 at 12pt
 
-\cptextfont
+\null
+\vsize=\vpage \advance\vsize-72bp
+\vskip-2\baselineskip
+
+\ptextfont
 \parindent=0pt
-\parskip=0pt plus1pt
-\baselineskip=13.3pt %14.4pt
+\parskip=0pt plus1pt minus1pt
+\baselineskip=13.3pt plus1pt minus1pt %14.4pt
 
-{\cpboldtextfont El problema aparente} 
+{\pboldtextfont El problema aparente}
 presenta una teoría del conocimiento modelada matemáticamente,
 de modo que sus conceptos son precisos y
 sus consecuencias son verificables.
 Pretende, por consiguiente,
-sentar las bases de una epistemología científica,
-que resulta ser subjetivista.
+sentar las bases de una epistemología científica.
 Responde, entre otras, a cuestiones tales como:
  \par
  ¿Hay diferencia entre adaptación y aprendizaje?\par
@@ -290,7 +276,7 @@ Responde, entre otras, a cuestiones tales como:
  ¿Piensa un perro?\par
  ¿Qué es un vaso?\par
  ¿Qué es la vida?\par
- ¿Qué soy yo?\kern5cm\vbox to 0pt{\vss\pdfBlack
+ ¿Qué soy yo?\kern4.4cm\vbox to 0pt{\vss\pdfBlack
   \hbox{%
    \pdfliteral{q}% save current graphic state in the stack
    \pdfliteral{0 0 0 0 k 0 0 0 1 K}% set black stroke on white fill
@@ -305,51 +291,5 @@ Responde, entre otras, a cuestiones tales como:
    \EAN 978-84-7774-877-9
    \relax
  }\kern1pc}\par
-
 \endinput
-
-{\bf El problema aparente} presenta una teoría del conocimiento modelada
-matemáticamente, de modo que sus conceptos son precisos y sus consecuencias
-verificables. Pretende, por consiguiente, sentar las bases de una
-epistemología científica, que resulta ser subjetivista. Y responde, entre
-otras, a las cuestiones siguientes:
-\vfil
-\begingroup\parindent=0pt\obeylines
- ¿Hay diferencia entre adaptación y aprendizaje?
- ¿Qué maneras hay de resolver un problema?
- ¿Hay diferencia entre saber y conocimiento?
- ¿Cuál es el último reducto del absolutismo?
- ¿Hay diferencia entre solución y resolución?
- ¿Qué razón evolutiva tiene el simbolismo?
- ¿Se pueden pensar varias cosas a la vez?
- ¿Qué conceptos son transcendentes?
- ¿Cómo es posible la comunicación?
- ¿Se puede fabricar una persona?
- ¿Cuál es el problema aparente?
- ¿Para qué sirve la consciencia?
- ¿Es mi cuerpo parte de mi yo?
- ¿Son peligrosas las paradojas?
- ¿Sabe sumar una calculadora?
- ¿Es inteligente un ordenador?
- ¿Qué es un comportamiento?
- ¿Por qué sufrimos ilusiones?
- ¿Qué niega el materialismo?
- ¿Para qué sirve la sintaxis?
- ¿Puede ser feliz un perro?
- Esta frase es falsa, ¿lo es?
- ¿Para qué sirve la lógica?
- ¿Qué significa significa?
- ¿Qué es la abstracción?
- ¿Qué es un problema?
- ¿Soy yo una persona?
- ¿Qué es la felicidad?
- ¿Puedo yo ser libre?
- ¿Qué es la libertad?
- ¿Explica la ciencia?
- ¿Por qué morimos?
- ¿Piensa un perro?
- ¿Qué es un vaso?
- ¿Qué es la vida?
- ¿Qué soy yo?
-\endgroup
 

@@ -12,42 +12,25 @@
 %\endgroup
 \pdfendcode
 
-\null % [1] Portada
+% [1] Portada
 
 \nopagenumbers
-
-\font\titlefont=texnansi-lmssbx10 at 70pt
-\font\subtitlefont=texnansi-lmss10 at 40pt
-\font\authorfont=texnansi-lmss10 at 50pt
-
-\pdfliteral{q}% save current graphic state in the stack
-%\pdfliteral{0 1 1 0 k 0 1 1 0 K}% set red
-%\pdfliteral{1 1 0 0 k 1 1 0 0 K}% set blue
-%\pdfliteral{1 0 1 0 k 1 0 1 0 K}% set green
-\pdfliteral{0 0.49 1 0.52 k 0 0.49 1 0.52 K}% set cinnamon
-\pdfliteral{-72 -576 m}% moves to the origin, 72 * 8 = 576
-\pdfliteral{360 -576 l}%  72 * 5 = 360
-\pdfliteral{360 72 l}%
-\pdfliteral{-72 72 l}%
-\pdfliteral{-72 -576 l}% 
-\pdfliteral{b Q}% close, stroke, fill, and restore graphic state
-
+\background
 \pdfWhite
 
 \hbox{}
-\vskip1.2in
-\centerline{\titlefont El problema}
+\vskip1.3in
+\centerline{\ptitlefont El problema}
 \vskip1pc
-\centerline{\titlefont aparente}
+\centerline{\ptitlefont aparente}
 
 \vskip10pc
-\centerline{\subtitlefont Una teoría del}
+\centerline{\psubtitlefont Una teoría del}
 \vskip6pt
-\centerline{\subtitlefont conocimiento}
+\centerline{\psubtitlefont conocimiento}
 
 \vskip2pc
-\centerline{\authorfont Ramón Casares}
-
+\centerline{\pauthorfont Ramón Casares}
 \pdfBlack
 
 \vfil
