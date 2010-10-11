@@ -294,7 +294,7 @@
 % PROLOG
 \def\prolog#1 (#2){\ifparra\newpage
  \hrule height0pt\vskip\prologskip\else\bigskip\bigskip\fi
- \centerline{\toc1{#1}\vbox{\lmone \openup3pt
+ \centerline{\pdflabel\toc1{#1}\vbox{\lmone \openup3pt
   \halign{\hfil##\hfil\cr #1\crcr}}}\def\sectionname{#2}%
   \bigskip\bigskip}
 \def\chapter#1 \par{\bigbreak\noindent{\lmtwo#1}\par\nobreak\smallskip}
