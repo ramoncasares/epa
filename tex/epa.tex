@@ -1,0 +1,626 @@
+% epa.tex (RMCG20100919)
+
+\input explain
+\input fonts
+\input index
+\input metatex
+
+% Fonts
+
+\font\tenbb=msbm10  \let\bbold\tenbb % N, B, T
+\font\ninebb=msbm9
+
+\font\tenrm=rm-lmr10 
+\font\ninerm=rm-lmr9 
+\font\eightrm=rm-lmr8
+
+\def\tenpoint{\lmfonts \textfont0=\tenrm}
+\def\ninepoint{\lmixfonts \textfont0=\ninerm
+ \skewchar\lmixmi='177 \skewchar\lmixsy='60 }
+\def\eightpt{\lmviiifonts \textfont0=\eightrm 
+ \skewchar\viiiscriptmi='177 \skewchar\viiiscriptsy='60 }
+\tenpoint\lmtitles\ansifont
+
+\def\tttext{\tt\frenchspacing
+ \spaceskip=.5em plus.25em minus.15em\relax}
+
+\font\logo=logo10 \def\METAFONT{{\logo METAFONT}}
+
+\def\pdfRed{\pdfliteral{0 1 1 0 k}}
+\def\pdfBlack{\pdfliteral{0 0 0 1 k}}
+\def\pdfWhite{\pdfliteral{0 0 0 0 k}}
+
+\catcode`\@=11
+
+% Layout
+
+\newdimen\hpage \newdimen\vpage 
+
+\let\docinfo\relax \let\infodoc\relax
+
+\headline={\hfil}
+\footline={\tenrm\ifodd\pageno \docinfo\hfil\folio
+            \else \folio\hfil\infodoc \fi\strut}
+
+\hpage=14cm \hsize=25pc % 105mm
+ \hoffset\hpage \advance\hoffset-\hsize \divide\hoffset2
+ \advance\hoffset-1in
+\vpage=22cm \vsize=40\baselineskip \advance\vsize\topskip % 40 + 1 lines
+ \voffset\vpage \advance\voffset-\vsize \advance\voffset-2\baselineskip
+ \divide\voffset2 \advance\voffset-1in
+
+\pdfcode \pdfpageheight=\vpage \pdfpagewidth=\hpage \pdfendcode
+
+%\parskip=0pt plus 0.0001pt minus 0.0001pt
+%\parindent=20pt 
+%\raggedbottom
+
+\def\breakif#1{\vskip#1\baselineskip \penalty-250 \vskip-#1\baselineskip}
+
+%\colors      % OPTIONAL COLORS
+\def\RED{\ifx\Yellow\relax\else
+ \hbox to0pt{\Yellow\vrule width20pt height8pt depth2pt\Black\hss}\fi}
+
+% Hyphenation
+
+\hyphenation{ma-the-ma-ti-ca ma-the-ma-tis-che}
+
+% Emphasis with automatic italic correction (\/).
+% Use: {\em italic, but {\em roman}, text}.
+\def\em{\ifdim \fontdimen1\font>0pt \rm
+ \else \it \expandafter\aftergroup \fi \itcor}
+\def\itcor{\ifhmode \expandafter\itpuncl@ok \fi}
+\def\itpuncl@ok{\begingroup\futurelet\ITCt@mpa\itcort@st}
+\def\itcort@st{\def\ITCt@mpb{\ITCt@mpa}%
+ \ifcat\noexpand\ITCt@mpa,\setbox0=\hbox{\ITCt@mpb}%
+  \ifdim\ht0<0.3ex \let\itc@rdo=\endgroup \fi\fi \itc@rdo}
+\def\itc@rdo{\skip0=\lastskip \ifdim\skip0=0pt \/\else
+ \unskip \/\hskip\skip0 \fi \endgroup}
+
+% Maths
+
+\def\inmmode$#1${\relax\ifmmode #1\else $#1$\fi}
+
+\def\ALFA{\aut{A}_{s\imath no}} % mmode
+\def\Metric{\inmmode${\cal M}^{\circ}$}
+\def\inpA{\inmmode${\no I}_{\cal \!A}$}
+\def\outA{\inmmode${\no O}_{\cal \!\!A}$}
+\def\stA{\inmmode${\no S}_{\cal\!A}$}
+\def\prA{\inmmode${\no P}_{\cal\!\!A}$}
+\def\inp#1{\inmmode${\no I}_{\cal #1}$}
+\def\out#1{\inmmode${\no O}_{\cal \!#1}$}
+\def\st#1{\inmmode${\no S}_{\cal #1}$}
+\def\pr#1{\inmmode${\no P}_{\cal\!#1}$}
+\def\FA{\inmmode$\mathop{\cal F}\nolimits_{\cal \!\!A}$}
+\def\F_#1{\inmmode$\mathop{\cal F}\nolimits_{\cal \!#1}$}
+\def\srl{\mathchar"1208\nolimits} % mmode
+\def\prl{\mathchar"120A\nolimits} % mmode
+\def\fdb{\mathchar"120C\nolimits} % mmode
+\def\forallA{\inmmode$\forall\!\!\mathop{\cal A}$}
+\let\prli=\bigotimes
+\let\through\hookrightarrow % mmode
+\mathcode"1F="101F % \O is \O also in mmode
+\let\nodis\approx
+\let\amp\triangleright
+\let\better\succeq
+\def\iffdef{\buildrel\rm def\over\iff}
+\def\eqdef{\buildrel\rm def\over=}
+\def\no#1{{\bf #1}}
+
+\def\aut#1{\inmmode$\mathop{\cal #1}\nolimits$}
+\catcode`\|=13 \let|=\aut
+\expandafter\def\expandafter\dospecials\expandafter{\dospecials\do\|}
+
+\def\op#1{\mathop{\rm #1}\nolimits} % mmode
+\def\opd#1{\mathop{#1}\nolimits} % mmode
+% automata
+\def\ID{\inmmode$\mathop{\cal I}\nolimits$}
+\def\FORK{\inmmode$\op{FORK}$}
+\def\NOP{\inmmode$\op{\O}$}
+\def\NOT{\inmmode$\op{NOT}$}
+\def\XOR{\inmmode$\op{XOR}$}
+\def\OR{\inmmode$\op{OR}$}
+\def\AND{\inmmode$\op{AND}$}
+\def\NAND{\inmmode$\op{NAND}$}
+\def\PERM{\inmmode$\op{PERM}$}
+\def\K{\inmmode$\op{K}$}
+\def\ONE{\inmmode$\op{K1}$}
+\def\ZERO{\inmmode$\op{K0}$}
+\def\Kte(#1,#2){\inmmode$\mathop{\rm Kte}(#1,#2)$}
+\def\SINK{\inmmode$\op{SINK}$}
+\def\PROB{\inmmode$\op{PROB}$}
+\def\DEL{\inmmode$\op{DEL}$}
+\def\SEL{\inmmode$\op{SEL}$}
+\def\Syntax(#1,#2,#3){\inmmode$\mathop{\rm Syntax}(#1,#2,#3)$}
+
+\def\P|#1{\mathop{\hat{\cal#1}}\nolimits}
+
+\mathcode`\?="8000 {\catcode`\?=13 \gdef?{\mathchar"603F\;}}
+
+\def\problem{\wp\mathchar"003F }
+\def\solution{\dagger}
+\def\resolution{\;\rightarrow\;}
+\def\trial{\Im}
+\def\traslation{\aleph}
+\def\apparent{\wp^a\mathchar"003F }
+\def\search{\wp^s\mathchar"003F }
+\def\model{\wp^m\mathchar"003F }
+\def\learn{\wp^\ell\mathchar"003F }
+
+\let\lnand=\vert
+\let\lnor=\downarrow
+
+\let\implies=\Longrightarrow
+\let\leapsfrom=\leftarrow
+
+\def\siif{si} % en ingl\'es \siif es if.
+
+\def\sqr#1#2{{\vcenter{\vbox{\hrule height.#2pt
+ \hbox{\vrule width.#2pt height#1pt \kern#1pt \vrule width.#2pt}
+ \hrule height.#2pt}}}}
+\def\square{\mathchoice\sqr34\sqr34\sqr{2.1}3\sqr{1.5}3}
+% from [320]
+
+% Alignments
+
+\def\eqalignrc#1{\null\,\vcenter{\openup1\jot \m@th
+ \ialign{\strut\hfil$\displaystyle{##}$&\hfil$\displaystyle{##}$\hfil
+ \crcr#1\crcr}}\,}
+
+\def\eqalignrcccl#1{\null\,\vcenter{\openup1\jot \m@th
+ \ialign{\strut\hfil$\displaystyle{##{}}$&\hfil$\displaystyle{{}##{}}$\hfil
+ &\hfil$\displaystyle{{}##{}}$\hfil &\hfil$\displaystyle{{}##{}}$\hfil
+ &$\displaystyle{{}##}$\hfil \crcr#1\crcr}}\,}
+
+\def\openupcase{\advance\normallineskip by 1\jot
+ \advance\normalbaselineskip by 1\jot
+ \advance\normallineskiplimit by 1\jot}
+
+\def\N{\hbox{\bbold N}} % Natural numbers
+\def\B{\hbox{\bbold B}} % Boolean set
+\def\T{\hbox{\bbold T}} % Time
+
+\def\function{\medbreak\noindent}
+\def\fan[#1,#2,#3,#4]{\hskip2em minus1.1em\left[\vcenter{
+ \halign{\hfil$\no ##$\hfil&${}={}##$&$##$\hfil\cr
+ I&& #1\cr O&& #2\cr}}\right.}
+
+\def\llave#1{\inmmode$\left\lbrace\vcenter{
+ \halign{&\hbox{\rm\strut##}\hfil\cr#1\crcr}}\right.$}
+
+% Paragraphs
+
+\def\bulletedpar{\endgraf\hangindent=\parindent
+ {\parskip=\medskipamount\indent}\llap{$\bullet$\enspace}}
+\def\subbulletedpar{\endgraf\hangindent=2\parindent
+ {\parskip=\smallskipamount\indent\indent}\llap{$\circ$\enspace}}
+
+\def\goodpage{\vskip0pt plus.2\vsize\penalty-250 \vskip0pt plus-.2\vsize}
+\def\newpage{\vfill\break}
+\def\newoddpage{\newpage \ifodd\pageno\else\null\newpage\fi}
+
+\def\point{\item{$\bullet$}}
+
+\def\beginquotation{\beginnarrow\smallskip\noindent\sl}
+\def\endquotation{\smallskip\endnarrow}
+
+% Index
+
+% \newcount\d@stno % index
+\newif\iflabeled
+\def\labeled#1\title{\def\thelabel{#1}\labeledtrue\title}
+\newcount\s@one \newcount\s@two \newcount\s@three
+\def\incsec#1{\ifcase #1 \s@one=0 \s@two=0 \s@three=0 \or
+ \advance\s@one by 1 \s@two=0 \s@three=0 \or
+ \advance\s@two by 1 \s@three=0 \or
+ \advance\s@three by 1 \else \fi}
+
+\newif\ifappendix
+\outer\def\annex{\appendixtrue \s@one=0 \ninepoint}
+%\def\nosection{\let\section\empty}
+\def\nosection{\def\section{Z}}
+
+%\def\section{\ifnum\s@one>0
+\def\section{\ifnum\s@one=0 0\else
+  \ifappendix \ifcase\s@one X\or A\or E\or I\or O\or U\else X\fi
+   \else \the\s@one \fi
+  \ifnum\s@two>0 .\the\s@two \ifnum\s@three>0 .\the\s@three \fi\fi\fi}
+
+\def\title#1 {\par \incsec#1 \ifcase #1\let\next=\titlezero \or
+ \let\next=\titleone \or \let\next=\titletwo \or \let\next=\titlethree
+ \else \let\next=\titlefour \fi \next}
+
+\newif\ifparra
+\everypar=\expandafter{\the\everypar\global\parratrue}
+\newskip\prologskip \prologskip=30pt plus12pt minus12pt
+
+\def\titlezero#1 \par{\newpage\vglue\prologskip
+ \centertitle{\pdflabel\lmzero #1}\parrafalse\nobreak\bigskip}
+\def\titleone#1 \par{\ifparra\newpage\else\bigskip\fi
+ \noindent\pdflabel{\lmone\section\quad #1}\toc1{#1}%
+ \def\sectionname{\uppercase{#1}}%
+ \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
+  \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
+ \par\parrafalse\nobreak\smallskip}
+\def\titletwo#1 \par{\ifparra \par\penalty-200\bigskip \else\smallskip\fi
+ \noindent\pdflabel{\lmtwo\section\quad #1}\toc2{#1}%
+ \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
+  \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
+ \par\parrafalse\nobreak\smallskip}
+\def\titlethree#1 \par{\ifparra \par\penalty-100\medskip \fi
+ \noindent\pdflabel{\bf\section\quad #1}\toc3{#1}%
+ \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
+  \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
+ \par\parrafalse\nobreak\smallskip}
+\def\titlefour#1 \par{\ifparra\smallbreak\fi\noindent\pdflabel{\bf#1}\toc4{#1}%
+ \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
+  \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi\quad}
+
+\outer\def\subtitle#1 \par{\par \ifparra\medbreak\fi
+ \noindent{\bf #1}\par\parrafalse\nobreak\smallskip}
+
+\def\centertitle#1{\centerline{\vbox{\baselineskip24pt\let\\=\cr
+ \halign{\hfil##\hfil\cr#1\crcr}}}}
+
+\def\newpart#1{\newpage \null
+ \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else
+  \uppercase{#1}\hfil\fi}\newoddpage{\let\section\empty\pdflabel\toc0{#1}}}
+\def\newPart#1#2{\newpage \null
+ \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else
+  \uppercase{#2}\hfil\fi}\newoddpage{\def\section{#1}\pdflabel\toc0{#2}}}
+\def\sectionname{}
+
+% PROLOG
+\def\prolog#1 (#2){\ifparra\newpage
+ \hrule height0pt\vskip\prologskip\else\bigskip\bigskip\fi
+ \centerline{\toc1{#1}\vbox{\lmone \openup3pt
+  \halign{\hfil##\hfil\cr #1\crcr}}}\def\sectionname{#2}%
+  \bigskip\bigskip}
+\def\chapter#1 \par{\bigbreak\noindent{\lmtwo#1}\par\nobreak\smallskip}
+\def\Q#1 \par{\smallbreak\hang\noindent{\bf#1}\quad}
+
+% Indexing
+
+\def\label#1{\leavevmode\pdflabel\lbl{#1}{}\ignorespaces}
+\def\person#1{\leavevmode\pdflabel\ndx{#1}1\penalty\@M\hskip\z@skip{\sc #1}}
+\def\index#1{\leavevmode\pdflabel\ndx{#1}0\penalty\@M\hskip\z@skip\ignorespaces}
+\def\tocfig#1{\leavevmode\pdflabel\toc9{#1}\global\advance\d@stno1\ignorespaces}
+
+\let\it@d=~
+\def\itc@r{\def\it@b{\it@a}\let\it@c=\/%
+ \ifcat\noexpand\it@a\noexpand\it@d\let\it@c=\relax\else
+ \ifcat\noexpand\it@a,\setbox0=\hbox{\it@b}%
+  \ifdim\ht0<0.3ex \let\it@c=\relax \fi\fi\fi \it@c}
+\def\definition#1{\leavevmode\pdflabel\ndx{#1}0\penalty\@M\hskip\z@skip
+ {\it #1}\futurelet\it@a\itc@r}
+
+\def\ndxline#1#2#3#4#5{\ifnum#2=1
+ \hang\noindent #1\nobreak\quad \pdfgoto{#4}{#5}\par\fi}
+
+\def\gobblefour#1#2#3#4{\ignorespaces}\def\gobblethree#1#2#3{\ignorespaces}
+
+% OUTPUT
+
+% From [416]
+\newcount\footnoteno \footnoteno=0
+
+\def\footnote#1{\edef\@sf{\spacefactor\the\spacefactor}%
+ \global\advance\d@stno1\pdfgoto{#1}{\number\d@stno}\@sf
+ \insert\footins\bgroup \interlinepenalty100 \eightpt
+ \let\par=\endgraf \leftskip=0pt \rightskip=0pt
+ \splittopskip=10pt plus 1pt minus 1pt \floatingpenalty=20000
+ \smallskip\pdfcode\pdfdest num \number\d@stno fitbh\pdfendcode
+ \item{#1}\bgroup\strut\aftergroup\@foot\let\next}
+\skip\footins=\bigskipamount
+\dimen\footins=0.5\vsize
+\def\footnoterule{\kern-3pt \hrule width 3cm \kern 2.6pt\nobreak}
+
+% Output for INDEX adapted from [417]
+
+\newdimen\fullhsize \fullhsize=\hsize
+\newdimen\fullvsize \fullvsize=\vsize
+\def\fullline{\hbox to\fullhsize}
+
+\newdimen\gutter \gutter=5mm %2pc
+\newbox\partialpage
+\def\begindoublecolumns{\begingroup
+ \output={\global\setbox\partialpage=\vbox{\unvbox255\bigskip}}\eject
+ \output={\doublecolumnout}%
+ \hsize=\fullhsize \advance\hsize by-\gutter \divide\hsize by2
+ \vsize=\fullvsize \multiply\vsize by2 \advance\vsize by1pc}
+\def\enddoublecolumns{\output={\balancecolumns}\eject
+ \endgroup \pagegoal=\vsize}
+
+\def\doublecolumnout{\splittopskip=\topskip \splitmaxdepth=\maxdepth
+ \dimen0=\fullvsize \advance\dimen0 by-\ht\partialpage
+ \setbox0=\vsplit255 to\dimen0 \setbox2=\vsplit255 to\dimen0
+ \shipout\vbox{\vbox to0pt{\vskip-22.5pt
+  \fullline{\vbox to8.5pt{}\the\headline}\vss}\nointerlineskip
+  \vbox to\fullvsize{\boxmaxdepth=\maxdepth \pagesofar}
+  \baselineskip=24pt \fullline{\the\footline}}\advancepageno
+ \unvbox255 \penalty\outputpenalty}
+\def\balancecolumns{\setbox0=\vbox{\unvbox255}\dimen0=\ht0
+ \advance\dimen0 by\topskip \advance\dimen0 by-\baselineskip
+ \divide\dimen0 by2 \splittopskip=\topskip
+ {\vbadness=10000 \loop \global\setbox3=\copy0
+  \global\setbox1=\vsplit3 to\dimen0
+  \ifdim\ht3>\dimen0 \global\advance\dimen0 by1pt \repeat}
+ \setbox0=\vbox to\dimen0{\unvbox1}%
+ \setbox2=\vbox to\dimen0{\dimen2=\dp3 \unvbox3 \kern-\dimen2 \vfil}%
+ \pagesofar}
+\def\pagesofar{\unvbox\partialpage \fullline{\box0\hfil\box2}}
+
+% FIGURES
+
+\def\MTendmark{:::}
+
+\MTcode
+pickup pencircle scaled 0.3pt; thin_pen:=savepen;
+pickup pencircle scaled 0.6pt; med_pen:=savepen;
+pickup pencircle scaled 1.2pt; thick_pen:=savepen;
+
+arrow_head_length := 6pt; arrow_head_width := 2.4pt;
+point_diameter := 2.4pt; aperture := 3pt; jot := 2pt;
+u := 1pt; v := 1pt;
+
+def rectangle(suffix s)(expr width,height) =
+ x.s.l = x.s - width/2;
+ x.s.r = x.s + width/2;
+ y.s.t = y.s + height/2;
+ y.s.b = y.s - height/2;
+ draw (x.s.l,y.s.b) -- (x.s.r,y.s.b) --
+  (x.s.r,y.s.t) -- (x.s.l,y.s.t) -- cycle;
+enddef;
+
+def square(suffix s)(expr side) =
+ x.s.l = x.s - side/2;
+ x.s.r = x.s + side/2;
+ y.s.t = y.s + side/2;
+ y.s.b = y.s - side/2;
+ draw (x.s.l,y.s.b) -- (x.s.r,y.s.b) --
+  (x.s.r,y.s.t) -- (x.s.l,y.s.t) -- cycle;
+enddef;
+
+def circle(suffix s)(expr diameter) =
+ x.s.l = x.s - diameter/2;
+ x.s.r = x.s + diameter/2;
+ y.s.t = y.s + diameter/2;
+ y.s.b = y.s - diameter/2;
+ draw (fullcircle scaled diameter shifted z.s);
+enddef;
+
+% point_diameter;
+
+def point(suffix s) =
+ fill fullcircle scaled point_diameter shifted z.s;
+enddef;
+
+% arrow_head_length, arrow_head_width;
+
+def arrowhead(suffix orig,dest) =
+ z.dest.head  = (arrow_head_length/length(z.dest-z.orig))[z.dest,z.orig];
+ z.dest.right = z.dest.head + arrow_head_width / 2 *
+                dir(angle(z.dest-z.orig)+90);
+ z.dest.left  = z.dest.head + arrow_head_width / 2 *
+                dir(angle(z.dest-z.orig)-90);
+ fill z.dest -- z.dest.right -- z.dest.left -- cycle;
+enddef;
+
+def arrow(suffix orig,dest) =
+ arrowhead(orig,dest); draw z.orig .. z.dest.head;
+enddef;
+
+% aperture;
+
+def soft(suffix orig,med,dest) =
+ z.med.o = (aperture/length(z.med-z.orig))[z.med,z.orig];
+ z.med.d = (aperture/length(z.med-z.dest))[z.med,z.dest];
+ draw z.orig --- z.med.o ... z.med.d --- z.dest;
+enddef;
+
+def softt(suffix orig,medone,medtwo,dest) =
+ z.medone.o = (aperture/length(z.medone-z.orig))[z.medone,z.orig];
+ z.medone.d = (aperture/length(z.medone-z.medtwo))[z.medone,z.medtwo];
+ z.medtwo.o = (aperture/length(z.medtwo-z.medone))[z.medtwo,z.medone];
+ z.medtwo.d = (aperture/length(z.medtwo-z.dest))[z.medtwo,z.dest];
+ draw z.orig --- z.medone.o ... z.medone.d
+  --- z.medtwo.o ... z.medtwo.d --- z.dest;
+enddef;
+
+def fork(suffix orig,med,dest) =
+ arrowhead(med,dest); point(orig); soft(orig,med,dest.head);
+enddef;
+
+def arroww(suffix orig,med,dest) =
+ arrowhead(med,dest); soft(orig,med,dest.head);
+enddef;
+
+def arrowww(suffix orig,medone,medtwo,dest) =
+ arrowhead(medtwo,dest); softt(orig,medone,medtwo,dest.head);
+enddef;
+
+def back(suffix s,o,d)(expr upper,size,margin) =
+ pickup thick_pen;
+ y.s.del.t = upper; y.s.del.t - y.s.del.b = size;
+ y.s.del.l = y.s.del.r = 1/2[y.s.del.b,y.s.del.t];
+ x.s.del.r + x.s.del.l = x.o + x.d;
+ x.s.del.r - x.s.del.l = size;
+ x.s.del.t = x.s.del.b = x.s.del.r;
+ draw z.s.del.l -- z.s.del.b -- z.s.del.t -- cycle;
+ pickup med_pen;
+ z.s.tr = (x.o,y.s.del.r);
+ z.s.r =  (x.o+margin,1/2[y.o,y.s.del.r]);
+ z.s.tl = (x.d,y.s.del.l);
+ z.s.l =  (x.d-margin,1/2[y.d,y.s.del.l]);
+ draw z.o {right} .. z.s.r {up} .. z.s.tr {left};
+ arrow(s.tr,s.del.r);
+ draw z.s.del.l --- z.s.tl {left} .. z.s.l {down} .. z.d {right};
+enddef;
+
+def feedback(suffix s,orig,dest)(expr upper,size,margin) =
+ z.s.br = z.orig + (margin,0); z.s.bl = z.dest - (margin,0);
+ back(s,s.br,s.bl,upper,size,margin);
+ draw z.orig .. z.s.br; arrow(s.bl,dest);
+enddef;
+
+def arrowlessfeedback(suffix s,orig,dest)(expr upper,size,margin) =
+ z.s.br = z.orig + (margin,0); z.s.bl = z.dest - (margin,0);
+ back(s,s.br,s.bl,upper,size,margin);
+ draw z.orig .. z.s.br; draw z.s.bl .. z.dest;
+enddef;
+
+def forkback(suffix s,orig,dest)(expr upper,size,margin) =
+ z.s.bl = z.dest - (margin,0); point(orig);
+ back(s,orig,s.bl,upper,size,margin); arrow(s.bl,dest);
+enddef;
+
+def shortforkback(suffix s,orig,dest)(expr upper,size,margin) =
+ z.s.bl = z.dest - (1/2margin,0); point(orig);
+ back(s,orig,s.bl,upper,size,margin); arrow(s.bl,dest);
+enddef;
+
+% CIRCUIT
+
+def or_gate(suffix s)(expr size) =
+ z.s.out = z.s + (0.5,0) scaled size;
+ z.s.tl = z.s + (-0.5,0.5) scaled size;
+ z.s.bl = z.s + (-0.5,-0.5) scaled size;
+ z.s.in1 = z.s + (-0.4,0.25) scaled size;
+ z.s.in2 = z.s + (-0.4,-0.25) scaled size;
+ draw z.s.bl .. z.s.in2 .. z.s.in1 .. z.s.tl;
+ draw z.s.bl{(1,0)} .. {(1,1)}z.s.out;
+ draw z.s.tl{(1,0)} .. {(1,-1)}z.s.out;
+enddef;
+
+def and_gate(suffix s)(expr size)  =
+ z.s.out = z.s + (0.5,0) scaled size;
+ z.s.tl = z.s + (-0.5,0.5) scaled size;
+ z.s.bl = z.s + (-0.5,-0.5) scaled size;
+ z.s.in1 = z.s + (-0.5,0.25) scaled size;
+ z.s.in2 = z.s + (-0.5,-0.25) scaled size;
+ draw z.s.bl .. z.s.tl;
+ draw z.s.bl{(1,0)} .. {(1,1)}z.s.out;
+ draw z.s.tl{(1,0)} .. {(1,-1)}z.s.out;
+enddef;
+
+def not_gate(suffix s)(expr size) =
+ z.s.out = z.s + (0.5,0) scaled size;
+ z.s.tl = z.s + (-0.5,0.35) scaled size;
+ z.s.bl = z.s + (-0.5,-0.35) scaled size;
+ z.s.in = z.s + (-0.5,0) scaled size;
+ z.s.rr = z.s.out + (-0.25,0) scaled size;
+ z.s.rrr = z.s.out + (-0.125,0) scaled size;
+ draw z.s.bl .. z.s.tl;
+ draw z.s.bl .. z.s.rr;
+ draw z.s.tl .. z.s.rr;
+ draw fullcircle scaled (0.25size) shifted z.s.rrr;
+enddef;
+
+def power_supply(suffix s)(expr size) =
+ y.s.t = y.s + 0.5 size; y.s.b = y.s - 0.5 size;
+ x.s.l = x.s - 0.5 size; x.s.r = x.s + 0.5 size;
+ draw fullcircle scaled size shifted z.s;
+ for i := 1 upto 5: x.s[i] = x.s.l + (i/6)*size; endfor
+ y.s[1] = y.s[3] = y.s[5] = y.s;
+ y.s[2] = y.s + 1/6size; y.s[4] = y.s - 1/6size;
+ draw z.s[1] .. z.s[2] .. z.s[3] .. z.s[4] .. z.s[5];
+enddef;
+
+def resistor(suffix s)(expr size) =
+ y.s.t - y.s.b = size; y.s.t + y.s.b = 2y.s;
+ x.s.l = x.s - 1/6size; x.s.r = x.s + 1/6size;
+ for i := 1 upto 4:
+  x.s.l[i] = x.s.l; x.s.r[i] = x.s.r;
+  y.s.l[i] = y.s.r[i] = ((i-1)/3)*size + y.s.b;
+ endfor
+ draw z.s.r[1] -- z.s.l[1] -- z.s.r[2] -- z.s.l[2] --
+           z.s.r[3] -- z.s.l[3] -- z.s.r[4] -- z.s.l[4];
+enddef;
+
+:::
+
+\def\MTbeginfigure(#1,#2);{\MTbeginchar(#1pt,#2pt,0pt);}
+
+\def\MTendfigure"#1"#2;{\MTendchar; % SUBJETO
+ $$\predisplaypenalty=50 \displaywidth=\hsize \displayindent=0pt
+ {\def\cr{\string\cr\space}\def\cite{\string\cite}\def|{\string\aut\space}%
+  \def\person{\string\person}\def\Syntax{\string\Syntax}%
+  \pdflabel\toc9{#1\string|#2}}\global\advance\d@stno1
+ \vcenter{\hbox{\box\MTbox}}\qquad
+ \vcenter{\hbox{\pdfgoto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
+  }{\number\d@stno}}}$$}
+
+\def\MTendfigureX"#1"#2;{\MTendchar; % SUBJETO
+ $$\predisplaypenalty=50 \displaywidth=\hsize \displayindent=0pt
+ {\def\cr{\string\cr\space}\def\cite{\string\cite}\def|{\string\aut\space}%
+  \def\person{\string\person}\def\Syntax{\string\Syntax}%
+  \pdflabel\toc9{#1\string|#2}}\global\advance\d@stno1
+ \vcenter{\hbox{\box\MTbox}}\hss %%%
+ \vcenter{\hbox{\pdfgoto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
+  }{\number\d@stno}}}$$}
+
+%%%%%%
+
+\def\uncatcodeall{\def\do##1{\catcode`##1=12 }\dospecials\dohigh}
+\def\iverb#1{\begingroup\uncatcodeall\obeyspaces\obeylines\d@iverb#1}
+\def\d@iverb#1#2{\def\next##1#2{\immediate\write#1{##1}\endgroup}\next}
+\def\wverb#1{\begingroup\uncatcodeall\obeyspaces\obeylines\d@wverb#1}
+\def\d@wverb#1#2{\def\next##1#2{\write#1{##1}\endgroup}\next}
+
+\saveplain\lmsc \def\lmsc{\string\sc\space}
+\saveplain\lmixsc \def\lmixsc{\string\sc\space}
+\saveplain| \def|{\string|}
+\saveplain\person \def\person{\string\person}
+\saveplain\aut \def\aut{\string\aut\space}
+\files
+\restoreplain\lmixsc \restoreplain\lmsc 
+\restoreplain| \restoreplain\person
+\restoreplain\aut
+
+\catcode`\@=12
+
+% Bibliography
+
+\def\cite#1{\global\advance\footnoteno1
+ \ndx{#1}2\footnote{$^{\number\footnoteno}$}{\ref{#1}.}}
+
+\def\citation#1{\global\advance\footnoteno1
+ \footnote{$^{\number\footnoteno}$}{%
+ {\def\cite##1{\ndx{##1}0\ref{##1}}#1}}}
+
+\newtoks\TITLE \newtoks\AUTHOR \newtoks\YEAR
+\newtoks\ISBN \newtoks\PUBLISHER \newtoks\ADDRESS
+\newtoks\EDITOR \newtoks\BOOKTITLE \newtoks\EDITION \newtoks\YEAREDITION
+\newtoks\JOURNAL \newtoks\VOLUME \newtoks\MONTH \newtoks\PAGES
+\newtoks\NOTE
+\def\cleantoks{%
+ \TITLE={}\AUTHOR={}\YEAR={}\ISBN={}\PUBLISHER={}\ADDRESS={}%
+ \EDITOR={}\BOOKTITLE={}\EDITION={}\YEAREDITION={}\NOTE={}%
+ \JOURNAL={}\VOLUME={}\MONTH={}\PAGES{}}
+
+% TEXT
+
+\input epa0.tex
+
+\newPart{I}{Introducci\'on}
+\input epi1.tex
+\input epi2.tex
+\input epi3.tex
+\input epi4.tex
+
+\newPart{II}{El problema aparente}
+\input epa1.tex
+\input epa2.tex
+\input epa3.tex
+
+\newpart{Anexo}
+\annex
+\input epae.tex
+\input epad.tex
+
+\newpart{Índices}
+\nosection
+\input epai.tex
+
+\bye
+

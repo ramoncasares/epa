@@ -1,0 +1,554 @@
+% EPA.BDB
+
+\record{}{BOOK}{
+ \AUTHOR{}
+ \TITLE{}
+ \PUBLISHER{}
+ \ADDRESS{}
+ \YEAR{}
+ \ISBN{}
+}
+
+
+\record{Abelson1985}{BOOK}{
+ \AUTHOR{Abelson, H.; Sussman, G.J.; Sussman, J.}
+ \TITLE{Structure and Interpretation of Computer Programs}
+ \PUBLISHER{The MIT Press}
+ \ADDRESS{Cambridge MA}
+ \YEAR{1985}
+ \ISBN{0-262-51036-7}
+}
+
+\record{Arbib1987}{BOOK}{
+ \AUTHOR{Arbib, M.A.}
+ \TITLE{Brains, Machines, and Mathematics}
+ \PUBLISHER{Springer Verlag}
+ \ADDRESS{Nueva York}
+ \YEAR{1987}
+ \ISBN{0-387-96539-4}
+}
+
+\record{Ashby1956}{BOOK}{
+ \AUTHOR{Ashby, W.R.}
+ \TITLE{Introducción a la Cibernética}
+ \PUBLISHER{Nueva Visión}
+ \ADDRESS{Buenos Aires}
+ \YEAR{1956}
+ \YEAREDITION{1977}
+}
+
+\record{Barrio1977}{BOOK}{
+ \AUTHOR{Barrio G., J.}
+ \TITLE{Protágoras y Gorgias. Fragmentos y testimonios}
+ \PUBLISHER{Orbis}
+ \ADDRESS{Barcelona}
+ \YEAR{1977}
+ \YEAREDITION{1984}
+ \ISBN{84-7530-499-0}
+}
+
+\record{Boden1990}{BOOK}{
+ \AUTHOR{Boden, M.A.}
+ \TITLE{The Philosophy of Artificial Intelligence}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAR{1990}
+ \ISBN{0-19-824854-7}
+}
+
+\record{Boole1854}{BOOK}{
+ \AUTHOR{Boole, G.}
+ \TITLE{An Investigation of the Laws of Thought}
+ \YEAR{1854}
+ \PUBLISHER{Dover}
+ \ADDRESS{Nueva York}
+ \YEAREDITION{1958}
+ \ISBN{0-486-60028-9}
+}
+
+\record{Brun1965}{BOOK}{
+ \AUTHOR{Brun, J.}
+ \TITLE{Heráclito}
+ \YEAR{1965}
+ \PUBLISHER{Edaf}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1976}
+ \ISBN{84-7640-441-7}
+}
+
+\record{Cantor1897}{ARTICLE}{
+ \AUTHOR{Cantor, G.}
+ \TITLE{Beitr\"age zur Begründung der transfiniten Mengenlehre}
+ \JOURNAL{Mathematische Annalen}
+ \VOLUME{xlvi, xlix}
+ \PAGES{481--512, 207--246}
+ \YEAR{1895, 1897}
+ \NOTE{Traducido al inglés por P.E.B.~Jourdain,
+       Dover, Nueva York, 1955, ISBN 0-486-60045-9}
+}
+
+\record{Chomsky1989}{BOOK}{
+ \AUTHOR{Chomsky, N.}
+ \TITLE{El conocimiento del lenguaje}
+ \PUBLISHER{Alianza}
+ \ADDRESS{Madrid}
+ \YEAR{1989}
+ \ISBN{84-206-2610-4}
+}
+
+\record{Church1936}{ARTICLE}{
+ \AUTHOR{Church, A.}
+ \TITLE{An Unsolvable Problem of Elementary Number Theory}
+ \JOURNAL{Amer.\ J.\ of Math.}
+ \VOLUME{58}
+ \YEAR{1936}
+ \PAGES{345--363}
+}
+
+\record{Churchland1986}{BOOK}{
+ \AUTHOR{Churchland, P.S.}
+ \TITLE{Neurophilosophy: Toward a Unified Science of the Mind/Brain}
+ \PUBLISHER{The MIT Press}
+ \ADDRESS{Cambridge MA}
+ \YEAR{1986}
+ \ISBN{ 0-262-03116-7}
+}
+
+\record{Darwin1859}{BOOK}{
+ \AUTHOR{Darwin, Ch.}
+ \TITLE{On the Origin of Species by Means of Natural Selection,
+        or the Preservation of Favored Races in the Struggle for Life}
+ \YEAR{1859}
+ \PUBLISHER{Penguin}
+ \ADDRESS{Londres}
+ \YEAREDITION{1985}
+ \ISBN{0-14-043205-1}
+}
+
+% No usado
+\record{Dawkins1989}{BOOK}{
+ \AUTHOR{Dawkins, R.}
+ \TITLE{The Shelfish Gene}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAR{1989}
+ \ISBN{0-19-286092-5}
+}
+
+\record{Delgado1987}{BOOK}{
+ \AUTHOR{Delgado Kloos, C.}
+ \TITLE{Semantics of Digital Circuits}
+ \PUBLISHER{Springer Verlag}
+ \ADDRESS{Berlín}
+ \YEAR{1987}
+ \ISBN{3-540-18540-2}
+}
+
+\record{Descartes1641}{BOOK}{
+ \AUTHOR{Descartes, R.}
+ \TITLE{Discurso del método, Meditaciones metafísicas}
+ \YEAR{1637, 1641}
+ \EDITION{Traducción, prólogo y notas de Manuel García Morente}
+ \PUBLISHER{Espasa-Calpe}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1980}
+ \ISBN{84-239-2021-6}
+}
+
+\record{Ernst1978}{BOOK}{
+ \AUTHOR{Ernst, B.}
+ \TITLE{El espejo mágico de Maurits Cornelis Escher}
+ \YEAR{1978}
+ \PUBLISHER{Taschen}
+ \YEAREDITION{1990}
+ \ADDRESS{Berlín}
+ \ISBN{3-89450-240-1}
+}
+
+\record{Fern^^e1ndez1987}{BOOK}{
+ \AUTHOR{Fernández Fernández, G.; Sáez Vacas, F.}
+ \TITLE{Fundamentos de informática}
+ \PUBLISHER{Alianza}
+ \ADDRESS{Madrid}
+ \YEAR{1987}
+ \ISBN{84-206-8604-2}
+}
+
+\record{Feyerabend1988}{BOOK}{
+ \AUTHOR{Feyerabend, P.}
+ \TITLE{Against Method}
+ \EDITION{edición revisada}
+ \PUBLISHER{Verso}
+ \ADDRESS{Londres}
+ \YEAR{1988}
+ \ISBN{0-86091-934-X}
+}
+
+\record{Freud1900}{BOOK}{
+ \AUTHOR{Freud, S.}
+ %\TITLE{Die Traumdeutung}
+ %\PUBLISHER{Franz Deuticke}
+ %\ADDRESS{Leipzig und Wien}
+ \YEAR{1900}
+ \TITLE{La interpretación de los sueños}
+ \EDITION{Traducción de Luis López-Ballesteros y de Torres (1923)}
+ \PUBLISHER{Alianza}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1966}
+ \ISBN{84-206-1993-0}
+}
+
+\record{Gazzaniga1998}{BOOK}{
+ \AUTHOR{Gazzaniga, M.S.}
+ \TITLE{The Mind's Past}
+ \YEAR{1998}
+ \PUBLISHER{University of California Press}
+ \ADDRESS{Berkeley, CA}
+ \ISBN{0-520-21320-3}
+}
+
+\record{G\"odel1931}{ARTICLE}{
+ \AUTHOR{G\"odel, K.}
+ \TITLE{\"Uber formal unentscheidbare S\"atze der
+        {\em Principia Mathematica} und verwandter Systeme, I}
+ \JOURNAL{Monatsh.\ f\"ur Math.\ und Phys.}
+ \VOLUME{38}
+ \YEAR{1931}
+ \PAGES{173--198}
+ \NOTE{Traducido al castellano por Jesús Mosterín,
+       Alianza Universidad, Madrid, 1989,
+       ISBN 84-206-2286-9}
+}
+
+\record{Hawking1988}{BOOK}{
+ \AUTHOR{Hawking, S.W.}
+ \TITLE{Historia del tiempo. Del big bang a los agujeros negros}
+ \PUBLISHER{Crítica}
+ \ADDRESS{Barcelona}
+ \YEAR{1988}
+ \ISBN{84-7423-374-7}
+}
+
+\record{Hofstadter1979}{BOOK}{
+ \AUTHOR{Hofstadter, D.R.}
+ \TITLE{G\"odel, Escher, Bach: An Eternal Golden Braid}
+ \PUBLISHER{Penguin}
+ \ADDRESS{Londres}
+ \YEAR{1979}
+ \YEAREDITION{1980}
+ \ISBN{0-14-005579-7}
+}
+
+\record{Hume1748}{BOOK}{
+ \AUTHOR{Hume, D.}
+ \TITLE{An Enquiry concerning Human Understanding}
+ \YEAR{1748, 1777}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAREDITION{1975}
+ \ISBN{0-19-824536-X}
+}
+
+\record{Kant1787}{BOOK}{
+ \AUTHOR{Kant, I.}
+ \TITLE{Crítica de la razón pura}
+ \YEAR{1781, 1787}
+ \EDITION{Prólogo, traducción, notas e índices por Pedro Ribas}
+ \PUBLISHER{Alfaguara}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1993}
+ \ISBN{84-204-0407-1}
+}
+
+\record{Klir1969}{BOOK}{
+ \AUTHOR{Klir, G.J.}
+ \TITLE{Teoría General de Sistemas}
+ \YEAR{1969}
+ \PUBLISHER{ICE}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1980}
+ \ISBN{84-7085-104-7}
+}
+
+\record{Kuhn1970}{BOOK}{
+ \AUTHOR{Kuhn, Th.S.}
+ \TITLE{The Structure of Scientific Revolutions}
+ \EDITION{2ª edición, ampliada}
+ \PUBLISHER{The University of Chicago Press}
+ \ADDRESS{Chicago}
+ \YEAR{1970}
+ \ISBN{0-226-45804-0}
+}
+
+\record{Lakatos1976}{BOOK}{
+ \AUTHOR{Lakatos, I.}
+ \TITLE{Proofs and Refutations. The Logic of Mathematical Discovery}
+ \PUBLISHER{Cambridge University Press}
+ \ADDRESS{Cambridge}
+ \YEAR{1976}
+ \ISBN{0-521-29038-4}
+}
+
+\record{Lovelock1979}{BOOK}{
+ \AUTHOR{Lovelock, J.E.}
+ \TITLE{Gaia. A new look at life on Earth}
+ \YEAR{1979}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAREDITION{1987}
+ \ISBN{0-19-286030-5}
+}
+
+\record{McCulloch1943}{INCOLLECTION}{
+ \AUTHOR{McCulloch, W.S.; Pitts, W.H.}
+ \TITLE{A Logical Calculus of the Ideas Immanent in Nervous Activity}
+ \YEAR{1943}
+ \EDITOR{McCulloch, W.S.}
+ \BOOKTITLE{Embodiments of Mind}
+ \PUBLISHER{The MIT Press}
+ \ADDRESS{Cambridge MA}
+ \YEAREDITION{1988}
+ \ISBN{0-262-63114-8}
+%\JOURNAL{Bulletin of Mathematical Biophysics, University of Chicago Press}
+%\VOLUME{5}
+%\PAGES{115--133}
+}
+
+\record{Minsky1985}{BOOK}{
+ \AUTHOR{Minsky, M.}
+ \TITLE{The Society of Mind}
+ \YEAR{1985}
+ \PUBLISHER{Simon \& Schuster}
+ \ADDRESS{Nueva York}
+ \YEAREDITION{1988}
+ \ISBN{0-671-65713-5}
+}
+
+\record{Monod1970}{BOOK}{
+ \AUTHOR{Monod, J.}
+ \TITLE{El azar y la necesidad}
+ \PUBLISHER{Barral}
+ \ADDRESS{Barcelona}
+ \YEAR{1970}
+}
+
+\record{Narendra1989}{BOOK}{
+ \AUTHOR{Narendra, K.S.; Thathachar, M.A.L.}
+ \TITLE{Learning Automata: An Introduction}
+ \PUBLISHER{Prentice Hall}
+ \ADDRESS{Englewood Cliffs, New Jersey}
+ \YEAR{1989}
+ \ISBN{0-13-485558-2}
+}
+
+\record{Northrop1944}{BOOK}{
+ \AUTHOR{Northrop, E.P.}
+ \TITLE{Riddles in Mathematics}
+ \PUBLISHER{Penguin}
+ \ADDRESS{Harmondsworth, Middlesex, England}
+ \YEAR{1944}
+ \YEAREDITION{1978}
+ \ISBN{0-14-020478-4}
+}
+
+\record{Ortega1914}{BOOK}{
+ \AUTHOR{Ortega y G., J.}
+ \TITLE{Meditaciones del Quijote}
+ \YEAR{1914}
+ \EDITION{Edición de Julián Marías}
+ \PUBLISHER{Cátedra}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1995}
+ \ISBN{84-376-0481-8}
+}
+
+\record{Penrose1989}{BOOK}{
+ \AUTHOR{Penrose, R.}
+ \TITLE{The Emperor's New Mind.
+        Concerning Computers, Minds, and The Laws of Physics}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAR{1989}
+ \ISBN{0-19-851973-7}
+}
+
+\record{Polya1957}{BOOK}{
+ \AUTHOR{Polya, G.}
+ \TITLE{How to solve it}
+ \EDITION{Second edition}
+ \YEAR{1957}
+ \PUBLISHER{Penguin}
+ \ADDRESS{Londres}
+ \YEAREDITION{1990}
+ \ISBN{0-14-012499-3}
+}
+
+\record{Quine1940}{BOOK}{
+ \AUTHOR{Quine, W.V.O.}
+ \TITLE{Mathematical Logic}
+ \EDITION{edición revisada}
+ \PUBLISHER{Harvard University Press}
+ \ADDRESS{Cambridge MA}
+ \YEAR{1940}
+ \ISBN{0-674-55451-5}
+}
+
+\record{Plat^^f3n-IV}{BOOK}{
+ \AUTHOR{Platón}
+ \TITLE{Diálogos}
+ \YEAR{IV a.C.}
+ \EDITION{Edición de Francisco Larroyo}
+ \PUBLISHER{Porrúa}
+ \ADDRESS{México}
+ \YEAREDITION{1989}
+ \ISBN{968-432-310-7}
+}
+
+\record{Plat^^f3n-IV}{BOOK}{
+ \AUTHOR{Platón}
+ \TITLE{Diálogos}
+ \YEAR{IV a.C.}
+ \EDITION{Introducción general por Emilio Lledó Íñigo,
+  traducción y notas Carlos García Gual et al.}
+ \PUBLISHER{Gredos}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1981--1992}
+ \ISBN{84-249-1487-2}
+}
+
+\record{Popper1972}{BOOK}{
+ \AUTHOR{Popper, K.R.}
+ \TITLE{Conjeturas y refutaciones.
+         El desarrollo del conocimiento científico}
+ \YEAR{1972}
+ \PUBLISHER{Paidós}
+ \ADDRESS{Barcelona}
+ \YEAREDITION{1983}
+ \ISBN{84-7509-146-6}
+}
+
+\record{RAE1970}{BOOK}{
+ \AUTHOR{Real Academia Española}
+ \TITLE{Diccionario de la lengua española}
+ \EDITION{decimonovena edición}
+ \ADDRESS{Madrid}
+ \YEAR{1970}
+}
+
+\record{Resnikoff1989}{BOOK}{
+ \AUTHOR{Resnikoff, H.L.}
+ \TITLE{The Illusion of Reality}
+ \YEAR{1989}
+ \PUBLISHER{Springer Verlag}
+ \ADDRESS{Nueva York}
+ \ISBN{0-387-96398-7}
+}
+
+\record{Schopenhauer1818}{BOOK}{
+ \AUTHOR{Schopenhauer, A.}
+ \TITLE{El mundo como voluntad y representación}
+ \PUBLISHER{Porrúa}
+ \ADDRESS{México}
+ \YEAR{1818}
+ \YEAREDITION{1992}
+ \ISBN{968-432-886-9}
+}
+
+\record{Searle1980}{INCOLLECTION}{
+ \AUTHOR{Searle, J.R.}
+ \TITLE{Minds, Brains, and Programs}
+ \YEAR{1980}
+ \EDITOR{Boden, M.A.}
+ \BOOKTITLE{The Philosophy of Artificial Intelligence}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAREDITION{1990}
+ \ISBN{0-19-824854-7}
+}
+
+\record{Shakespeare1601}{BOOK}{
+ \AUTHOR{Shakespeare, W.}
+ \TITLE{Hamlet}
+ \YEAR{{\it c}.~1601}
+ \EDITION{Edición bilingüe del Instituto Shakespeare
+  dirigida por M.A.~Conejero}
+ \YEAREDITION{1997}
+ \PUBLISHER{Cátedra}
+ \ADDRESS{Madrid}
+ \ISBN{84-376-1097-4}
+}
+
+\record{Shannon1948}{ARTICLE}{
+ \AUTHOR{Shannon, C.E.}
+ \TITLE{A Mathematical Theory of Communication}
+ \JOURNAL{Bell Syst.\ Tech.\ J.}
+ \VOLUME{27}
+ \PAGES{379--423}
+ \MONTH{julio}
+ \YEAR{1948}
+ \NOTE{Recopilado por D.~Slepian en
+       ``Key Papers in The Development of Information Theory'',
+       IEEE Press, Nueva York, 1974, ISBN 0-87942-027-8}
+}
+
+\record{Smullyan1984}{BOOK}{
+ \AUTHOR{Smullyan, R.}
+ \TITLE{¿Cómo se llama este libro?
+   El enigma de Drácula y otras paradojas lógicas}
+ \PUBLISHER{Cátedra}
+ \ADDRESS{Madrid}
+ \YEAR{1984}
+ \ISBN{84-376-0297-1}
+}
+
+\record{Tovar1984}{BOOK}{
+ \AUTHOR{Tovar, A.}
+ \TITLE{Vida de Sócrates}
+ \EDITION{2ª edición}
+ \PUBLISHER{Alianza}
+ \ADDRESS{Madrid}
+ \YEAR{1984}
+ \ISBN{84-206-2397-0}
+}
+
+\record{Turing1937}{INCOLLECTION}{
+ \AUTHOR{Turing, A.M.}
+ \TITLE{On Computable Numbers,
+   with an Application to the Entscheidungsproblem}
+ \YEAR{1937}
+ \EDITOR{Laplante, Ph.}
+ \BOOKTITLE{Great Papers in Computer Science}
+ \PUBLISHER{West \& IEEE Press}
+ \ADDRESS{Minneapolis}
+ \YEAREDITION{1996}
+ \ISBN{0-7803-1112-4}
+}
+
+\record{Turing1950}{INCOLLECTION}{
+ \AUTHOR{Turing, A.M.}
+ \TITLE{Computing Machinery and Intelligence}
+ \YEAR{1950}
+ \EDITOR{Boden, M.A.}
+ \BOOKTITLE{The Philosophy of Artificial Intelligence}
+ \PUBLISHER{Oxford University Press}
+ \ADDRESS{Oxford}
+ \YEAREDITION{1990}
+ \ISBN{0-19-824854-7}
+}
+
+\record{Whitehead1910}{BOOK}{
+ \AUTHOR{Whitehead, A.N.; Russell, B.}
+ \TITLE{Principia Mathematica}
+ \PUBLISHER{Cambridge University Press}
+ \YEAR{1910--13}
+}
+
+\record{Wittgenstein1922}{BOOK}{
+ \AUTHOR{Wittgenstein, L.}
+ \TITLE{Tractatus Logico-Philosophicus}
+ \YEAR{1922}
+ \PUBLISHER{Alianza}
+ \ADDRESS{Madrid}
+ \YEAREDITION{1987}
+ \ISBN{84-206-2050-5}
+}

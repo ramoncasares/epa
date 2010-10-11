@@ -1,0 +1,355 @@
+% EPAI.TEX (RMCG19950910)
+
+\catcode`\@=11
+\prologskip=12pt plus12pt minus6pt
+
+
+\prolog Lista de figuras (FIGURAS)
+
+ Las figuras del texto principal y del anexo son, todas ellas, originales.
+ Las figuras de la introducción han sido adaptadas mayormente de
+ \person{Resnikoff}\cite{Resnikoff1989}, y también de
+ \person{Gazzaniga}\cite{Gazzaniga1998} y de
+ \person{Ernst}\cite{Ernst1978}.
+ El número que aparece al final de cada entrada
+ indica la página en la que está la figura. Así, por ejemplo,
+ 27 significa que la figura aparece en la página~27.
+
+\def\tocline#1{\ifnum#1=0\let\next=\dopart\else
+ \ifnum#1=9\let\next=\dofigure\else\let\next=\gobblefour\fi\fi
+ \next}
+\def\dofigure#1#2#3#4{\par
+ \def\taketover##1|##2|{\def\1{##1}\def\2{##2}}\taketover#1|%
+ \count255=#2\advance\count255by1
+ \pdfcode \pdfdest num \number\count255 fitbh\pdfendcode
+ \hang\noindent {\let\cr=\space\bf\1}%
+ \setbox0=\hbox{\2}\ifdim\wd0=0pt \space\else{\bf:} \2.\fi
+ \space\pdfgoto{{#4}}{#2}}
+\def\dopart#1#2#3#4{\def\1{#1}\def\2{^^cdndices}\ifx\1\2\else
+ \bigskip\leftline{\lmone#1}\nobreak\smallskip\fi}
+
+\input auxiliar.toc
+
+
+\prolog Bibliografía (BIBLIOGRAFÍA)
+
+Se señalan las ediciones de las obras consultadas. Los números que aparecen
+detrás del punto al final de cada reseña indican las páginas en las que la
+obra está citada, así 128 significa que la cita está en la página~128.
+
+\newwrite\bibnotes \immediate\openout\bibnotes=auxiliar.bdb
+\iverb\bibnotes"% AUXILIAR.BDB"
+\iverb\bibnotes"\record{Churchland1986}{BOOK}{"
+\iverb\bibnotes" \TITLE{Neurophilosophy: Toward a Unified Science"
+\iverb\bibnotes" of the Mind\discretionary{/}{}{/}Brain}}"
+\iverb\bibnotes"\record{Turing1950}{INCOLLECTION}{\EDITOR{M.~Boden}}"
+\iverb\bibnotes"\record{Searle1980}{INCOLLECTION}{\EDITOR{M.~Boden}}"
+\iverb\bibnotes"\record{McCulloch1943}{INCOLLECTION}{\EDITOR{W.~McCulloch}}"
+\iverb\bibnotes"\record{Turing1937}{INCOLLECTION}{\EDITOR{Ph.~Laplante}}"
+\iverb\bibnotes"\record{Descartes1641}{BOOK}{\YEAR{1637, 41}}"
+\iverb\bibnotes"\endinput"
+\immediate\closeout\bibnotes
+
+\def\ndxline#1#2{\ifnum#2=2 \let\oldk@y=\newk@y \def\newk@y{#1}%
+ \let\next=\bibline \else \let\next\gobblethree \fi \next}
+
+\def\bibbreak{\ifdim\lastskip<\smallskipamount \removelastskip
+ \penalty-200 \vskip3pt plus 2pt \relax\fi} %plus 1.5pt minus 1pt \fi}
+
+\def\bibline#1#2#3{\ifx\newk@y\oldk@y, \pdfgoto{#3}{#1}\else
+ \bibbreak\cleantoks % \smallbreak\cleantoks
+ \def\record##1##2##3{\def\secondk@y{##1}\ifx\newk@y\secondk@y##3\fi}
+ \input epa.bdb
+ \input auxiliar.bdb
+ \hang\noindent\pdflabel{\bf \the\AUTHOR:}%
+ {\def\em{\string\em\space}\def~{\string~}\def\it{\string\it\space}%
+  \lbl{\newk@y}{\string\rm\space\expandafter\expandafter\the\AUTHOR\space
+  \expandafter\expandafter(\the\YEAR):\space
+  {\string\sl\space\expandafter\expandafter\the\TITLE}}}%
+ {\sl\null{ }\the\TITLE}%
+ \setbox0=\hbox{\the\YEAREDITION}\ifdim\wd0=0pt
+  \YEAREDITION={\the\YEAR}\else\ (\the\YEAR)\fi
+ \setbox0=\hbox{\the\EDITOR}\ifdim\wd0=0pt\else.
+   Recopilado por \the\EDITOR\fi
+ \setbox0=\hbox{\the\BOOKTITLE}\ifdim\wd0=0pt\else
+   \ en ``\the\BOOKTITLE''\fi
+ \setbox0=\hbox{\the\EDITION}\ifdim\wd0=0pt\else, \the\EDITION\fi
+ \setbox0=\hbox{\the\PUBLISHER}\ifdim\wd0=0pt\else, \the\PUBLISHER\fi
+ \setbox0=\hbox{\the\ADDRESS}\ifdim\wd0=0pt\else, \the\ADDRESS\fi
+ \setbox0=\hbox{\the\JOURNAL}\ifdim\wd0=0pt\else, \the\JOURNAL\fi
+ \setbox0=\hbox{\the\VOLUME}\ifdim\wd0=0pt\else, vol.~\the\VOLUME\fi
+ \setbox0=\hbox{\the\MONTH}\ifdim\wd0=0pt
+  \setbox0=\hbox{\the\YEAREDITION}\ifdim\wd0=0pt\else, \the\YEAREDITION\fi
+  \else, \the\MONTH\ de \the\YEAREDITION\fi
+ \setbox0=\hbox{\the\PAGES}\ifdim\wd0=0pt\else, pp.~\the\PAGES\fi
+ \setbox0=\hbox{\the\ISBN}\ifdim\wd0=0pt\else, ISBN \the\ISBN\fi.
+ \setbox0=\hbox{\the\NOTE}\ifdim\wd0=0pt\else \the\NOTE. \fi
+ \pdfgoto{#3}{#1}\fi
+ \ignorespaces}
+
+\medskip
+
+\input auxiliar.abc
+
+
+\prolog Índice de definiciones (DEFINICIONES)
+
+Se indican las páginas en las que aparecen las definiciones técnicas de los
+conceptos listados.
+
+\def\ndxline#1#2{\ifnum#2=0 \let\oldk@y=\newk@y \def\newk@y{#1}%
+ \let\next=\defline \else \let\next\gobblethree \fi \next}
+
+\def\defline#1#2#3{\ifx\newk@y\oldk@y, \pdfgoto{#3}{#1}\else
+ \par\hang\noindent \newk@y,\nobreak\space\space
+  \pdfgoto{#3}{#1}\fi\ignorespaces}
+
+\begindoublecolumns
+\parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
+\input auxiliar.abc
+\enddoublecolumns
+
+
+\prolog Índice de nombres (NOMBRES)
+
+%Se indican las personas mencionadas y, en letra negrilla, la página en la
+%que aparece la mención. Así, {\bf8} significa que la mención está en la
+%página~{\bf8}.
+
+\def\ndxline#1#2{\ifnum#2=1 \let\oldk@y=\newk@y \def\newk@y{#1}%
+ \let\next=\ndxone \else \let\next\gobblethree \fi \next}
+
+\def\ndxone#1#2#3{\let\oldp@ge=\newp@ge\def\newp@ge{#3}%
+ \ifx\newk@y\oldk@y
+  \ifx\newp@ge\oldp@ge \else, \pdfgoto{#3}{#1}\fi
+ \else \par\noindent\hang{\sc\newk@y},\space\space
+  \pdfgoto{#3}{#1}\fi\ignorespaces}
+
+\begindoublecolumns
+\parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
+\input auxiliar.abc
+\enddoublecolumns
+
+\catcode`\@=12
+
+
+\tenpoint
+
+\prolog Índice (ÍNDICE)
+
+\def\tocline#1{\ifcase #1\let\next\toclinezero \or
+ \let\next\toclineone \or \let\next\toclinetwo \or
+ \let\next\toclinethree \or \let\next\toclinefour \else
+ \let\next\gobblefour \fi \next}
+
+\def\toclinezero#1#2#3#4{\bigskip\null
+ \def\3{#3}\ifx\3\empty\def\1{#1}\else\def\1{#3. #1}\fi
+ \centerline{\lmzero\pdfgoto{\1}{#2}}}
+\def\toclineone#1#2#3#4{\medbreak
+ \def\3{#3}\def\0{0}\def\Z{Z}%
+ \ifx\3\0 \let\3=\empty \fi \ifx\3\Z \let\3=\empty \fi
+ \ifx\3\empty \def\1{\vbox{\halign{\hfil####\cr#1\crcr}}\tocdotfill}%
+  \else\def\1{#3\quad#1\hfill}\def\3{#3 }\fi
+ \line{{\bf\1\space}\pdfgoto{#4}{#4}%
+ \pdfcode\let\cr=\space%\stringactives
+ \pdfoutline goto num #2 {\3#1}\pdfendcode}}
+\def\toclinetwo#1#2#3#4{\line{\let\cr\space #3\quad #1\tocdotfill
+ \space\pdfgoto{#4}{#2}}}
+\def\toclinethree#1#2#3#4{\line{\let\cr\space \qquad #3\quad #1\tocdotfill
+ \space\pdfgoto{#4}{#2}}}
+\let\toclinefour\gobblefour
+
+\def\tocdotfill{\leaders\hbox to \baselineskip{\bf\hss.\hss}\hfill}
+
+\kern-2pc
+\label{Índice}
+
+\input auxiliar.toc
+
+% \newpage \normalbottom
+
+\null\newpage
+
+\footline={\hfil} \headline={\hfil}
+\loop \ifnum\pageno<207 \null\newpage \repeat
+
+
+\null\vfill
+{\bf El problema aparente} es una reelaboración en forma de ensayo de mi
+prolongada tesis doctoral.  La tesis fue dirigida por el Profesor Fernando
+Sáez Vacas, de la Universidad Politécnica de Madrid, y fue defendida el día
+11 de mayo de 1993 ante un tribunal compuesto por los Profesores Gregorio
+Fernández (Universidad Politécnica de Madrid), Miguel Ángel Quintanilla
+(Universidad de Salamanca), José Cuena (Universidad Politécnica de Madrid),
+Ángel Rivi\`ere (Universidad Autónoma de Madrid) y Carlos Delgado Kloos
+(Universidad Politécnica de Madrid), que le concedieron por unanimidad la
+máxima calificación, apto {\it cum laude}.
+
+\null
+{\bf El problema aparente} presenta una teoría del conocimiento modelada
+matemáticamente, de manera que sus conceptos son precisos y sus
+consecuencias verificables. Pretende, por tanto, sentar las bases de una
+epistemología científica. La introducción, que intenta facilitar el
+entendimiento de la teoría y la lectura del libro, incluye una sinopsis (a
+partir de la página~{\refpg{Sinopsis}}) que resume el contenido.
+
+\null
+{\bf El problema aparente} sostiene i) que el simbolismo es un sistema
+extensible de convenciones que sirve para resolver problemas porque permite
+la expresión de problemas, soluciones y resoluciones, y ii) que el
+simbolismo fue diseñado por la evolución darwiniana porque la vida es un
+problema aparente y porque el simbolismo proporciona, de una sola vez, la
+resolución de problemas, la consciencia, el lenguaje y la libertad. De aquí
+se sigue que el simbolismo está vacío de significados y que son los
+problemas los que aportan los significados. La teoría es subjetivista porque
+es el sujeto simbólico quien da significado al objeto. Pero como saber es un
+medio, el fin es vivir, y el sujeto individual es una parte de la vida,
+resulta que de donde el individuo toma los significados últimos es de la
+vida, por lo que todos los seres vivos disponen de una fuente común de
+significados que hace posible la comunicación.
+
+\null
+{\bf El problema aparente} trata del saber, por lo que se sitúa en el cruce
+de todos los saberes específicos y, en consecuencia, puede ser atacado desde
+muy diferentes posiciones. Algunas de las disciplinas que se ven afectadas,
+en mayor o menor grado, por esta epistemología de carácter subjetivista son:
+ ética, filosofía, epistemología,
+ lingüística, lógica, matemáticas,
+ informática, inteligencia artificial,
+ psicología, neurología y biología.
+
+\break % Contraportada
+
+% 22cm x 14cm (22 cm = 623.622047 bp, 14 cm = 396.850394 bp)
+\vsize=\vpage \advance\vsize-72bp \voffset=36bp \advance\voffset-1in
+\hsize=\hpage \advance\hsize-72bp \hoffset=36bp \advance\hoffset-1in
+
+\pdfliteral{q}% save current graphic state in the stack
+%\pdfliteral{0 1 1 0 k 0 1 1 0 K}% set red
+%\pdfliteral{1 1 0 0 k 1 1 0 0 K}% set blue
+%\pdfliteral{1 0 1 0 k 1 0 1 0 K}% set green
+\pdfliteral{0 0.49 1 0.52 k 0 0.49 1 0.52 K}% set cinnamon
+\pdfliteral{-36 -588 m}% moves to the origin, 72 * 8 = 576
+\pdfliteral{361 -588 l}%  72 * 5 = 360
+\pdfliteral{361 36 l}%
+\pdfliteral{-36 36 l}%
+\pdfliteral{-36 -588 l}% 
+\pdfliteral{b Q}% close, stroke, fill, and restore graphic state
+
+\pdfWhite
+\input ean13
+\font\cpboldtextfont=texnansi-lmssbx10 at 12pt
+\font\cptextfont=texnansi-lmss10 at 12pt
+
+\cptextfont
+\parindent=0pt
+\parskip=0pt plus1pt
+\baselineskip=13.3pt %14.4pt
+
+{\cpboldtextfont El problema aparente} 
+presenta una teoría del conocimiento modelada matemáticamente,
+de modo que sus conceptos son precisos y
+sus consecuencias son verificables.
+Pretende, por consiguiente,
+sentar las bases de una epistemología científica,
+que resulta ser subjetivista.
+Responde, entre otras, a cuestiones tales como:
+ \par
+ ¿Hay diferencia entre adaptación y aprendizaje?\par
+ ¿Qué maneras hay de resolver un problema?\par
+ ¿Hay diferencia entre saber y conocimiento?\par
+ ¿Cuál es el último reducto del absolutismo?\par
+ ¿Hay diferencia entre solución y resolución?\par
+ ¿Qué razón evolutiva tiene el simbolismo?\par
+ ¿Se pueden pensar varias cosas a la vez?\par
+ ¿Qué conceptos son transcendentes?\par
+ ¿Cómo es posible la comunicación?\par
+ ¿Se puede fabricar una persona?\par
+ ¿Cuál es el problema aparente?\par
+ ¿Para qué sirve la consciencia?\par
+ ¿Es mi cuerpo parte de mi yo?\par
+ ¿Son peligrosas las paradojas?\par
+ ¿Sabe sumar una calculadora?\par
+ ¿Es inteligente un ordenador?\par
+ ¿Qué es un comportamiento?\par
+ ¿Por qué sufrimos ilusiones?\par
+ ¿Qué niega el materialismo?\par
+ ¿Para qué sirve la sintaxis?\par
+ ¿Puede ser feliz un perro?\par
+ Esta frase es falsa, ¿lo es?\par
+ ¿Para qué sirve la lógica?\par
+ ¿Qué significa significa?\par
+ ¿Qué es la abstracción?\par
+ ¿Qué es un problema?\par
+ ¿Soy yo una persona?\par
+ ¿Qué es la felicidad?\par
+ ¿Puedo yo ser libre?\par
+ ¿Qué es la libertad?\par
+ ¿Explica la ciencia?\par
+ ¿Por qué morimos?\par
+ ¿Piensa un perro?\par
+ ¿Qué es un vaso?\par
+ ¿Qué es la vida?\par
+ ¿Qué soy yo?\kern5cm\vbox to 0pt{\vss\pdfBlack
+  \hbox{%
+   \pdfliteral{q}% save current graphic state in the stack
+   \pdfliteral{0 0 0 0 k 0 0 0 1 K}% set black stroke on white fill
+   \pdfliteral{-5 -5 m}% moves to the origin
+   \pdfliteral{110 -5 l}%
+   \pdfliteral{110 92 l}%
+   \pdfliteral{-5 92 l}%
+   \pdfliteral{-5 -5 l}% 
+   \pdfliteral{b Q}% close, stroke, fill, and restore graphic state
+   \barheight=2.4cm 
+   \vbox to 0pt{\vss\hbox to 0pt{ISBN 84-7774-877-2\hss}\kern\barheight\kern1pc}%
+   \EAN 978-84-7774-877-9
+   \relax
+ }\kern1pc}\par
+
+\endinput
+
+{\bf El problema aparente} presenta una teoría del conocimiento modelada
+matemáticamente, de modo que sus conceptos son precisos y sus consecuencias
+verificables. Pretende, por consiguiente, sentar las bases de una
+epistemología científica, que resulta ser subjetivista. Y responde, entre
+otras, a las cuestiones siguientes:
+\vfil
+\begingroup\parindent=0pt\obeylines
+ ¿Hay diferencia entre adaptación y aprendizaje?
+ ¿Qué maneras hay de resolver un problema?
+ ¿Hay diferencia entre saber y conocimiento?
+ ¿Cuál es el último reducto del absolutismo?
+ ¿Hay diferencia entre solución y resolución?
+ ¿Qué razón evolutiva tiene el simbolismo?
+ ¿Se pueden pensar varias cosas a la vez?
+ ¿Qué conceptos son transcendentes?
+ ¿Cómo es posible la comunicación?
+ ¿Se puede fabricar una persona?
+ ¿Cuál es el problema aparente?
+ ¿Para qué sirve la consciencia?
+ ¿Es mi cuerpo parte de mi yo?
+ ¿Son peligrosas las paradojas?
+ ¿Sabe sumar una calculadora?
+ ¿Es inteligente un ordenador?
+ ¿Qué es un comportamiento?
+ ¿Por qué sufrimos ilusiones?
+ ¿Qué niega el materialismo?
+ ¿Para qué sirve la sintaxis?
+ ¿Puede ser feliz un perro?
+ Esta frase es falsa, ¿lo es?
+ ¿Para qué sirve la lógica?
+ ¿Qué significa significa?
+ ¿Qué es la abstracción?
+ ¿Qué es un problema?
+ ¿Soy yo una persona?
+ ¿Qué es la felicidad?
+ ¿Puedo yo ser libre?
+ ¿Qué es la libertad?
+ ¿Explica la ciencia?
+ ¿Por qué morimos?
+ ¿Piensa un perro?
+ ¿Qué es un vaso?
+ ¿Qué es la vida?
+ ¿Qué soy yo?
+\endgroup
+

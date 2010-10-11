@@ -1,0 +1,1372 @@
+% EPAE.TEX (RMCG19950910)
+
+\labeled El álgebra automática\title1 El ^^e1lgebra autom^^e1tica
+
+\title2 General
+
+Se presenta un álgebra de autómatas.  Esto es, se formaliza el
+autómata finito, binario y probabilístico y sobre él se definen tres
+operaciones.  Se describe tanto la estática como la dinámica de los
+autómatas y de las operaciones.  Se demuestra constructivamente que
+cualquier autómata puede ser escrito como una expresión que sólo
+utiliza siete palabras diferentes.  También se construye un autómata
+universal.  Se definen las siguientes relaciones entre autómatas:
+igualdad, indistinguibilidad, equivalencia y ampliabilidad. Varios campos
+de las matemáticas resultan ser subálgebras del álgebra automática.
+
+
+\title2 El vector
+
+\title3 La variable
+
+Una \definition{variable} no cambia sino de \definition{valor}.  Una
+variable puede tomar valores distintos en momentos distintos.  Si los
+posibles valores son dos, tenemos la \definition{variable binaria}.  De
+aquí en adelante supondremos que las variables son binarias, y en
+concreto denominaremos $1$ a uno de los dos valores que pueden tomar y
+denominaremos $0$ al otro de los valores, $\B = \{ 1, 0 \}$.  Otros tipos
+más complejos de variables pueden convertirse en una serie de variables
+binarias utilizando la codificación adecuada.
+
+Un conjunto ordenado de $\no N$ variables es un \definition{vector} de
+$\no N$ componentes.  Denominaremos \definition{string} al valor de un
+vector en un instante.  A la secuencia de strings, según se desarrolla
+en el tiempo, la denominaremos \definition{stream}.
+
+A una disposición de números ordenada por índices la denominamos
+\definition{array}, y decimos que tiene tantas dimensiones como índices
+utiliza.  Así, un {\em string} es un array unidimensional, una
+\definition{matriz} es un array bidimensional.
+
+Un \definition{índice} que haya de tomar $n$ valores recorrerá, de
+mayor a menor, los $n$ menores números naturales.  Como los
+\definition{números naturales}, $\N$, son el cero y los enteros
+positivos, es decir, $\N = \{ 0, 1, 2, 3, \ldots \}$, el índice con $n$
+posibilidades tomará los valores desde el $n-1$ hasta el $0$, y en ese
+orden.
+
+Si denominamos \definition{rango} de un índice al número de valores que
+puede tomar, entonces el tamaño de un array se obtiene multiplicando los
+rangos de todos sus índices.
+
+\title3 La formalización
+
+Sea un vector, que llamaremos |V, con $\no N$ variables.  Como $\no N$
+variables binarias ordenadas son capaces de $2^{\no N}$ combinaciones,
+asignamos a cada una de las distintas combinaciones un número diferente,
+o índice, comprendido entre el $2^{\no N} - 1$ y el $0$, ambos incluidos.
+
+Escribimos $j \through \no N$ para explicar que el índice $j$
+\definition{recorre la potencia} del número $\no N \in \N$, es decir,
+para expresar que $j$ toma valores desde $2^{\no N} - 1$ hasta $0$, ambos
+incluidos y en orden decreciente.
+
+Nótese que estamos interpretando vectores binarios, de $\no N$
+componentes, como variables no binarias, con $2^{\no N}$ posibles valores.
+Si la escritura de los números es binaria, entonces la diferencia es
+mínima.  Al valor del vector, o string, binario de longitud
+ $\ell = \no N$,
+ $$S = [b_{\ell-1}\,b_{\ell-2}\, \ldots\, b_2\,b_1\,b_0],$$
+con $b_i \in \B = \{1,0\}$ y, por tanto, $S \in \B^\ell$, notando $\B^\ell$
+el producto cartesiano de $\B$ por él mismo $\ell$ veces, le corresponde
+como índice el número
+ $$\overline S = b_{\ell-1}.2^{\ell-1} + b_{\ell-2}.2^{\ell-2}
+   + \cdots + b_2.2^2 + b_1.2 + b_0 = \sum_{i=\ell-1}^0 b_i.2^i.$$
+Por ejemplo, al string $[1\,0\,1]$ le corresponde el índice binario $101$,
+que en decimal se escribe $5$:
+ $$\overline{[1\,0\,1]} = 101_2 = 5_{10} .$$
+De este modo se justifica que nos refiramos indistintamente al índice o
+al correspondiente string de un vector.
+
+Notamos $|V_r \!/ 2^{\no P}$ la probabilidad de que el vector |V tome el
+valor correspondiente al índice $r$.  Sólo consideraremos valores naturales
+de $|V_r$ y $\no P$.  Con esta notación tenemos que
+ $r \through {\no N}$,
+con lo que resulta que $(|V_r)$ es una forma ordenada (de mayor a
+menor índice) de hacer referencia a $2^{\no N}$ números.  Así que
+$(|V_r)$ es un string de tamaño $2^{\no N}$.
+
+Si |V es un vector, entonces podemos establecer la siguiente convención
+para describirlo probabilísticamente.  Escribimos, en este orden:  su
+número de variables, $\no N$; $\no P$, siendo $2^{\no P}$ el divisor
+común de todas las probabilidades; y los $2^{\no N}$ valores que toma
+$|V_r$ ordenados de mayor índice ($r = 2^{\no N} - 1$) a menor índice
+($r = 0$).
+ $$\eqalign{ |V
+  = &{} \left< {\no N}, {\no P}; (|V_r) \right> \cr
+    & {\no N}, {\no P}, |V_r \in \N \cr
+    & r \through {\no N} \cr
+    & \textstyle{\sum_r} |V_r = 2^{\no P} .\cr}$$
+
+\title4 Ejemplo
+
+Si $|V = \left< 3, 1; (0, 0, 1, 0, 0, 0, 0, 1) \right>$, entonces es tan
+probable que |V tome el valor $[1\,0\,1]$ como el valor $[0\,0\,0]$.
+
+\title3 La igualdad de vectores
+
+La \definition{igualdad de vectores}:  decimos que dos vectores descritos
+probabilísticamente, |V y |W, son iguales, y lo notaremos $|V = |W$, si y
+sólo si, por definición, ${\no N}_{|V} = {\no N}_{|W}$ y:
+ $$\forall r \through {\no N}_{|V} = {\no N}_{|W} : \;
+   { |V_r \over 2^{{\no P}_{|V}} } = { |W_r \over 2^{{\no P}_{|W}} }.$$
+
+\labeled\title3 Notación vectorial de strings
+
+Si un vector es determinístico, $\no P = 0$, entonces sólo toma un
+valor, aquél cuyo índice $j$ es tal que $|V_j = 1$.  Confundiendo el
+vector determinístico con el único valor que toma, podemos abusar de la
+descripción de vectores para anotar strings del siguiente modo:
+ $S = \left< \ell, 0; (S_r) \right>$,
+siendo $S_{\overline S} = 1$ y $S_{r \not= \overline S} = 0$.
+
+\title4 Ejemplo
+
+El string $[1\,0\,1]$ se escribe, a la manera de los vectores, así:
+ $\left< 3, 0; (0, 0, 1, 0, 0, 0, 0, 0) \right>$.
+
+
+\title2 El autómata
+
+Un \definition{autómata finito} se compone de tres vectores y una ley de
+dependencia.  Los tres vectores son:  el vector de entrada con las
+variables de entrada, el vector de salida con las variables de salida y el
+vector de estado con las variables de estado.
+
+La determinación de los valores de las variables de entrada queda fuera
+de la definición del autómata.  Se dice que las variables de entrada
+son independientes.
+
+Los valores que toman en este instante las variables de salida dependen de
+los valores que toman en este instante las variables de estado y las
+variables de entrada.
+
+Los valores que tomarán en el instante siguiente las variables de estado
+dependen de los valores que toman en este instante las variables de estado
+y las variables de entrada.  De otra manera, el string de estado siguiente
+depende del string de estado actual y del string de entrada actual.  El
+string de estado siguiente y el string de estado actual son dos valores
+consecutivos del mismo vector.
+
+\vfil
+
+$$\hbox{\rm Autómata}\llave{
+ Estática\llave{
+  Notación $|A = \left< \no I,\no O,\no S,\no P; (\ALFA) \right>$\cr
+  Igualdad $=$\cr
+  Operaciones\llave{
+   Composición en serie $\srl$\cr
+   Composición en paralelo $\prl$\cr
+   Composición de realimentación $\fdb$\cr}\cr
+  Función característica $\FA: |A = \fdb^{\no S} \FA$\cr
+  Formas canónicas\llave{
+   Descodificada $|A = \hbox{Canon}_{|A}$\cr
+   Universal $|A = \hbox{Kanon}_{|A}$\cr}\cr}\cr
+ Dinámica\llave{
+  Ecuación dinámica $|Q = \srl |P \FA = \srl \prl |S |J \FA$\cr
+  Ecuación temporal $|N(t) = |S(t+1)$\cr
+  Función de transferencia $Z^{|A}_{S_0}$\cr
+  Comportamiento\llave{
+   Indistinguibilidad $\nodis$\cr
+   Equivalencia $\equiv$\cr}\cr
+  Dinámica compuesta $|A \nodis |A' \implies |F(|A) \nodis |F(|A')$\cr
+ }\cr}$$
+
+\break
+
+\title2 La estática
+
+\title3 La formalización
+
+Sea |A un autómata, con $\no I$ variables de entrada, $\no O$ variables
+de salida y $\no S$ variables de estado; todas las variables son binarias.
+Decimos, por tanto, que el conjunto de entradas a |A es el conjunto de
+strings de longitud $\no I$, $\B^{\no I}$, que el conjunto de salidas de |A
+es el conjunto de strings de longitud $\no O$, $\B^{\no O}$, y que el
+conjunto de estados de |A es el conjunto de strings de longitud $\no S$,
+$\B^{\no S}$.
+
+Escribimos $\ALFA \!/ 2^{\no P}$ para indicar la probabilidad de que estando
+|A en el estado $s$ y recibiendo la entrada $\imath$, pase al estado $n$ y
+produzca la salida $o$.  Sólo consideraremos valores naturales de $\ALFA$ y
+de $\no P$.  De modo que $(\ALFA)$ es un array de cuatro dimensiones y de
+tamaño
+ $2^{\no S} \times 2^{\no I} \times 2^{\no S} \times 2^{\no O}$.
+
+La definición del autómata |A queda:
+ $$\eqalign{
+ |A ={} &\left< \no I, \no O, \no S, \no P; (\ALFA) \right>\cr
+  & \no I, \no O, \no S, \no P, \ALFA \in \N \cr
+  & s \through \no S, \imath \through \no I, n \through \no S,
+    o \through \no O \cr
+  & \forall s, \imath: \; \textstyle{\sum_n} \textstyle{\sum_o}
+    \ALFA = 2^{\no P} .\cr}$$
+
+\label{forma A}
+Haciendo
+ $p = s.2^{\no I} + \imath$, $q = n.2^{\no O} + o$,
+podemos reducir el número de dimensiones de $(\ALFA)$ a dos, $(|A_{pq})$,
+y haciendo
+ $r = s.2^{\no{I+S+O}} + \imath.2^{\no{S+O}} + n.2^{\no O} + o$,
+incluso a una, $(|A_r)$.  Pero debe observarse que
+ $p \through (\no S + \no I)$, que $q \through (\no S + \no O)$ y que
+ $r \through ({\no{S+I+S+O}})$,
+de modo que el tamaño del array de cuatro dimensiones
+ $(\ALFA)$, $2^{\no S} \times 2^{\no I} \times 2^{\no S} \times 2^{\no O}$,
+es el mismo que el tamaño de la matriz $({|A}_{pq})$,
+ $2^{\no  S+\no I} \times 2^{\no S+\no O}$,
+y el mismo que el tamaño del string
+ $({|A}_r)$, $2^{\no S+\no I+\no S+\no O}$.
+
+\title4 Ejemplos
+
+\label{channel}
+Sea
+ $$|H = \bigl< 1, 1, 1, 1; \pmatrix{
+   2&0&0&0\cr 1&0&0&1\cr \underline{1}&0&0&1\cr 0&0&0&2\cr} \bigr>$$
+la forma matricial $(|H_{pq})$ de cierto autómata |H.  El $1$ que ocupa
+la séptima posición de la matriz (llevando la cuenta creciendo desde
+cero pero comenzando desde el final, o sea, el $1$ subrayado), corresponde
+a $|H_{01,11}$ (decimal $|H_{1,3}$), que también es $|H_{0111}$ (decimal
+$|H_7$) cuando se expresa como string, y también $|H_{0,1,1,1}$ con sus
+cuatro dimensiones escritas de manera explícita.  Por lo tanto el $1$
+subrayado explica que si el estado actual del autómata |H es $0$ y la
+entrada es $1$, entonces la probabilidad de que el próximo estado sea $1$
+y la salida (actual) sea $1$, es $1/2$.
+
+Hagamos ahora el ejercicio inverso, es decir, representemos en esta
+notación un autómata conocido.  Empezaremos por uno sencillo, la puerta
+$\op{AND}$.  Para ello lo primero es determinar el número de variables,
+en este caso dos de entrada y una de salida, $\inp{\op{AND}} = 2$ y
+$\out{\op{AND}} = 1$.  Es determinístico, $\pr{\op{AND}} = 0$, y no tiene
+variables de estado, o sea, sólo tiene un estado, $\st{\op{AND}} = 0$.
+Si optamos por la representación bidimensional, que es la más sencilla,
+entonces sabemos que tenemos que rellenar una matriz de cuatro filas por
+dos columnas, $2^{0+2} \times 2^{0+1}$.  O sea, hemos llegado hasta:
+ $$\op{AND} = \bigl< 2, 1, 0, 0; \bordermatrix{ & 1 & 0 \cr 11 &&\cr 10
+   &&\cr 01 &&\cr 00 &&\cr} \bigr>.$$
+Los números que rodean a la matriz aún vacía sirven de ayuda para
+guiar la siguiente fase.  Sabemos que si las dos variables de entrada valen
+$1$, entonces la variable de salida toma el valor $1$, de modo que donde
+cruza la fila $11$ y la columna $1$ escribimos un $1$ porque su
+probabilidad es $1$, y donde se encuentra la entrada $11$ con la salida $0$
+escribimos un $0$ porque su probabilidad es $0$. Igualmente hemos de
+considerar las otras posibilidades del vector de entrada.  La solución
+final es:
+ $$\op{AND} =  \bigl< 2, 1, 0, 0;
+ \pmatrix{ 1 & 0 \cr 0 & 1 \cr 0 & 1 \cr 0 & 1 \cr} \bigr>,$$
+cuya forma unidimensional es:
+ $\op{AND} = \bigl< 2, 1, 0, 0; (1, 0, 0, 1, 0, 1, 0, 1) \bigr>$.
+
+El siguiente nivel de complejidad aparece cuando se consideran autómatas
+con variables de estado, o sea, con más de un estado.  Pero es una
+complejidad menor, ya que basta percatarse de que las variables de estado
+se anteponen tanto a las variables de entrada como a las de salida.  Veamos
+como ejemplo el autómata $\op{DEL}$ que representa el retardo elemental,
+o sea, que si se presenta a su entrada un stream unitario, a la salida
+aparece el mismo stream, pero un instante más tarde.  En este caso la
+plantilla a rellenar es:
+ $$\op{DEL} = \bigl< 1, 1, 1, 0; \bordermatrix{ & 1.1 & 1.0 & 0.1 & 0.0 \cr
+   1.1 &&\cr 1.0 &&\cr 0.1 &&\cr 0.0 &&\cr} \bigr>,$$
+donde antes del punto aparece la variable de estado.  La variable de estado
+sirve para recordar cuál es el valor actual de la variable de entrada, para
+que esté disponible en el instante siguiente.  Al rellenar la matriz tenemos
+que hacer consideraciones como la que sigue:  si el estado actual es 0 y
+entra un 1, esto significa que la entrada del instante anterior fue 0, de
+manera que la salida actual debe ser 0, y como ahora entra un 1 el estado
+debe pasar a valer 1, de modo que la combinación (estado, entrada) 0.1
+resulta en el par (estado, salida) 1.0, lo que hace que el cruce de la fila
+0.1 con la columna 1.0 se lleve el 1 del suceso seguro, y las otras tres
+columnas de la misma fila un 0.  Recorriendo todas las combinaciones
+(estado, entrada) completamos la matriz
+ $$\op{DEL} = \bigl< 1, 1, 1, 0; \pmatrix{ 1&0&0&0\cr 0&0&1&0\cr
+   0&1&0&0\cr 0&0&0&1\cr} \bigr>,$$
+o linealmente:
+ $\op{DEL} = \bigl< 1, 1, 1, 0; ( 1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1 )
+ \bigr>$.
+
+\title3 La igualdad de autómatas
+
+La \definition{igualdad de autómatas}:  diremos que dos autómatas, |A y
+$|A'$, son iguales, lo cual notaremos $|A = |A'$, si y sólo si, por
+definición,
+ $\inpA = \inp{\!A'}$,
+ $\outA = \out{\!A'}$,
+ $\stA = \st{\!A'}$ y:
+ $$\forall r \through ({\stA + \inpA + \stA + \outA}) =
+  ({\st{\!A'} + \inp{\!A'} + \st{\!A'} + \out{\!A'}}) : \;
+  { |A_r \over 2^{\prA} } = { |A'_r \over 2^{\pr{\!\!A\!'}} }.$$
+
+La igualdad es una relación de equivalencia:
+ $$\eqalignrc{\forall |A, |B, |C :
+   & |A = |A \cr
+   & |A = |B \implies |B = |A \cr
+   & (|A = |B) \land (|B = |C) \implies |A = |C .\cr}$$
+
+\title4 Ejemplo
+
+El autómata sin variables, $\O$, es:
+ $\op{\O} = \bigl< 0, 0, 0, 0; (1) \bigr>$,
+o lo que es lo mismo, según la definición vista:
+ $\op{\O} = \bigl< 0, 0, 0, 2; (4) \bigr>$.
+
+\title3 La forma mínima
+
+Si todos los elementos del array $(|A_r)$ son pares, entonces podemos
+dividirlos todos ellos entre 2, restar 1 a $\no P$, y tenemos otra manera
+de escribir |A.  Preferiremos la manera en la que alguno de los elementos
+del array $(|A_r)$ es impar, forma que llamamos de $\no P$ mínimo o,
+simplemente, \definition{forma mínima}.
+
+
+\title3 Las operaciones
+
+Definimos tres operaciones sobre los autómatas:  la composición en
+serie, escrita $\srl$; la composición en paralelo, escrita $\prl$; y la
+composición de realimentación, escrita $\fdb$.  Usaremos la notación
+prefija de las operaciones y de esta manera evitaremos el uso de
+paréntesis.  Para definir las operaciones emplearemos tres autómatas
+genéricos:
+ $$\predisplaypenalty=-50 %%% manual breaking
+ \eqalign{|A &= \left< \inpA, \outA, \stA, \prA; ({|A}_r) \right>\cr |B &=
+ \left< \inp B, \out B, \st B, \pr B; ({|B}_{\dot{r}}) \right>\cr |C &=
+ \left< \inp C, \out C, \st C, \pr C; ({|C}_{\ddot{r}}) \right>.\cr}$$
+Nótese que los índices de |B están bajo un punto, que los índices
+de |C están bajo dos puntos, y que los índices de |A no están bajo
+punto alguno.
+
+\title4 La composición en serie
+
+La \definition{composición en serie}, $|A = \srl |B |C$, sólo
+puede ser efectuada si $\out B = \inp C$, en cuyo caso:
+ $$\inpA = \inp B,\quad \outA = \out C,\quad
+   \stA = \st B + \st C,\quad \prA = \pr B + \pr C.$$
+Para calcular $({|A}_r)$ es más sencilla la forma en cuatro
+dimensiones, siendo:
+ $$s = \dot{s}.2^{\st C} +\ddot{s},\quad n =
+ \dot{n}.2^{\st C} + \ddot{n},\quad \imath =
+ \dot{\imath},\quad o = \ddot{o},$$
+y resulta (nótese que $v \through \out B = \inp C$):
+ $$\ALFA = {|A}_{\dot{s}2^{\st C} + \ddot{s}, \dot{\imath},
+   \dot{n}2^{\st C} + \ddot{n}, \ddot{o}} =
+   \sum_v {|B}_{\dot{s}\dot{\imath}\dot{n}v} \,\cdot\,
+   {|C}_{\ddot{s}v\ddot{n}\ddot{o}} .$$%\belowdisplayskip=3pt$$
+\vskip-6pt
+% Composición en serie
+\MTbeginfigure(120,50);%\abovedisplayskip=3pt
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton + B C
+ \MT: pickup thick_pen;
+ \MT: x2l = w - x3r = 30u;
+ \MT: y2b = y3b = 10v;
+ \MT: rectangle(2)(20u,20v); % 2 is B
+ \MT: rectangle(3)(20u,20v); % 3 is C
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"|B";
+ \MTlabel(3lbl)"|C";
+ \MT: x4 = 1/2w; y4 = 0.5[y2t,h];
+ \MTlabel(4)"$|A = \srl |B |C$"; % 4 is A = + B C
+ \MT: pickup med_pen;
+ \MT: x5l = x6l = x7l = 0; x5r = x6r = x7r = x2l;
+ \MT: y5l = y5r = 1/4[y2b,y2t];
+ \MT: y6l = y6r = 2/4[y2b,y2t];
+ \MT: y7l = y7r = 3/4[y2b,y2t];
+ \MT: arrow(5l,5r); arrow(6l,6r); arrow(7l,7r); % arrows to B / A
+ \MT: x8l = x9l = x2r; x8r = x9r = x3l;
+ \MT: y8l = 1/3[y2b,y2t]; y9l = 2/3[y2b,y2t];
+ \MT: y8r = 1/3[y3b,y3t]; y9r = 2/3[y3b,y3t];
+ \MT: arrow(8l,8r); arrow(9l,9r); % arrows from B to C
+ \MT: x10l = x11l = x3r; x10r = x11r = w;
+ \MT: y10l = y10r = 1/3[y3b,y3t]; y11l = y11r = 2/3[y3b,y3t];
+ \MT: arrow(10l,10r); arrow(11l,11r); % arrows from C / A
+\MTendfigure"Composición\cr en serie";
+
+\smallskip
+\title4 La composición en paralelo
+
+La \definition{composición en paralelo}, $|A = \prl |B |C$, hace que:
+ $$\inpA = \inp B + \inp C,\quad \outA = \out B + \out C,\quad
+   \stA = \st B + \st C,\quad \prA = \pr B + \pr C.$$
+Para calcular $({|A}_r)$ es más sencillo utilizar la forma en cuatro
+dimensiones, siendo:
+ $$s = \dot{s}.2^{\st C} + \ddot{s},\quad
+   n = \dot{n}.2^{\st C} + \ddot{n},\quad
+   \imath = \dot{\imath}.2^{\inp C} + \ddot{\imath},\quad
+   o = \dot{o}.2^{\out C} + \ddot{o},$$
+y resulta:
+ $$\abovedisplayskip=\abovedisplayshortskip
+ \ALFA = {|A}_{\dot{s}2^{\st C} + \ddot{s},
+ \dot{\imath}2^{\inp C} + \ddot{\imath}, \dot{n}2^{\st C} + \ddot{n},
+ \dot{o}2^{\out C} + \ddot{o}} = {|B}_{\dot{s}\dot{\imath}\dot{n}\dot{o}}
+ \,\cdot\, {|C}_{\ddot{s}\,\ddot{\imath}\,\ddot{n}\ddot{o}}.$$
+% Composición en paralelo
+\MTbeginfigure(100,80);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton * B C
+ \MT: pickup thick_pen;
+ \MT: x2 = x3 = x4 = w/2;
+ \MT: y2b = 10v;
+ \MT: rectangle(2)(20u,20v); % 2 is C
+ \MT: y3b = y2t + 10v;
+ \MT: rectangle(3)(20u,20v); % 3 is BC
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"|C";
+ \MTlabel(3lbl)"|B";
+ \MT: y4 = 0.5[y3t,h];
+ \MTlabel(4)"$|A = \prl |B |C$"; % 4 is A = * B C
+ \MT: pickup med_pen;
+ \MT: x5l = x6l = x7l = 0; x5r = x6r = x7r = x3l;
+ \MT: y5l = y5r = 1/4[y3b,y3t];
+ \MT: y6l = y6r = 2/4[y3b,y3t];
+ \MT: y7l = y7r = 3/4[y3b,y3t];
+ \MT: arrow(5l,5r); arrow(6l,6r); arrow(7l,7r); % arrows to B
+ \MT: x8l = x9l = 0; x8r = x9r = x2l;
+ \MT: y8l = y8r = 1/3[y2b,y2t]; y9l = y9r = 2/3[y2b,y2t];
+ \MT: arrow(8l,8r); arrow(9l,9r); % arrows to C
+ \MT: x10l = x11l = x3r; x10r = x11r = w;
+ \MT: y10l = y10r = 1/3[y3b,y3t]; y11l = y11r = 2/3[y3b,y3t];
+ \MT: arrow(10l,10r); arrow(11l,11r); % arrows from B
+ \MT: x12l = x13l = x2r; x12r = x13r = w;
+ \MT: y12l = y12r = 1/3[y2b,y2t]; y13l = y13r = 2/3[y2b,y2t];
+ \MT: arrow(12l,12r); arrow(13l,13r); % arrows from C
+\MTendfigure"Composición\cr en paralelo";
+
+\title4 La composición de realimentación
+
+La \definition{composición de realimentación}, $|A = \fdb |B$,
+solamente puede efectuarse si $\inp B > 0$, $\out B > 0$, y entonces
+resulta que:
+ $$ |A = \left< \inp B - 1, \out B - 1, \st B + 1, \pr B;
+    ({|B}_{\dot{r}}) \right>,$$
+esto es, $\inpA = \inp B - 1$, $\outA = \out B - 1$, $\stA = \st B + 1$,
+$\prA = \pr B$ y $({|A}_r) = ({|B}_{\dot{r}})$, con $r, \dot{r} \through
+\stA + \inpA + \stA + \outA = \st B + \inp B + \st B + \out B$.
+
+Obsérvese que $r$ recorre los mismos valores que $\dot{r}$ pero que sus
+significados, al ser trasladados a los cuatro índices
+ $(s, \imath, n, o)$,
+son diferentes.  La relación entre los índices de |A y los de |B es:
+ $$s = \dot{s}.2 + \breve{s}, \quad
+   n = \dot{n}.2 + \breve{n}, \quad
+   \dot{\imath} = \breve{\imath}.2^{\inp A} + \imath, \quad
+   \dot{o} = \breve{o}.2^{\out A} + o ,$$
+donde $\breve{s}$, $\breve{\imath}$, $\breve{n}$ y $\breve{o}$ son índices
+binarios, que toman el valor $1$ o el valor $0$, es decir,
+ $\breve{\jmath} \through 1$.
+% Composición de realimentación
+\MTbeginfigure(110,60);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton & B
+ \MT: pickup thick_pen;
+ \MT: x2 = w/2; y2b = 20v; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 is B
+ \MTlabel(2lbl)"|B";
+ \MT: x3 = 1/2w; y3 = 0.5y2b;
+ \MTlabel(3)"$|A = \fdb |B$"; % 3 is A = & B
+ \MT: z4o = (x2r,2/3[y2b,y2t]); z4d = (x2l,3/4[y2b,y2t]);
+ \MT: feedback(4,4o,4d)(1/2[y2t,h]+5v,10u,10u);
+ \MT: x5l = x6l = 0; x5r = x6r = x2l;
+ \MT: y5l = y5r = 1/4[y2b,y2t];
+ \MT: y6l = y6r = 2/4[y2b,y2t];
+ \MT: arrow(5l,5r); arrow(6l,6r); % arrows to B
+ \MT: x7l = x2r; x7r = w;
+ \MT: y7l = y7r = 1/3[y2b,y2t];
+ \MT: arrow(7l,7r); % arrow from B
+\MTendfigure"Composición\cr de realimentación";
+
+
+\title4 Ejemplos
+
+\MTbeginchar(40pt,20pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(1/2w,h);
+ \MT: pickup med_pen;
+ \MT: x3 = x4 = x1l; x5 = x6 = x1r;
+ \MT: y3 = y5 = 3/4[y1b,y1t]; y4 = y6 = 1/4[y1b,y1t];
+ \MT: draw z3{1,0} .. z6{1,0};
+ \MT: draw z4{1,0} .. z5{1,0};
+ \MT: z11o = (0,y3); z11d = (x3,y3); draw z11o .. z11d;
+ \MT: z12o = (0,y4); z12d = (x4,y4); draw z12o .. z12d;
+ \MT: z13o = (x5,y5); z13d = (w,y5); arrow(13o,13d);
+ \MT: z14o = (x6,y6); z14d = (w,y6); arrow(14o,14d);
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\PERM$"; % PERM
+\MTendchar;
+\setbox0=\box\MTbox
+
+\MTbeginchar(60pt,30pt,1pc);
+ \MT: save u,v; u := 0.5pt; v := 0.5pt;
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(2/3w,h);
+ \MT: pickup med_pen;
+ \MT: x3 = x4 = 1/3w; x5 = x6 = 2/3w;
+ \MT: y3 = y5 = 3/6[y1b,y1t]; y4 = y6 = 1/6[y1b,y1t];
+ \MT: draw z3{1,0} .. z6{1,0};
+ \MT: draw z4{1,0} .. z5{1,0};
+ \MT: z12o = (0,y4); z12d = (x4,y4); draw z12o .. z12d;
+ \MT: z14o = (x6,y6); z14d = (w,y6); arrow(14o,14d);
+ \MT: y7t = h; y7b = y7t - 1/3h; y7 = 1/2[y7b,y7t];
+ \MT: x7l + x7r = w; x7r - x7l = 1/6w;
+ \MT: z8 = (1/2[x5,x1r],1/2[y5,y7]);
+ \MT: z9 = (1/2[x1l,x3],1/2[y3,y7]);
+ \MT: draw z5{1,0} .. z8{0,1} .. (x7r,y7){-1,0};
+ \MT: draw (x7l,y7){-1,0} .. z9{0,-1} .. z3{1,0};
+ \MT: pickup thick_pen;
+ \MT: draw (x7l,y7) -- (x7r,y7b) -- (x7r,y7t) -- cycle;
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\fdb\PERM$"; % & PERM
+\MTendchar;
+\setbox2=\box\MTbox
+
+\MTbeginchar(40pt,10pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(1/2w,h);
+ \MT: pickup thick_pen;
+ \MT: x4 = x1; x4r - x4l = 1/4w; x4r + x4l = 2x4;
+ \MT: y4 = y1; y4t - y4b = h; y4t + y4b = 2y4;
+ \MT: draw (x4r,y4) -- (x4l,y4t) -- (x4l,y4b) -- cycle;
+ \MT: pickup med_pen;
+ \MT: z2o = (0,y4); z2d = (x4l,y4); draw z2o .. z2d;
+ \MT: z3o = (x4r,y4); z3d = (w,y4); arrow(3o,3d);
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\DEL$"; % DEL
+\MTendchar;
+\setbox4=\box\MTbox
+
+Puesto que
+ $\PERM = \bigl< 2,2,0,0; ( 1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1 ) \bigr>$
+y
+ $\DEL = \bigl< 1,1,1,0; ( 1,0,0,0, 0,0,1,0, 0,1,0,0, 0,0,0,1 ) \bigr>$,
+resulta que \hfil\break $\op{DEL} = \fdb\op{PERM}$.
+
+\line{\hfil\box0\hfil\box2\hfil\box4\hfil}
+\bigbreak
+
+\MTbeginchar(160pt,60pt,0pt);
+ \MT: pickup thick_pen;
+ \MT: x1l = 100u; y1b = 0; x1lbl = x1; y1lbl.b=y1b+jot;
+ \MT: rectangle(1)(20u,30v); % 1 is \string\SEL
+ \MTlabel(1lbl)"\sevenrm SEL";
+ \MT: x11 = x12 = x1l; x13 = x1r;
+ \MT: y11 = 1/4[y1b,y1t]; y12 = 3/4[y1b,y1t]; y13 = 1/2[y1b,y1t];
+ \MT: x2r = x1l - 20u; y2 = y12; z2lbl = z2;
+ \MT: circle(2)(15u); % 2 is \string\PROB
+ \MTlabel(2lbl)"\sevenrm Pr";
+ \MT: x3 = x2; y3 = y2 + 20v; z3lbl=z3;
+ \MT: or_gate(3)(15u); % 3 is \string\XOR
+ \MTlabel(3lbl)"\sevenrm X ";
+ \MT: pickup med_pen;
+ \MT: draw z11 .. z13; draw z12 .. z13;
+ \MT: z14 = (x2r,y2); arrow(14,12);
+ \MT: z15 = (x3out,y3); z16 = (x1,y3); z17 = (x1,y1t);
+ \MT: arroww(15,16,17);
+ \MT: x18 = 0; y18 = 1/2[y11,y3in2]; z19 = z18 + (20u,0);
+ \MT: draw z18 .. z19; point(19);
+ \MT: x20 = x21 = x19 + 20u; y20 = y11; y21 = y3in2;
+ \MT: arroww(19,20,11); arroww(19,21,3in2);
+ \MT: z22 = (w,y13); arrow(13,22);
+ \MT: z23 = 1/4[z13,z22];
+ \MT: forkback(24,23,3in1)(h,10u,10u);
+\MTendchar;
+
+Véase que:
+ $\srl \FORK \fdb \srl \srl \prl \prl \XOR \PROB \ID \SEL \FORK$, con
+ $$\line{$\displaystyle{\eqalign{
+ \FORK &= \left< 1, 2, 0, 0; ( 1, 0, 0, 0, 0, 0, 0, 1 ) \right> \cr
+ \XOR  &= \left< 2, 1, 0, 0; ( 0, 1, 1, 0, 1, 0, 0, 1 ) \right> \cr
+ \PROB &= \left< 0, 1, 0, 1; ( 1, 1 ) \right> \cr
+ \ID   &= \left< 1, 1, 0, 0; ( 1, 0, 0, 1 ) \right> \cr
+ \SEL  &= \left< 3, 1, 0, 0; ( 1, 0, 1, 0, 0, 1, 0, 1,
+                               1, 0, 0, 1, 1, 0, 0, 1 ) \right> ,\cr}}
+ \hss\vcenter{\box\MTbox\kern6pt}$%
+ \tocfig{Ejemplos\string|Ejemplos de composiciones de autómatas}}$$
+resulta
+ $\left< 1, 1, 1, 1; ( 2, 0, 0, 0, 1, 0, 0, 1, 1, 0, 0, 1,
+ 0, 0, 0, 2 ) \right> = |H$,
+ que es el autómata presentado en la página {\refpg{channel}}.
+
+
+\title4 Abreviaturas
+
+Utilizaremos las siguientes abreviaturas:
+ $$\eqalign{
+  \prl^n |A &= \underbrace{\prl \cdots \prl}_{n-1}
+   \underbrace{\vphantom{\prl} |A \ldots |A}_n \quad (\prl^0 |A = \O) \cr
+  \srl^n |A &= \underbrace{\srl \cdots \srl}_{n-1}
+   \underbrace{\vphantom{\srl} |A \ldots |A}_n \quad (n > 0)\cr
+  \fdb^n |A &= \underbrace{\fdb \cdots \fdb}_n |A\cr
+ \noalign{\kern-6pt}
+  \prli_{i=m}^n |A_i &= \underbrace{\prl \cdots \prl}_{m-n}
+    |A_m |A_{m-1} \ldots |A_n \quad (m \geq n) .\cr}$$
+ Si $m < n$, entonces $\prli_{i=m}^n |A_i = \O$.
+ También: $\prli_{i \through \no N} |A_i = \prli_{i=2^{\no N}-1}^0 |A_i$.
+
+
+\labeled\title3 La función característica
+
+Llamando \definition{función característica} del autómata |A a:
+ $$\FA = \left< \no S+\no I, \no S+\no O, 0, \no P; (|A_r) \right>,$$
+resulta que:
+ $$|A = \left< \no I, \no O, \no S, \no P; (|A_r) \right> =
+  \fdb^{\no S} \left< \no S+\no I, \no S+\no O, 0, \no P; (|A_r) \right> =
+   \fdb^{\no S} \FA ,$$
+o sea:  $$\forall\! |A: \; |A = \fdb^{\no S} \FA .$$
+% Función característica
+\MTbeginfigure(110,60);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is A
+ \MT: pickup thick_pen;
+ \MT: x2 = w/2; y2b = 20v; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 is \FA
+ \MTlabel(2lbl)"\FA";
+ \MT: x3 = 1/2w; y3 = 0.5y2b;
+ \MTlabel(3)"$|A$"; % 3 is A
+ \MT: z4o = (x2r,2/3[y2b,y2t]); z4d = (x2l,2/3[y2b,y2t]);
+ \MT: feedback(4,4o,4d)(1/2[y2t,h]+5v,10u,10u);
+ \MT: x4lbl.r = x4d - jot; y4lbl.b = y4d + jot;
+ \MTlabel(4lbl)"$\no S$";
+ \MT: x5l = 0; x5r = x2l; y5l = y5r = 1/3[y2b,y2t];
+ \MT: arrow(5l,5r); % arrow to B
+ \MT: x6r = x5r - jot; y6t = y5r - jot;
+ \MTlabel(6)"$\no I$";
+ \MT: x7l = x2r; x7r = w; y7l = y7r = 1/3[y2b,y2t];
+ \MT: arrow(7l,7r); % arrow from B
+ \MT: x8l = x7l + jot; y8t = y7l - jot;
+ \MTlabel(8)"$\no O$";
+\MTendfigure"Función\cr característica";
+
+\goodpage
+\title3 La propiedad asociativa
+
+\title4 La composición en serie
+
+tiene la propiedad asociativa:
+ $$\forall\! |A, |B, |C: \;
+  (\outA = \inp B) \land (\out B = \inp C) \implies
+   \srl\srl |A |B |C = \srl |A \srl |B |C.$$
+
+\title4 Demostración
+
+Es inmediato que
+ $$\displaylines{
+ \inp{\srl\!\srl\!|A\!|B\!|C} = \inpA = \inp{\srl\!|A\!\srl\!|B\!|C} \cr
+ \out{\srl\!\srl\!|A\!|B\!|C} = \out C = \out{\srl\!|A\!\srl\!|B\!|C} \cr
+ \st{\srl\!\srl\!|A\!|B\!|C} = \stA+\st B+\st C =
+    \st{\srl\!|A\!\srl\!|B\!|C} \cr
+ \pr{\srl\!\srl\!|A\!|B\!|C} = \prA+\pr B+\pr C =
+    \pr{\srl\!|A\!\srl\!|B\!|C} .\cr}$$
+%
+Además (con $\outA = \inp B$ y $\out B = \inp C$):
+ $$\eqalign{
+ \left[\srl\srl |A |B |C\right]_{\acute s \acute\imath \acute n \acute o}
+ &= \sum_{v \through \out B} \left( \sum_{v' \through \outA}
+ |A_{s \imath n v'} \cdot  |B_{\dot s v' \dot n v} \right) \cdot
+ |C_{\ddot s v \ddot n \ddot o}
+ =\cr&= \sum_{v \through \out B} \sum_{v' \through \outA}
+ |A_{s \imath n v'} \cdot  |B_{\dot s v' \dot n v} \cdot
+ |C_{\ddot s v \ddot n  \ddot o}
+ =\cr&= \sum_{v' \through \outA} \sum_{v \through \out B}
+ |A_{s \imath n v'} \cdot  |B_{\dot s v' \dot n v} \cdot
+ |C_{\ddot s v \ddot n  \ddot o}
+ =\cr\noalign{\vskip-6pt}&
+      = \sum_{v' \through \outA} |A_{s \imath n v'} \cdot  \left(
+ \sum_{v \through \out B} |B_{\dot s v' \dot n v} \cdot
+ |C_{\ddot s v \ddot n \ddot o} \right)
+ =\cr&= \left[\srl |A \srl |B |C\right]_{\acute s \acute\imath \acute n
+ \acute o} .}$$
+
+\title4 La composición en paralelo
+
+tiene la propiedad asociativa:
+ $$\forall\! |A, |B, |C: \; \prl\prl |A |B |C = \prl |A \prl |B |C.$$
+
+\title4 Demostración
+
+Es inmediato que
+ $$\displaylines{
+ \inp{\prl\!\prl\!|A\!|B\!|C} = \inpA+\inp B+\inp C =
+  \inp{\prl\!|A\!\prl\!|B\!|C} \cr
+ \out{\prl\!\prl\!|A\!|B\!|C} = \outA+\out B+\out C =
+  \out{\prl\!|A\!\prl\!|B\!|C} \cr
+ \st{\prl\!\prl\!|A\!|B\!|C} = \stA+\st B+\st C =
+  \st{\prl\!|A\!\prl\!|B\!|C} \cr
+ \pr{\prl\!\prl\!|A\!|B\!|C} = \prA+\pr B+\pr C =
+  \pr{\prl\!|A\!\prl\!|B\!|C} .\cr}$$
+%
+Además:
+ $$\eqalign{
+ \left[\prl\prl |A |B |C\right]_{\acute s\acute\imath\acute n\acute o} &=
+ \left( \ALFA \cdot |B_{\dot s \dot\imath \dot n \dot o} \right) \cdot
+ |C_{\ddot s \ddot\imath \ddot n \ddot o} =
+ \ALFA \cdot \left( |B_{\dot s \dot\imath \dot n \dot o} \cdot
+ |C_{\ddot s \ddot\imath \ddot n \ddot o} \right)
+ =\cr&=
+ \left[\prl |A \prl |B |C\right]_{\acute s\acute\imath\acute n\acute o}
+ .}$$
+
+\goodpage
+
+\title3 Los elementos neutros
+
+\title4 La composición en paralelo
+
+tiene elemento neutro, es \O, definido:
+ $$\O = \left< 0, 0, 0, 0; (1) \right>.$$
+%
+Se cumple que, \forallA:
+ $$\eqalign{
+ |A &= \prl \op\O |A \cr
+ |A &= \prl |A \op\O \cr
+ |A &= \prl \prl \op\O |A \op\O .\cr}$$
+%
+La demostración es inmediata.
+
+\title4 La composición en serie
+
+tiene elemento neutro, es $\ID_n$, definido:
+ $$\left\{\eqalignrcccl{
+  \ID_0 &=& \op\O &=& \left< 0, 0, 0, 0; (1) \right> \cr
+  \ID_1 &=& \ID   &=& \left< 1, 1, 0, 0; (1, 0, 0, 1) \right> \cr
+  \ID_n &&&=& \prl \ID_{n-1} \ID
+    \hfill \hbox{ \siif\ } \; n\geq 2 .\cr}\right.$$
+%
+Se cumple que, \forallA:
+ $$\eqalign{
+ |A &= \srl \ID_{\no I} |A \cr
+ |A &= \srl |A \ID_{\no O} \cr
+ |A &= \srl \srl \ID_{\no I} |A \ID_{\no O} .\cr}$$
+%
+La demostración es sencilla una vez se reconoce en $\ID_n$ la forma
+de la matriz identidad de tamaño $2^n \times 2^n$:
+ $$\ID_n = \bigl< n, n, 0, 0; \pmatrix{ 1 & 0 & \ldots & 0 \cr
+  0 & 1 & \ldots & 0 \cr \vdots & \vdots & \ddots & \vdots \cr
+  0 & 0 & \ldots & 1 \cr} \bigr> . $$
+
+\goodpage
+\title3 Notación automática de vectores
+
+Si un autómata sólo tiene variables de salida, o sea, no tiene ni
+vector de entrada ni vector de estado, entonces sólo tiene el vector de
+salida.  Confundiendo un autómata de estas características con el
+único vector que tiene, podemos abusar de la notación que describe
+autómatas para escribir vectores.  Queda:
+ $$|V = \left< {\no N}, {\no P};
+  (|V_r) \right> = \left< 0, {\no N}, 0, {\no P}; (|V_r) \right> .$$
+
+
+\labeled\title3 Notación automática de strings
+
+Si en \S\refsc{Notación vectorial de strings} escribimos un string
+utilizando el aparato descriptivo necesario a los vectores, ahora podemos
+describir un string al modo de un autómata.
+
+Sea
+ $S = [b_{\ell-1}\,b_{\ell-2}\, \ldots\, b_2\,b_1\,b_0]$
+el string notado $S = \left< \ell, 0; (S_r) \right>$ con
+ $S_{\overline S} = 1$ y $S_{r \not= \overline S} = 0$ en
+\S\refsc{Notación vectorial de strings}.  Su forma automática será:
+ $$S = \left< 0,\ell,0,0; (S_r) \right> = \prli_{i=\ell-1}^0 \K_{b_i}$$
+donde esta última igualdad se sostiene porque:
+ $$\eqalign{
+  \K_1 = \ONE  &= \left< 0, 1, 0, 0; (1, 0) \right> \cr
+  \K_0 = \ZERO &= \left< 0, 1, 0, 0; (0, 1) \right> .\cr}$$
+
+
+\title3 La ampliabilidad
+
+Siendo $S$ el string de longitud $\ell$ al que corresponde el índice
+$\overline S$, definimos
+ $$\Syntax(\overline S,\ell,|B) =
+   \srl \prl \prli_{i=\ell-1}^0 \K_{b_i} \ID_{\inp B-\ell} |B .$$
+O, abreviadamente, usando la notación automática del string:
+ $$\op{Syntax}(\opd{S},|B) =
+   \srl \prl \opd{S} \ID_{\inp B-\ell} |B .$$
+
+Por ejemplo y suponiendo que $\inp B = 6$, $\op{Syntax}([0\,1\,1\,1],|B)$
+puede representarse así.
+% Syntax
+\MTbeginfigure(80,45);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(w-20u,h);
+ \MT: pickup thick_pen;
+ \MT: x2r = x1r - 5u; y2b = y1b + 5v; z2lbl = z2;
+ \MT: rectangle(2)(35u,35v);
+ \MTlabel(2lbl)"|B";
+ \MT: pickup med_pen;
+ \MT: z3o = (x2r,y2); z3d = (w,y2); arrow(3o,3d);
+ \MT: for i := 4 upto 9: z[i]d = (x2l, ((i-3)/7)[y2b,y2t]); endfor
+ \MT: z4o = (0,y4d); z5o = (0,y5d); arrow(4o,4d); arrow(5o,5d);
+ \MT: for i := 6 upto 9:
+ \MT:     z[i]o = z[i]d - (10u,0); arrow([i]o,[i]d);
+ \MT:     x[i]lbl.r = x[i]o; y[i]lbl = y[i]o;
+ \MT: endfor
+ \MTlabel(9lbl)"\sevenrm 0"; \MTlabel(8lbl)"\sevenrm 1";
+ \MTlabel(7lbl)"\sevenrm 1"; \MTlabel(6lbl)"\sevenrm 1";
+\MTendfigure"Syntax(7,4,|B)";
+
+\label{eqamp}
+Decimos que el autómata |B es una \definition{ampliación} del autómata |A,
+notado $|B \amp \!|A$, cuando:
+ $$|B \amp \!|A \iff \bigl(\inp B > \inpA\bigr)
+   \land \bigl(\exists c:  \Syntax(c,\inp B-\inpA,|B) = |A\bigr).$$
+
+Por ejemplo, el autómata
+ $\XOR = \left< 2, 1, 0, 0; (0, 1, 1, 0, 1, 0, 0, 1) \right>$
+es una ampliación del autómata \NOT, $\XOR \amp \NOT$, y
+también del autómata \ID, $\XOR \amp \ID$, ya que:
+ $$\eqalign{\Syntax(1,1,\XOR) &= \srl \prl \ONE \ID \XOR = \NOT,\cr
+   \Syntax(0,1,\XOR) &= \srl \prl \ZERO \ID \XOR = \ID .\cr}$$
+
+
+\labeled\title3 La construcción
+
+\title4 Minimum
+
+Cualquier autómata puede ser escrito como una expresión en la que sólo
+aparecen las tres composiciones (en serie, en paralelo y de
+realimentación) y cuatro autómatas, concretamente \SINK, \FORK, \PROB\ y
+\NAND.  Llamaremos conjunto Minimum al constituido por estos cuatro
+autómatas, que presentamos en forma de string $(|A_r)$.
+ $$\eqalign{
+ \op{Minimum} &= \{\, \SINK, \FORK, \PROB, \NAND \,\} \cr
+ \SINK &= \left< 1, 0, 0, 0; ( 1, 1 ) \right> \cr
+ \FORK &= \left< 1, 2, 0, 0; ( 1, 0, 0, 0, 0, 0, 0, 1 ) \right> \cr
+ \PROB &= \left< 0, 1, 0, 1; ( 1, 1 ) \right> \cr
+ \NAND &= \left< 2, 1, 0, 0; ( 0, 1, 1, 0, 1, 0, 1, 0 ) \right>.\cr}$$
+
+\title4 Fundamentales
+
+Componiendo estos cuatro autómatas definimos otros que nos servirán para
+construir cualquier autómata.
+ $$\eqalign{
+ \NOP &= \srl \PROB \SINK\cr
+ \NOT &= \srl \FORK \NAND\cr
+ \ID  &= \srl \NOT \NOT\cr
+ \AND &= \srl \NAND \NOT\cr
+ \OR  &= \srl \prl \NOT \NOT \NAND\cr
+ \ONE &= \srl \srl \srl \PROB \FORK \prl \NOT \ID \NAND\cr
+ \ZERO &= \srl \ONE \NOT\cr
+ \XOR &= \srl \srl \srl \prl \FORK \FORK
+         \prl \prl \ID \srl \NAND \FORK \ID
+ \cr\noalign{\vskip-3pt}&\qquad % manual splitting
+         \prl \NAND \NAND \NAND\cr
+ \PERM &= \srl \srl \prl \FORK \FORK \prl \prl \ID
+          \srl \XOR \FORK \ID \prl \XOR \XOR\cr
+ \SEL &= \srl \srl \prl \srl \PERM \prl \ID \FORK \ID
+ \cr\noalign{\vskip-3pt}&\qquad % manual splitting
+         \prl \NAND \srl \prl \NOT \ID \NAND \NAND\cr}$$
+
+\newpage
+
+\title4 Funciones
+
+También necesitamos algunas funciones de números naturales
+ ($m,n \in \N$) en autómatas, todos ellos con $\no S = 0$ y $\no P = 0$.
+
+\function$ \OR_n =
+ \cases{\srl \prl \OR_{n-1} \ID \OR& \siif\ $n>2$\cr
+  \OR& \siif\ $n=2$\cr
+  \ID& \siif\ $n=1$\cr
+  \ZERO& \siif\ $n=0$}\fan[n,1,0,0]$
+
+\function$ \K_n =
+ \cases{\ONE& \siif\ $n>0$\cr
+        \ZERO& \siif\ $n=0$\cr} \fan[0,1,0,0] $
+
+\MTbeginchar(40pt,20pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(1/2w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = 0; x2d = x3d = x4d = w;
+ \MT: y2o = y2d = 1/4[y1b,y1t];
+ \MT: y3o = y3d = 2/4[y1b,y1t];
+ \MT: y4o = y4d = 3/4[y1b,y1t];
+ \MT: arrow(2o,2d); arrow(3o,3d); arrow(4o,4d);
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\ID_3$"; % ID_3
+\MTendchar;
+\setbox0=\box\MTbox
+
+\MTbeginchar(40pt,20pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(1/2w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = 0; x2d = x3d = x4d = 1/2w;
+ \MT: y2o = y2d = 3/4[y1b,y1t];
+ \MT: y3o = y3d = 2/4[y1b,y1t];
+ \MT: y4o = y4d = 1/4[y1b,y1t];
+ \MT: arrow(2o,2d); arrow(3o,3d); arrow(4o,4d);
+ \MT: point(2d); point(3d); point(4d);
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\SINK_3$"; % SINK_3
+\MTendchar;
+\setbox2=\box\MTbox
+
+\MTbeginchar(40pt,20pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(1/2w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = 0; x2d = x3d = x4d = x1l;
+ \MT: y2o = y2d = 3/4[y1b,y1t];
+ \MT: y3o = y3d = 2/4[y1b,y1t];
+ \MT: y4o = y4d = 1/4[y1b,y1t];
+ \MT: draw z2o .. z2d; draw z3o .. z3d; draw z4o .. z4d;
+ \MT: x5o = x6o = x7o = x1r; x5d = x6d = x7d = w;
+ \MT: y5o = y5d = 3/4[y1b,y1t];
+ \MT: y6o = y6d = 2/4[y1b,y1t];
+ \MT: y7o = y7d = 1/4[y1b,y1t];
+ \MT: arrow(5o,5d); arrow(6o,6d); arrow(7o,7d);
+ \MT: draw z2d{1,0} .. z6o{1,0};
+ \MT: draw z3d{1,0} .. z7o{1,0};
+ \MT: draw z4d{1,0} .. z5o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Csr}_3$"; % Csr_3
+\MTendchar;
+\setbox4=\box\MTbox
+
+\MTbeginchar(40pt,20pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(1/2w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = 0; x2d = x3d = x4d = x1l;
+ \MT: y2o = y2d = 3/4[y1b,y1t];
+ \MT: y3o = y3d = 2/4[y1b,y1t];
+ \MT: y4o = y4d = 1/4[y1b,y1t];
+ \MT: draw z2o .. z2d; draw z3o .. z3d; draw z4o .. z4d;
+ \MT: x5o = x6o = x7o = x1r; x5d = x6d = x7d = w;
+ \MT: y5o = y5d = 3/4[y1b,y1t];
+ \MT: y6o = y6d = 2/4[y1b,y1t];
+ \MT: y7o = y7d = 1/4[y1b,y1t];
+ \MT: arrow(5o,5d); arrow(6o,6d); arrow(7o,7d);
+ \MT: draw z2d{1,0} .. z7o{1,0};
+ \MT: draw z3d{1,0} .. z5o{1,0};
+ \MT: draw z4d{1,0} .. z6o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Csl}_3$"; % Csl_3
+\MTendchar;
+\setbox6=\box\MTbox
+
+\bigbreak
+\line{\hfil\box0\hfil\box2\hfil\box4\hfil\box6\hfil
+ \tocfig{\aut I\string|Autómata identidad}%
+ \tocfig{SINK\string|Autómata sumidero}%
+ \tocfig{Csr\string|Autómata de rotación a la derecha}%
+ \tocfig{Csl\string|Autómata de rotación a la izquierda}}
+
+\function$ \ID_n = \cases{
+ \prl \ID_{n-1} \ID& \siif\ $n>1$\cr
+ \ID& \siif\ $n=1$\cr \NOP& \siif\ $n=0$} \fan[n,n,0,0] $
+
+\function$ \SINK_n = \cases{
+ \prl \SINK_{n-1} \SINK& \siif\ $n>1$\cr
+ \SINK& \siif\ $n=1$\cr \NOP& \siif\ $n=0$} \fan[n,0,0,0] $
+
+\function$ \op{Csr}_n = \cases{
+ \srl \prl \ID \op{Csr}_{n-1} \prl \PERM \ID_{n-2}& \siif\ $n>2$\cr
+ \PERM&\siif\ $n=2$\cr
+ \ID&\siif\ $n=1$\cr
+ \NOP&\siif\ $n=0$} \fan[n,n,0,0] $
+
+\function$ \op{Csl}_n = \cases{
+ \srl \prl \op{Csl}_{n-1} \ID \prl \ID_{n-2} \PERM& \siif\ $n>2$\cr
+ \PERM&\siif\ $n=2$\cr
+ \ID&\siif\ $n=1$\cr
+ \NOP&\siif\ $n=0$} \fan[n,n,0,0] $
+
+\MTbeginchar(50pt,40pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(3/5w,h);
+ \MT: pickup med_pen;
+ \MT: x4bl = x4ml = x4tl = 0;
+ \MT: y4bl = 3/8h; y4ml = 4/8h; y4tl = 5/8h;
+ \MT: x4br = x4mr = x4tr = 2/5w;
+ \MT: y4br = y4bl; y4mr = y4ml; y4tr = y4tl;
+ \MT: draw z4bl -- z4br; draw z4ml -- z4mr; draw z4tl -- z4tr;
+ \MT: z5bl = z4br + (1/5w,2/8h); z6bl = z4br + (1/5w,-2/8h);
+ \MT: z5ml = z4mr + (1/5w,2/8h); z6ml = z4mr + (1/5w,-2/8h);
+ \MT: z5tl = z4tr + (1/5w,2/8h); z6tl = z4tr + (1/5w,-2/8h);
+ \MT: z5br = z5bl + (2/5w,0); z6br = z6bl + (2/5w,0);
+ \MT: z5mr = z5ml + (2/5w,0); z6mr = z6ml + (2/5w,0);
+ \MT: z5tr = z5tl + (2/5w,0); z6tr = z6tl + (2/5w,0);
+ \MT: fork(4br,5bl,5br); fork(4mr,5ml,5mr); fork(4tr,5tl,5tr);
+ \MT: fork(4br,6bl,6br); fork(4mr,6ml,6mr); fork(4tr,6tl,6tr);
+ \MT: z8 = (1/2w,-10pt);
+ \MTlabel(8)bc"$\FORK_3$";
+\MTendchar;
+\setbox0=\box\MTbox
+
+\MTbeginchar(50pt,40pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(3/5w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = 0; x2d = x3d = 2/5w;
+ \MT: y2o = y2d = 5/9h; y3o = y3d = 4/9h;
+ \MT: draw z2o -- z2d; draw z3o -- z3d;
+ \MT: x4o = x5o = x6o = x7o = x8o = x9o = x2d;
+ \MT: x4m = x5m = x6m = x7m = x8m = x9m = x2d + 1/5w;
+ \MT: x4d = x5d = x6d = x7d = x8d = x9d = w;
+ \MT: y4o = y6o = y8o = y2d; y5o = y7o = y9o = y3d;
+ \MT: y4m = y4d = 8/9h; y5m = y5d = 7/9h;
+ \MT: y6m = y6d = 5/9h; y7m = y7d = 4/9h;
+ \MT: y8m = y8d = 2/9h; y9m = y9d = 1/9h;
+ \MT: fork(4o,4m,4d); fork(5o,5m,5d); fork(6o,6m,6d);
+ \MT: fork(7o,7m,7d); fork(8o,8m,8d); fork(9o,9m,9d);
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Mult}_{3,2}$";
+\MTendchar;
+\setbox2=\box\MTbox
+
+\bigbreak
+\line{\hfil\box0\hfil\box2\hfil
+ \tocfig{FORK\string|Autómata de bifurcación}%
+ \tocfig{Mult\string|Autómata de multiplicación}}
+
+\function$ \FORK_n = \cases{
+ \srl \prl \FORK_{n-1} \FORK \prl \prl \ID_{n-1} \op{Csr}_n \ID&
+ \siif\ $n>1$\cr \FORK& \siif\ $n=1$\cr
+ \NOP& \siif\ $n=0$} \fan[n,2n,0,0] $
+
+\function$ \op{Mult}_{m,n} = \cases{
+ \srl \op{Mult}_{m-1,n} \prl \FORK_n \ID_{(m-2)n}
+ \quad \hbox{ \siif\ } (m>2)\land(n>0)\hidewidth&\cr
+ \FORK_n& \siif\ $(m=2)\land(n>0)$\cr
+ \ID_n& \siif\ $(m=1)\land(n>0)$\cr
+ \SINK_n& \siif\ $(m=0)\land(n>0)$\cr
+ \NOP& \siif\ $n=0$} \fan[n,mn,0,0] $
+
+\MTbeginchar(60pt,60pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(2/3w,h);
+ \MT: pickup med_pen;
+ \MT: for k := 2 upto 10: x[k]o = 0; x[k]d = x1l; endfor
+ \MT: y2o = y2d = 13/14h; y3o = y3d = 12/14h; y4o = y4d = 11/14h;
+ \MT: y5o = y5d = 8/14h; y6o = y6d = 7/14h;
+ \MT: y7o = y7d = 5/14h; y8o = y8d = 4/14h;
+ \MT: y9o = y9d = 2/14h; y10o = y10d = 1/14h;
+ \MT: for k := 2 upto 10: draw z[k]o .. z[k]d; endfor
+ \MT: for k := 11 upto 19: x[k]o = x1r; x[k]d = w; endfor
+ \MT: y11o = y11d = 13/14h; y12o = y12d = 12/14h; y13o = y13d = 11/14h;
+ \MT: y14o = y14d = 8/14h; y15o = y15d = 7/14h; y16o = y16d = 6/14h;
+ \MT: y17o = y17d = 3/14h; y18o = y18d = 2/14h; y19o = y19d = 1/14h;
+ \MT: for k := 11 upto 19: arrow([k]o, [k]d); endfor
+ \MT: draw z2d{1,0} .. z11o{1,0};
+ \MT: draw z3d{1,0} .. z14o{1,0};
+ \MT: draw z4d{1,0} .. z17o{1,0};
+ \MT: draw z5d{1,0} .. z12o{1,0};
+ \MT: draw z6d{1,0} .. z13o{1,0};
+ \MT: draw z7d{1,0} .. z15o{1,0};
+ \MT: draw z8d{1,0} .. z16o{1,0};
+ \MT: draw z9d{1,0} .. z18o{1,0};
+ \MT: draw z10d{1,0} .. z19o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Join}_{3,3}$"; % Join_3,3
+\MTendchar;
+\setbox0=\box\MTbox
+
+\MTbeginchar(60pt,60pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(2/3w,h);
+ \MT: pickup med_pen;
+ \MT: for k := 2 upto 10: x[k]o = 0; x[k]d = x1l; endfor
+ \MT: y2o = y2d = 13/14h; y3o = y3d = 12/14h; y4o = y4d = 11/14h;
+ \MT: y5o = y5d = 8/14h; y6o = y6d = 7/14h; y7o = y7d = 6/14h;
+ \MT: y8o = y8d = 3/14h; y9o = y9d = 2/14h; y10o = y10d = 1/14h;
+ \MT: for k := 2 upto 10: draw z[k]o .. z[k]d; endfor
+ \MT: for k := 11 upto 19: x[k]o = x1r; x[k]d = w; endfor
+ \MT: y11o = y11d = 13/14h; y12o = y12d = 12/14h; y13o = y13d = 11/14h;
+ \MT: y14o = y14d = 8/14h; y15o = y15d = 7/14h;
+ \MT: y16o = y16d = 5/14h; y17o = y17d = 4/14h;
+ \MT: y18o = y18d = 2/14h; y19o = y19d = 1/14h;
+ \MT: for k := 11 upto 19: arrow([k]o, [k]d); endfor
+ \MT: draw z2d{1,0} .. z11o{1,0};
+ \MT: draw z3d{1,0} .. z14o{1,0};
+ \MT: draw z4d{1,0} .. z15o{1,0};
+ \MT: draw z5d{1,0} .. z12o{1,0};
+ \MT: draw z6d{1,0} .. z16o{1,0};
+ \MT: draw z7d{1,0} .. z17o{1,0};
+ \MT: draw z8d{1,0} .. z13o{1,0};
+ \MT: draw z9d{1,0} .. z18o{1,0};
+ \MT: draw z10d{1,0} .. z19o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Disjoin}_{3,3}$";
+\MTendchar;
+\setbox2=\box\MTbox
+
+\MTbeginchar(50pt,40pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(3/5w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = x5o = x6o = x7o = 0;
+ \MT: x2d = x3d = x4d = x5d = x6d = x7d = x1l;
+ \MT: y2o = y2d = 8/9h; y3o = y3d = 7/9h; y4o = y4d = 6/9h;
+ \MT: y5o = y5d = 3/9h; y6o = y6d = 2/9h; y7o = y7d = 1/9h;
+ \MT: for k := 2 upto 7: draw z[k]o .. z[k]d; endfor
+ \MT: x12o = x13o = x14o = x15o = x16o = x17o = x1r;
+ \MT: x12d = x13d = x14d = x15d = x16d = x17d = w;
+ \MT: y12o = y12d = 8/9h; y13o = y13d = 7/9h; y14o = y14d = 5/9h;
+ \MT: y15o = y15d = 4/9h; y16o = y16d = 2/9h; y17o = y17d = 1/9h;
+ \MT: for k := 12 upto 17: arrow([k].o,[k].d); endfor
+ \MT: draw z2d{1,0} .. z12o{1,0}; draw z3d{1,0} .. z14o{1,0};
+ \MT: draw z4d{1,0} .. z16o{1,0}; draw z5d{1,0} .. z13o{1,0};
+ \MT: draw z6d{1,0} .. z15o{1,0}; draw z7d{1,0} .. z17o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Rea}_{2,3}$";
+\MTendchar;
+\setbox4=\box\MTbox
+
+\bigbreak
+\line{\hfil\box0\hfil\box2\hfil\box4\hfil
+ \tocfig{Join\string|Autómata de unión}%
+ \tocfig{Disjoin\string|Autómata de separación}%
+ \tocfig{Rea\string|Autómata de reagrupación}}
+
+\function$ \op{Join}_{m,n} = \cases{
+ \srl \prl \prl \ID_{m-1} \op{Csl}_{(m-1)(n-1)+1}
+ \ID_{n-1} \prl \op{Join}_{m-1,n} \ID_n
+ \hidewidth \cr& \siif\ $(m>2)\land(n>1)$\cr
+ \prl \prl \ID \op{Csl}_n \ID_{n-1}& \siif\ $(m=2)\land(n>1)$\cr
+ \ID_n& \siif\ $(m=1)\land(n>0)$\cr
+ \ID_m& \siif\ $(m>0)\land(n=1)$\cr
+ \NOP& \siif\ $(m=0)\lor(n=0)$} \fan[mn,mn,0,0] $ % \no I = m+m(n-1)
+
+\function$ \op{Disjoin}_{m,n} = \cases{
+ \srl \prl \op{Disjoin}_{m-1,n} \ID_n \prl \prl \ID_{m-1}
+ \op{Csr}_{(m-1)(n-1)+1} \ID_{n-1}
+ \hidewidth \cr& \siif\ $(m>2)\land(n>1)$\cr
+ \prl \prl \ID \op{Csr}_n \ID_{n-1}& \siif\ $(m=2)\land(n>1)$\cr
+ \ID_n& \siif\ $(m=1)\land(n>0)$\cr
+ \ID_m& \siif\ $(m>0)\land(n=1)$\cr
+ \NOP& \siif\ $(m=0)\lor(n=0)$} \fan[mn,mn,0,0] $ % \no O=m+m(n-1)
+
+\function$ \op{Rea}_{m,n} = \cases{ % from m of n bit to n of m bit
+ \srl \op{Disjoin}_{m,n} \prl \ID_m \op{Rea}_{m,n-1}
+ \quad \hbox{ \siif\ } (m>0)\land(n>2)\hidewidth&\cr
+ \op{Disjoin}_{m,2}& \siif\ $(m>0)\land(n=2)$\cr
+ \ID_m& \siif\ $(m>0)\land(n=1)$\cr
+ \NOP& \siif\ $(m=0)\lor(n=0)$} \fan[mn,nm,0,0] $
+
+\bigskip
+
+\function$ \SEL_n = \cases{
+ \srl \srl \prl \op{Mult}_{n,1} \op{Rea}_{2,n} \op{Join}_{n,3}
+ \prl^n \SEL& \siif\ $n>1$\cr
+ \SEL& \siif\ $n=1$\cr \SINK& \siif\ $n=0$} \fan[1+2n,n,0,0] $
+
+\function$ \op{Cand}_n = \cases{
+ \srl \srl \prl \op{Mult}_{n,1} \ID_n \op{Rea}_{2,n} \prl^n \AND&
+  \siif\ $n>1$\cr \AND& \siif\ $n=1$\cr
+ \SINK& \siif\ $n=0$} \fan[1+n,n,0,0] $
+
+\function$ \op{Coder}_n = \cases{
+ \srl \srl \srl \prl \FORK_{2^{n-1}} \ID_{2^{n-1}}
+ \prl \prl \OR_{2^{n-1}} \op{Coder}_{n-1} \op{Coder}_{n-1}
+\hidewidth&\cr\quad % manual spliting
+ \prl \FORK \ID_{2n-2} \prl \ID \SEL_{n-1} & \siif\ $n>1$\cr
+ \prl \ID \SINK& \siif\ $n=1$\cr
+ \SINK& \siif\ $n=0$} \fan[2^n,n,0,0] $
+
+\function$ \op{Switch}_n = \cases{
+ \srl \srl \FORK_{2n+1} \prl \NOT \ID_{4n+1}
+&\cr\quad % manual spliting
+ \prl \SEL_n \SEL_n& \siif\ $n>0$\cr
+ \SINK & \siif\ $n=0$} \fan[1+2n,2n,0,0] $
+
+\function$ \op{Decoder}_n = \cases{
+ \srl \prl \prl \ID \prl^{2^{n-1}} \ZERO \op{Decoder}_{n-1}
+ &\cr\quad % splitted
+ \op{Switch}_{2^{n-1}}& \siif\ $n>1$\cr
+ \srl \FORK \prl \ID \NOT& \siif\ $n=1$\cr
+ \ONE& \siif\ $n=0$} \fan[n,2^n,0,0] $
+
+
+\break
+
+\title4 La forma canónica
+
+Por fin la expresión $\op{Canon}_{|A}$, definida a partir de la forma
+unidimensional de
+ $|A = \bigl< \no I,\no O,\no S,\no P; (|A_r) \bigr>$,
+que es importante porque puede desarrollarse hasta que sólo aparezcan las
+siete palabras
+ $\{\srl$, $\prl$, $\fdb$, \SINK, \FORK, \PROB, \NAND $\}$,
+y porque,
+ $\forallA$, $\op{Canon}_{|A} = |A$:
+ $$\eqalign{\op{Canon}_{|A} = \fdb^{\no S} \srl \srl \srl \srl \srl
+  &\op{Decoder}_{\no S+\no I}\cr
+  &\op{Shape}_{\!\!|A}\cr
+  &\prl^{2^{\no S+\no I}} \op{Cand}_{2^{\no S+\no O}}\cr
+  &\op{Rea}_{2^{\no S+\no I},2^{\no S+\no O}}\cr
+  &\prl^{2^{\no S+\no O}} \OR_{2^{\no S+\no I}}\cr
+  &\op{Coder}_{\no S+\no O}}$$
+donde $\op{Shape}_{\!\!|A}$,\vadjust{\smallskip}\hfil\break
+ con $\inp{\rm Shape} = 2^{\no S+\no I}$,
+     $\out{\rm\, Shape} = 2^{\no S+\no I}.(1+2^{\no S+\no O})$,
+     $\st{\rm Shape} = 0$, $\pr{\rm Shape} =\no P$,
+es:
+\function$ \op{Shape}_{\!\!|A} = \cases{
+  \srl \prl \ID_{2^{\no S+\no I}}
+  \srl \srl \srl \prl^{\no P} \PROB
+  \op{Decoder}_{\no P} \op{Mult}_{2^{\no S+\no I},2^{\no P}}
+\hidewidth&\cr\qquad % manual splitting
+  \prli_{r \,\through\, (\no S+\no I+\no S+\no O)} \OR_{|A_r}
+  \op{Join}_{2^{\no S+\no I},1+2^{\no S+\no O}}& \siif\ $\no P>0$\cr
+ \noalign{\vskip3pt}
+  \srl \prl \ID_{2^{\no S+\no I}}
+  \prli_{r \,\through\, (\no S+\no I+\no S+\no O)} \K_{|A_r}
+  \op{Join}_{2^{\no S+\no I},1+2^{\no S+\no O}}& \siif\ $\no P=0$.}$
+
+\medskip
+Decimos que $\op{Canon}_{|A}$ es una \definition{forma canónica} de
+expresar el autómata |A.  Para expresar que cualquier autómata |A puede
+ser escrito utilizando, únicamente, las siete palabras, escribiremos:
+ $$ \{ |A \} = \Re(\srl, \prl, \fdb, \SINK, \FORK, \PROB, \NAND ).$$
+
+\title4 Comentarios
+
+Los autómatas que pertenecen al conjunto Minimum son independientes, es
+decir, no es posible construir uno de ellos por composición de los otros
+tres.  Son, pues, una base del álgebra automática.
+
+Pero el conjunto Minimum no es el único capaz de generar cualquier
+autómata.  Otros conjuntos de estas características son:
+ $$\eqalign{
+  \op{Minimum}_1 &=
+   \{\, \SINK, \FORK, \PROB, \op{NOR} = \srl \OR \NOT \,\}\cr
+  \op{Minimum}_2 &=
+   \{\, \SINK, \ID, \prl^n \PROB, \prl \FORK \NAND \,\}
+   \;\; \forall n>0.\cr}$$
+Sólo he encontrado bases de cuatro miembros.
+
+
+\title3 La probabilidad binaria
+
+Si se define la \definition{probabilidad binaria} como aquella probabilidad
+que describe la ocurrencia de cualquiera de las combinaciones booleanas de
+los eventos generados por $n$ dispositivos binarios de máxima entropía,
+entonces las probabilidades manejadas por el álgebra automática son
+probabilidades binarias y sus autómatas son doblemente binarios.
+
+
+\title3 Otra construcción
+
+\title4 Otra forma
+
+También se pueden escribir autómatas rellenando el array, en vez de con
+probabilidades, con los valores de estado y de salida.  Por ejemplo:
+ $$\op{AND} = \bigl< 2, 1, 0, 0; \left[\matrix{ [1]\cr [0]\cr [0]\cr
+ [0]\cr}\right] \bigr>$$
+donde en cada fila hay un solo string porque
+$2^{\pr{\op{AND}}}=1$ y cada string sólo tiene un bit porque
+$\st{\op{AND}}+\out{\op{AND}}=1$.
+
+Otro ejemplo es:
+ $$|H = \bigl< 1, 1, 1, 1;
+ \pmatrix{ 2&0&0&0\cr 1&0&0&1\cr 1&0&0&1\cr 0&0&0&2\cr} \bigr> =
+ \bigl< 1, 1, 1, 1; \left[\matrix{
+ [1\,1]&[1\,1]\cr [1\,1]&[0\,0]\cr [1\,1]&[0\,0]\cr [0\,0]&[0\,0]\cr}\right]
+ \bigr>.$$
+
+\label{forma A star}
+Notaremos $[|A^*_{pu}]$ la matriz de esta forma de representar autómatas.
+Luego, si $|A_{pq} = n$, entonces en la fila $|A^*_p$ aparecerá $n$ veces el
+string correspondiente al índice $q$.  Es decir, $u \through \no P$ y
+$|A^*_{pu}$ es un string de tamaño $\no S + \no O$. Ambas notaciones
+contienen la misma información.
+
+Linealizando $[|A^*_{pu}]$ y empalmando los
+ $2^{\no S+\no I} . 2^{\no P}$
+strings que resultan, obtenemos un string binario $[|A^*_z]$ de longitud
+ $\no L = (\no S + \no O) . 2^{\no S+\no I+\no P}$.
+Por ejemplo, la forma linealizada de $\AND$ es:
+ $\AND = \bigl< 2, 1, 0, 0; \left[1\, 0\, 0\, 0 \right] \bigr>$.
+
+
+\title4 La construcción
+
+Usando esta manera de representar autómatas, cuya forma linealizada es
+ $|A = \bigl< \no I,\no O,\no S, \no P; \left[|A^*_z\right] \bigr>$,
+podemos utilizar la construcción más sencilla $\op{Kanon}$, que puede
+ser desarrollada hasta que sólo aparezcan las mismas siete palabras y tal
+que,
+\forallA, $\op{Kanon}_{|A} = |A$:
+ $$\op{Kanon}_{|A} = \srl \prl \prli_{z=\no L-1}^0 \K_{|A^*_z} \ID_{\no I}
+   \op{Universal}_{\no I,\no O,\no S,\no P}$$
+ donde $\no L=(\no S+\no O).2^{\no S+\no I+\no P}$. \hfil\break
+ O de manera más compacta, usando la notación automática del string
+ $[|A^*_z]$:
+ $$\op{Kanon}_{|A} = \srl \prl \opd{[|A^*_z]} \ID_{\no I}
+      \op{Universal}_{\no I,\no O,\no S,\no P} .$$
+
+\goodpage
+
+\title4 Universal
+
+Usa un autómata universal:
+
+\bigskip\noindent$\op{Universal}_{i,o,s,p} = \cases{
+ \srl \op{Cross}_{(s+o)2^{s+i+p},i} \fdb^s \srl \prl \prl^p \PROB
+\cr\qquad % manual spliting
+  \op{Selector}_{s+i,(s+o)2^p} \op{Selector}_{p,s+o}& \siif\ $p>0$
+\cr\noalign{\vskip3pt}
+ \srl \op{Cross}_{(s+o)2^{s+i},i}
+    \fdb^s \op{Selector}_{s+i,s+o}& \siif\ $p=0$.}$
+
+\medskip
+El autómata $\op{Universal}_{i,o,s,p}$
+ (con $\no I = (s+o).2^{s+i+p}+i$, $\no O = o$, $\no S = s$ y $\no P = p$)
+es un \definition{autómata universal}, y de aquí su nombre, porque es
+una ampliación de cualquier autómata |A con $\inpA = i$, $\outA = o$,
+$\stA = s$ y $\prA = p$.
+
+
+\title4 Funciones
+
+\label{Cross}
+Y también usa dos funciones adicionales.
+
+\function$ \op{Cross}_{m,n} = \cases{
+ \srl \prl \op{Cross}_{m,n-1} \ID \prl \ID_{n-1} \op{Csr}_{m+1}
+\hidewidth \cr & \siif\ $(m>0)\land(n>1)$\cr % manual adjustment
+ \op{Csr}_{m+1}& \siif\ $(m>0)\land(n=1)$\cr
+ \ID_m& \siif\ $(m>0)\land(n=0)$\cr
+ \ID_n& \siif\ $m=0$} \fan[m+n,n+m,0,0] $
+
+\function$ \op{Selector}_{m,n} = \cases{
+ \srl \srl \prl \op{Csl}_m \ID_{n2^m} \prl \ID_{m-1}
+ \SEL_{n2^{m-1}} \op{Selector}_{m-1,n}
+ \hidewidth \cr & \siif\ $(m>1)\land(n>0)$\cr % manual adjustment
+ \SEL_n& \siif\ $(m=1)\land(n>0)$\cr
+ \ID_n& \siif\ $(m=0)\land(n>0)$\cr
+ \SINK_m& \siif\ $n=0$} \fan[m+n2^m,n,0,0] $
+
+\MTbeginchar(50pt,40pt,1pc);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h; rectangle(1)(3/5w,h);
+ \MT: pickup med_pen;
+ \MT: x2o = x3o = x4o = x5o = x6o = 0;
+ \MT: x2d = x3d = x4d = x5d = x6d = x1l;
+ \MT: y2o = y2d = 7/8h; y3o = y3d = 6/8h;
+ \MT: y4o = y4d = 3/8h; y5o = y5d = 2/8h; y6o = y6d = 1/8h;
+ \MT: for k := 2 upto 6: draw z[k]o .. z[k]d; endfor
+ \MT: x12o = x13o = x14o = x15o = x16o = x1r;
+ \MT: x12d = x13d = x14d = x15d = x16d = w;
+ \MT: y12o = y12d = 7/8h; y13o = y13d = 6/8h; y14o = y14d = 5/8h;
+ \MT: y15o = y15d = 2/8h; y16o = y16d = 1/8h;
+ \MT: for k := 12 upto 16: arrow([k].o,[k].d); endfor
+ \MT: draw z2d{1,0} .. z15o{1,0}; draw z3d{1,0} .. z16o{1,0};
+ \MT: draw z4d{1,0} .. z12o{1,0}; draw z5d{1,0} .. z13o{1,0};
+ \MT: draw z6d{1,0} .. z14o{1,0};
+ \MT: z0 = (1/2w,-10pt);
+ \MTlabel(0)bc"$\op{Cross}_{2,3}$";
+\MTendchar;
+\vskip1pc
+\noindent
+$$\box\MTbox\tocfig{Cross\string|Autómata de cruce}$$
+

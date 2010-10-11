@@ -1,0 +1,1355 @@
+% EPA1.TEX (RMCG19950910)
+
+\title0 II. El problema aparente
+
+\labeled\title1 El problema
+
+\labeled\title2 El planteamiento
+
+Buscamos la solución del problema aparente.  El \definition{problema
+aparente} plantea la búsqueda de beneficio en la interacción.
+
+\subtitle La caja negra
+
+La definición anterior es exacta y suficiente si ya se tiene el concepto,
+pero inescrutable si no se posee, por lo que es necesaria una aclaración.
+
+Una forma simple de representarnos el problema aparente es la de suponer que
+nos enfrentamos a una \definition{caja negra}\cite{Klir1969} cuyo
+funcionamiento ignoramos por completo, cuyo interior es inaccesible y de la
+que queremos obtener alguna utilidad que justifique el alto precio que hemos
+pagado por ella.  Querremos descubrir cómo usarla con provecho, y para ello
+ejerceremos acciones sobre la caja negra y observaremos detalladamente sus
+reacciones.
+
+Pero la caja negra es excesiva en un punto.  En el problema aparente todo
+lo que tenemos es la \definition{apariencia}, también llamada
+\definition{interacción}, es decir, la posibilidad de actuar y de
+observar.  La caja negra supone que tenemos algo más, a saber, la
+delimitación precisa de lo que interesa, porque hemos limitado la
+investigación a la propia caja negra, mientras que en el problema
+aparente todo está por hacer.
+
+Llamando \definition{entorno} exterior a lo que no es la solución del
+problema aparente, podemos distinguir dos tipos de interacción:  la
+\definition{acción} que la solución ejecuta sobre el entorno exterior,
+y la \definition{reacción} que, procedente del entorno exterior, percibe
+la solución.  Hay libertad para determinar las acciones.  Algunas
+reacciones son buenas, otras no.  De lo que media desde las acciones hasta
+las reacciones nada se sabe, y aun es desconocido si media algo o no.  Una
+solución del problema aparente es una determinada definición de qué
+acciones deben ejecutarse en cada momento y circunstancia, tal que las
+reacciones percibidas son buenas.
+
+
+\title2 La lógica
+
+Nos limitaremos a la resolución del problema aparente en una lógica.
+Llamamos \definition{lógica} a la totalidad de lo
+posible\cite{Wittgenstein1922}. En concreto, la lógica contiene todas las
+representaciones posibles o imaginables.  La lógica aquí elegida es el
+álgebra automática.
+
+\subtitle Las razones de la elección
+
+La formulación hecha del problema aparente es demasiado general para que
+pueda ser examinado sistemáticamente.  De modo que, al menos, deben quedar
+establecidas qué soluciones son posibles o, dicho de otro modo, qué
+soluciones son aceptables.
+
+Puesto que las soluciones del problema aparente deben expresar maneras de
+interaccionar y que la interacción es la sucesión en el tiempo de
+acciones y reacciones, toda lógica que aspire a describir las soluciones
+del problema aparente ha de acomodar el tiempo.  El álgebra automática
+es temporal, y por tanto válida, pero también podrían ser utilizadas
+otras lógicas, como el cálculo diferencial.
+
+Introducir una lógica en este punto es necesario.  Aun así, se debe recordar
+en todo momento que la lógica elegida, sea ésta cual sea, repercutirá
+decisivamente sobre toda la investigación subsiguiente. Por ejemplo, que la
+lógica utilice objetos, composiciones de objetos y relaciones entre objetos,
+hace que éstos sean conceptos básicos.  Pero los hace básicos la lógica, no
+el problema aparente.
+
+
+\title2 El álgebra automática
+
+El \definition{álgebra automática} tiene como objetos los autómatas
+binarios y probabilísticos.  Permite tres operaciones sobre los
+autómatas:  la composición en serie, la composición en paralelo y la
+composición de realimentación.  Varias son las relaciones que pueden
+establecerse entre los autómatas, siendo las principales la igualdad, la
+indistinguibilidad y la ampliabilidad.
+
+El detalle del álgebra automática se muestra en el Anexo \refsc{El álgebra
+automática}.
+
+\subtitle Un resumen del álgebra automática
+
+Quien no quiera desviar aquí su atención para dedicarla al estudio del
+álgebra automática, puede servirse de este pequeño resumen que sólo
+trata del caso determinístico.
+
+Un autómata |A, para el álgebra automática, es un objeto que tiene {\inpA}
+variables binarias de entrada, {\outA} variables binarias de salida y {\stA}
+variables binarias de estado, tal que los valores que toman en este instante
+las variables de salida y los valores que tomarán en el instante siguiente
+las variables de estado dependen de los valores que toman en este instante
+las variables de entrada y las variables de estado. Las variables de entrada
+son independientes: sus valores los determina el entorno, y no el autómata.
+
+La composición en serie de dos autómatas |B y |C será un autómata
+|A, notado $|A = \srl |B |C$.  La composición en serie sólo se puede
+realizar si el número de variables de salida del primer autómata,
+\out B, es igual al número de variables de entrada al segundo autómata,
+\inp C, o sea, si $\out B = \inp C$, ya que el funcionamiento de la
+composición en serie es el que se obtiene de aplicar la entrada a la
+composición a la entrada al primero, |B, y la salida de éste a la
+entrada al segundo, |C, siendo la salida de éste la salida de la
+composición.  El estado de la composición es el estado del primero y el
+estado del segundo de los autómatas de la composición.  Así que se
+tienen las siguientes igualdades:  $\inpA = \inp B$, $\outA = \out C$,
+$\stA = \st B + \st C$.
+% Composición en serie
+\MTbeginfigure(120,50);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton + B C
+ \MT: pickup thick_pen;
+ \MT: x2l = w - x3r = 30u;
+ \MT: y2b = y3b = 10v;
+ \MT: rectangle(2)(20u,20v); % 2 is B
+ \MT: rectangle(3)(20u,20v); % 3 is C
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"|B";
+ \MTlabel(3lbl)"|C";
+ \MT: x4 = 1/2w; y4 = 0.5[y2t,h];
+ \MTlabel(4)"$|A = \srl |B |C$"; % 4 is A = + B C
+ \MT: pickup med_pen;
+ \MT: x5l = x6l = x7l = 0; x5r = x6r = x7r = x2l;
+ \MT: y5l = y5r = 1/4[y2b,y2t];
+ \MT: y6l = y6r = 2/4[y2b,y2t];
+ \MT: y7l = y7r = 3/4[y2b,y2t];
+ \MT: arrow(5l,5r); arrow(6l,6r); arrow(7l,7r); % arrows to B / A
+ \MT: x8l = x9l = x2r; x8r = x9r = x3l;
+ \MT: y8l = 1/3[y2b,y2t]; y9l = 2/3[y2b,y2t];
+ \MT: y8r = 1/3[y3b,y3t]; y9r = 2/3[y3b,y3t];
+ \MT: arrow(8l,8r); arrow(9l,9r); % arrows from B to C
+ \MT: x10l = x11l = x3r; x10r = x11r = w;
+ \MT: y10l = y10r = 1/3[y3b,y3t]; y11l = y11r = 2/3[y3b,y3t];
+ \MT: arrow(10l,10r); arrow(11l,11r); % arrows from C / A
+\MTendfigure"Composición\cr en serie";
+
+La composición en paralelo de dos autómatas |B y |C será un
+autómata |A, notado $|A = \prl |B |C$.  El autómata compuesto, |A,
+funciona aplicando sus primeros \inp B valores de entrada al primer
+autómata, |B, y sus otros \inp C valores de entrada al segundo
+autómata, |C, y devolviendo como sus \out B primeros valores de salida
+los que salen del autómata |B, y como sus otros \out C valores de salida
+los que salen del autómata |C.  El estado de la composición es el
+estado del primero y el estado del segundo de los autómatas de la
+composición.  Así que se tienen las siguientes igualdades:
+ $\inpA = \inp B + \inp C$, $\outA = \out B + \out C$,
+ $\stA = \st B + \st C$.
+% Composición en paralelo
+\MTbeginfigure(100,80);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton * B C
+ \MT: pickup thick_pen;
+ \MT: x2 = x3 = x4 = w/2;
+ \MT: y2b = 10v;
+ \MT: rectangle(2)(20u,20v); % 2 is C
+ \MT: y3b = y2t + 10v;
+ \MT: rectangle(3)(20u,20v); % 3 is BC
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"|C";
+ \MTlabel(3lbl)"|B";
+ \MT: y4 = 0.5[y3t,h];
+ \MTlabel(4)"$|A = \prl |B |C$"; % 4 is A = * B C
+ \MT: pickup med_pen;
+ \MT: x5l = x6l = x7l = 0; x5r = x6r = x7r = x3l;
+ \MT: y5l = y5r = 1/4[y3b,y3t];
+ \MT: y6l = y6r = 2/4[y3b,y3t];
+ \MT: y7l = y7r = 3/4[y3b,y3t];
+ \MT: arrow(5l,5r); arrow(6l,6r); arrow(7l,7r); % arrows to B
+ \MT: x8l = x9l = 0; x8r = x9r = x2l;
+ \MT: y8l = y8r = 1/3[y2b,y2t]; y9l = y9r = 2/3[y2b,y2t];
+ \MT: arrow(8l,8r); arrow(9l,9r); % arrows to C
+ \MT: x10l = x11l = x3r; x10r = x11r = w;
+ \MT: y10l = y10r = 1/3[y3b,y3t]; y11l = y11r = 2/3[y3b,y3t];
+ \MT: arrow(10l,10r); arrow(11l,11r); % arrows from B
+ \MT: x12l = x13l = x2r; x12r = x13r = w;
+ \MT: y12l = y12r = 1/3[y2b,y2t]; y13l = y13r = 2/3[y2b,y2t];
+ \MT: arrow(12l,12r); arrow(13l,13r); % arrows from C
+\MTendfigure"Composición\cr en paralelo";
+
+La composición de realimentación del autómata |B será un autómata
+|A, notado $|A = \fdb |B$.  El autómata compuesto, |A, funciona haciendo
+que el valor de la primera variable de entrada al autómata sin componer,
+|B, sea el valor que tomó en el instante anterior la primera variable de
+salida del autómata sin componer, |B.  Es así que el estado de la
+composición es el estado del autómata sin componer además de una
+variable de estado adicional que sirve para recordar cual fue el valor en
+el instante anterior de la primera variable de salida.  De manera que
+sólo se puede realimentar un autómata |B si tiene, al menos, una
+variable de entrada y una variable de salida, $\inp B > 0$, $\out B > 0$.
+Además se tienen las siguientes igualdades:  $\inpA = \inp B - 1$,
+ $\outA = \out B - 1$, $\stA = \st B + 1$.
+% Composición de realimentación
+\MTbeginfigure(110,60);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1 = 1/2h;
+ \MT: rectangle(1)(w-40u,h); % 1 is automaton & B
+ \MT: pickup thick_pen;
+ \MT: x2 = w/2; y2b = 20v; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 is B
+ \MTlabel(2lbl)"|B";
+ \MT: x3 = 1/2w; y3 = 0.5y2b;
+ \MTlabel(3)"$|A = \fdb |B$"; % 3 is A = & B
+ \MT: z4o = (x2r,2/3[y2b,y2t]); z4d = (x2l,3/4[y2b,y2t]);
+ \MT: feedback(4,4o,4d)(1/2[y2t,h]+5v,10u,10u);
+ \MT: x5l = x6l = 0; x5r = x6r = x2l;
+ \MT: y5l = y5r = 1/4[y2b,y2t];
+ \MT: y6l = y6r = 2/4[y2b,y2t];
+ \MT: arrow(5l,5r); arrow(6l,6r); % arrows to B
+ \MT: x7l = x2r; x7r = w;
+ \MT: y7l = y7r = 1/3[y2b,y2t];
+ \MT: arrow(7l,7r); % arrow from B
+\MTendfigure"Composición\cr de realimentación";
+
+Dos autómatas son iguales cuando sus definiciones coinciden, de modo que,
+entre otras cosas,
+ $$|A = |B \implies
+   (\inpA = \inp B) \land (\outA = \out B) \land (\stA = \st B).$$
+
+Dos autómatas son indistinguibles cuando, por observación de sus
+variables externas, las de entrada y las de salida pero no las de estado, es
+imposible determinar cuál es cual.  En estas circunstancias se dice que
+ambos autómatas tienen el mismo comportamiento.  Se tiene, entre otras
+cosas,
+ $$\displaylines{|A = |B \implies |A \nodis |B ,\cr
+  |A \nodis |B \implies (\inpA = \inp B) \land (\outA = \out B) .\cr}$$
+
+
+\title2 El problema aparente en el álgebra automática
+
+\title3 La ecuación de supervivencia
+
+Presentada la lógica, ahora formalizaremos el problema en la lógica, es
+decir, formularemos el problema aparente en el aparato lógico
+proporcionado por el álgebra automática.
+
+La manera de expresar la \definition{interacción total} de dos
+autómatas, |U y |A, en el álgebra automática es
+ $\fdb^{\outA} \srl |U |A$. También valdría
+ $\fdb^{\inpA} \srl |A \, |U$.
+% Interacción total
+\MTbeginfigure(100,40);
+ \MT: pickup thick_pen;
+ \MT: x1 + x2 = w; x2 = x1 + 40u; y1b = y2b = 0;
+ \MT: rectangle(1)(20u,20v); % 1 is U
+ \MT: rectangle(2)(20u,20v); % 2 es A
+ \MT: z1lbl = z1; z2lbl = z2;
+ \MTlabel(1lbl)"|U";
+ \MTlabel(2lbl)"|A";
+ \MT: z3o = (x2r,y2); z3d = (x1l,y1);
+ \MT: feedback(3,3o,3d)(h,10u,10u);
+ \MT: x4l = x1r; x4r = x2l; y4l = y1; y4r = y2;
+ \MT: arrow(4l,4r); % arrow from U to A
+\MTendfigure"Interacción\cr total";
+
+Para la solución |A, los beneficios obtenidos de su interacción con el
+\definition{universo}~|U, que es su entorno, sólo pueden ser debidos a los
+valores de las variables de entrada a él.  Suponiendo que la
+semántica~|V trata algunos de los valores de entrada a |A de modo que cada
+valor 1 a la salida de |V significa bien y cada valor 0 a la salida de |V
+significa mal, y siendo las variables sin significado, o neutras, las $\no
+n$ primeras, podemos expresar la interacción significativa como:
+ $\fdb^{\no m} \srl |U \srl \prl \ID_{\no n} |V |A$,
+con $\no m = \outA$ y $\no v = \out V$.
+% Interacción significativa
+\MTbeginfigure(130,40);
+ \MT: pickup thick_pen;
+ \MT: x1 + x2 = w; x2 = x1 + 70u; y1b = y2b = 0;
+ \MT: rectangle(1)(20u,20v); % 1 is U
+ \MT: rectangle(2)(20u,20v); % 2 es A
+ \MT: z1lbl = z1; z2lbl = z2;
+ \MTlabel(1lbl)"|U";
+ \MTlabel(2lbl)"|A";
+ \MT: 2x3 = x1 + x2; y3b = -1v; z3lbl = z3;
+ \MT: rectangle(3)(12u,12v); % 3 is V
+ \MTlabel(3lbl)"|V";
+ \MT: z4o = (x2r,y2); z4d = (x1l,y1);
+ \MT: feedback(4,4o,4d)(h,10u,10u);
+ \MT: x4lbl.l = x4br; y4lbl.t = y4br - jot;
+ \MTlabel(4lbl)"\no m";
+ \MT: z6l = (x1r, 3/4[y1b,y1t]); z6r = (x2l, 3/4[y2b,y2t]);
+ \MT: z7l = (x1r, 1/4[y1b,y1t]); z7r = (x3l, 1/2[y3b,y3t]);
+ \MT: z8l = (x3r, 1/2[y3b,y3t]); z8r = (x2l, 1/4[y2b,y2t]);
+ \MT: arrow(6l,6r); arrow(7l,7r); arrow(8l,8r); % arrows from U to A
+ \MT: y9b = y6r + jot; x9r = x2l - 5u;
+ \MTlabel(9)"\no n";
+ \MT: y10t = y8r - jot; x10r = x2l - 5u;
+ \MTlabel(10)"\no v";
+\MTendfigure"Interacción\cr significativa";
+
+\label{semántica mínima}
+Si el autómata |A no tiene conocimiento de la forma de |V, suposición
+que denominaremos \definition{hipótesis del significado aparente},
+entonces la situación toma la forma de la interacción total, pero
+distinguiendo, en las reacciones desde |U hasta |A, dos tipos de variables:
+las significativas, en las que el valor 1 significa bien y el valor 0 mal, y
+las neutras, que son el resto.  Llamaremos \definition{interacción total
+con semántica mínima} a ésta, que es la que estudiaremos en lo que
+sigue, aunque no es la única posible. Sin variables significativas el
+problema aparente no tiene urgencia alguna, o dicho más dramáticamente,
+no tiene sentido ni significado.  De aquí el nombre de semántica
+mínima dado a aquélla con sólo dos significados, bien y mal.
+% Interacción total con semántica mínima
+\MTbeginfigure(100,40);
+ \MT: pickup thick_pen;
+ \MT: x1 + x2 = w; x2 = x1 + 40u; y1b = y2b = 0;
+ \MT: rectangle(1)(20u,20v); % 1 is U
+ \MT: rectangle(2)(20u,20v); % 2 es A
+ \MT: z1lbl = z1; z2lbl = z2;
+ \MTlabel(1lbl)"|U";
+ \MTlabel(2lbl)"|A";
+ \MT: z3o = (x2r,y2); z3d = (x1l,y1);
+ \MT: feedback(3,3o,3d)(h,10u,10u);
+ \MT: x3lbl.l = x3br; y3lbl.t = y3br - jot;
+ \MTlabel(3lbl)"\no m";
+ \MT: x4tl = x1r; x4tr = x2l; y4tl = 2/3[y1b,y1t]; y4tr = 2/3[y2b,y2t];
+ \MT: x4bl = x1r; x4br = x2l; y4bl = 1/3[y1b,y1t]; y4br = 1/3[y2b,y2t];
+ \MT: arrow(4tl,4tr); arrow(4bl,4br); % arrows from U to A
+ \MT: x4tlbl = 1/2[x4tl,x4tr]; y4tlbl.b = 1/2[y4tl,y4tr] + jot;
+ \MT: x4blbl = 1/2[x4bl,x4br]; y4blbl.t = 1/2[y4bl,y4br] - jot;
+ \MTlabel(4tlbl)"\no n"; \MTlabel(4blbl)"\no v";
+\MTendfigure"Interacción total\cr con semántica mínima";
+
+Para medir externamente si |A es solución del problema, necesitamos
+comparar contra una referencia el beneficio que obtiene.  Sea una
+\definition{medición}~\Metric\ un autómata que, tomando a su entrada
+las variables significativas, las trata de manera que su única variable de
+salida toma el valor 1 si considera que el beneficio obtenido hasta el
+momento es suficiente y el valor 0 en otro caso.  Estamos ante la
+disposición que se muestra a continuación.
+% Interacción total y medida externa
+\MTbeginfigure(110,70);
+ \MT: pickup thick_pen;
+ \MT: x1 + x2 = w; x2 = x1 + 50u; y1b = y2b = 30v;
+ \MT: rectangle(1)(20u,20v); % 1 is U
+ \MT: rectangle(2)(20u,20v); % 2 es A
+ \MT: z1lbl = z1; z2lbl = z2;
+ \MTlabel(1lbl)"|U";
+ \MTlabel(2lbl)"|A";
+ \MT: z3o = (x2r,y2); z3d = (x1l,y1);
+ \MT: feedback(3,3o,3d)(h,10u,10u);
+ \MT: x3lbl.l = x3br; y3lbl.t = y3br - jot;
+ \MTlabel(3lbl)"\no m";
+ \MT: x4tl = x1r; x4tr = x2l; y4tl = 2/3[y1b,y1t]; y4tr = 2/3[y2b,y2t];
+ \MT: x4bl = x1r; x4br = x2l; y4bl = 1/3[y1b,y1t]; y4br = 1/3[y2b,y2t];
+ \MT: arrow(4tl,4tr); arrow(4bl,4br); % arrows from U to A
+ \MT: x4tlbl = x4tr - 10u; y4tlbl.b = y4tr + jot;
+ \MT: x4blbl = x4tlbl; y4blbl.t = y4br - jot;
+ \MTlabel(4tlbl)"\no n"; \MTlabel(4blbl)"\no v";
+ \MT: pickup thick_pen;
+ \MT: z6 = z2 - (0,30v); z6lbl = z6;
+ \MT: rectangle(6)(20u,20v); % 6 is M
+ \MTlabel(6lbl)"\Metric";
+ \MT: pickup med_pen;
+ \MT: z7o = 1/6[z4bl,z4br]; z7d = (x6l,y6); z7m = z7d - (10u,0);
+ \MT: fork(7o,7m,7d);
+ \MT: x7lbl = x7m; y7lbl.t = y7m - jot;
+ \MTlabel(7lbl)"\no v";
+ \MT: z8l = (x6r,y6); z8r = (w,y6); arrow(8l,8r);
+ \MT: x8lbl = x3lbl; y8lbl.t = y6 - jot;
+ \MTlabel(8lbl)"\sevenbf 1";
+\MTendfigure"Interacción total\cr con semántica mínima\cr
+ y medida externa";
+
+Esta disposición puede escribirse algebraicamente, siendo $\no n$ el
+número de variables neutras, $\no v$ el número de variables
+significativas (de modo que $\no n + \no v = \inpA$) y $\no m = \outA$,
+como:
+ $$\fdb^{\no m} \srl |U \srl \prl \ID_{\no n} \FORK_{\no v} \prl |A
+   \Metric.$$
+
+Podemos ya formalizar el problema aparente en el álgebra automática del
+siguiente modo:
+ $$|A? \forall |U : \; \fdb^{\no m} \srl |U \srl
+   \prl \ID_{\no n} \FORK_{\no v} \prl |A \Metric \nodis \ONE.$$
+En castellano esta expresión puede leerse así:  hallar aquel autómata
+|A tal que, al interaccionar totalmente con cualquier entorno |U y aplicar
+al beneficio una medición~\Metric\ dada, sea indistinguible del
+autómata que en cada instante produce un valor de salida 1.
+Una medición~\Metric\ típica promediará la valoración y
+comparará el promedio obtenido contra un valor de referencia.
+
+Daremos el nombre de \definition{ecuación de la supervivencia} a la
+indistinción central del problema aparente. También llamaremos
+\definition{problema de la supervivencia} al problema aparente, y diremos
+que el autómata |A sobrevive si lo soluciona y que muere en caso
+contrario.
+
+\title3 Encaminamiento
+
+Los autómatas $\ID_n$ y $\FORK_n$ son dos funciones de encaminamiento.
+Llanamente, $\ID_n$ es aquel autómata que repite $n$ variables y $\FORK_n$
+el que duplica $n$ variables.  Las figuras deben ser suficientes para
+entender los autómatas propuestos, pero si no es así, entonces es necesario
+acudir al Anexo \refsc{El álgebra automática} (\S\refsc{encaminamiento}).
+% Autómatas ID_3 y FORK_3
+\MTbeginfigure(110,50);
+ \MT: pickup thin_pen;
+ \MT: x1l = 10u; y1b = 20v; rectangle(1)(20u,20v);
+ \MT: pickup med_pen;
+ \MT: x2bl = x2ml = x2tl = 0;
+ \MT: y2bl = 1/4[y1b,y1t]; z2br = z2bl + (40u,0);
+ \MT: y2ml = 2/4[y1b,y1t]; z2mr = z2ml + (40u,0);
+ \MT: y2tl = 3/4[y1b,y1t]; z2tr = z2tl + (40u,0);
+ \MT: arrow(2bl,2br); arrow(2ml,2mr); arrow(2tl,2tr);
+ \MT: z3 = (x1,10v);
+ \MTlabel(3)bc"$\ID_3$";
+ \MT: x4bl = x4ml = x4tl = x2mr + 20u;
+ \MT: y4bl = 25v; y4ml = y4bl + 5v; y4tl = y4ml + 5v;
+ \MT: x4br = x4mr = x4tr = x4ml + 20u;
+ \MT: y4br = y4bl; y4mr = y4ml; y4tr = y4tl;
+ \MT: draw z4bl -- z4br; draw z4ml -- z4mr; draw z4tl -- z4tr;
+ \MT: z5bl = z4br + (10u,10v); z6bl = z4br + (10u,-10v);
+ \MT: z5ml = z4mr + (10u,10v); z6ml = z4mr + (10u,-10v);
+ \MT: z5tl = z4tr + (10u,10v); z6tl = z4tr + (10u,-10v);
+ \MT: z5br = z5bl + (20u,0); z6br = z6bl + (20u,0);
+ \MT: z5mr = z5ml + (20u,0); z6mr = z6ml + (20u,0);
+ \MT: z5tr = z5tl + (20u,0); z6tr = z6tl + (20u,0);
+ \MT: fork(4br,5bl,5br); fork(4mr,5ml,5mr); fork(4tr,5tl,5tr);
+ \MT: fork(4br,6bl,6br); fork(4mr,6ml,6mr); fork(4tr,6tl,6tr);
+ \MT: pickup thin_pen;
+ \MT: y7t = h; x7r = w - 10u; rectangle(7)(30u,40v);
+ \MT: z8 = (x7,0);
+ \MTlabel(8)bc"$\FORK_3$";
+\MTendfigure"Encaminamiento";
+
+\labeled\title3 Importa el comportamiento
+
+Siendo $|F(|X)$ una función automática en el autómata |X, se tiene
+que:
+ $$|A \nodis |B \implies |F(|A) \nodis |F(|B),$$
+ya que si $|F(|A)$ fuera distinguible de $|F(|B)$, entonces también
+habríamos distinguido a |A de |B. La demostración completa se encuentra
+en la \S\refsc{demostración}.
+
+Dada la naturaleza del problema aparente se deduce, pues, que si el
+autómata |B sobrevive en el universo~|U, entonces cualquier autómata
+|C, tal que $|C \nodis |B$, también sobrevive en el universo~|U.  Es
+decir, que lo que importa de la solución es su comportamiento y no su
+forma.
+
+
+\title2 Resolución general del problema aparente
+
+Para expresar que sólo la apariencia es conocida y que nada se sabe de lo
+que media desde las acciones hasta las reacciones, escribimos en el
+problema aparente que el entorno o universo~|U podía ser cualquiera,
+$\forall |U$.  Como consecuencia, en el álgebra automática existen
+universos que hacen imposible la solución del problema de la
+supervivencia.  Por ejemplo, si:
+ $$|U = |U_0 \eqdef \srl \prl^{\outA} \SINK \prl^{\inpA} \ZERO.$$
+Porque este universo $|U_0$ produce siempre e independientemente de los
+valores de sus variables de entrada, y no tiene variables de estado, o sea,
+independientemente de todo, valores 0 en todas sus variables de salida.
+
+El caso contrario se da si:
+ $$ |U = |U_1 \eqdef \srl \prl^{\outA} \SINK \prl^{\inpA} \ONE.$$
+En este caso afortunado, el autómata |A, sea éste cual sea, es
+solución del problema.
+
+Es así que el problema de la supervivencia ya tiene un resultado:  no
+existe un autómata |A capaz de sobrevivir en cualquier universo |U,
+aunque cualquier autómata |A es capaz sobrevivir en algún universo~|U.
+
+Eliminada toda posibilidad de una solución absoluta del problema aparente,
+el camino a seguir será el de la búsqueda de soluciones relativamente
+mejores.  Consideraremos que una solución $|A_{n+1}$ es tan buena o
+\definition{mejor solución} que otra $|A_n$ si la primera, $|A_{n+1}$,
+soluciona el problema contra todos los entornos solucionados por la segunda,
+$|A_n$.  Lo notaremos $|A_{n+1} \better |A_n$.
+
+Más informalmente lo que pretende el problema de la supervivencia es
+hallar un autómata |A que en (casi) cualquier universo~|U obtenga (casi)
+siempre buenas valoraciones, o sea, valores 1.
+
+\goodpage
+
+\title2 La referencia
+
+Hechas estas consideraciones podemos proponer una primera solución.  Esta
+solución no tiene nada especial, pero nos servirá como referencia para
+obtener mejores soluciones.  Llamaremos \definition{mecanismo} a esta
+solución de referencia, y la anotaremos como $|A_0$.
+
+Sabemos que, por malo que sea, el mecanismo $|A_0$ soluciona el problema de
+la supervivencia, al menos, si el universo al que se enfrenta es $|U_1$.
+
+\medskip
+% Mecanismo
+\MTbeginfigure(80,20);
+ \MT: pickup thick_pen;
+ \MT: x1 = w/2; y1b = 0; z1lbl = z1;
+ \MT: rectangle(1)(20u,20v); % 1 is A_0
+ \MTlabel(1lbl)"$|A_0$";
+ \MT: pickup med_pen;
+ \MT: z2o = (0,1/3[y1b,y1t]); z2d = (x1l, y2o); arrow(2o,2d);
+ \MT: z3o = (0,2/3[y1b,y1t]); z3d = (x1l, y3o); arrow(3o,3d);
+ \MT: y2lbl.t = y2.o - jot; y3lbl.b = y3.o + jot;
+ \MT: x2lbl = 1/2[x2o,x2d]; x3lbl = 1/2[x3o,x3d];
+ \MTlabel(2lbl)"\no v"; \MTlabel(3lbl)"\no n";
+ \MT: z4o = (x1r,1/2[y1b,y1t]); z4d = (w, y4o); arrow(4o,4d);
+ \MT: y4lbl.t = y4o - jot; x4lbl = 1/2[x4o,x4d];
+ \MTlabel(4lbl)"\no m";
+\MTendfigure"Mecanismo\cr$|A_0$";
+
+
+\labeled\title1 El adaptador
+
+\title2 Definición
+
+Si fijamos a $1$ el valor de una variable de entrada a un autómata,
+entonces el autómata restante, que tiene una variable de entrada menos,
+tendrá un cierto comportamiento.  Si la fijamos a $0$ obtendremos, en
+general, un comportamiento diferente.
+
+Por ejemplo, el autómata $\XOR$ puede funcionar como el inversor de bits
+$\NOT$ fijando a $1$ una de sus variables de entrada, o puede funcionar
+transparentemente, como $\ID$, fijándola a $0$.
+
+\MTbeginchar(45pt,15pt,0pt);
+\MT: pickup thick_pen;
+\MT: x1 = 1/2w; y1 = 1/2h; z1lbl = z1;
+\MT: or_gate(1)(15u);
+\MTlabel(1lbl)"\sevenrm X ";
+\MT: pickup med_pen;
+\MT: x2l = 0; y2 = y1in1;
+\MTlabel(2)"\sevenrm 1";
+\MT: x3o = x2r; y3o = y3d = y1in1; x3d = x1in1; arrow(3o,3d);
+\MT: x4o = 0; y4o = y4d = y1in2; x4d = x1in2; arrow(4o,4d);
+\MT: x5o = x1out; y5o = y5d = y1out; x5d = w; arrow(5o,5d);
+\MTendchar;
+\setbox2=\box\MTbox
+\MTbeginchar(45pt,15pt,0pt);
+\MT: pickup thick_pen;
+\MT: x1 = 1/2w; y1 = 1/2h; z1lbl = z1;
+\MT: or_gate(1)(15u);
+\MTlabel(1lbl)"\sevenrm X ";
+\MT: pickup med_pen;
+\MT: x2l = 0; y2 = y1in1;
+\MTlabel(2)"\sevenrm 0";
+\MT: x3o = x2r; y3o = y3d = y1in1; x3d = x1in1; arrow(3o,3d);
+\MT: x4o = 0; y4o = y4d = y1in2; x4d = x1in2; arrow(4o,4d);
+\MT: x5o = x1out; y5o = y5d = y1out; x5d = w; arrow(5o,5d);
+\MTendchar;
+\setbox4=\box\MTbox
+
+\vskip\abovedisplayskip
+\line{\noindent $\vcenter{\box2}\;\, \srl\prl\ONE\ID\XOR = \NOT$
+       \hfil $\ID = \srl\prl\ZERO\ID\XOR \;\,\vcenter{\box4}$%
+       \tocfig{Ejemplos\string|Ejemplos de ampliaciones de autómatas}}
+\vskip\belowdisplayskip
+
+Decimos que el autómata $\XOR$ es una ampliación del autómata $\NOT$,
+$\XOR \amp \NOT$, porque existe un valor de entrada a $\XOR$ que hace que
+el resto del autómata se comporte como $\NOT$.  Por la misma razón el
+autómata $\XOR$ es una ampliación del autómata $\ID$,
+ $\XOR \amp \ID$.
+
+La definición completa del concepto de ampliación se encuentra en el
+Anexo~\refsc{El álgebra automática} (véanse las secciones
+\S\refsc{eqamp} y \S\refsc{eqamp'}). Aquí sólo recordaremos que
+$\Syntax(x,\no g,|B)$, utilizado en la definición de ampliación, es el
+autómata que resulta al forzar que las $\no g$ primeras variables de
+entrada al autómata |B tomen los valores correspondientes al índice $x$.
+Por ejemplo:
+ $$\Syntax(1,1,\XOR) = \srl \prl \ONE \ID \XOR = \NOT .$$
+Luego si $|B \amp \!|A$, entonces para cierto valor $b$,
+ $\Syntax(b,\inp B-\inpA,|B) \nodis |A$,
+pero en general, para otros valores c,
+ $\Syntax(c,\inp B-\inpA,|B) \not\nodis |A$.
+En este sentido decimos que la ampliación |B es capaz de más
+comportamientos, y por lo tanto es más versátil, que su original |A.
+
+De manera que si encontramos un autómata |B, al que llamaremos
+\definition{cuerpo}, que sea una ampliación de la solución de
+referencia $|A_0$, o sea, si $|B \amp \!|A_0$, entonces tenemos la
+posibilidad de construir un autómata que solucione mejor que $|A_0$ el
+problema aparente.  La condición para que esto ocurra, que denominaremos
+\definition{condición de adaptación}, es que la otra parte de tal
+autómata, parte a la que denominaremos \definition{gobernador} en honor a
+\person{Maxwell} y que notaremos |G, sea capaz de elegir el valor $b$
+cuando se encuentre ante un universo~|U en el que $|A_0$ sobreviviría.
+Para que pueda cumplir la condición de adaptación, el gobernador debe
+contar con la información precisa, por lo que, proporcionándole toda la
+información que es posible suministrarle, o sea, toda la apariencia del
+universo~|U, llegamos a la definición de adaptador.
+
+Un \definition{adaptador}, notado $|A_1$, es un autómata que tiene la
+forma:
+ $$\srl \FORK_{\no n+\no v} \fdb^{\no m} \srl \srl \prl |G
+    \ID_{\no n+\no v} |B \FORK_{\no m},$$
+siendo $|B \amp \!|A_0$ y cumpliendo |G la condición de adaptación.
+% Adaptador
+\MTbeginfigure(140,60);
+ \MT: pickup thick_pen;
+ \MT: x1r = w - 20u; y1b = 0; z1lbl = z1;
+ \MT: rectangle(1)(20u,20v); % 1 is B
+ \MTlabel(1lbl)"|B";
+ \MT: x2r = x1l - 40u; y2b = y1t; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 is G
+ \MTlabel(2lbl)"|G";
+ \MT: z3o = (x1r+5u,y1); z3d = (x2l,3/4[y2b,y2t]);
+ \MT: forkback(3,3o,3d)(h,10u,10u);
+ \MT: x3lbl.l = x3o; y3lbl.t = y3o - jot;
+ \MTlabel(3lbl)"\no m";
+ \MT: z4o = (x1r,y1); z4d = (w,y1); arrow(4o,4d);
+ \MT: z6o = (0,1/4[y1b,y1t]); z6d = (x1l, y6o); arrow(6o,6d);
+ \MT: z7o = (0,2/4[y1b,y1t]); z7d = (x1l, y7o); arrow(7o,7d);
+ \MT: y6lbl.t = y6.o - jot; y7lbl.b = y7.o + jot; x6lbl = x7lbl = 5u;
+ \MTlabel(6lbl)"\no v"; \MTlabel(7lbl)"\no n";
+ \MT: z8d = (x2l,1/4[y2b,y2t]); z9d = (x2l,2/4[y2b,y2t]);
+ \MT: z8m = z8d - (10u,0); z9m = z9d - (10u,0);
+ \MT: z8o = (10u,y6o); fork(8o,8m,8d);
+ \MT: z9o = (x8o,y7o); fork(9o,9m,9d);
+ \MT: z10o = (x2r,y2); z10m = z10o + (5u,0);
+ \MT: z10d = (x1l,3/4[y1b,y1t]); z10n = z10d - (10u,0);
+ \MT: arrowww(10o,10m,10n,10d);
+ \MT: x10lbl.l = x10m; y10lbl.b = y10m + jot;
+ \MTlabel(10lbl)"\no g";
+\MTendfigure"Adaptador\cr$|A_1$";
+
+
+\title2 Una clasificación
+
+\title3 Según las influencias
+
+El gobernador~|G recibe dos influencias:  una procedente del cuerpo~|B y la
+otra del exterior.  Si se prescinde de la influencia recibida desde el
+cuerpo~|B, tenemos el \definition{adaptador directo}, o no realimentado.
+La influencia externa es, como sabemos, de dos tipos:  neutra y
+significativa.  Si se prescinde de la influencia neutra, tenemos el
+\definition{adaptador gobernado por significados}; si se prescinde de la
+influencia significativa tenemos el adaptador de gobierno neutro.  Si se
+prescinde de ambas tenemos el adaptador de gobierno ciego.  Los adaptadores
+de gobierno neutro y ciego son casos degenerados de adaptador.
+
+El cuerpo~|B recibe dos influencias:  del exterior y del gobernador~|G.  Si
+se prescinde de la influencia externa tenemos el \definition{actuador}.  Si
+se prescinde de la influencia del gobernador~|G, entonces éste no tiene
+influencia sobre elemento alguno, por lo que tenemos otro caso degenerado
+de adaptador.
+
+Nótese que, por ejemplo, la influencia externa que recibe el cuerpo~|B es
+a través de $\FORK_{\no n+\no v}$ y de $\ID_{\no n+\no v}$.  Es decir,
+que en este modo de hablar las funciones de encaminamiento se limitan a
+repetir o a transmitir una influencia.
+
+El adaptador directo toma la forma:
+ $\srl \FORK_{\no n+\no v} \srl \prl |G \ID_{\no n+\no v} |B$.
+El actuador es:
+ $\fdb^{\no m} \srl \srl |G |B \FORK_{\no m}$,
+y el actuador directo:
+ $\srl |G |B$.
+
+\goodpage
+
+\title3 Según la universalidad
+
+Interesa, en general, que el cuerpo~|B del adaptador sea muy universal, o
+sea, capaz de muchos comportamientos diferentes.  El gobernador~|G, en este
+caso, tiene un espacio de comportamientos mucho más amplio que explorar,
+de modo que la tarea del gobernador~|G puede ser ardua si la estructura
+del universo~|U es tal que la gran mayoría de los comportamientos son
+malos.  Por contra, en el caso de los adaptadores poco universales, la
+labor del gobernador~|G puede ser mucho más sencilla.  Ahora bien,
+también es posible que el rango de comportamientos del adaptador sea
+entonces tan corto que ninguno de ellos sea lo suficientemente bueno.
+
+\title3 Según el lenguaje
+
+Entre el gobernador~|G y el cuerpo~|B del adaptador está definido un
+lenguaje, en el que a la combinación de valores $c$ de las \no g variables
+de salida del gobernador~|G le corresponde el significado
+\Syntax(c,\no g,|B).
+
+Nótese que si entre el gobernador~|G y el cuerpo~|B no estuviera definido
+un lenguaje, supuesto que llamaremos \definition{hipótesis del cuerpo
+aparente}, entonces el cuerpo no sería otra cosa que la parte más
+cercana del universo exterior~|U.
+
+
+\title2 El homeostato
+
+El homeostato de \person{Ashby}\cite{Ashby1956} es un gobernador~|G
+sencillo.  El homeostato va monitorizando el beneficio obtenido y, mientras
+éste se encuentra por encima de un cierto umbral, no varía su salida
+hacia el cuerpo~|B, lo cual significa que el comportamiento global del
+adaptador no varía.  Si el beneficio baja del umbral, entonces el
+homeostato cambia aleatoriamente su salida hacia el cuerpo~|B.  Esto asegura
+que sólo son estables aquellos comportamientos que obtienen beneficios
+superiores al umbral establecido. Según nuestra clasificación, el
+adaptador homeostático es un adaptador directo y gobernado por
+significados.
+
+Quizás el mayor problema del homeostato es que, cada vez que falla un
+comportamiento, el siguiente que es probado se genera de una manera
+completamente aleatoria y sin tener en cuenta la historia pasada.
+
+\goodpage
+
+\title2 Adaptadores con traducción
+
+Otra forma de construir un adaptador, procurando aprovechar la historia
+pasada, parte del supuesto de que comportamientos parecidos tendrán
+valoraciones parecidas, supuesto al que damos el nombre de
+\definition{hipótesis de continuidad en el significado de los
+comportamientos}.  Bajo esta hipótesis, podemos planear que la búsqueda
+del mejor comportamiento se haga en pasos cortos, es decir, quedándose
+siempre en las inmediaciones del comportamiento actual.  De esa manera
+nunca empeorará demasiado el beneficio y, si persistimos en la mejora,
+llegaremos a un máximo.  Y si no existen máximos locales, entonces este
+máximo es el óptimo.
+
+En esta situación parece más interesante hablar en términos de diferencias
+de comportamientos que de comportamientos absolutos.  Así que el gobernador
+ordenará variar el comportamiento actual en determinada dirección, en vez de
+ordenar el comportamiento preciso a ejecutar.  O sea, indicará la diferencia
+entre el comportamiento que desea y el comportamiento actual.
+
+Pero teóricamente se puede hablar indistintamente en diferencias y en
+absolutos merced al empleo de integradores y diferenciadores.  Un integrador
+convierte diferencias en absolutos y un diferenciador convierte absolutos en
+diferencias.
+
+Usando los autómatas integradores y diferenciadores adecuados podemos
+acoplar cualesquiera gobernador y cuerpo, ya sea que se refieran a los
+comportamientos como diferencias respecto al actual o se refieran
+absolutamente a ellos.  En este sentido entenderemos que actúan como
+traductores del lenguaje hablado por el gobernador al lenguaje entendido por
+el cuerpo.
+
+Teóricamente es indiferente suponer que el traductor~|T es la última
+etapa del gobernador~|G o la primera del cuerpo~|B, pero si lo que se
+pretende es señalar que existe una traducción, entonces tenemos el
+\definition{adaptador con traductor}, que toma la forma:
+ $$\srl \FORK_{\no n+\no v} \fdb^{\no m} \srl \srl \prl \srl |G' |T
+  \ID_{\no n+\no v} |B \FORK_{\no m} .$$
+% Adaptador con traductor
+\MTbeginfigure(170,60);
+ \MT: pickup thick_pen;
+ \MT: x1r = w - 20u; y1b = 0; z1lbl = z1;
+ \MT: rectangle(1)(20u,20v); % 1 is B
+ \MTlabel(1lbl)"|B";
+ \MT: x2r = x1l - 70u; y2b = y1t; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 is G'
+ \MTlabel(2lbl)"$|G'$";
+ \MT: z3o = (x1r+5u,y1); z3d = (x2l,3/4[y2b,y2t]);
+ \MT: forkback(3,3o,3d)(h,10u,10u);
+ \MT: x3lbl.l = x3o; y3lbl.t = y3o - jot;
+ \MTlabel(3lbl)"\no m";
+ \MT: z4o = (x1r,y1); z4d = (w,y1); arrow(4o,4d);
+ \MT: z6o = (0,1/4[y1b,y1t]); z6d = (x1l, y6o); arrow(6o,6d);
+ \MT: z7o = (0,2/4[y1b,y1t]); z7d = (x1l, y7o); arrow(7o,7d);
+ \MT: y6lbl.t = y6.o - jot; y7lbl.b = y7.o + jot; x6lbl = x7lbl = 5u;
+ \MTlabel(6lbl)"\no v"; \MTlabel(7lbl)"\no n";
+ \MT: z8d = (x2l,1/4[y2b,y2t]); z9d = (x2l,2/4[y2b,y2t]);
+ \MT: z8m = z8d - (10u,0); z9m = z9d - (10u,0);
+ \MT: z8o = (10u,y6o); fork(8o,8m,8d);
+ \MT: z9o = (x8o,y7o); fork(9o,9m,9d);
+ \MT: pickup thick_pen;
+ \MT: z11 = z2 + (30u,0); z11lbl = z11; rectangle(11)(20u,20v);
+ \MTlabel(11lbl)"|T";
+ \MT: pickup med_pen;
+ \MT: z12o = (x2r,y2); z12d = (x11l,y11); arrow(12o,12d);
+ \MT: z13o = (x11r,y11); z13m = z13o + (5u,0);
+ \MT: z13d = (x1l,3/4[y1b,y1t]); z13n = z13d - (10u,0);
+ \MT: arrowww(13o,13m,13n,13d);
+ \MT: x13lbl.l = x13m; y13lbl.b = y13m + jot;
+ \MTlabel(13lbl)"\no g";
+\MTendfigure"Adaptador\cr con traductor";
+
+\title2 Autómatas estocásticos
+
+Los autómatas estocásticos\cite{Narendra1989} son actuadores con
+traductor. Cada comportamiento de que es capaz el cuerpo~|B del autómata
+estocástico consiste en generar, con una determinada probabilidad pero
+independientemente de entradas y estados, salidas de valor~1.  De modo que
+estos comportamientos pueden ordenarse, desde aquél que no produce ninguna
+salida de valor~1 (probabilidad~0) hasta aquél que las produce siempre
+(probabilidad~1).
+
+El gobierno de este cuerpo es sencillo.  Por ejemplo, si la salida anterior
+fue~1 y la reacción del universo~|U fue mala, primero el gobernador~|G
+determina que debe aplicarse un comportamiento con menor probabilidad de
+generar valores~1; entonces el traductor~|T, que es un integrador, calcula
+cuál es el comportamiento contiguo al actual pero con menor probabilidad de
+generar valores~1, y éste es el comportamiento que por fin ejecuta el
+cuerpo~|B.
+
+\title2 Autómatas de comportamiento variable
+
+Existen muchos esquemas adaptativos que lo único que aportan es un
+autómata de comportamiento variable o, en nuestra terminología, el
+cuerpo de un adaptador.  Para que este cuerpo pueda ser útil, ha de venir
+provisto de un lenguaje.  Y si el lenguaje es diferencial la operación es
+más fácil.
+
+La utilización autónoma de un cuerpo diferencial requiere de una fase
+previa de entrenamiento o de prueba durante la cual se supervisa su
+comportamiento.  En esta fase de prueba se utilizan las entradas de
+gobierno al cuerpo de manera que se va acomodando el comportamiento del
+cuerpo al deseado por el supervisor.  Una vez finaliza esta fase y comienza
+la fase autónoma, se ausenta el supervisor y la entrada de gobierno se
+fija a cero (para que el comportamiento no cambie).  Es decir, el
+entrenamiento determina el comportamiento deseado para la posterior
+utilización autónoma del cuerpo.
+
+Dentro de este grupo se encuentran los esquemas conexionistas (o redes de
+neuronas formales), los inductivos (que generan, a partir de ejemplos y
+contraejemplos, reglas de clasificación) y, en general, todos aquéllos
+en los que se diferencia una fase de entrenamiento, supervisada, de otra
+fase autónoma o no supervisada durante la cual ya no se producen cambios
+de comportamiento.
+
+
+\title2 El termostato
+
+Por último, y como excepción, desarrollaremos un adaptador en el que la
+semántica es algo más compleja que la semántica mínima (véase la
+\S\refsc{semántica mínima}).  El termostato es un conocido adaptador.
+El termostato típico es una máquina cuyo cometido es mantener, dentro de
+determinados límites, la temperatura de un cierto lugar.  En nuestro caso
+supondremos que la temperatura deseada es siempre mayor que la temperatura
+ambiente, por lo cual el termostato precisará activar, en ocasiones, un
+calefactor que constituye el cuerpo del termostato.  Como dato de entrada el
+termostato dispondrá de la temperatura codificada en dos bits y con tres
+significados: demasiado alta, buena y demasiado baja, en vez de buena y mala
+solamente.
+
+El cometido de esta semántica~|V será, pues, determinar que calificación, de
+esas tres, se merece la temperatura que percibe.  Para ello definiremos dos
+temperaturas:  $T_h$ o temperatura máxima a la que debe estar el lugar y
+$T_l$ o temperatura mínima a la que debe estar el lugar.  Supondremos que la
+codificación utilizada por la semántica~|V es así:
+ si la temperatura medida $T_m$ es demasiado alta,
+ $T_m > T_h$, entonces usa el código 01;
+ si la temperatura medida es buena,
+ $T_h \ge T_m \ge T_l$, emplea el código 11;
+ y si la temperatura medida es demasiado baja,
+ $T_l > T_m$, usa el código 10.
+
+Es decir, el termostato utiliza una semánica no mínima, distinguiendo
+dos tipos de maldad, la maldad caliente ($T_h < T_m$) y la maldad fría
+($T_m < T_l$).  Ambas podrían causar la muerte, aunque cada una requiere
+una acción diferente.  Que la semántica~|V proporcione esta
+información más significativa, le ahorra al gobernador~|G del
+termostato la tarea de discriminar el tipo de maldad a la que se enfrenta,
+discriminación que es necesaria para aplicar a cada maldad el
+comportamiento específico que la reduce.
+
+Supondremos que el cuerpo~|B del termostato es capaz de efectuar dos
+comportamientos, que codificaremos así:  1 significa `calefactor encendido'
+y 0 significa `calefactor apagado', luego éste es el lenguaje definido entre
+el gobernador~|G y el cuerpo~|B.  Para mantener la temperatura entre los dos
+límites fijados, y teniendo en cuenta que sin la intervención del calefactor
+la temperatura tiende a bajar, la estrategia del termostato será la de
+encender el calefactor cuando la temperatura sea demasiado baja y apagarlo
+cuando la temperatura sea demasiado alta.  Cuando la temperatura esté entre
+los límites, mantendrá al calefactor en su estado.
+
+En esta situación, y si el lugar no tuviera inercia térmica, la
+temperatura subiría, con el calefactor encendido, de $T_l$ a $T_h$, al
+llegar a $T_h$ se apagaría el calefactor y la temperatura bajaría de
+$T_h$ a $T_l$, pero al llegar a $T_l$ se volvería a encender el
+calefactor y recomenzaría el ciclo.
+
+El termostato es un actuador directo gobernado por significados.
+ $$|G = \srl\srl \prl\ID\FORK \prl\AND\NOT \fdb \srl\srl
+  \prl\AND\ID \OR \FORK.$$
+
+\MTline{}\MTcode
+ def termometer(suffix s)(expr size) =
+  x.s.big = size/4; x.s.small = size/10;
+  y.s.t - y.s.b = size; y.s.t + y.s.b = 2y.s;
+  x.s.r - x.s.l = x.s.big; x.s.l + x.s.r = 2x.s;
+  x.s.rr - x.s.ll = x.s.small; x.s.ll + x.s.rr = 2x.s;
+  fill fullcircle scaled (x.s.big) shifted (x.s,y.s.b+x.s.big/2);
+  draw (x.s.ll,y.s.b+x.s.big/2) --- (x.s.ll,y.s.t-x.s.small/2) ...
+       (x.s,y.s.t){right} ... (x.s.rr,y.s.t-x.s.small/2) ---
+       (x.s.rr,y.s.b+x.s.big/2);
+   fill (x.s.ll,y.s.b+x.s.big/2) -- (x.s.ll,y.s) --
+        (x.s.rr,y.s) -- (x.s.rr,y.s.b+x.s.big/2) -- cycle;
+ enddef;
+:::
+
+\removelastskip\vskip-1pc
+\MTline{}
+\MTbeginfigure(165,65); % termostato
+ \MT: % 1 is the electrical circuit
+ \MT: pickup thick_pen;
+ \MT: y1b = 0; y1t = 20v; y1P = y1R = y1 = 1/2[y1b,y1t];
+ \MT: x1P.r = w; x1l = x1R; x1r = x1P; x1r - x1l = 40u; x1 = 1/2[x1l,x1r];
+ \MT: power_supply(1P)(10u); resistor(1R)(10v);
+ \MT: z1lbl = z1;
+ \MTlabel(1lbl)"|B";
+ \MT: pickup med_pen;
+ \MT: z1bo = (x1R,y1R.b); z1bm = (x1bo,y1b);
+ \MT: z1bd = (x1P,y1P.b); z1bn = (x1bd,y1b);
+ \MT: softt(1bo,1bm,1bn,1bd);
+ \MT: z1tlo = (x1R,y1R.t); z1tlm = (x1R,y1t); z1tld = (x1-5u,y1t);
+ \MT: soft(1tlo,1tlm,1tld);
+ \MT: z1tro = (x1P,y1P.t); z1trm = (x1P,y1t); z1trd = (x1+5u,y1t);
+ \MT: soft(1tro,1trm,1trd);
+ \MT: % 2 is V
+ \MT: pickup thick_pen;
+ \MT: x2l = 0; y2b = 0; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v);
+ \MTlabel(2lbl)"|V";
+ \MT: % 3 is the termometer
+ \MT: x3l = x2r + jot; y3b = 0; termometer(3)(20v);
+ \MT: x3cold = x3med = x3hot = x3r + jot;
+ \MT: y3cold = y3b; y3med = y3; y3hot = y3t;
+ \MTlabel(3cold)bl"\sevenrm 10";
+ \MTlabel(3med)cl"\sevenrm 11";
+ \MTlabel(3hot)tl"\sevenrm 01";
+ \MT: % 4 is G
+ \MT: z41 = (55u, h - 20v); and_gate(41)(7u);
+ \MT: z42 = z41 + (0,-10v); not_gate(42)(7u);
+ \MT: y43in2 = y41out; x43 = x42 + 20u; and_gate(43)(7u);
+ \MT: x44 = x43+20u; y44in1 = y43out; or_gate(44)(7u);
+ \MT: z47o = z44out + (5u,0); z47d = z43in1;
+ \MT: shortforkback(47,47o,47d)(h-5v,7u,10u);
+ \MT: arrow(41out,43in2); arrow(43out,44in1);
+ \MT: z40 = (x41in1-20u,1/2[y42in,y41in2]);
+ \MT: z40t = (x40+10u,y41in2); z40b = (x40+10u,y42in);
+ \MT: fork(40,40t,41in2); fork(40,40b,42in);
+ \MT: z40o1 = (1/3[x2l,x2r],y2t); z40o2 = (2/3[x2l,x2r],y2t);
+ \MT: z40m1 = (x40o1,y41in1); z40m2 = (x40o2,y40);
+ \MT: arroww(40o1,40m1,41in1); soft(40o2,40m2,40);
+ \MT: z43m = (x43in2,y42out); z43n = (x43out,y44in2);
+ \MT: arrowww(42out,43m,43n,44in2);
+ \MT: pickup thin_pen;
+ \MT: x7l = x40 - 5u; x7r = x47o + 15u;
+ \MT: y7b = y42bl - 5v; y7t = h;
+ \MT: rectangle(7)(x7lg,y7hg);
+ \MT: x7lbl = 1/2*(x40+x41); y7lbl = y47.del.l;
+ \MTlabel(7lbl)"|G";
+ \MT: pickup med_pen;
+ \MT: z5m = (x1,y44out); z5d = (x1,y1t+2v); arroww(44.out,5m,5d);
+ \MT: point(1tld); z6d = 2[z1tld,z5d]; draw z1tld -- z6d;
+ \MT: z6open = z6d + (jot,0);
+ \MTlabel(6open)bl"\sevenrm 0";
+\MTendfigure"Termostato";
+
+
+\labeled adaptadores\title2 Conclusión
+
+Son adaptadores todos los autómatas capaces de varios comportamientos, y
+que evalúan estos comportamientos probándolos contra el universo
+exterior.  Es decir, usan el procedimiento de tanteo, o de prueba y error.
+
+Eso significa que cualquier adaptador, para percatarse de la inadecuación
+de un comportamiento, ha de sufrir las consecuencias de aplicarlo.
+Solamente cuando el adaptador contrasta el comportamiento contra el
+exterior obtiene la prueba de que es malo, o bueno.  El problema es que
+pudiera ser tan malo que le provocara la muerte.  Y éste es el problema
+que intentaremos resolver a continuación, con el aprendiz.
+
+
+
+\labeled\title1 El aprendiz
+
+\title2 La simulación
+
+\title3 La ecuación del adaptador
+
+La tarea del gobernador~|G de un adaptador puede ser entendida como la de
+buscar el comportamiento $x$ del cuerpo |B, de los $2^{\no g}$ que tienen
+diferente código, que hace máxima la valoración obtenida por el
+autómata \Syntax(x,\no g,|B) enfrentado al problema de la supervivencia.
+Más precisamente, el \definition{problema del adaptador} es:
+ $$x? \forall |U : \; \fdb^{\no m} \srl |U \srl \prl \ID_{\no n}
+ \FORK_{\no v} \prl \Syntax(x,\no g,|B) \Metric \nodis \ONE.$$
+Esta \definition{ecuación del adaptador} está abierta, ya que uno de
+sus términos es el universo~|U exterior.  Consiguientemente, el
+gobernador no tiene otra manera de determinar el valor, mejor o peor, del
+comportamiento~$j$, o sea, de \Syntax(j,\no g,|B), que la de utilizar ese
+comportamiento, necesariamente en el presente, contra el universo~|U
+exterior.
+
+Así que el gobernador del adaptador sólo conoce el significado de los
+comportamientos que ha probado hasta el presente.  Y, por tanto, el
+gobernador de un adaptador se encuentra, en todo instante, con la siguiente
+disyuntiva:  o bien aplica desde ya el comportamiento mejor de los
+encontrados, y entonces no prueba otros que podrían ser mejores, o bien
+aplica un comportamiento nuevo que, si bien podría ser mejor que el mejor
+de los encontrados hasta el momento, lo más probable es que sea peor.
+
+Ahora podemos añadir, a la definición positiva del adaptador que lo
+describe como un mecanismo capaz de variar su comportamiento tras probarlo
+contra el mundo exterior, otra definición, esta vez negativa, que
+describe al adaptador como aquel mecanismo de comportamiento variable que
+es incapaz de prever su futuro.
+
+Sin futuro cualquier variación del comportamiento, aun hecha con buenas
+intenciones, puede resultar mortal.  El gobernador, al elegir el
+comportamiento del adaptador, puede obstinarse en permanecer vivo de la
+mejor manera encontrada hasta el presente, pero no puede fijarse una
+estrategia en la que un malestar presente le facilite y le alargue su vida
+futura.
+
+Sucede que el propósito interno del adaptador, y más concretamente de su
+gobernador, no coincide con su razón de ser, o propósito externo, que es
+solucionar el problema de la supervivencia. Esta discrepancia es la causa de
+las limitaciones del adaptador. Sólo se eliminaría esta discrepancia si
+la semántica fuera tal que un mejor ahora significase una vida más
+larga, pero dada la hipótesis del significado aparente, esta suposición
+es ilícita.
+
+
+\title3 La ecuación del aprendiz
+
+La dificultad del adaptador desaparece encerrando la ecuación del
+adaptador dentro de una lógica.  Es decir, que si todos los términos de
+la ecuación fueran objetos o representaciones de la lógica del
+gobernador, entonces podría ser resuelta dentro del gobernador.  La
+realización de esta idea es la que define al aprendiz.
+
+El universo~|U es uno de los objetos exteriores al gobernador que aparecen
+en la ecuación del adaptador, así que lo sustituimos por la
+\definition{realidad}~|R, que decimos que es un modelo del universo~|U.  Un
+\definition{modelo} es la representación lógica de un objeto.
+
+El cuerpo~|B es el otro objeto exterior al gobernador que aparece en la
+ecuación del adaptador.  Pero el cuerpo~|B es un objeto interior a la
+solución.  Por lo tanto, prescindiendo de la hipótesis del cuerpo
+aparente, podemos disponer de una réplica del cuerpo~|B en el gobernador.
+Para distinguir al cuerpo~|B del adaptador de este cuerpo replicable,
+denominaremos ejecutor~|E al cuerpo del aprendiz, del que el gobernador
+tiene réplica.
+
+Es así que la ecuación del adaptador interiorizada, a la que llamaremos
+\definition{ecuación del aprendiz}, queda:
+ $$x? \fdb^{\no m} \srl |R \srl \prl
+ \ID_{\no n} \FORK_{\no v} \prl \Syntax(x,\no g,|E) \Metric \nodis \ONE.$$
+
+Llamaremos \definition{simulación} al proceso de resolución del problema
+planteado por la ecuación del aprendiz, o \definition{problema del
+aprendiz}, y \definition{simulador}~|S a la parte del aprendiz que lo
+realiza.
+
+El propósito interno del simulador~|S coincide con el propósito externo,
+solucionar el problema de la supervivencia, aunque con dos salvedades:  es
+contra un modelo del universo, la realidad~|R, en vez de ser contra
+cualquier universo~|U; y en vez de una solución genérica~|A, la solución de
+la solución sólo tiene $2^{\no g}$ alternativas posibles, una por cada
+posible codificación de $x$ en \Syntax(x,\no g,|E). Nótese que el problema
+del aprendiz {\em no} es un problema aparente, ya que se puede resolver sin
+interaccionar con el exterior.
+
+\newpage
+
+\title3 La lógica interna
+
+El simulador~|S desarrolla su actividad dentro de su lógica, es decir,
+dentro del espacio de representaciones definido por su lógica.  Conviene
+distinguir en todo momento esta \definition{lógica interna} del aprendiz de
+aquella otra \definition{lógica externa} al aprendiz en la que se escribe la
+ecuación de la supervivencia de la que es solución el aprendiz.
+
+Para que el simulador~|S pueda resolver el problema del aprendiz quedándose
+dentro de un mundo enteramente lógico, ha de estar aislado del exterior.
+Para ello disponemos al simulador~|S entre otros dos autómatas:  el
+modelador~|M, que a partir de la apariencia del universo~|U suministra al
+simulador~|S la mejor representación lógica de tal universo~|U, a la que
+hemos denominado realidad~|R, y el ejecutor~|E, que interpreta la solución
+lógica encontrada por el simulador~|S y actúa en consecuencia sobre el
+universo~|U.  Estos dos autómatas efectúan la conversión y desconversión que
+encapsulan al simulador~|S en su mundo lógico.
+
+Ya que el aprendiz es una posible solución del problema aparente, su
+lógica interna ha de estar contenida en la lógica externa.
+
+\title3 Un simulador
+
+La simulación, al ser un proceso interno al aprendiz que puede manejarse
+a voluntad, puede llevarse tanto al pasado, como al presente, como al
+futuro.  Es decir, que la existencia de una lógica interna le proporciona
+al aprendiz la posibilidad de prever el futuro.  También es de una enorme
+importancia práctica que la búsqueda del mejor comportamiento puede ser
+hecha en paralelo.  Esto era imposible en el caso del adaptador, porque
+entonces cada comportamiento había de ser probado contra el único
+universo~|U exterior.  Pero sí pueden hacerse réplicas de la
+realidad~|R, ya que es un objeto lógico.
+
+Un simulador~|S puede ser construido como un conjunto de varios adaptadores
+de cuerpo~|E trabajando en paralelo, y en un tiempo de simulación
+diferente del tiempo externo, sobre varias réplicas de la realidad~|R,
+además de cierta maquinaria adicional para comparar y controlar a los
+adaptadores del conjunto.
+
+En resumen, disponer de una lógica le permite al aprendiz superar las
+limitaciones del adaptador.  El aprendiz puede simular simultáneamente
+varios posibles comportamientos y prever su futuro, o sea, elaborar
+estrategias.
+
+\goodpage
+
+\title2 La modelación
+
+\labeled\title3 El modelo
+
+Un modelo es la representación lógica de una cosa.  Al modelo también
+se le denomina objeto formal, ya que es un objeto formado según la
+lógica en base a cierta cosa.  Desde dentro de la lógica, el modelo es
+la descripción de la cosa.  La \definition{modelación}, o el
+\definition{problema de la modelación}, es el proceso que tiene como
+objetivo hallar la mejor descripción o representación lógica de una
+cosa.  Llamaremos \definition{modelador}~|M a la parte del aprendiz que hace
+la modelación.
+
+En el caso del aprendiz, la modelación tiene como objetivo hallar una
+representación de la lógica interna que reemplace adecuadamente al
+universo~|U, tomando como dato la apariencia del universo~|U.  El modelo del
+universo~|U, que denominamos realidad~|R, será tanto más adecuado cuanto más
+se parezca el problema del aprendizaje al problema de la supervivencia.  La
+situación óptima se alcanza si la realidad~|R es indistinguible del
+universo~|U, $|R \nodis |U$, ya que entonces el problema del aprendiz es
+indistinguible del problema aparente de la supervivencia (véase la
+\S\refsc{Importa el comportamiento}).
+
+Si la realidad~|R es determinística e indistinguible del universo~|U, o sea,
+si $\pr R = 0 \land |R \nodis |U$, entonces la realidad~|R es infalible, ya
+que acierta todas las predicciones.  Es decir, que supuesta la
+sincronización de los estados de |R y de |U, y ante cualquier secuencia de
+acciones, el modelo~|R producirá las mismas reacciones que produciría el
+universo~|U exterior.
+
+Cuando la realidad~|R no es determinística, $\pr R > 0$, se pierde esta
+equivalencia entre la indistinguibilidad y la infalibilidad de las
+predicciones. Por otro lado, un modelo determinístico es más
+informativo, y por ello es más fácilmente falsable; basta que la
+secuencia observada difiera en un bit respecto a la predicha para concluir
+que el modelo no es el adecuado.
+
+\title3 Un modelador
+
+Las maneras de resolver la modelación son varias.  Aquí sólo
+explicaremos una sencilla, porque nos contentamos con mostrar que la
+modelación es posible.
+
+Sean \Syntax(m,\no d,|D), con $0 \le m < 2^{\no d}$, todos los
+comportamientos del universo~|U que el aprendiz puede imaginar.  Admitiendo
+que un modelo es mejor si predice mejor, entonces una manera de determinar
+la bondad de un modelo $m$, que es \Syntax(m,\no d,|D), es utilizarlo para
+hacer una serie de predicciones y, una vez las predicciones se comprueben
+acertadas o fallidas, computar el porcentaje de aciertos sobre el total. Lo
+que interesa predecir es, por supuesto, la futura reacción del universo~|U
+sobre el aprendiz.
+
+El modelador~|M podría, por lo tanto, funcionar así.  Aplica, a cada
+modelo~$m$ que es candidato a realidad, la misma acción que el aprendiz
+está aplicando actualmente al universo~|U, y anota la predicción del
+candidato.  Cuando, en el instante siguiente, el aprendiz conoce la
+reacción recibida desde el universo~|U, la compara con la predicción. Se
+repite el proceso durante $\no t$ instantes.  En cada instante han de
+predecirse $\no n+\no v$ valores de variables, por lo que el total de
+predicciones binarias hechas por el candidato sometido a la prueba es
+ $\no t . (\no n+\no v)$.
+El candidato~$r$ con mayor porcentaje de aciertos de entre los modelos~$m$
+comparados, es la realidad buscada.
+
+Es importante que la prueba anterior, y con ella la modelación, puede
+hacerse simultáneamente sobre varios candidatos, es decir, en paralelo.
+
+Con esta modelación, y ya que $|R = \Syntax(r,\no d,|D)$ siendo $r$ el
+valor pasado desde el modelador~|M al simulador~|S, la ecuación del
+aprendiz queda:
+ $$x? \fdb^{\no m} \srl \Syntax(r,\no d,|D) \srl \prl \ID_{\no n}
+ \FORK_{\no v} \prl \Syntax(x,\no g,|E) \Metric \nodis \ONE.$$
+
+
+\title3 Otros modeladores
+
+El modelador visto sólo es uno de los muchos posibles.  Otra manera
+juiciosa de elegir el mejor modelo $r$, de entre los $2^{\no d}$ posibles,
+consiste en calcular la probabilidad de que cada uno de ellos genere, dado
+el stream de entrada aplicado al universo~|U durante un período de $\no t$
+instantes, el stream correspondiente observado como salida del universo~|U.
+El mejor modelo es aquél que obtiene en el cálculo la probabilidad
+mayor.
+
+Tampoco el promedio de aciertos es la única medida posible de la bondad
+de un modelo.  Otra medida de la bondad de un modelo es la información, o
+negaentropía, que contiene.
+
+\bigskip
+
+\title2 La ejecución
+
+La \definition{ejecución} es la realización fiel de una representación
+lógica.  Desde dentro de la lógica, la ejecución es la actualización
+del objeto formal.  Llamaremos \definition{ejecutor}~|E a la parte del
+aprendiz que hace la ejecución.
+
+\goodpage
+
+En el caso del aprendiz, la ejecución es la conversión de la solución
+lógica encontrada por el simulador~|S, sea $b$, con
+ $0 \le b < 2^{\no g}$,
+en interacción con el universo~|U, en concreto \Syntax(b,\no g,|E). La
+ejecución será fiel si el ejecutor~|E utilizado por el simulador~|S en la
+resolución del problema del aprendizaje coincide con el ejecutor~|E del
+aprendiz.
+
+
+\title2 Una clasificación
+
+Puesto que los aprendices añaden una lógica interna a los adaptadores,
+la clasificación de los aprendices se hará en función de su lógica
+interna.  También se distinguirán unos aprendices de otros según como
+lleven a cabo la modelación y la simulación.
+
+
+\title2 Definición
+
+El aprendiz es un adaptador cuyo gobernador se divide en dos partes, un
+modelador y un simulador.  Por ser el modelador~|M quien suministra la
+realidad~|R al simulador~|S, la disposición del gobernador del aprendiz
+es:  $\srl |M |S$.  Si la realidad es indistinguible del universo,
+ $|R \nodis |U$,
+condición que llamaremos \definition{condición de modelación},
+entonces el aprendiz puede resolver el problema de la supervivencia mejor
+que el adaptador porque, como ya explicamos, puede determinar la bondad de
+cada uno de sus posibles comportamientos sin tener que sufrir las
+consecuencias de ejecutarlos.  Pero para ello es menester que el
+simulador~|S sea capaz de solucionar el problema del aprendiz, presupuesto
+al que denominamos \definition{condición de aprendizaje}.
+
+Un \definition{aprendiz}, notado $|A_2$, es un autómata que tiene la
+forma:
+ $$\srl \FORK_{\no n+\no v} \fdb^{\no m} \srl \srl \prl \srl |M |S
+   \ID_{\no n+\no v} |E \FORK_{\no m},$$
+cumpliendo |M la condición de modelación, o sea, $|R \nodis |U$;
+cumpliendo |S la condición de aprendizaje; y siendo $|E \amp |A_0$.
+% Aprendiz
+\MTbeginfigure(170,60);
+ \MT: pickup thick_pen;
+ \MT: x1r = w - 20u; y1b = 0; z1lbl = z1;
+ \MT: rectangle(1)(20u,20v); % 1 is E
+ \MTlabel(1lbl)"|E";
+ \MT: x2r = x1l - 70u; y2b = y1t; z2lbl = z2;
+ \MT: rectangle(2)(20u,20v); % 2 es M
+ \MTlabel(2lbl)"|M";
+ \MT: z3o = (x1r+5u,y1); z3d = (x2l,3/4[y2b,y2t]);
+ \MT: forkback(3,3o,3d)(h,10u,10u);
+ \MT: x3lbl.l = x3o; y3lbl.t = y3o - jot;
+ \MTlabel(3lbl)"\no m";
+ \MT: z4o = (x1r,y1); z4d = (w,y1); arrow(4o,4d);
+ \MT: z6o = (0,1/4[y1b,y1t]); z6d = (x1l, y6o); arrow(6o,6d);
+ \MT: z7o = (0,2/4[y1b,y1t]); z7d = (x1l, y7o); arrow(7o,7d);
+ \MT: y6lbl.t = y6.o - jot; y7lbl.b = y7.o + jot; x6lbl = x7lbl = 5u;
+ \MTlabel(6lbl)"\no v"; \MTlabel(7lbl)"\no n";
+ \MT: z8d = (x2l,1/4[y2b,y2t]); z9d = (x2l,2/4[y2b,y2t]);
+ \MT: z8m = z8d - (10u,0); z9m = z9d - (10u,0);
+ \MT: z8o = (10u,y6o); fork(8o,8m,8d);
+ \MT: z9o = (x8o,y7o); fork(9o,9m,9d);
+ \MT: pickup thick_pen;
+ \MT: z11 = z2 + (40u,0); z11lbl = z11; rectangle(11)(20u,20v);
+ \MTlabel(11lbl)"|S";
+ \MT: pickup med_pen;
+ \MT: z12o = (x2r,y2); z12d = (x11l,y11); arrow(12o,12d);
+ \MT: x12lbl = 1/2[x12o,x12d]; y12lbl.b = 1/2[y12o,y12d] + jot;
+ \MTlabel(12lbl)"\no d";
+ \MT: z13o = (x11r,y11); z13m = z13o + (5u,0);
+ \MT: z13d = (x1l,3/4[y1b,y1t]); z13n = z13d - (10u,0);
+ \MT: arrowww(13o,13m,13n,13d);
+ \MT: x13lbl.l = x13m; y13lbl.b = y13m + jot;
+ \MTlabel(13lbl)"\no g";
+\MTendfigure"Aprendiz\cr$|A_2$";
+
+\newpage
+
+\labeled\title2 Las enfermedades
+
+Los aprendices pueden sufrir enfermedades como resultado de no cumplir la
+condición de modelación, $|R \nodis |U$.  Como el propio aprendiz no puede
+saber si cumple o no la condición de modelación, porque del universo~|U sólo
+es accesible su apariencia {\em actual}, no tiene manera de evitarlas.
+Nótese que, para determinar si dos autómatas son indistinguibles, es preciso
+verificar que todas las apariencias {\em potenciales} de ambos son idénticas
+(véase la sección \S\refsc{El comportamiento} en el Anexo \refsc{El álgebra
+automática}).
+
+La más grave de las enfermedades es la
+ \definition{enfermedad de {\sc Camus}}\ndx{Camus}{1}.
+
+Cuando el universo o entorno al que se enfrenta un aprendiz es muy adverso,
+porque produce muy pocas valoraciones buenas, entonces es probable que el
+comportamiento aplicado no obtenga valoración positiva alguna; siendo éste
+el comportamiento pésimo.  Así las cosas, también será probable que el mejor
+modelo encontrado prediga que el aprendiz no será nunca recompensado,
+independientemente de lo que haga; siendo éste el modelo de máximo
+pesimismo.  Que estas probabilidades sean más o menos altas depende de cómo
+sean concretamente el aprendiz y el universo.  Por otra parte, supondremos
+que el aprendiz sólo cambia de comportamiento cuando el comportamiento
+simulado es mejor que el aplicado, porque ésta es una estrategia prudente al
+preferir el comportamiento comprobado cuando quedan igualadas una valoración
+comprobada con otra hipotética.  Pues bien, en estas circunstancias, si el
+modelo de máximo pesimismo se convierte en la realidad del aprendiz,
+entonces todos los comportamientos candidatos que examina el simulador
+obtendrán una valoración nula y el comportamiento pésimo seguirá siendo
+aplicado, por lo que la realidad de máximo pesimismo obtendrá un ciento por
+ciento de aciertos y no será tampoco sustituida.
+
+Un factor que incrementa la probabilidad de aplicar el comportamiento pésimo
+es que la modelación sea difícil.  Si la modelación le resulta difícil al
+aprendiz, entonces cambiará de realidad con frecuencia.  Como al cambiar de
+realidad cambian las valoraciones de los comportamientos candidatos del
+simulador, si el aprendiz cambia con frecuencia de realidad, entonces
+también cambiará de comportamiento con frecuencia.  Cambiar de
+comportamiento con frecuencia en base a simulaciones efectuadas con modelos
+defectuosos facilita que el aprendiz llegue a aplicar un comportamiento
+pésimo.
+
+Esto nos permite caracterizar las circunstancias que causan esta enfermedad.
+Dos factores parecen contribuir:  la imposibilidad de modelar adecuadamente
+el mundo y la alta tasa de castigos recibida. De modo que los síntomas de la
+enfermedad de \person{Camus} son los de una depresión apática, ya que el
+aprendiz queda bloqueado, sin intentar cambiar de comportamiento por creer
+que todo es inútil, cuando se enfrenta a entornos ininteligibles y altamente
+punitivos.
+
+Es notable que, en este entorno, los adaptadores tienen menos dificultades.
+Un adaptador que recibe siempre castigos no se bloquea; al contrario, muchos
+de ellos, y el homeostato es un buen ejemplo, sólo cambian de comportamiento
+cuando reciben castigos.
+
+La otra enfermedad es debida igualmente a una excesiva generalización,
+pero de signo opuesto, por lo que puede considerarse un efecto más que una
+enfermedad.  Lo denominaremos
+ \definition{efecto de {\sc Leibniz}}\ndx{Leibniz}{1}.
+
+Si el aprendiz encuentra antes un comportamiento infalible, o sea, un
+comportamiento que sólo recibe premios y no recibe castigo alguno, que un
+modelo del universo infalible, es decir, un modelo que acierta todas sus
+predicciones y ninguna falla, entonces es probable que su mejor modelo acabe
+siendo uno que predice que obtendrá premios siempre e independientemente de
+lo que haga; siendo éste el modelo de máximo optimismo.  Que la realidad del
+aprendiz sea la mejor de las posibles, aunque el universo no lo sea, no
+causa mayores trastornos al aprendiz, que seguirá aplicando felizmente el
+comportamiento infalible.
+
+
+\labeled aprendices\title2 Conclusión
+
+Son aprendices todos los autómatas de comportamiento variable que
+disponen de una lógica interna en la que hacen modelos del universo
+exterior y a la que trasladan el problema de la supervivencia.

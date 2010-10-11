@@ -1,0 +1,1221 @@
+% EPA2.TEX (RMCG19950910)
+
+\labeled La resolución\title1 La resoluci^^f3n
+
+\title2 La teoría del problema
+
+Para poder proseguir la resolución del problema aparente que desde un
+principio nos habíamos planteado, se hace necesaria una reflexión más
+detallada sobre la naturaleza del problema.  En concreto, es necesario
+definir qué es un problema, es preciso distinguir la solución de la
+resolución del problema, y es obligado indagar sobre la particularidad que
+caracteriza al problema aparente. De tal estudio se beneficiarán, no
+sólo nuestras futuras investigaciones, sino también las hasta aquí
+realizadas, que adquirirán nuevos aspectos.
+
+
+\labeled El problema*\title2 El  problema
+
+Un \definition{problema} es una condición puesta a cierta libertad, o
+indefinición.  Una \definition{solución} al problema es un determinado
+uso de la libertad que satisface, o cumple, la condición.  Si no hay
+libertad, entonces no hay problema.  Es una \definition{condición} aquello
+que sólo tiene dos posibles resultados, uno de los cuales se denomina
+satisfacción.
+
+La \definition{resolución} del problema es la manera de alcanzar la
+solución.  Es decir, es el proceso que discurre desde el punto en el que
+se tiene el problema, con su condición y su libertad no ejercitada, hasta
+el momento en el que se tiene la solución, o sea, hasta el momento en el
+que se ejerce la libertad y se satisface la condición.
+
+La solución de un problema, y consiguientemente la resolución, no es
+necesariamente única, aunque una solución, y por tanto una
+resolución, es suficiente.
+
+
+\labeled La resolución*\title2 La resolución
+
+\labeled\title3 Las tres maneras
+
+Hay tres maneras de resolver un problema:  conocer una solución, usar el
+procedimiento de tanteo, o trasladar el problema.
+
+Conocer una solución del problema soluciona el problema.  Usar el
+procedimiento de tanteo puede solucionar el problema.  Trasladar el problema
+inventa otro problema para cuya resolución hay tres maneras ({\it da
+capo}, o sea, véase la \S\refsc{Las tres maneras}).
+
+\title3 La solución
+
+Para que la {\em solución} de un problema solucione el problema, es preciso
+conocer la solución, es necesario saber que soluciona ese problema y es
+imprescindible ejercitarla.
+
+\title3 El tanteo
+
+Cuando no se conoce la solución de un problema, pero se conoce un
+conjunto de posibles soluciones, se puede utilizar el procedimiento de
+tanteo, o procedimiento de prueba y error.  El \definition{tanteo} consiste
+en probar cada posible solución.  Si no resultan erróneas todas las
+pruebas, entonces encontramos alguna solución al problema.  De paso,
+posiblemente encontremos varias soluciones casi buenas.
+
+Para que el procedimiento de resolución por tanteo solucione el problema,
+ha de suceder que en el conjunto de posibles soluciones se encuentre alguna
+solución, que la solución se reconozca como solución y, finalmente,
+que la solución se ejercite.
+
+Un tanteador se compone de un conjunto de posibles soluciones y un
+gobernador.  El gobernador determina qué posible solución probar,
+reconoce si es una solución o no y, si lo es, la ejercita.  Si se imponen
+condiciones a la tarea del gobernador, entonces es un problema, al que
+denominamos el \definition{problema de la búsqueda}.  Hay tres maneras de
+resolver un problema (véase la \S\refsc{Las tres maneras}).
+
+\title3 La traslación
+
+La \definition{traslación} es la última de las maneras de resolver un
+problema, y consiste en convertirlo en otro problema.  Llamamos problema
+convertido, o \definition{cuestión}, al problema una vez que ha sido
+trasladado, y llamamos \definition{problema original}, o simplemente
+problema si no da lugar a equívocos, al problema sin trasladar.  A la
+solución del problema convertido la denominamos \definition{respuesta}.
+Para que la conversión del problema sea efectiva, ha de disponerse
+también de la manera de desconvertir la respuesta a la cuestión, por si
+ésta fuere hallada.  A la respuesta desconvertida, o sea, a la solución
+del problema original, la denominamos solución, o \definition{solución
+original}.
+
+El problema convertido puede tener una solución conocida, en cuyo caso la
+desconversión de la respuesta es la solución del problema original.  El
+problema convertido puede no tener una solución conocida, pero puede ser
+conocido un conjunto de posibles soluciones, y en este caso puede ser
+aplicada una resolución por tanteo a la cuestión.  El problema
+convertido puede ser trasladado.
+
+La cuestión puede consistir en varios subproblemas.  Un
+\definition{subproblema} es un problema de los que resultan de la
+traslación de un problema, cuando resultan varios.
+
+Para que sea posible la resolución por traslación de un problema, ha de
+contarse con una lógica que permita, como mínimo, cuatro
+representaciones, a saber, la del problema, la de la cuestión, la de la
+respuesta y la de la solución.  En general interesan lógicas más
+ricas.  Pero en este caso, y supuesto que existen condiciones que
+determinan que unas traslaciones son mejores y otras son peores, la
+determinación de cuál traslación aplicar al problema original es un
+problema al que denominaremos \definition{problema de la traslación}.  Y
+como ya sabemos, hay tres maneras de resolver un problema (véase la
+\S\refsc{Las tres maneras}).
+
+
+\title2 La implementación
+
+La construcción práctica de un artefacto para solucionar un problema es
+una traslación de ese problema.  La construcción impone condiciones
+prácticas que la teoría no tiene.  Consecuentemente, siempre que exista
+cierta libertad de construcción, sucederá que esta traslación del
+dominio teórico al práctico, que denominamos
+\definition{implementación}, planteará algún \definition{problema
+práctico}.  Cuando existe libertad para efectuar la implementación, la
+implementación no es única.  Dicho de otra manera, los problemas prácticos
+no se siguen del problema teórico.
+
+Si la implementación soluciona completamente tanto el problema teórico
+original como los problemas prácticos derivados de la implementación,
+de modo que el artefacto queda completamente definido, o sea, sin libertad
+alguna, entonces el artefacto es la solución y no ha de resolver
+ulteriores problemas.  Si la implementación no soluciona completamente el
+problema original o los problemas prácticos, entonces el artefacto goza
+de cierta libertad a causa de la cual ha de resolver algún problema, por
+lo que lo denominaremos \definition{resolutor}.
+
+
+\labeled\title2 El problema aparente
+
+En un \definition{problema aparente}, o problema definido en apariencias,
+sólo están definidas las posibles maneras de actuar y los posibles
+resultados a obtener como reacción, sobre los que pesa una valoración.
+Una solución de un problema definido en apariencias es un modo de
+actuación que tiene como respuesta reacciones buenas, o sea, bien
+valoradas.
+
+Lo característico del problema aparente es que no puede ser solucionado
+ahora, o {\it a priori}, porque en este caso todo lo que tenemos es la
+posibilidad de actuar y de observar.  Lo interesante es que, en cambio,
+sí es posible resolverlo {\it a priori\/} estableciendo la estrategia de
+actuación a seguir al enfrentarse al problema.
+
+De otro modo: si un problema es aparente, entonces no se puede implementar
+un artefacto que sea una solución del problema, y lo mejor que puede hacerse
+es dotar al artefacto de libertad y dejar que lo resuelva cuando al
+interaccionar se enfrente al problema, o sea, implementar un resolutor.  De
+manera que lo que habíamos calificado hasta aquí como mejores soluciones del
+problema aparente son, bien mirado, mejores resolutores del problema
+aparente.  Y podemos establecer las siguientes correspondencias: el
+mecanismo con la solución conocida, el adaptador con la resolución por
+tanteo y el aprendiz con la traslación del problema.
+
+El adaptador implementa la resolución del problema de la supervivencia
+por el procedimiento de tanteo.  El cuerpo~|B define el conjunto de
+soluciones posibles y el gobernador~|G determina el orden de búsqueda y
+reconoce la solución.  Las características del problema de la
+supervivencia agravan el problema de la búsqueda.  Las pruebas han de ser
+realizadas secuencialmente y, lo que es determinante, realizar alguna de
+las pruebas puede resultar mortal.  También puede ser mortal no realizar,
+en un determinado intervalo de tiempo, alguna de las pruebas.
+
+El aprendiz implementa la resolución del problema de la supervivencia por
+traslación.  El modelador~|M soluciona el problema de la traslación, que
+habíamos llamado problema de la modelación, y traslada el problema, el
+simulador~|S resuelve el problema trasladado y el ejecutor~|E define el
+conjunto de soluciones posibles y desconvierte la solución encontrada por
+el simulador.  Mas el aprendizaje no es una traslación cualquiera, sino
+aquélla que convierte un problema aparente, el problema de la
+supervivencia, en un problema que no es aparente, el problema del aprendiz.
+El problema del aprendiz no es aparente y esto, al hacer innecesaria la
+interacción para resolverlo, le confiere ventaja al aprendiz sobre el
+adaptador.
+
+\label{modelación aparente}
+Pero el aprendizaje se basa en una hipótesis que denominamos esencialismo.
+El \definition{esencialismo} postula que es solución de un problema aparente
+aquélla que lo es de cualquiera de los problemas que somos capaces de
+imaginar cuya apariencia es la del problema aparente. Esto permite la
+sustitución del problema aparente por otro que no es aparente, pero cuya
+apariencia es la del primero.  Aunque la posición esencialista sea la mejor
+que puede adoptarse ante un problema aparente, no es legítima.  Por la
+propia naturaleza del problema aparente, es imposible conocer la apariencia
+no experimentada y, por lo tanto, aunque cierto problema que no es aparente
+se haya mostrado hasta el momento indistinguible del problema aparente, no
+hay modo de asegurar que esto seguirá siendo cierto.  De otra manera: no es
+posible eliminar completamente la apariencia de un problema aparente; en el
+caso del aprendiz, aunque el problema del aprendiz no es aparente, el
+problema de la modelación sí es aparente (véase la \S\refsc{Las
+enfermedades}), ya que para resolverlo es necesaria la interacción.
+
+Nótese que cualquier formalización del problema aparente peca de
+esencialista; a no ser que se recurra a la astucia de declarar
+autoritariamente que tal formalización es lógica, y se defina la
+lógica como la totalidad entera de lo posible.
+
+
+\labeled\title2 Una notación resolutiva
+
+Hay tres maneras de resolver un problema.  Pero la traslación inventa
+otros problemas que han de ser solucionados para que quede solucionado el
+problema original.  Además, determinar qué traslación hacer, cuando
+varias son posibles, es otro problema que aparece al intentar resolver por
+traslación el problema original.  Y el tanteo, si hay requisitos de orden,
+plantea el problema de la búsqueda, o sea, de determinar qué probar.
+
+Esto hace que la resolución de un problema vaya generando otros problemas
+cuya solución es requisito para la solución del problema original.  De otra
+manera: la resolución de un problema puede hacer uso repetidamente de la
+traslación y del tanteo.  Introduciremos una notación para explicar el
+camino seguido al resolver el problema, que por tener su raíz en el problema
+original, y la posibilidad de irse desdoblando en varias ramas cada vez que
+se traslada, denominaremos \definition{árbol de resolución}.
+
+Notamos un problema dado como $\problem$, una solución conocida como
+$\solution$, la resolución por tanteo como $\trial$ y la traslación de
+un problema como $\traslation$.  Si el tanteo genera un problema de
+búsqueda, anotamos $\trial(\search)$.  Si el problema trasladado genera un
+problema de traslación lo anotamos $\traslation(\model)$, si de la
+traslación resultan $n$ subproblemas lo notamos $\traslation^n$, y si
+ambas cosas ocurren entonces la notación es: $\traslation^n(\model)$.
+
+Para notar el árbol de resolución de un problema, comenzamos por el
+problema, su raíz, y vamos escribiendo, de izquierda a derecha, el camino
+seguido hasta alcanzar la solución.  Por ejemplo,
+ $$\problem \resolution \traslation^2
+  \cases{\problem\resolution\trial \cr
+         \problem\resolution\solution \cr}$$
+significa que, para resolver un problema, ha sido primero trasladado, que
+como resultado de la traslación se obtuvieron dos subproblemas, uno al
+que se aplicó el procedimiento de tanteo con éxito, y otro del que se
+conocía la solución.
+
+\label{resoluciones}
+Con esta notación, si el problema $\apparent$ es el problema aparente,
+entonces las resoluciones que ejecutan los resolutores encontrados son:
+ $$\eqalign{
+  \hbox{Mecanismo $|A_0$:}&\quad
+   \apparent \resolution \solution \cr
+  \hbox{Adaptador $|A_1$:}&\quad
+   \apparent \resolution \trial(\search\resolution\solution) \cr
+  \hbox{Aprendiz $|A_2$:}&\quad
+   \apparent\resolution \trial\bigl(\search\resolution
+     \traslation(\model\resolution\solution)
+      \cases{\learn\resolution\solution}
+    \bigr)
+ .\cr}$$
+
+La notación es muy grosera, solamente recoge los rasgos principales de la
+resolución de un problema (véase la \S\refsc{Un planteamiento general}).
+
+\labeled\title2 La evolución resolutiva
+
+El problema de la supervivencia no tiene una solución definitiva, pero hay
+resolutores mejores y resolutores peores.  En una
+\definition{evolución} de resoluciones del problema de la supervivencia,
+cada resolución debe ser mejor que la anterior, aunque ello sea a costa
+de que se cumpla alguna condición.  La evolución resolutiva es una
+manera de solucionar el problema de la supervivencia, paso a paso, y cada
+vez en mayor grado.  Por ejemplo, el mecanismo $|A_0$, el adaptador $|A_1$
+y el aprendiz $|A_2$, siendo $|A_2 \better |A_1 \better |A_0$, constituyen
+tres pasos de una evolución resolutiva que puede tener lugar si se cumple
+la condición de adaptación, la condición de modelación y la
+condición de aprendizaje.
+
+Definimos la lógica externa como aquélla en que representamos el
+problema de la supervivencia y sus soluciones que, por ser un problema
+aparente, no son soluciones definitivas sino, más bien, resolutores.  De
+este modo resulta que los resolutores que hemos encontrado hasta el momento,
+el mecanismo $|A_0$, el adaptador $|A_1$ y el aprendiz $|A_2$, son objetos
+distintos de la lógica externa.  Pero con el aprendiz apareció otra
+lógica, la lógica interna, de tal modo que si en esta lógica pudieran
+representarse problemas, soluciones y resoluciones, entonces podría
+continuarse la evolución resolutiva dentro de la lógica interna.
+
+La parte de la evolución resolutiva que ocurre dentro de la lógica
+interna es invisible en la lógica externa, porque sus distintos pasos se
+corresponden a un único objeto de la lógica externa, al que
+denominaremos conocedor.  Denominaremos \definition{evolución física} a
+aquella parte de la evolución resolutiva que es visible en la lógica
+externa, o sea, aquélla cuyos pasos corresponden a distintos objetos de la
+lógica externa en la que se define el problema, y llamaremos
+\definition{evolución cognitiva} a aquella parte de la evolución que es
+invisible en la lógica externa, o sea, aquélla cuyos pasos corresponden
+a un mismo objeto de la lógica externa.
+
+\title2 Conclusión
+
+Sabemos ahora que el problema de la supervivencia, como cualquier otro
+problema, admite una resolución cuyas tres formas básicas son la
+solución conocida, el tanteo y la traslación, que pueden combinarse en
+árboles de resolución más complejos.  Tenemos, además, los datos
+necesarios para proseguir la evolución resolutiva proponiendo un aprendiz
+mejorado, al que nos referiremos como conocedor.  Ya podemos adelantar que,
+así como el mecanismo, el adaptador y el aprendiz sólo eran capaces de
+una manera de resolver, el conocedor será capaz de más maneras.  Pero
+antes de llegar al conocedor, averiguaremos qué tipo de lógica es capaz
+de representar problemas, soluciones y resoluciones.
+
+
+\labeled\title1 El simbolismo
+
+\title2 La lógica simbólica
+
+La tarea es caracterizar las lógicas capaces de representar problemas,
+soluciones y resoluciones, tanto las básicas, solución conocida, tanteo
+y traslación, como sus combinaciones en árboles de resolución.
+Nótese que un conocedor con esta lógica interna sería capaz de
+resolver de cualquiera de las maneras y, por lo tanto, sería capaz de una
+evolución cognitiva.
+
+Como ya hemos hecho varias veces para llegar hasta aquí, presentaremos un
+tipo de lógica que cubre los requisitos, aunque ello signifique que
+pudiéramos olvidarnos de otras lógicas; en este caso tal vez no existan
+otras. Es decir, veremos que las lógicas simbólicas permiten representar
+problemas, soluciones y resoluciones.
+
+Con el propósito de dar una estructura a la explicación, presentaremos
+primero las lógicas analíticas y después, y sobre la base de
+aquéllas, las lógicas simbólicas.  Ésta es sólo una argucia
+expositiva, ya que una lógica analítica es insuficiente para representar
+problemas, aunque una lógica simbólica es necesariamente analítica.
+
+Por último, y puesto que el interés final es que una lógica simbólica sea la
+lógica interna de un resolutor del problema aparente, o sea, de un objeto de
+la lógica externa, todas estas capacidades que ahora exigimos a la lógica
+interna deben estar desde un principio en la lógica externa.  Resulta, de
+nuevo, que la lógica elegida para circunscribir el problema aparente, siendo
+ajena a éste, repercute decisivamente en el estudio del problema aparente.
+Así que mostraremos que es posible construir una lógica simbólica sobre un
+objeto del álgebra automática, esto es, sobre un autómata finito.
+
+A partir de aquí diremos lógica simbólica, en singular, y pensaremos, sobre
+todo, en el cálculo~$\lambda$, aunque se trata más de un tipo de lógicas que
+de una lógica concreta.
+
+
+\title2 El análisis
+
+\title3 El todo y sus partes
+
+Llamamos \definition{lógica exhaustiva} a aquélla que define sus
+representaciones por la anotación exhaustiva de todas las posibilidades.
+Las lógicas exhaustivas sufren de crecimiento exponencial.  Una buena
+lógica ha de tener otros recursos expresivos que le permitan evitar los
+crecimientos exponenciales.
+
+\goodpage
+
+Por ejemplo, la longitud de las formas de escribir autómatas en el
+álgebra automática crece exponencialmente con el número de variables
+de estado.  Así, el número de bits de la matriz $[|A^*_{pu}]$
+correspondiente a un autómata |A, véase la \S\refsc{forma A star}, es
+$(\no S+\no O).2^{\no S+\no I+\no P}$, de modo que si lo que nos interesa es
+el crecimiento de dicho número en relación al número de variables de
+estado, podemos establecer que crece con la potencia de dos del número de
+variables de estado, $O(2^{\no S})$.  El tamaño en bits de la matriz
+$(|A_{pq})$ del autómata |A, véase la \S\refsc{forma A}, también crece
+exponencialmente con el número de variables de estado, concretamente como
+$O(2^{2\no S})$.
+
+Un recurso útil contra el crecimiento exponencial es \definition{partir}
+el todo.  El \definition{todo} queda entonces descrito como la
+\definition{composición} de sus varias \definition{partes}.
+
+Por ejemplo, en el álgebra automática se cumple:
+ $\no S_{\srl\!|B\!|C} = \st B + \st C$,
+ $\no S_{\prl\!|B\!|C} = \st B + \st C$,
+ $\no S_{\fdb\!|B} = \st B + 1$.
+Esto quiere decir que, una vez definidas las partes |B y |C en el léxico,
+la longitud de las composiciones que se pueden hacer con las partes crece
+linealmente con el número de variables de estado, o sea, como $O(\no S)$.
+
+Así, por ejemplo y en concreto, tomaremos como base el autómata:
+ $$\DEL \eqdef \langle 1, 1, 1, 0;
+   \left(\matrix{1&0&0&0\cr 0&0&1&0\cr
+                 0&1&0&0\cr 0&0&0&1\cr}\right)\rangle,$$
+cuya matriz $(|A_{pq})$ ocupa, como podemos ver, 16 bits, y escribiremos de
+varias maneras el autómata
+ $$\DEL^{1024} \eqdef \srl^{1024}\DEL.$$
+La expresión anterior es sumamente compacta pero, aun sin usar la
+abreviatura que permite condensar la escritura de una reiteración de
+composiciones en serie, podríamos escribir
+ $$\DEL^{1024} =
+ \underbrace{\srl\cdots\srl}_{1023}
+ \underbrace{\vphantom{\srl} \DEL\ldots\DEL}_{1024}\,,$$
+que usa 2047 símbolos.  Estos símbolos no son bits, pero si el
+autómata \DEL\ formase parte de un léxico de $2^8 - 3$, o menos,
+autómatas, asignando un código a cada uno de éstos y un código a
+cada una de las tres composiciones, podríamos utilizar una codificación
+a 8 bits por símbolo, por lo que la longitud de la expresión sería
+menor que $2^{14}$ bits.  Con léxicos mayores crecería algo esta
+longitud, pero nada en comparación al tamaño que tendría la matriz
+$[|A^*_{pu}]$ de $\DEL^{1024}$, exactamente $1025.2^{1025} > 2^{1035}$
+bits, que es una cantidad difícil de imaginar, aunque mucho menor que
+$2^{2050}$ que es el tamaño en bits de la matriz $(|A_{pq})$ de
+$\DEL^{1024}$.
+
+Este ejercicio muestra la utilidad de hacer partes para evitar el
+crecimiento desmesurado de la complejidad.
+
+\labeled\title3 La partición
+
+Si las partes del todo son de la misma naturaleza que el todo, entonces la
+composición de cada una de las partes del todo puede hacerse de la misma
+manera que la composición del todo en sus partes.  Esto permite la
+composición reiterada del todo en sus partes, de una parte del todo en sus
+partes, de una parte de las partes del todo en sus partes, y así hasta
+donde sea de interés.  Y esto utilizando un único método de
+composición. Llamamos \definition{partición} a esta composición
+reiterada. Si, por el contrario, la parte es de diferente naturaleza que el
+todo, entonces necesita un método de composición diferente.  Esto
+complica la composición reiterada.
+
+A una lógica, o modo de representación, que permite la partición la
+denominamos \definition{lógica particular}.  El álgebra automática es
+una lógica particular.
+
+\title3 La lógica analítica
+
+En una lógica particular llamamos \definition{léxico} al catálogo de
+partes susceptibles de ser compuestas en la definición de un todo.
+Decimos que un determinado léxico permite el \definition{análisis} de
+una determinada representación si la representación es equivalente a
+alguna composición de las partes incluidas en el léxico.  Si un
+léxico hace que cualquier representación de la lógica particular
+pueda ser analizada, entonces decimos que esa lógica con ese léxico
+constituye una \definition{lógica analítica}, y al léxico lo
+denominamos \definition{base}.  Disponer de una lógica analítica
+asegura que cualquier representación puede ser partida.  La analiticidad,
+así definida, es una propiedad de la lógica, siendo independiente del
+uso que se hace de la lógica.
+
+Por ejemplo, sabemos que los autómatas del conjunto
+ $${\rm Minimum} = \{ \, \SINK, \FORK, \PROB, \NAND \,\}$$
+son una base del álgebra automática (véase la
+\S\refsc{La construcción}).  Esto significa que el álgebra automática
+con el léxico Minimum constituye una lógica analítica.
+
+\title3 El nombre
+
+Un \definition{nombre} es una etiqueta o manera de referirnos a una cosa.
+Para notar la asignación de un nombre a una cosa utilizaremos el signo
+$\eqdef$.  Así, anotando
+ $$\NAND \eqdef \langle 2, 1, 0, 0; \left(
+ \matrix{0&1\cr 1&0\cr 1&0\cr 1&0\cr} \right) \rangle,$$
+podemos utilizar el nombre \NAND\ para referirnos abreviadamente al
+autómata que figura a la derecha de $\eqdef$.  Habitualmente relajaremos
+el discurso y diremos que \NAND\ es un autómata, sin aclarar que, en
+rigor, \NAND\ sólo es el nombre del autómata.
+
+La partición, o composición reiterada, de las lógicas analíticas
+permite hacer definiciones a partir de otras definiciones.  Esto hace
+especialmente útil la utilización de los nombres y hace natural el uso
+de expresiones.  De momento, definimos la expresión como una
+composición en la que pueden utilizarse nombres.
+
+Así, en el álgebra automática, podemos definir un autómata como la
+composición $\srl\FORK\NAND$ de elementos del léxico Minimum.  Pero además,
+y merced a la posibilidad que tienen las lógicas analíticas, por ser
+particulares, de hacer particiones, podemos componer estas composiciones y
+aún serán de la misma naturaleza que los elementos del léxico de partida. Es
+decir, que siguiendo con el ejemplo del álgebra automática, la expresión
+lícita
+ $$\srl\srl\FORK\NAND\srl\FORK\NAND$$
+también es un autómata.  Cuando una determinada expresión, como
+$\srl\FORK\NAND$, se muestra útil en la definición de expresiones mayores,
+es interesante, porque abrevia, darle un nombre a esa expresión. En este
+caso, si le damos el nombre \NOT\ a la expresión corta, lo anotaremos como
+ $$\NOT \eqdef \srl\FORK\NAND,$$
+y la expresión larga queda abreviada a $\srl\NOT\NOT$.  También la
+expresión larga y la abreviada pueden ser nombradas, y en este caso, si
+somos lo sufientemente perspicaces, podemos darles el mismo nombre ya que,
+en definitiva, ambas expresiones designan al mismo autómata, de modo que
+anotaremos
+ $$\ID \eqdef \srl\NOT\NOT = \srl\srl\FORK\NAND\srl\FORK\NAND.$$
+Queda claro que el sistema de nombres puede crecer hasta alcanzar tamaños
+en los cuales resulta difícil percatarse de que dos expresiones designan
+la misma cosa, pero cuando sí nos percatamos, el signo $=$ denota que una
+expresión puede alcanzarse desde la otra haciendo las debidas
+sustituciones de los nombres por las expresiones que designan.
+
+
+\title2 La semántica y la sintaxis
+
+Finalizada la revisión de la lógica analítica, nos centraremos en la lógica
+simbólica.  Los conceptos que debe representar una lógica simbólica son:  el
+problema, la solución y la resolución.  En la representación de resoluciones
+hay dos aspectos, la representación de las maneras básicas de resolver un
+problema y la representación del árbol de resolución.  Pero antes de
+estudiar cómo puede expresarse cada uno de estos conceptos en una lógica
+simbólica, es mejor definirla.
+
+Llamamos \definition{lógica simbólica} o \definition{simbolismo} a una
+lógica que trabaja a dos niveles distintos, uno semántico y otro
+sintáctico.  La \definition{sintaxis} es el dominio de las expresiones.
+Una \definition{expresión} ha de ser traducida a la semántica para que
+tenga significado.  La \definition{semántica} es el núcleo de la
+lógica simbólica o simbolismo y ha de ser, en sí misma, una lógica
+completa.
+
+Por ejemplo, en el caso de los nombres de las lógicas analíticas, la
+traducción es la mera sustitución del nombre por el objeto semántico
+que designa.  Un simbolismo, pues, generaliza el uso de los nombres y
+facilita la definición de nuevos tipos de objetos sobre la base de los
+objetos fundamentales o semánticos.  Por ejemplo, un conjunto pasa a ser
+cierto tipo de expresión que se traduce en varios objetos semánticos.
+
+\title2 El problema
+
+Puesto que un problema es una representación con cierta libertad y cierta
+condición, la lógica simbólica ha de ser capaz de expresar la
+libertad y la condición.
+
+\title3 La libertad
+
+En una lógica analítica, la \definition{libertad} puede representarse
+dejando sin definir algunas partes.  Denominamos \definition{función} a
+la expresión abierta, o sea, a aquella expresión que incluye nombres
+que no se refieren a objeto semántico alguno.  A un nombre que no se
+refiere a objeto semántico alguno se le denomina \definition{variable
+libre}, y si forma parte de una expresión abierta condicional, o sea, si
+forma parte de un problema, entonces se le denomina
+\definition{incógnita}.
+
+Por ejemplo, la expresión aritmética $\lambda_x 2x$ representa la
+función `doble de', donde $x$ es la variable libre.
+
+Las expresiones abiertas también pueden recibir un nombre.  Así,
+siguiendo con el ejemplo, $f \eqdef \lambda_x 2x$ denota que hemos asignado
+el nombre $f$ a la función `doble de'.  Esto también se nota
+ $f(x) \eqdef 2x$.
+
+Ni la expresión abierta ni su nombre se corresponden con objeto
+semántico alguno, ya que algunas de sus partes (las designadas por las
+variables libres) están indefinidas.  La función completamente
+asignada, o sea, una vez que se asigna un objeto semántico a cada una de
+las variables libres de la función, sí se corresponderá con algún
+objeto semántico.
+
+\title3 La condición
+
+Una condición sólo tiene dos posibles resultados, uno de los cuales se
+denomina satisfacción.  El cumplimiento o no de una determinada
+relación entre dos objetos es, por ejemplo, una condición.  Así, en
+el álgebra automática la indistinguibilidad de dos autómatas puede
+usarse como condición.  Lo mismo puede decirse de la igualdad de
+autómatas.
+
+La combinación de condiciones se hace según las prescripciones del
+álgebra de \person{Boole}.  En general, se usan tres operaciones:
+conjunción ($\land$), disyunción ($\lor$) y negación ($\lnot$),
+aunque la negación conjunta ($\lnor$) sola, o la negación alternativa
+($\lnand$) sola, serían suficientes.
+
+\title3 El problema
+
+Ya podemos representar problemas.  Así
+ $x? 2x = 8$, o simplemente
+ $2x = 8$, denota el problema aritmético consistente en hallar un número cuyo
+doble sea ocho.  Como sabemos, la resolución de este problema puede
+hacerse mediante una traslación consistente en dividir ambos miembros de
+la ecuación entre dos,
+ $$(x? 2x = 8) \implies (x? x = 4),$$ ya que el problema resultante,
+ $x = 4$, es de solución conocida, a saber, cuatro.
+En este ejemplo, se puede decir que la expresión condicionada $2x = 8$, o
+el problema así notado, es una forma perifrástica de referirse a sus
+soluciones, en este caso al número cuatro.
+
+\title2 La solución
+
+La solución, en una lógica, es el objeto formal perfectamente definido
+que cumple las condiciones propuestas por el problema.  Cualquier lógica
+debe ser capaz de definir perfectamente sus objetos porque una lógica
+incapaz de tratar sus objetos bien definidos parece un contrasentido.  Que
+el razonamiento anterior sea circular, sólo demuestra que el concepto de
+solución es consustancial al de lógica.
+
+Soluciones ya las representaban el adaptador y el aprendiz, y hasta el
+mecanismo era una solución.
+
+Así como las expresiones abiertas no correspondían a objeto semántico
+alguno, las soluciones sí han de corresponder a algún objeto
+semántico, pues de lo contrario el simbolismo sería inútil.  Pero
+como no todos los problemas tienen solución, ocurre que hay expresiones
+abiertas condicionadas que no describen objeto semántico alguno, siendo
+éste uno de los orígenes de las paradojas.
+
+\title2 El tanteo
+
+En el tanteo lo importante es definir el conjunto de posibles soluciones,
+por lo que es necesario que la lógica simbólica represente
+\definition{conjunto}s, o listas de soluciones.
+
+El cuerpo de un adaptador representa un conjunto de posibles soluciones y,
+como hemos visto en el álgebra automática merced al concepto de
+ampliación, un conjunto de autómatas puede seguir siendo un autómata.
+Luego, en este caso, las dos clases de cosas son una misma cosa.
+
+Pero ahora, disponiendo de un simbolismo, podemos permitirnos una notación
+más general de los conjuntos.  En concreto, la expresión
+ $$\{\, \SINK, \FORK, \PROB, \NAND \,\}$$
+representa al conjunto formado por los cuatro autómatas cuyos nombres
+aparecen en la expresión.  Nótese que un simbolismo de esta guisa permite
+definir conjuntos de autómatas de modo más general que
+\Syntax(x,\no n,|A), ya que con éste último todos los autómatas del
+conjunto deben tener el mismo número de variables.
+
+\label{abstracción}
+Cuando un problema tiene varias soluciones, entonces puede utilizarse el
+problema para referirse en perífrasis al conjunto de sus soluciones. Esta
+forma de definir conjuntos por las propiedades que caracterizan a sus
+elementos, se denomina \definition{abstracción}.
+
+\goodpage
+
+La abstracción permite definir recursivamente conjuntos infinitos. Por
+ejemplo, el conjunto de los números naturales puede expresarse así:
+ $${\N} \eqdef \{ x? (x = 0) \lor (\exists y \in {\N}:  x = y + 1)\}.$$
+Los conjuntos infinitos plantean algunas dificultades, ya que si bien cada
+uno de sus elementos puede referirse a un objeto semántico, el conjunto
+completo no puede, en ningún caso, tener una correspondencia semántica.
+
+\title2 La traslación
+
+La traslación de problemas supone, en una lógica simbólica, la
+transformación de expresiones abiertas y condicionadas.  Puesto que un
+problema no se corresponde con objeto semántico alguno, la traslación
+de problemas tampoco puede corresponderse con objeto semántico alguno.
+
+Al aplicar una determinada transformación a una expresión~$\xi_1$
+resultará otra expresión~$\xi_1'$, proceso que puede representarse como
+un par ordenado de expresiones, $(\xi_1,\xi_1')$.  La misma
+transformación aplicada a otra expresión~$\xi_2$ resultará en otra
+expresión~$\xi_2'$, por lo que este otro proceso se representará con un
+par ordenado diferente, $(\xi_2,\xi_2')$.  Nos interesa representar, no
+sólo la aplicación de una transformación a una determinada
+expresión, sino la transformación misma.  Llamamos
+\definition{algoritmo} a la representación de una transformación
+sintáctica de expresiones.
+
+A la hora de representar transformaciones sintácticas de expresiones nos
+caben dos posibilidades:  o bien representamos las transformaciones
+sintácticas en otra lógica que denominaremos metasintaxis, o bien
+representamos las transformaciones sintácticas en la misma
+\index{sintaxis recursiva}{\em sintaxis} que entonces calificamos de {\em
+recursiva}. Como ocurría con las particiones (véase la \S\refsc{La
+partición}), el primero de los caminos complica la traslación reiterada, y
+nótese que el problema trasladado puede resolverse por traslación, por lo
+que el segundo es preferible.  Es decir, de ahora en adelante sólo
+consideraremos el caso en el que los algoritmos son expresiones sintácticas
+y no metasintácticas. El calificativo de recursiva se explica porque, en su
+caso, una transformación puede aplicarse, también, a la expresión que se
+refiere a esa misma transformación.
+
+Nos interesa disponer de un \definition{evaluador} de expresiones que
+convierta un algoritmo en la transformación de expresiones que
+representa.  Nótese que un evaluador $\Theta$ tomará un algoritmo
+$\xi_{\traslation}$, que es la expresión que representa una determinada
+transformación $\traslation$ de expresiones, y una expresión $\xi$, y
+devolverá aquella expresión $\xi'$ que resultaría de aplicar la
+transformación $\traslation$ a la expresión $\xi$.
+ $$\Theta(\xi_{\traslation},\xi) = \traslation(\xi) = \xi'.$$
+
+Ya vimos al comienzo de esta sección que los simbolismos que nos
+interesan deben ser capaces de representar pares ordenados de expresiones
+como expresiones, por lo que resulta que lo que hace el evaluador $\Theta$
+es, simplemente, una transformación de expresiones.  De modo que en toda
+sintaxis recursiva existe un \definition{algoritmo universal} capaz de
+cualquier transformación; lo notaremos $\xi_{\Theta}$ porque es la
+expresión que representa a la transformación efectuada por el
+evaluador.
+
+En resumen, la necesidad de poder realizar transformaciones reiteradamente
+con un único aparato lógico fuerza a la utilización de simbolismos
+recursivos con algoritmos universales.
+
+\labeled\title3 Una digresión paradójica
+
+Llamamos \definition{paradoja} a cierta expresión que no teniendo
+referente semántico, se confunde con otras que sí lo tienen.
+
+Tratando de la representación simbólica de la resolución por
+solución conocida encontramos un tipo de paradoja, la
+\definition{paradoja de la solución}, que ocurre cuando nos referimos
+perifrásticamente a la solución de un problema sin solución.  Un
+ejemplo de este tipo es ``el cuadrado redondo''.  Cualquier lógica capaz
+de representar problemas puede sufrir paradojas de la solución.
+
+Al tratar de la representación simbólica de la resolución por tanteo
+encontramos otro tipo de paradoja, la \definition{paradoja del tanteo}, que
+ocurre cuando nos referimos al conjunto de todas las soluciones, y tal
+conjunto no termina nunca de construirse.  Valen, como ejemplos de este
+tipo, todos los conjuntos infinitos.
+
+Con la traslación aparecen las paradojas más engañosas.  En los simbolismos
+recursivos pueden construirse expresiones cuya interpretación semántica
+resulta imposible, porque se enreda en una secuencia inacabable de
+transformaciones.  Llamaremos \definition{paradoja de la traslación} a una
+paradoja de este tipo.  La característica de las paradojas simples de este
+tipo es que hacen referencia a su propia interpretación, de la que es
+ejemplo prototípico la sentencia ``esta frase es falsa''.
+
+Las paradojas más peligrosas, las del tanteo y de la traslación, ya que las
+paradojas de la solución son más fáciles de eliminar, tienen una relación
+con el infinito.  Una manera de evitar estas paradojas es incluir una
+\definition{condición de parada} que sea seguro que terminará por cumplirse.
+Aunque sea de poco consuelo, la muerte despeja cualquier paradoja pendiente.
+
+Ejemplos: la paradoja del cretense \person{Epiménides}, ``todos los
+cretenses son unos mentirosos''; la función Lisp, en dialecto
+Scheme\cite{Abelson1985}, {\tttext (define (paradox) (not (paradox)))}; el
+conjunto paradójico de \person{Russell}, $R = \{ x? x \notin x \}$. Hasta
+las paradojas de \person{Zenón} sobre el movimiento se basan en
+razonamientos que no llegan a concluir.
+
+Como muestra, por ejemplo, la paradoja {\tttext (define (paradox) (not
+(paradox)))}, la condición para que una lógica pueda sufrir paradojas de la
+traslación coincide con la condición para que una lógica se denomine
+recursiva, a saber, que los algoritmos sean expresiones sintácticas.  De
+este modo se puede definir un algoritmo como una expresión sintáctica en la
+que aparecen otros algoritmos, y si alguno de estos algoritmos hace
+referencias recursivas sin que se disponga de una condición de parada que
+detenga el proceso, entonces resultará que la traslación descrita por el
+algoritmo no podrá abandonar nunca la sintaxis.
+
+\title3 Una digresión formal
+
+La formalización de las matemáticas puede verse en los siguientes
+términos de la teoría aquí presentada.  La semántica son las
+matemáticas mismas.  Las expresiones que formalizan las matemáticas son
+interpretadas como verdaderas o como falsas.  Sólo interesan las
+transformaciones que conservan la verdad, o sea, aquéllas que transforman
+una expresión verdadera en otra expresión verdadera; a estas
+transformaciones se les denomina reglas de inferencia.  El objetivo de la
+formalización es proporcionar un número finito de reglas de inferencia y
+un número finito de expresiones verdaderas por definición, los axiomas,
+que sea capaz de generar, por aplicación reiterada de las reglas de
+inferencia, todas aquellas expresiones cuya interpretación sea verdadera y
+ninguna cuya interpretación sea falsa.
+
+El punto crucial para que un formalismo así definido pueda sufrir
+paradojas de la traslación, es que las reglas de inferencia también
+puedan ser expresadas sintácticamente.  Si las reglas de inferencia se
+pueden formalizar en el propio formalismo, entonces estamos en el caso de
+los simbolismos recursivos, y el formalismo puede sufrir paradojas.
+
+\person{G\"odel}\cite{G\"odel1931} mostró que el formalismo necesario
+para formalizar la aritmética tiene una expresividad que es suficiente para
+formalizar su propio aparato de inferir.  Como consecuencia tal {\em
+formalismo} es propenso a las paradojas.  En concreto la expresión cuya
+traducción al castellano es ``esta expresión no es inferible'' es una
+paradoja que puede ser expresada en el formalismo de la aritmética.  Suele
+afirmarse que la paradoja de \person{G\"odel} es verdadera porque,
+efectivamente, no puede ser inferida en el formalismo que describe la
+aritmética.  Sin embargo, debe tenerse en cuenta que tal verdad no es una
+verdad que interese a la aritmética, sino a la formalización de la
+aritmética.
+
+\labeled\title3 Una digresión final
+
+Para la teoría del problema, una paradoja de la traslación equivale a
+una resolución infinitamente larga y, por consiguiente, infinitamente
+mala.  Como quiera que también las resoluciones muy malas, y aun las
+malas, deben ser evitadas, resulta que la condición de parada que debe
+evitar las resoluciones muy largas también evitará las infinitamente
+largas.  Además, los algoritmos sintácticos son de una extraordinaria
+potencia, y los simbolismos recursivos que los soportan son relativamente
+económicos, de manera que las paradojas que sufren son fácilmente
+toleradas.
+
+
+\title2 El árbol
+
+Un árbol tiene nodos y ramas.  Todo árbol tiene un nodo y sólo uno,
+llamado raíz, que no es rama de ningún otro nodo.  Cada nodo tiene un
+determinado número de ramas; si tiene cero ramas el nodo se denomina hoja.
+Cada rama es un árbol.
+
+El árbol es una expresión recursiva, y por lo tanto los algoritmos más
+indicados para su tratamiento son los algoritmos recursivos.  Ya sabemos que
+los algoritmos recursivos son necesarios en nuestro simbolismo, y como en
+esos simbolismos los algoritmos son ya expresiones sintácticas, resulta
+que la necesidad de admitir expresiones recursivas para representar los
+árboles de resolución no supone requisito adicional alguno.
+
+\goodpage
+
+\labeled\title2 El dominio de la sintaxis
+
+Una vez vistos todos los conceptos que debe ser capaz de representar la
+lógica interna del conocedor, estamos en disposición de determinar
+cuál será el dominio de la semántica y cuál el dominio de la
+sintaxis de nuestro simbolismo.
+
+La solución ha de ser un objeto semántico y el problema ha de ser un
+objeto sintáctico.  El tanteo podría ser semántico, aunque
+sintácticamente se obtiene una mayor flexibilidad y la abstracción,
+potente herramienta para definir conjuntos, sólo es posible
+sintácticamente.  La traslación, y sobre todo la traslación
+reiterada, es un concepto sintáctico y recursivo.  Los árboles son
+también expresiones recursivas, y por lo tanto sintácticas.  Así que
+toda la resolución es un proceso sintáctico, aunque toda solución, o
+posible solución, encontrada haya de ser interpretada semánticamente.
+
+En resumen, sólo la solución se queda en la semántica, siendo tanto
+el problema como su resolución conceptos sintácticos.
+
+\title2 El motor sintáctico
+
+En los simbolismos interesantes la sintaxis es enormemente versátil, puede
+llegar a ocupar la mayor parte de los recursos de computación de todo el
+simbolismo y puede alcanzar una notable autonomía.  Tanta es la autonomía de
+las sintaxis, que se pueden construir artefactos que la implementen.  De
+hecho la posibilidad de separar la sintaxis de la semántica hace posible el
+lenguaje.  Por ejemplo, un libro recoge la sintaxis correspondiente a
+ciertos significados.  Incluso se puede construir un artefacto que
+implemente una sintaxis recursiva, como la computadora.
+
+\label{calculadora}
+No obstante la sintaxis, en sí misma, carece de significado.  Por esto un
+libro escrito en un idioma, o lenguaje, desconocido no comunica y no se
+puede decir que una calculadora sepa sumar, aunque sea cierto que si
+apretamos la tecla a la que damos el significado `dos' (`2'), después la
+tecla a la que damos el significado de `suma' (`$+$'), otra vez la tecla
+correspondiente al `dos' (`2') y finalmente la tecla que interpretamos como
+`evaluación' (`$=$'), resulte que en la pantalla se enciendan una serie de
+puntos luminosos que interpretamos como `cuatro' (`4').
+
+Llamamos \definition{motor}, o motor sintáctico, al artefacto que implementa
+una sintaxis recursiva.
+ \vadjust{\goodpage}%
+ Una computadora es un motor sintáctico.
+\person{McCulloch} y \person{Pitts}\cite{McCulloch1943} mostraron que es
+posible construir un motor sintáctico con neuronas.
+
+
+\title2 La simbolización
+
+El álgebra automática es una lógica simbólica, y por eso podemos
+utilizarla para plantear el problema aparente.  En este caso, los objetos
+semánticos de la lógica externa son los autómatas finitos, ya que las
+soluciones han de ser autómatas finitos.  Si pretendemos que el conocedor
+simbólico sea una solución del problema de la supervivencia, entonces
+ha de ser tanto un objeto semántico como un motor sintáctico.  Nos
+falta, por lo tanto, averiguar si un autómata finito puede ser un motor
+sintáctico.
+
+Afortunadamente, esta cuestión ya ha sido contestada afirmativamente de
+varios modos, por lo que sólo citaremos algunos ejemplos significativos. Fue
+\person{Turing}\cite{Turing1937} el primero en explicar cómo construir un
+simbolismo, y lo hizo, precisamente, sobre autómatas finitos en su
+investigación sobre los números computables. Fue el mismo \person{Turing}
+quien mostró la equivalencia entre su simbolismo y el cálculo~$\lambda$ de
+\person{Church}\cite{Church1936}.  Las computadoras son otra prueba evidente
+de que es posible construir simbolismos sobre autómatas síncronos, finitos,
+binarios y determinísticos.
+
+El primer simbolismo recursivo descubierto, por
+ {\def\section{5.9}\person{G\"odel}}, % trampa por fallo texsort pg 100<99
+fue la aritmética formalizada, pero al estar este simbolismo construido
+sobre una semántica que es inaccesible, la aritmética, resulta que fue
+\person{Turing} el primero en explicar cómo construir un simbolismo.
+
+\title2 Conclusión
+
+La lógica simbólica, con su sintaxis y su semántica, puede
+representar problemas, soluciones y resoluciones.  Con la lógica
+simbólica aparecen los dos tipos de problemas:  los problemas aparentes o
+semánticos, y los problemas simbólicos o sintácticos.  Cuando el
+problema sintáctico pierde toda relación con el problema semántico,
+aparecen las paradojas.
+
+
+\labeled\title1 El conocedor
+
+\title2 Replanteamiento
+
+El estudio de la resolución, \S\refsc{La resolución}, nos proporciona
+información suficiente para proseguir la evolución resolutiva del
+problema aparente que nos había llevado hasta el aprendiz.  Sabemos que el
+aprendiz acomete un determinado modo de resolución, el adaptador otro
+diferente, y el mecanismo un tercero (véase la \S\refsc{resoluciones}).  Y
+sabemos que hay muchas otras maneras de resolver, por lo que el conocedor
+será más versátil que los aprendices, los adaptadores y los
+mecanismos, si es capaz de los modos de resolución de éstos y, además,
+de otros. También sabemos, \S\refsc{El simbolismo}, que si la lógica
+interna del conocedor es simbólica, entonces este \definition{conocedor
+simbólico} es capaz, en principio, de cualquier modo de resolución.
+
+\title2 Las dos partes
+
+Siendo el \definition{conocedor} un autómata capaz de varias resoluciones,
+cabe estructurarlo en dos partes:  aquélla, a la que llamaremos
+\definition{ánima}, que determina cuál de las posibles resoluciones
+ejecutar y aquélla otra, a la que denominaremos \definition{mente}, que
+resuelve, es decir, que busca la solución a la manera determinada por el
+ánima.
+
+Lo que el adaptador era con respecto a las soluciones, lo es el conocedor
+con respecto a las resoluciones.
+
+\labeled\title3 El ánima
+
+La tarea del ánima es determinar qué posible resolución ejecutar de
+las varias que la mente hace posibles.  Como esta tarea es un problema, la
+denominaremos el \definition{problema de la resolución}.  Podemos
+clasificar por su origen los datos con los que cuenta el ánima para
+resolver el problema de la resolución, como sigue.  A la apariencia del
+problema de la supervivencia la denominaremos \definition{percepción}.  A
+su propio estado, estado de ánimo, lo denominaremos
+\definition{emoción}.  Por último, a la información proviniente de
+resto del conocedor la llamaremos \definition{propiocepción}.
+
+\title3 La mente
+
+La mente debe ser capaz de buscar soluciones de varias maneras.  Sabemos
+que si el conocedor dispone de una lógica interna simbólica, entonces
+esta mente simbólica es capaz de cualquier resolución.
+
+\title2 Definición
+
+Para mejorar al aprendiz, al adaptador y al mecanismo, no hace falta que el
+conocedor sea capaz de cualquier resolución.  Bastan dos condiciones:
+ la \definition{condición de resolución}, esto es, que
+la mente del conocedor sea capaz de resolver, al menos, como el aprendiz,
+como el adaptador y como el mecanismo (véase la \S\refsc{resoluciones});
+ y la \definition{condición de conocimiento}, es decir, que
+el ánima del conocedor decida resolver como el aprendiz cuando se enfrente
+a un universo~|U en el cual sobreviviría el aprendiz, o como el adaptador
+frente a un universo que el adaptador solucionaría, o como el mecanismo en
+un universo en el que sobreviviría el mecanismo. Si se cumplen estas dos
+condiciones, entonces el conocedor~$|A_3$ mejora al aprendiz~$|A_2$, al
+adaptador~$|A_1$ y al mecanismo~$|A_0$:
+ $|A_3 \better |A_2 \better |A_1 \better |A_0$.
+
+Si la mente es simbólica entonces el conocedor cumple sobradamente la
+condición de resolución.
+
+\title2 El conocedor simple
+
+Un conocedor fácilmente implementable puede servir como ejemplo de los
+conceptos definidos.  Lo llamaremos \definition{conocedor simple}.
+
+Sólo es capaz de un número finito de resoluciones, de modo que no se trata
+necesariamente de un conocedor simbólico.  En concreto, su mente dispone de
+cuatro módulos:  i) un modelador para poder trasladar el problema de la
+supervivencia como un aprendiz, ii) un simulador para resolver el problema
+del aprendiz si es preciso, iii) un gobernador homeostático capaz de
+requerir aleatoriamente un comportamiento y iv) un cuerpo capaz de ejecutar
+varios comportamientos o soluciones a requerimiento, según lo decida el
+ánima, o bien del simulador o bien del gobernador.  Además, la mente es tal
+que el funcionamiento de estos módulos puede inhibirse a petición del ánima.
+Por último, la conexión de estos módulos sigue las pautas del aprendiz y el
+adaptador, pero también está mediatizada por el ánima, que determina cuándo
+debe, y cuándo no debe, fluir la información entre ellos.
+
+\goodpage
+
+El funcionamiento del ánima se basa en un \definition{mapa de resolución}, o
+\definition{mapa de emociones}, con dos ejes perpendiculares. Un eje marca
+la bondad de la modelación y el otro la bondad del comportamiento.
+% Figura:  El mapa de resolución.
+ \MTbeginfigure(260,150);
+ \MT: pickup thick_pen;
+ \MT: y1t = h; x1l = 0;
+ \MTlabel(1)"\strut Comportamiento";
+ \MT: y2b = 0; x2 = w;
+ \MTlabel(2)"\strut Modelación";
+ \MT: z3 = (x1,y2t+1jot);
+ \MT: z4o = z3 - (1jot,0); z4d = (x2,y4o);
+ \MT: z5o = z3 - (0,1jot); z5d = (x5o,y1b);
+ \MT: arrow(4o,4d); arrow(5o,5d);
+ \MT: pickup thin_pen;
+ \MT: z7 = z5d - (0,1pc);
+ \MT: z8 = (x2l-1pc,y3);
+ \MT: z9 = (x8,y7);
+ \MT: draw z7 .. z9; draw z8 .. z9;
+ \MT: z10 = 0.2[z3,z7]; z11 = 0.8[z3,z7];
+ \MT: z12 = 0.3[z3,z8]; z13 = 0.7[z3,z8];
+ \MT: draw z10 .. (x8,y10); draw z11 .. (x8,y11);
+ \MT: draw (x12,y10) .. (x12,y11); draw (x13,y10) .. (x13,y11);
+ \MT: z14 = 1/2[z8,z10];
+ \MTlabel(14)"Adaptador";
+ \MT: z15 = 1/2[z9,z11];
+ \MTlabel(15)"Mecanismo";
+ \MT: z16 = 1/2[z10,(x12,y11)];
+ \MTlabel(16)"\vbox{\halign{\hfil#\hfil\cr
+    Modelador\cr +\cr Adaptador\cr}}";
+ \MT: z17 = 1/2[(x12,y10),(x13,y11)];
+ \MTlabel(17)"Aprendiz";
+ \MT: z18 = 1/2[(x13,y10),(x8,y11)];
+ \MTlabel(18)"\vbox{\halign{\hfil#\hfil\cr
+    Simulador\cr +\cr Cuerpo\cr}}";
+ \MT: pickup med_pen;
+ \MT: x3lbl.r = x3 - 1jot; y3lbl.t = y3 - 1jot;
+ \MTlabel(3lbl)"0";
+ \MT: x7lbl.r = x7 - 1jot; y7lbl = y7;
+ \MTlabel(7lbl)"1";
+ \MT: y8lbl.t = y8 - 1jot; x8lbl = x8;
+ \MTlabel(8lbl)"1";
+ \MT: x10lbl.r = x10 - 1jot; y10lbl = y10;
+ \MTlabel(10lbl)"$\theta_{\rm mod}$";
+ \MT: x11lbl.r = x11 - 1jot; y11lbl = y11;
+ \MTlabel(11lbl)"$\theta_{\rm mec}$";
+ \MT: y12lbl.t = y12 - 1jot; x12lbl = x12;
+ \MTlabel(12lbl)"$\theta_{\rm int}$";
+ \MT: y13lbl.t = y13 - 1jot; x13lbl = x13;
+ \MTlabel(13lbl)"$\theta_{\rm rea}$";
+\MTendfigureX"Mapa de\cr resolución";
+
+\bulletedpar \label{mecanización} Si la valoración obtenida por el
+comportamiento aplicado está por encima de un determinado umbral, que
+denominaremos \definition{umbral de mecanización} ($\theta_{\rm mec}$),
+entonces el ánima considera felizmente solucionado el problema de la
+supervivencia e inhibe todos los módulos de la mente excepto el cuerpo,
+que ejecuta mecánicamente el comportamiento.
+
+\bulletedpar Pero, si la valoración obtenida por el comportamiento
+aplicado no alcanza otro \definition{umbral de modelación}
+ ($\theta_{\rm mod}$), menor que el umbral de mecanización, entonces el
+ánima inhibe tanto al modelador como al simulador y deja que el conocedor
+funcione como un adaptador homeostático.
+
+\bulletedpar Si la valoración obtenida por el comportamiento supera el
+umbral de modelación pero no alcanza el umbral de mecanización,
+entonces la actuación del ánima depende de la bondad del mejor modelo
+encontrado hasta el momento, o sea, de la bondad de la realidad.
+
+\subbulletedpar Si el acierto de las predicciones de la realidad está por
+encima de cierto umbral, que denominaremos \definition{umbral de la
+realidad} ($\theta_{\rm rea}$), entonces inhibirá el funcionamiento del
+modelador y del gobernador, y hará que el simulador trabaje sobre la
+realidad y suministre el comportamiento al cuerpo.
+
+\goodpage
+
+\subbulletedpar Pero, si el acierto de las predicciones del mejor modelo
+está por debajo de otro umbral, el \definition{umbral de inteligibilidad}
+($\theta_{\rm int}$), menor que el umbral de la realidad, entonces inhibirá
+al simulador, no al modelador, y hará que el gobernador homeostático rija el
+cuerpo.
+
+\subbulletedpar Por último, si el acierto de las predicciones del mejor
+modelo encontrado supera el umbral de inteligibilidad pero no alcanza el
+umbral de la realidad, entonces sólo inhibirá al gobernador y el
+conocedor funcionará como un aprendiz.
+
+\smallskip
+
+Para que el ánima pueda funcionar de este modo, precisa tener, en todo
+instante, información sobre el lugar del mapa de resolución en el que se
+encuentra.  Para conocer la bondad del comportamiento aplicado le basta
+disponer de las variables valoradas y estar al tanto de cuándo se producen
+los cambios de comportamiento, pero para conocer la bondad de la modelación
+precisa disponer de la predicción del mejor de los modelos encontrados hasta
+ese instante y de toda la percepción procedente del universo exterior.
+Nótese que precisa esas predicciones incluso cuando el modelador y el
+simulador están inhibidos.
+
+Aun siendo éste el conocedor simple, supone una mejora con respecto al
+aprendiz.  En concreto no es propenso a la enfermedad de \person{Camus} que
+puede sufrir un aprendiz, pero que no sufre un adaptador (véase la
+\S\refsc{Las enfermedades}).  Para percatarse de este hecho, basta observar
+que el atractor de \person{Camus} queda en la zona donde el conocedor actúa
+como adaptador. El atractor de \person{Camus} se sitúa dentro del mapa de
+resolución en el punto donde el comportamiento es pésimo, no obtiene premio
+alguno, pero la realidad es infalible, acierta todas las predicciones.
+% Figura con los atractores de Camus y Leibniz.
+\MTbeginfigure(240,120);
+ \MT: pickup thick_pen;
+ \MT: y1t = h; x1l = 0;
+ \MTlabel(1)"\strut Comportamiento";
+ \MT: y2b = 0; x2 = w;
+ \MTlabel(2)"\strut Modelación";
+ \MT: z3 = (x1,y2t+1jot);
+ \MT: z4o = z3 - (1jot,0); z4d = (x2,y4o);
+ \MT: z5o = z3 - (0,1jot); z5d = (x5o,y1b);
+ \MT: arrow(4o,4d); arrow(5o,5d);
+ \MT: pickup thin_pen;
+ \MT: z7 = z5d - (0,1pc);
+ \MT: z8 = (x2l-1pc,y3);
+ \MT: z9 = (x8,y7);
+ \MT: draw z7 .. z9; draw z8 .. z9;
+ \MT: pickup med_pen;
+ \MT: x3lbl.r = x3 - 1jot; y3lbl.t = y3 - 1jot;
+ \MTlabel(3lbl)"0";
+ \MT: x7lbl.r = x7 - 1jot; y7lbl = y7;
+ \MTlabel(7lbl)"1";
+ \MT: y8lbl.t = y8 - 1jot; x8lbl = x8;
+ \MTlabel(8lbl)"1";
+ \MT: point(8); point(9);
+ \MT: y10o = y8 + 1pc; x10o = x8 - 1pc; z10d = z8;
+ \MT: z10 = z10o + (0,1jot);
+ \MTlabel(10)br"Atractor de \person{Camus}";
+ \MT: arrow(10o,10d);
+ \MT: y11 = y9 - 1pc; x11 = x9 - 1pc; z11o = z11; z11d = z9;
+ \MTlabel(11)tr"Atractor de \person{Leibniz}";
+ \MT: arrow(11o,11d);
+\MTendfigureX"Mapa de\cr resolución\cr con atractores";
+
+\goodpage
+
+\title2 El conocedor simbólico
+
+\labeled\title3 Justificación
+
+El conocedor simple está muy cerca del mecanismo, del adaptador y del
+aprendiz por lo que sirve para explicar el salto que existe desde el
+aprendiz hasta el conocedor.  Queda por explicar el salto evolutivo que
+existe desde el conocedor simple hasta el conocedor simbólico.
+
+El mecanismo, el adaptador y el aprendiz sólo son capaces de una única
+resolución, en concreto de la resolución mostrada en la
+\S\refsc{resoluciones}. Pero hay, como ya sabemos, muchas otras
+resoluciones, de manera que existen otros tantos mono-resolutores.  Por lo
+tanto, en un proceso evolutivo lo suficientemente rico existirán nichos
+---un \definition{nicho} es un lugar que cumple determinadas condiciones---
+apropiados para muchos de los diferentes mono-resolutores.
+
+Un nicho con las condiciones suficientes para ser ocupado por adaptadores y
+por aprendices puede ser tomado por un conocedor simple, pero no así otros
+nichos con otras condiciones.  Llamando poli-resolutores a los autómatas
+que, como el conocedor simple, son capaces de un número finito de
+resoluciones, estos otros nichos podrían ser tomados por los
+poli-resolutores apropiados.
+
+Pero, siguiendo en esta línea, no sólo los mono-resolutores pueden ser
+mejorados por poli-resolutores, sino que los mismos poli-resolutores pueden
+ser mejorados por otros poli-resolutores capaces de más resoluciones.  En
+este caso, llegará un momento en el que el conocedor simbólico, capaz
+de cualquier resolución, represente una mejora evolutiva ineludible.
+
+\title3 Definición
+
+La diferencia entre un conocedor simbólico y otro conocedor no
+simbólico, como el conocedor simple, está en su mente.  La mente del
+conocedor simbólico tiene dos capas, una semántica y otra sintáctica.
+La novedad del conocedor simbólico es la sintaxis, ya que semántica la
+tienen todos los resolutores.
+
+Porque una mente simbólica es un resolutor general de problemas, resulta que
+el problema de la resolución, que debe resolver el ánima, está completamente
+abierto; hay que determinar una libertad inacabable y, consecuentemente, es
+más difícil.  Si el ánima del conocedor simple lo resolvía por el expediente
+de la solución conocida, el ánima de un buen conocedor simbólico debe
+disponer de todos los recursos que la teoría del problema ha presentado.
+Esto no es un problema para el conocedor simbólico ya que su peculiaridad
+consiste, precisamente, en disponer de una lógica interna capaz de todos los
+recursos de resolución. Por lo tanto, en el caso del conocedor simbólico,
+una implementación muy económica se consigue construyendo sintácticamente el
+ánima.  Si prescindimos de otros tipos de conocedores simbólicos más
+complejos que podrían ser diseñados, podemos alcanzar la conclusión
+siguiente. El conocedor simbólico es, en la lógica externa, un motor
+sintáctico, y nada más.
+
+La configuración sintáctica del conocedor simbólico marca la diferencia en
+poder resolutivo entre los diferentes conocedores simbólicos pero es
+invisible en la lógica externa.  Sólo se ve el motor sintáctico.  Y toda la
+evolución subsiguiente es invisible.
+
+\title3 Ejemplo
+
+En un conocedor simbólico el ánima pasa a ser, simplemente, el elemento
+sintáctico que rige y organiza a los otros elementos sintácticos.  A
+continuación se presenta un ejemplo de esta organización sintáctica.
+
+El ánima ha de decidir qué tipo de resolución intentar para ejecutarla, éste
+es el problema de la resolución.  Al construir el árbol de resolución, el
+ánima está planteando el conjunto de problemas que debe resolver la mente.
+El árbol de resolución puede ser construido de una vez, pero aquí
+mostraremos cómo podría hacerse una construcción gradual.  En este caso el
+ánima, enfrentada a cada nuevo problema, determina el tipo de resolución
+básica que debe aplicar la mente para su resolución.
+
+Supuesto que la mente del conocedor tiene un catálogo de problemas con
+solución conocida y que el ánima decide intentar una resolución por
+solución conocida, el \definition{problema de la recuperación} consiste
+en determinar cómo se recupera la solución de la mejor de las maneras
+posibles.  Si el catálogo de problemas solucionados pudiera crecer,
+entonces otro \definition{problema de catalogación} consistiría en
+determinar cómo organizar el catálogo.
+
+Supuesto que el ánima decide aplicar una resolución por tanteo,
+aparecen dos nuevos problemas, el \definition{problema de la acotación} o
+determinar qué conjunto de posibles soluciones probar, y el
+\definition{problema de la búsqueda} o decidir qué método u orden de
+búsqueda se aplica.
+
+Y supuesto que el ánima determina trasladar un problema, aparece
+inmediatamente el \definition{problema de la traslación}, que consiste en
+decidir qué traslación concreta se aplica.  Resolver por traslación el
+problema de la traslación no es un juego de palabras, sino una posibilidad.
+
+Todos estos problemas que surgen una vez el ánima ha instruido a la mente
+sobre el modo de resolución básico a emplear, también deben ser
+resueltos.  Como es el ánima quien determina el modo de resolución,
+resulta que el proceso de construcción gradual del árbol discurre, en
+este caso, como un diálogo continuo entre el ánima y la mente.
+
+
+\title2 Conclusión
+
+Son conocedores todos los autómatas capaces de resolver el problema de la
+supervivencia de varias maneras.  El conocedor es respecto a las
+resoluciones lo que el adaptador era respecto a las soluciones.
+
+Son conocedores simbólicos todos los autómatas capaces de resolver el
+problema de la supervivencia de cualquiera de las maneras posibles,
+apareciéndose, en la lógica externa, como un motor sintáctico.  Así
+como el aprendiz interioriza el problema de la supervivencia, el conocedor
+simbólico interioriza la evolución resolutiva del problema de la
+supervivencia.  Con el conocedor simbólico culmina la evolución
+física.
+

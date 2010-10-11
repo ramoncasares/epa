@@ -1,0 +1,982 @@
+% EPAD.TEX (RMCG19970304)
+
+\newpage
+
+\title2 La dinámica
+
+\title3 La ecuación dinámica
+
+Si denotamos
+ $|S_s \!/ 2^{\pr S}$, con
+ $|S_s, \pr S \in \N$,
+la probabilidad de que el estado actual de $|A$ sea $s$, de modo que
+ $s \through \no S$, entonces
+podemos representar el vector de estado de |A a la manera probabilística:
+ $|S = \left< \no S, \pr S; (|S_s) \right>$.
+
+Si denotamos
+ $|J_{\imath} \!/ 2^{\pr{\!J}}$, con
+ $|J_{\imath}, \pr{\!J} \in \N$,
+la probabilidad de que la entrada actual a $|A$ sea $\imath$, de modo que
+ $\imath \through \no I$, entonces
+podemos representar el vector de entrada a |A a la manera probabilística:
+ $|J = \left< \no I, \pr{\!J}; (|J_{\imath}) \right>$.
+
+Si las variables del vector de estado actual son probabilísticamente
+independientes de las variables del vector de entrada, entonces
+ $$ { |S_s \over 2^{\pr S} } \cdot
+    { |J_{\imath} \over 2^{\pr{\!J}} }  =
+    { |P_{\!s\imath} \over 2^{\pr S+\pr{\!J}} } $$
+es la probabilidad de que el estado actual de $|A$ sea $s$ y que la entrada
+actual a $|A$ sea $\imath$. Linealizando la matriz $(|P_{\!s\imath})$, para
+lo que hacemos $p = s.2^{\no I}+\imath$, obtenemos el vector de
+estado+entrada
+ $$|P = \left< \no S+\no I, \pr S+\pr{\!J}; (|P_p) \right>.$$
+Nótese que, usando la descripción automática de vectores, podemos
+resumir los cálculos anteriores así:
+ $$|P = \prl |S |J.$$
+
+Puesto que las probabilidades que definen al autómata |A,
+ $|A_{pq} \!/ 2^{\no P}$,
+son probabilidades de los valores de estado siguiente y de salida actual
+condicionadas a los valores de $|P$, dadas estas probabilidades podemos
+calcular aquéllas.  En concreto,
+ $$\sum_p { |P_p \over 2^{\pr S+\pr{\!J}} } \cdot
+ { |A_{pq} \over 2^{\no P} } =
+ { |Q_q \over 2^{\pr S+\pr{\!J}+\no P} } $$
+es la probabilidad de que el vector estado-siguiente+salida $|Q$ tome el
+valor correspondiente al índice $q = n.2^{\no O}+o$.  Es decir,
+ $|Q_q = \sum_p |P_p \cdot |A_{pq}$ y
+ $$|Q = \bigl< \no S+\no O, \pr S+\pr{\!J}+\no P;
+   (\textstyle{\sum_p} |P_p \cdot |A_{pq}) \bigr> .$$
+Estos cálculos pueden resumirse usando, de nuevo, la descripción
+automática de vectores, para obtener la \definition{ecuación
+dinámica}:
+ $$|Q = \srl |P \FA = \srl \prl |S |J \FA$$
+donde {\FA} es la función característica de |A (véase la
+\S\refsc{La función característica}).
+
+A partir de este resultado es también posible describir separada y
+probabilísticamente los vectores de estado siguiente $|N$ y de salida
+$|O$.  Usando $|Q_{no}$,
+ $|Q_{no} = \sum_s \sum_\imath |P_{\!s\imath} \cdot \ALFA$,
+que es la forma matricial de $|Q_q$, queda:
+ $$\eqalign{
+  |N &= \left< \no S, \pr S+\pr{\!J}+\no P;
+   (\textstyle{\sum_o} |Q_{no}) \right> \cr
+  |O &= \left< \no O, \pr S+\pr{\!J}+\no P;
+   (\textstyle{\sum_n} |Q_{no}) \right> .\cr}$$
+Es decir, hemos proyectado la matriz $(|Q_{no})$ en dos partes.  Debe
+tenerse presente que, en general, las variables del vector de estado
+siguiente no serán probabilísticamente independientes de las variables
+del vector de salida.
+
+\title4 Ejemplo
+
+Sea el autómata |H del ejemplo que tenía un 1 subrayado (en la página
+{\refpg{channel}}), y sea el string de estado+entrada
+ $|P^{|H} = \left< 2, 0; (0, 1, 0, 0) \right>$,
+que significa que es seguro que el autómata
+está en el estado $1$ y que la variable de entrada vale $0$.  Calculamos
+$|Q^{|H}$ de acuerdo a la ecuación dinámica y obtenemos
+ $\left< 2, 1; (1, 0, 0, 1) \right>$.
+Esto significa que es tan probable que el estado siguiente sea $1$ y la
+salida actual $1$ como que el estado siguiente sea $0$ y la salida actual
+$0$.  Nótese que la probabilidad de que el estado siguiente sea $1$ es $1/2$
+y que la probabilidad de que la salida valga $0$ es también $1/2$, pero que
+es imposible que el estado siguiente sea diferente de la salida.
+
+
+\title3 La dinámica determinada
+
+La ecuación dinámica es determinística, ya que el vector $|Q$ queda
+completamente determinado por $|S$, $|J$ y \FA, aunque describe un proceso
+probabilístico. El autómata, aun siendo probabilístico, usa valores
+determinados de las variables; concretamente y por ser binario, las
+variables toman, en todo instante, el valor 1 o el valor 0.
+
+Mientras que al partir un vector descrito probabilísticamente se
+perderá información si las variables que quedan en las distintas partes
+no son probabilísticamente independientes, se puede partir el string que
+toma como valor un vector sin pérdida alguna de información.
+
+Sea $S = [b_{\ell-1}\,b_{\ell-2}\, \ldots\, b_2\,b_1\,b_0]$ un string,
+$S\in\B^\ell$, cualquiera. Si notamos
+ $$\abovedisplayshortskip=-3pt\abovedisplayskip=-3pt\relax
+ \displaylines{
+  S_{m\times} = [b_{\ell-1}\,b_{\ell-2}\, \ldots\, b_{\ell-m}] =
+    \prli_{i=\ell-1}^{\ell-m} \K_{b_i} \cr
+  S_{\times n} = [b_{n-1}\, \ldots\, b_2\,b_1\,b_0] =
+    \prli_{i=n-1}^0 \K_{b_i} \cr}$$
+los strings cabeza $S_{m\times}$, de longitud $m \leq \ell$, y cola
+$S_{\times n}$, de longitud $n \leq \ell$, en que queda partido $S$, de
+longitud $\ell = m + n$, entonces es inmediato que:
+ $$S = \prl S_{m\times} \, S_{\times n} \quad (\ell = m + n),$$
+lo que demuestra que no se pierde información al partir un string.
+
+Luego si $\opd S$ es el string de estado actual del autómata |A e $\opd I$
+es el string de entrada, notamos $\opd P = \prl \opd S \opd I$, y la
+ecuación dinámica queda:
+ $$|Q = \bigl< \no S+\no O, \no P; (|A_{Pq}) \bigr>
+   \quad\hbox{o bien}\quad
+  |Q = \srl \opd P \FA = \srl \prl \opd S \opd I \FA $$
+donde |Q es un vector probabilístico si
+ $\no P > 0$ y un string si
+ $\no P = 0$.  En cualquier caso, escribiremos
+ $Q \leapsfrom |Q$
+si el vector |Q \definition{sabemos que toma como valor} el string $Q$, y
+entonces el string de estado siguiente $N$ y el string de salida $O$ valen:
+ $$N = Q_{\no S\times} \qquad O = Q_{\times\no O} .$$
+
+\title3 El tiempo
+
+Ahora describiremos el paso de un instante al siguiente.  Recordemos que
+denominamos string al valor que toma un vector y stream a la secuencia de
+strings ordenada creciendo desde el instante inicial.
+
+Utilizaremos números naturales para referirnos a los instantes del
+tiempo.  El instante inicial utilizará el número $0$, y cada instante
+utilizará el número siguiente al utilizado por el instante anterior.
+Denominaremos tiempo, \T, al conjunto de todos los instantes,
+ $\T = \{ 0, 1, 2, 3, \ldots \}$.
+Es decir, que al vector |V en el instante $t \in \T$ lo denotaremos $|V(t)$
+y a su valor, si lo conocemos, $V(t)$. Si conocemos su valor en el instante
+siguiente, lo anotaremos $V(t+1) \leapsfrom |V(t+1)$.
+
+Ya podemos establecer la \definition{ecuación temporal} de los
+autómatas, a saber, que el estado siguiente del instante actual, $|N(t)$,
+es el estado actual del instante siguiente, $|S(t+1)$. Es decir:
+ $$ |N(t) = |S(t+1) .$$
+
+\title3 La función de transferencia
+
+Si aplicamos el stream de entrada $I(0), I(1), \ldots, I(\tau)$, de duración
+$\delta$, $\delta=\tau+1$, al autómata |A en el estado inicial $S_0$,
+$|S(0)= S_0 \in \B^{\no S}$, obtendremos en el instante final $\tau$ un
+string de salida del que, {\it a priori}, sólo podemos conocer su vector de
+probabilidad $|O(\tau)$. Para calcular $|O(\tau)$ hemos de aplicar
+reiteradamente la ecuación dinámica. Notando con sombrero las
+probabilidades, $|A_{pq} \!/ 2^{\no P} = \P|A_{pq}$, y teniendo en cuenta
+que, por la ecuación temporal, $n_t$ y $s_{t+1}$ son dos sinónimos del mismo
+índice, queda:
+ $$\displaylines{
+  \P|O_{o_\tau}\!\bigl(S_0; I(0), I(1), \ldots, I(\tau)\bigr)
+  = \hfill\cr =
+   \sum_{s_\tau n_\tau} \P|A_{s_\tau I(\tau) n_\tau o_\tau} \cdot
+   \sum_{\scriptstyle s_{\tau-1} \atop \scriptstyle o_{\tau-1}}
+    \P|A_{s_{\tau-1} I(\tau-1) n_{\tau-1} o_{\tau-1}}
+  \cdots \cr \noalign{\vskip-3pt} \hfill \cdots
+   \sum_{s_1 o_1} \P|A_{s_1 I(1) n_1 o_1} \cdot
+   \sum_{o_0} \P|A_{S_0 I(0) n_0 o_0} .}$$
+
+Llamamos \definition{función de transferencia} del autómata |A desde su
+estado $S_0$, $S_0 \in \B^{\no S}$, y la notamos $Z^{|A}_{S_0}$, a la
+función que hace corresponder, cada uno de los posibles streams de entrada a
+|A, con el vector probabilístico que describe la salida que se obtendría en
+el instante final si se aplicara dicho stream de entrada al autómata |A
+desde el estado $S_0$. Es decir:
+ $$ Z^{|A}_{S_0}\!\bigl(I(0), I(1), \ldots, I(\tau)\bigr) = |O(\tau) ,$$
+que se calcula como hemos visto arriba.
+
+\goodpage
+
+\title4 Extensión probabilística
+
+La extensión probabilística de la función de transferencia, notada
+$|Z^{|A}_{S_0}$, hace la misma correspondencia que $Z^{|A}_{S_0}$ cuando,
+en vez de conocer el stream de entrada, tenemos su descripción
+probabilística
+ $|J(0), |J(1), \ldots, |J(\tau)$.
+O sea,
+ $$\displaylines{
+  \P|O_{o_\tau}\!\bigl(S_0; |J(0), |J(1), \ldots, |J(\tau)\bigr) =
+ \hfill\cr\hfill =
+   \sum_{\imath_\tau s_\tau n_\tau}
+    \P|J(\tau)_{\imath_\tau}
+    \P|A_{s_\tau \imath_\tau n_\tau o_\tau} \cdot
+   \sum_{\scriptstyle\imath_{\tau-1} \atop
+         {\scriptstyle s_{\tau-1} \atop
+          \scriptstyle o_{\tau-1}}}
+    \P|J(\tau-1)_{\imath_{\tau-1}}
+    \P|A_{s_{\tau-1} \imath_{\tau-1} n_{\tau-1} o_{\tau-1}}
+ \cdots \cr \hfill \cdots
+   \sum_{\imath_1 s_1 o_1}
+    \P|J(1)_{\imath_1} \P|A_{s_1 \imath_1 n_1 o_1} \cdot
+   \sum_{\imath_0 o_0}
+    \P|J(0)_{\imath_0} \P|A_{S_0 \imath_0 n_0 o_0} .\cr}$$
+
+\title4 Teorema
+
+Se tiene que:
+ $$Z^{|A}_{S_0} = Z^{|A'}_{S'_0} \implies
+  |Z^{|A}_{S_0} = |Z^{|A'}_{S'_0} .$$
+
+\title4 Demostración
+
+ $$\displaylines{
+   Z^{|A}_{S_0} = Z^{|A'}_{S'_0} \implies
+     \forall I(0), I(1), \ldots, I(\tau) :
+   \hfill \cr
+   \P|O^{|A}_{o_\tau}\!\bigl(S_0; I(0), I(1), \ldots, I(\tau)\bigr) =
+   \P|O^{|A'}_{o_\tau}\!\bigl(S'_0; I(0), I(1),\ldots, I(\tau)\bigr) .\cr}$$
+Y, por lo tanto,
+ $$\displaylines{
+  \P|O^{|A}_{o_\tau}\!\bigl(S_0; |J(0), |J(1), \ldots, |J(\tau)\bigr) =
+ \hfill\cr\qquad\qquad =
+   \sum_{\imath_\tau \imath_{\tau-1} \ldots \imath_1 \imath_0}
+      \P|J(\tau)_{\imath_\tau}
+      \P|J(\tau-1)_{\imath_{\tau-1}} \ldots
+      \P|J(1)_{\imath_1} \P|J(0)_{\imath_0} \cdot
+ \hfill\cr\hfill \cdot
+   \sum_{s_\tau n_\tau}
+      \P|A_{s_\tau \imath_\tau n_\tau o_\tau} \cdot
+   \sum_{\scriptstyle s_{\tau-1} \atop
+         \scriptstyle o_{\tau-1}}
+      \P|A_{s_{\tau-1} \imath_{\tau-1} n_{\tau-1} o_{\tau-1}}
+ \cdots \qquad\qquad \cr \hfill \cdots
+   \sum_{s_1 o_1} \P|A_{s_1 \imath_1 n_1 o_1} \cdot
+   \sum_{o_0} \P|A_{S_0 \imath_0 n_0 o_0} =
+ \cr\qquad\qquad =
+   \sum_{\imath_\tau \imath_{\tau-1} \ldots \imath_1 \imath_0}
+      \P|J(\tau)_{\imath_\tau}
+      \P|J(\tau-1)_{\imath_{\tau-1}} \ldots
+      \P|J(1)_{\imath_1} \P|J(0)_{\imath_0} \cdot
+ \hfill\cr\hfill \cdot
+   \sum_{s'_\tau n'_\tau}
+      \P|A'_{s'_\tau \imath_\tau n'_\tau o_\tau} \cdot
+   \sum_{\scriptstyle s'_{\tau-1} \atop
+         \scriptstyle o_{\tau-1}}
+      \P|A'_{s'_{\tau-1} \imath_{\tau-1} n'_{\tau-1} o_{\tau-1}}
+ \cdots \qquad\qquad \cr \hfill \cdots
+   \sum_{s'_1 o_1} \P|A'_{s'_1 \imath_1 n'_1 o_1} \cdot
+   \sum_{o_0} \P|A'_{S'_0 \imath_0 n'_0 o_0} =
+ \cr \qquad\qquad =
+  \P|O^{|A'}_{o_\tau}\!\bigl(S'_0; |J(0), |J(1), \ldots, |J(\tau)\bigr)
+   . \hfill\cr}$$
+Con lo que se demuestra que:
+ $Z^{|A}_{S_0} = Z^{|A'}_{S'_0} \implies |Z^{|A}_{S_0} = |Z^{|A'}_{S'_0}$.
+
+\goodpage
+
+\title4 Extensión temporal
+
+La extensión en el tiempo de la función de transferencia, notada
+$\vec{Z}^{|A}_{S_0}$, es la función que devuelve, en vez del valor final
+$|O(\tau)$ como $Z^{|A}_{S_0}$, toda la secuencia
+ $|O(0), |O(1), \ldots, |O(\tau)$.
+
+\labeled\title3 El comportamiento
+
+Las \definition{variables externas} son las de entrada al autómata y las
+de salida del autómata.  Al par de streams desarrollado por estos dos
+vectores lo denominamos \definition{apariencia del autómata}.
+
+\title4 Teorema
+
+Si  $Z^{|A}_{S_0} = Z^{|A'}_{S'_0}$ entonces no se puede distinguir, por su
+apariencia, a |A de $|A'$.
+
+\title4 Demostración
+
+Si  $Z^{|A}_{S_0} = Z^{|A'}_{S'_0}$ entonces, para
+cualquier stream de entrada $I(0), I(1), \ldots I(\tau)$, se tiene que:
+ $$\displaylines{
+   |O^{|A}(0) = Z^{|A}_{S_0}\!\bigl(I(0)\bigr) =
+     Z^{|A'}_{S'_0}\!\bigl(I(0)\bigr) = |O^{|A'}\!(0) \cr
+   |O^{|A}(1) = Z^{|A}_{S_0}\!\bigl(I(0), I(1)\bigr) =
+     Z^{|A'}_{S'_0}\!\bigl(I(0), I(1)\bigr) = |O^{|A'}\!(1) \cr
+   \!\vdots \cr
+   |O^{|A}(\tau) = Z^{|A}_{S_0}\!\bigl(I(0), I(1),  \ldots, I(\tau)\bigr) =
+   Z^{|A'}_{S'_0}\!\bigl(I(0), I(1), \ldots, I(\tau)\bigr) =
+   |O^{|A'}\!(\tau)
+  \cr}$$
+lo que significa que ni siquiera probabilísticamente es posible distinguir
+por su apariencia a |A de $|A'$.
+
+\title4 Corolario
+
+Eso también prueba, en relación a la extensión en el
+tiempo de la función de transferencia, $\vec{Z}^{|A}_{S_0}$, que:
+ $$Z^{|A}_{S_0} = Z^{|A'}_{S'_0} \implies
+   \vec{Z}^{|A}_{S_0} = \vec{Z}^{|A'}_{S'_0} .$$
+
+\title4 Definiciones
+
+De aquí se deriva la definición de \definition{indistinguibilidad}:
+decimos que dos autómatas, |A y $|A'$, son indistinguibles, y lo notamos
+ $|A \nodis |A'$, si y sólo si, por definición,
+ $\inpA = \inp{\!|A'}$, y $\outA = \out{\!|A'}$, y se cumple que:
+ $$(\exists S_0 \in \B^{\stA}) \land
+   (\exists S'_0 \in \B^{\st{\!\!A\!'}}) : \;
+   Z^{|A}_{S_0} = Z^{|A'}_{S'_0} .$$
+También decimos, en este caso, que $S_0$ y $S'_0$ son
+\definition{estados equivalentes}.
+
+La indistinguibilidad depende del estado inicial, pero si cada estado de |A
+tuviera algún estado equivalente en $|A'$, y {\it vice versa}, entonces
+|A y $|A'$ serían indistinguibles independientemente del estado inicial.
+
+Esto nos sugiere la definición de \definition{equivalencia}:  decimos que
+dos autómatas, |A y $|A'$, son equivalentes, y lo notamos
+ $|A \equiv |A'$, si y sólo si, por definición,
+ $\inpA = \inp{\!A'}$, y $\outA = \out{\!A'}$, y se cumple que:
+ $$ \{ Z^{|A}_{S_0} : S_0 \in \B^{\stA} \} =
+    \{ Z^{|A'}_{S'_0} : S'_0 \in \B^{\st{\!\!A\!'}} \} .$$
+
+La indistinguibilidad es más débil que la equivalencia, y ésta es
+más débil que la igualdad:
+ $$ |A = |A' \implies |A \equiv |A' \implies |A \nodis |A'. $$
+
+La equivalencia de autómatas es una relación de equivalencia, y de
+ahí su nombre:
+ $$\eqalignrc{\forall |A, |B, |C:
+  & |A \equiv |A \cr
+  & |A \equiv |B \implies |B \equiv |A \cr
+  & (|A \equiv |B) \land (|B \equiv |C) \implies |A \equiv |C .\cr}$$
+
+Denominamos \definition{comportamiento} a cada elemento del conjunto
+cociente definido por la equivalencia sobre el conjunto de los autómatas,
+ $$\{ \hbox{Comportamiento} \} = \{ |A \} / \!\equiv.$$
+Es decir, que si dos autómatas son equivalentes, $|B \equiv |C$, entonces
+decimos que tienen el mismo comportamiento.
+
+La indistinguibilidad no es una relación de equivalencia. Por ejemplo:
+ $$ (\srl \prl \fdb \FORK \ID \XOR \nodis \ID) \land
+    (\srl \prl \fdb \FORK \ID \XOR \nodis \NOT) \land
+    (\ID \not\nodis \NOT) .$$
+Si el estado inicial del autómata $\srl \prl \fdb \FORK \ID \XOR$ es $1$,
+entonces se distingue del autómata $\ID$.
+
+\title4 Ampliabilidad
+
+\label{eqamp'}
+Cuando interesa más el comportamiento que la igualdad, se pueden utilizar
+las siguientes definiciones alternativas de ampliación:
+ $$\displaylines{
+  |B \mathrel{\tilde{\amp}} \!|A \iff \bigl(\inp B > \inpA\bigr) \land
+    \bigl(\exists c: \Syntax(c,\inp B-\inpA,|B) \nodis |A\bigr) ,\cr
+  |B \mathrel{\bar{\amp}} \!|A \iff \bigl(\inp B > \inpA\bigr) \land
+    \bigl(\exists c: \Syntax(c,\inp B-\inpA,|B) \equiv |A\bigr) .\cr }$$
+
+
+\title3 La dinámica compuesta
+
+El cálculo de la dinámica de un autómata compuesto puede hacerse
+calculando primero el autómata compuesto, utilizando para ello las
+definiciones de las composiciones, y aplicando entonces la ecuación
+dinámica, o puede hacerse aplicando la ecuación dinámica a cada parte
+y componiendo los resultados como se propone a continuación.
+
+Nótese que si {\em conocemos} los valores determinados $Q$ que toman los
+vectores $|Q$ ($Q \leapsfrom |Q$), entonces pueden ser utilizados los
+cálculos desacoplados, por partes, o paso a paso. La ecuación temporal toma,
+en este caso, la forma: $N(t) = S(t+1)$.
+
+
+\title4 Composición en serie
+
+El nombre de la composición en serie tiene sentido porque
+ $$Z^{\srl\!|B\!|C}_{\prl\! S_{|B} S_{|C}} =
+   \vec{Z}^{|B}_{S_{|B}} \circ |Z^{|C}_{S_{|C}} $$
+donde $\circ$ denota la composición de funciones,
+ $[g \circ f](x) = f\bigl(g(x)\bigr)$, y |Z y
+ $\vec{\opd{Z}}$ son las extensiones, probabilística y temporal,
+de la función de transferencia~$\opd Z$.
+
+\title4 Demostración
+
+Notamos $|A=\srl|B|C$ y, por tratarse de strings,
+ $$\displaylines{
+   \dot{S}_0 = S^{|A}(0)_{\st B \times} \qquad
+   \ddot{S}_0 = S^{|A}(0)_{\times \st C} .\cr}$$
+Por la definición de la composición en serie,
+ $I^{|B}(t) = I^{|A}(t)$, que notamos abreviadamente $I_t$.
+
+La disposición de los índices se muestra en la figura, de la cual
+también se deduce que:
+ $$ \F_{\srl\!|B\!|C} = \srl \srl \srl
+    \prl \op{Cross}_{\st B,\st C} \ID_{\inp B}
+    \prl \ID_{\st C} \F_B
+    \prl \op{Cross}_{\st C,\st B} \ID_{\inp C}
+    \prl \ID_{\st B} \F_C .$$
+% Composición en serie
+\MTbeginfigure(150,60);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1b = 0;
+ \MT: rectangle(1)(w-40u,35v); % 1 is F_{+ B C}
+ \MT: pickup thick_pen;
+ \MT: x2l = x1l + 30u; y2b = y1b + 5v;
+ \MT: rectangle(2)(20u,20v); % 2 is F_B
+ \MT: x3r = x1r - 5u; y3b = y1b + 5v;
+ \MT: rectangle(3)(20u,20v); % 3 is F_C
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"\F_B";
+ \MTlabel(3lbl)"\F_C";
+ \MT: pickup med_pen;
+ \MT: for i := 11 upto 20:
+ \MT:  y[i]b = y1b + 10v;
+ \MT:  y[i]m = y1b + 20v;
+ \MT:  y[i]t = y1b + 30v;
+ \MT: endfor
+ \MT: x11b = x11m = x11t = x1l;
+ \MT: x12b = x12m = x12t = 1/6[x1l,x2l];
+ \MT: x13b = x13m = x13t = 5/6[x1l,x2l];
+ \MT: x14b = x14m = x14t = x2l;
+ \MT: x15b = x15m = x15t = x2r;
+ \MT: x16b = x16m = x16t = 1/6[x2r,x3l];
+ \MT: x17b = x17m = x17t = 5/6[x2r,x3l];
+ \MT: x18b = x18m = x18t = x3l;
+ \MT: x19b = x19m = x19t = x3r;
+ \MT: x20b = x20m = x20t = x1r;
+ \MT: draw z11b .. z12b; draw z11m .. z12m; draw z11t .. z12t;
+ \MT: draw z12b .. z13b;
+ \MT: draw z12m{1,0} .. z13t{1,0};
+ \MT: draw z12t{1,0} .. z13m{1,0};
+ \MT: arrow(13b,14b); arrow(13m,14m);
+ \MT: draw z13t .. z16t;
+ \MT: draw z15b .. z16b; draw z15m .. z16m;
+ \MT: draw z16b .. z17b;
+ \MT: draw z16m{1,0} .. z17t{1,0};
+ \MT: draw z16t{1,0} .. z17m{1,0};
+ \MT: arrow(17b,18b); arrow(17m,18m);
+ \MT: draw z17t .. z20t;
+ \MT: draw z19b .. z20b; draw z19m .. z20m;
+ \MT: z10 = (0,y11b); draw z10 .. z11b;
+ \MT: z21 = (w,y20b); arrow(20b,21);
+ \MT: arrowlessfeedback(32,20m,11m)(h,10u,10u)
+ \MT: arrowlessfeedback(31,20t,11t)(h-12u,10u,5u);
+\MTendfigure"Composición\cr en serie"Función característica;
+
+\bigbreak
+Primero calculamos, dentro de la composición $\srl|B|C$, el vector
+estado-siguiente+salida de |B, que notamos ${}^{|B}\!\!|Q$. Para ello
+sustituimos
+ $\P|A_{\dot{s}_t \ddot{s}_t i_t \dot{n}_t \ddot{n}_t \ddot{o}_t}$
+por
+ $\sum_{\dot{o}_t} \P|B_{\dot{s}_t i_t \dot{n}_t \dot{o}_t} \cdot\,
+  \P|C_{\ddot{s}_t \dot{o}_t \ddot{n}_t \ddot{o}_t}$
+en la ecuación dinámica aplicada reiteradamente y, en el instante final
+$\sigma$, dejamos libres los índices $\dot{n}_\sigma$ y $\dot{o}_\sigma$.
+ $$\displaylines{
+ {}^{|B}\!\!\P|Q_{\dot{n}_\sigma \dot{o}_\sigma} =
+   \sum_{\dot{s}_\sigma \ddot{s}_\sigma \ddot{n}_\sigma \ddot{o}_\sigma}
+    \P|B_{\dot{s}_\sigma I_\sigma \dot{n}_\sigma \dot{o}_\sigma}
+    \P|C_{\ddot{s}_\sigma \dot{o}_\sigma \ddot{n}_\sigma \ddot{o}_\sigma}
+  \cdot \hfill \cr \qquad\qquad\qquad \cdot
+   \sum_{\scriptstyle \dot{s}_{\sigma-1} \ddot{s}_{\sigma-1}
+    \atop \scriptstyle \dot{o}_{\sigma-1} \ddot{o}_{\sigma-1}}
+    \P|B_{\dot{s}_{\sigma-1} I_{\sigma-1}
+          \dot{n}_{\sigma-1} \dot{o}_{\sigma-1}}
+    \P|C_{\ddot{s}_{\sigma-1} \dot{o}_{\sigma-1}
+          \ddot{n}_{\sigma-1} \ddot{o}_{\sigma-1}}
+  \cdots \hfill \cr \noalign{\vskip-3pt} \hfill \cdots
+   \sum_{\scriptstyle \dot{s}_1 \ddot{s}_1 \atop
+         \scriptstyle \dot{o}_1 \ddot{o}_1}
+    \P|B_{\dot{s}_1 I_1 \dot{n}_1 \dot{o}_1}
+    \P|C_{\ddot{s}_1 \dot{o}_1 \ddot{n}_1 \ddot{o}_1}
+  \cdot
+   \sum_{\dot{o}_0 \ddot{o}_0}
+    \P|B_{\dot{S}_0 I_0 \dot{n}_0 \dot{o}_0}
+    \P|C_{\ddot{S}_0 \dot{o}_0 \ddot{n}_0 \ddot{o}_0} .\cr}$$
+Como resulta que
+ $$\forall s, \imath : \;
+   \sum_{\ddot{n} \ddot{o}} \P|C_{s \imath \ddot{n} \ddot{o}} = 1 ,$$
+y recordando que, merced a la ecuación temporal,
+ $\ddot{s}_{t}$
+también puede escribirse como
+ $\ddot{n}_{t-1}$,
+pueden eliminarse todas las apariciones de
+ $\P|C_{s \imath \ddot{n} \ddot{o}}$,
+con lo que queda:
+ $$\displaylines{
+  {}^{|B}\!\!\P|Q_{\dot{n}_\sigma \dot{o}_\sigma} =
+   \sum_{\dot{s}_\sigma}
+    \P|B_{\dot{s}_\sigma I_\sigma \dot{n}_\sigma \dot{o}_\sigma} \cdot
+   \sum_{\scriptstyle\dot{s}_{\sigma-1} \atop
+         \scriptstyle \dot{o}_{\sigma-1}}
+    \P|B_{\dot{s}_{\sigma-1} I_{\sigma-1}
+          \dot{n}_{\sigma-1} \dot{o}_{\sigma-1}}
+  \cdots \hfill \cr \hfill \cdots
+   \sum_{\dot{s}_1 \dot{o}_1}
+    \P|B_{\dot{s}_1 I_1 \dot{n}_1 \dot{o}_1}
+  \cdot
+   \sum_{\dot{o}_0}
+    \P|B_{\dot{S}_0 I_0 \dot{n}_0 \dot{o}_0} =
+  \P|Q^{|B}_{\dot{n}_\sigma \dot{o}_\sigma}\!
+     (\dot{S}_0; I_0, I_1, \ldots, I_\sigma) .\cr}$$
+Es decir, que |B funciona dentro de $\srl|B|C$ del mismo modo que solo y,
+lo que es más importante,
+ ${}^{|B}\!\!\P|Q_{\dot{n}_\sigma\dot{o}_\sigma}$
+únicamente depende del estado inicial $\dot{S}_0$ y  del stream de
+entrada $I_0, I_1, \ldots, I_\sigma$. Este resultado será útil a
+continuación.
+
+Ahora sustituimos
+ $\P|A_{\dot{s}_t \ddot{s}_t i_t \dot{n}_t \ddot{n}_t \ddot{o}_t}$
+por
+ $\sum_{\dot{o}_t} \P|B_{\dot{s}_t i_t \dot{n}_t \dot{o}_t} \cdot\,
+  \P|C_{\ddot{s}_t \dot{o}_t \ddot{n}_t \ddot{o}_t}$
+en la expresión que calcula $|O^{|A}$, y tenemos que:
+ $$\displaylines{
+  \P|O^{|A}_{\ddot{o}_\tau}\!\bigl(S^{|A}(0); I_0, I_1, \ldots, I_\tau\bigr)
+  = \hfill\cr \qquad =
+   \sum_{\dot{s}_\tau \ddot{s}_\tau \dot{n}_\tau \ddot{n}_\tau}
+   \Bigl( \sum_{\dot{o}_\tau}
+    \P|B_{\dot{s}_\tau I_\tau \dot{n}_\tau \dot{o}_\tau}
+    \P|C_{\ddot{s}_\tau \dot{o}_\tau \ddot{n}_\tau \ddot{o}_\tau}
+   \Bigr)
+  \cdot \hfill \cr \qquad\qquad\qquad \cdot
+   \sum_{\scriptstyle \dot{s}_{\tau-1} \ddot{s}_{\tau-1}
+    \atop \scriptstyle \ddot{o}_{\tau-1}}
+   \Bigl( \sum_{\dot{o}_{\tau-1}}
+    \P|B_{\dot{s}_{\tau-1} I_{\tau-1}
+          \dot{n}_{\tau-1} \dot{o}_{\tau-1}}
+    \P|C_{\ddot{s}_{\tau-1} \dot{o}_{\tau-1}
+          \ddot{n}_{\tau-1} \ddot{o}_{\tau-1}}
+   \Bigr)
+  \cdots \hfill \cr\noalign{\vskip-6pt}\hfill \cdots
+   \sum_{\scriptstyle \dot{s}_1 \ddot{s}_1
+    \atop \scriptstyle \ddot{o}_1}
+   \Bigl( \sum_{\dot{o}_1}
+    \P|B_{\dot{s}_1 I_1 \dot{n}_1 \dot{o}_1}
+    \P|C_{\ddot{s}_1 \dot{o}_1 \ddot{n}_1 \ddot{o}_1}
+   \Bigr)
+  \cdot \qquad\qquad\qquad \cr \noalign{\vskip-6pt}\hfill \cdot
+   \sum_{\ddot{o}_0}
+   \Bigl( \sum_{\dot{o}_0}
+    \P|B_{\dot{S}_0 I_0 \dot{n}_0 \dot{o}_0}
+    \P|C_{\ddot{S}_0 \dot{o}_0 \ddot{n}_0 \ddot{o}_0}
+   \Bigr)
+ = \cr \qquad =
+   \sum_{\dot{o}_\tau \ddot{s}_\tau \dot{n}_\tau \ddot{n}_\tau}
+    {}^{|B}\!\!\P|Q_{\dot{n}_\tau \dot{o}_\tau}
+    \P|C_{\ddot{s}_\tau \dot{o}_\tau \ddot{n}_\tau \ddot{o}_\tau}
+  \cdot \hfill \cr \qquad\qquad\qquad \cdot
+   \sum_{\scriptstyle \dot{s}_\tau \ddot{s}_{\tau-1}
+    \atop \scriptstyle \dot{o}_{\tau-1} \ddot{o}_{\tau-1}}
+    {}^{|B}\!\!\P|Q_{\dot{n}_{\tau-1} \dot{o}_{\tau-1}}
+    \P|C_{\ddot{s}_{\tau-1} \dot{o}_{\tau-1}
+          \ddot{n}_{\tau-1} \ddot{o}_{\tau-1}}
+  \cdots \hfill \cr \hfill \cdots
+   \sum_{\dot{s}_2 \ddot{s}_1 \dot{o}_1 \ddot{o}_1}
+    {}^{|B}\!\!\P|Q_{\dot{n}_1 \dot{o}_1}
+    \P|C_{\ddot{s}_1 \dot{o}_1 \ddot{n}_1 \ddot{o}_1}
+  \cdot
+   \sum_{\dot{s}_1 \dot{o}_0 \ddot{o}_0}
+    {}^{|B}\!\!\P|Q_{\dot{n}_0 \dot{o}_0}
+    \P|C_{\ddot{S}_0 \dot{o}_0 \ddot{n}_0 \ddot{o}_0}
+  = \cr \noalign{\vskip3pt}\qquad =
+   \P|O^{|C}_{\ddot{o}_\tau}\!\bigl(\ddot{S}_0;
+      |O^{|B}(\dot{S}_0; I_0),
+      |O^{|B}(\dot{S}_0; I_0, I_1),
+    \ldots \hfill\cr\hfill \ldots ,
+      |O^{|B}(\dot{S}_0; I_0, I_1,\ldots, I_{\tau-1}),
+      |O^{|B}(\dot{S}_0; I_0, I_1, \ldots, I_\tau)
+    \bigr)
+  . \cr}$$
+Con lo que se demuestra que:
+ $Z^{\srl\!|B\!|C}_{\prl\!\dot{S}_0 \ddot{S}_0} =
+   \vec{Z}^{|B}_{\dot{S}_0} \circ |Z^{|C}_{\ddot{S}_0}$.
+
+\smallskip
+Sabiendo los valores determinados $Q$ que toman los vectores de
+estado-siguiente+salida, se pueden utilizar los cálculos desacoplados, o
+paso a paso, como sigue:
+ $$\eqalign{
+ Q^{|B} \leapsfrom |Q^{|B} &=
+   \srl \prl S^{|A}_{\st B\times} I^{|A} \F_B \cr
+ I^{|C} &= O^{|B} = Q^{|B}_{\times\out B}\cr
+ Q^{|C} \leapsfrom |Q^{|C} &=
+   \srl \prl S^{|A}_{\times\st C} I^{|C} \F_C \cr
+ N^{|A} &= \prl N^{|B} N^{|C} =
+   \prl Q^{|B}_{\st B\times} Q^{|C}_{\st C\times} \cr
+ O^{|A} &= O^{|C} = Q^{|C}_{\times\out C} .\cr}$$
+
+\bigskip
+\title4 Composición en paralelo
+
+El nombre de la composición en paralelo tiene sentido porque
+ $$Z^{\prl\!|B\!|C}_{\prl\! S_{|B} S_{|C}} =
+  Z^{|B}_{S_{|B}} \times Z^{|C}_{S_{|C}} $$
+notando $\times$ el producto cartesiano de funciones,
+ $[f \times g](x,y) = \bigl(f(x),g(y)\bigr)$.
+
+\goodpage
+\title4 Demostración
+
+Notamos $|A=\prl|B|C$ y, por tratarse de strings,
+ $$\displaylines{
+   \dot{I}_t = I^{|A}(t)_{\inp B \times} \qquad
+   \ddot{I}_t = I^{|A}(t)_{\times \inp C} \cr
+   \dot{S}_0 = S^{|A}(0)_{\st B \times} \qquad
+   \ddot{S}_0 = S^{|A}(0)_{\times \st C} .\cr}$$
+
+La disposición de los índices se muestra en la figura, de la cual
+también se deduce que:
+ $$ \F_{\prl\!|B\!|C} = \srl \srl
+    \prl \prl \ID_{\st B} \op{Cross}_{\st C,\inp B} \ID_{\inp C}
+    \prl \F_B \F_C
+    \prl \prl \ID_{\st B} \op{Cross}_{\out B,\st C} \ID_{\out C} .$$
+% Composición en paralelo
+\MTbeginfigure(120,80);
+ \MT: pickup thin_pen;
+ \MT: x1 = 1/2w; y1b = 0;
+ \MT: rectangle(1)(w-40u,55/80h); % 1 is F_{*BC}
+ \MT: pickup thick_pen;
+ \MT: x2 = x3 = w/2;
+ \MT: y2b = y1b + 5v;
+ \MT: rectangle(2)(20u,20v); % 2 is F_C
+ \MT: y3t = y1t - 5v;
+ \MT: rectangle(3)(20u,20v); % 3 is F_B
+ \MT: z2lbl = z2; z3lbl = z3;
+ \MTlabel(2lbl)"\F_C";
+ \MTlabel(3lbl)"\F_B";
+ \MT: pickup med_pen;
+ \MT: for i := 11 upto 18:
+ \MT:  y[i]b = 1/6[y1b,y1t];
+ \MT:  y[i]n = 2/6[y1b,y1t];
+ \MT:  y[i]m = 4/6[y1b,y1t];
+ \MT:  y[i]t = 5/6[y1b,y1t];
+ \MT: endfor
+ \MT: x11b = x11n = x11m = x11t = x1l;
+ \MT: x12b = x12n = x12m = x12t = 1/6[x1l,x2l];
+ \MT: x13b = x13n = x13m = x13t = 5/6[x1l,x2l];
+ \MT: x14b = x14n = x14m = x14t = x2l;
+ \MT: x15b = x15n = x15m = x15t = x2r;
+ \MT: x16b = x16n = x16m = x16t = 1/6[x2r,x1r];
+ \MT: x17b = x17n = x17m = x17t = 5/6[x2r,x1r];
+ \MT: x18b = x18n = x18m = x18t = x1r;
+ \MT: draw z11b .. z12b; draw z11n .. z12n;
+ \MT: draw z11m .. z12m; draw z11t .. z12t;
+ \MT: draw z12b .. z13b; draw z12t .. z13t;
+ \MT: draw z12m{1,0} .. z13n{1,0};
+ \MT: draw z12n{1,0} .. z13m{1,0};
+ \MT: arrow(13b,14b); arrow(13n,14n); arrow(13m,14m); arrow(13t,14t);
+ \MT: draw z15b .. z16b; draw z15n .. z16n;
+ \MT: draw z15m .. z16m; draw z15t .. z16t;
+ \MT: draw z16b .. z17b; draw z16t .. z17t;
+ \MT: draw z16m{1,0} .. z17n{1,0};
+ \MT: draw z16n{1,0} .. z17m{1,0};
+ \MT: draw z17b .. z18b; draw z17n .. z18n;
+ \MT: draw z17m .. z18m; draw z17t .. z18t;
+ \MT: z10b = (0,y11b); draw z10b .. z11b;
+ \MT: z10n = (0,y11n); draw z10n .. z11n;
+ \MT: z19b = (w,y18b); arrow(18b,19b);
+ \MT: z19n = (w,y18n); arrow(18n,19n);
+ \MT: arrowlessfeedback(32,18m,11m)(h,10u,10u)
+ \MT: arrowlessfeedback(31,18t,11t)(h-12u,10u,5u);
+\MTendfigure"Composición\cr en paralelo"Función característica;
+
+\bigbreak
+Sustituyendo
+ $\P|A_{\dot{s}_t \ddot{s}_t i_t \ddot{\imath}_t
+        \dot{n}_t \ddot{n}_t \dot{o}_t \ddot{o}_t}$
+por
+ $\P|B_{\dot{s}_t i_t \dot{n}_t \dot{o}_t} \cdot\,
+  \P|C_{\ddot{s}_t \ddot{\imath}_t \ddot{n}_t \ddot{o}_t}$
+en la expresión que calcula $|O^{|A}$,  tenemos que:
+ $$\displaylines{
+  \P|O^{|A}_{o_\tau}\!\bigl(S^{|A}(0);
+       I^{|A}(0), I^{|A}(1), \ldots, I^{|A}(\tau)\bigr)
+  = \hfill\cr \qquad\qquad =
+   \sum_{\dot{s}_\tau \ddot{s}_\tau \dot{n}_\tau \ddot{n}_\tau}
+    \P|B_{\dot{s}_\tau \dot{I}_\tau \dot{n}_\tau \dot{o}_\tau}
+    \P|C_{\ddot{s}_\tau \ddot{I}_\tau \ddot{n}_\tau \ddot{o}_\tau}
+  \cdot \hfill \cr \qquad\qquad\qquad \cdot
+   \sum_{\scriptstyle \dot{s}_{\tau-1} \ddot{s}_{\tau-1}
+    \atop \scriptstyle \dot{o}_{\tau-1} \ddot{o}_{\tau-1}}
+    \P|B_{\dot{s}_{\tau-1} \dot{I}_{\tau-1}
+          \dot{n}_{\tau-1} \dot{o}_{\tau-1}}
+    \P|C_{\ddot{s}_{\tau-1} \ddot{I}_{\tau-1}
+          \ddot{n}_{\tau-1} \ddot{o}_{\tau-1}}
+  \cdots \hfill \cr \noalign{\vskip-3pt} \hfill \cdots
+   \sum_{\scriptstyle \dot{s}_1 \ddot{s}_1 \atop
+         \scriptstyle \dot{o}_1 \ddot{o}_1}
+    \P|B_{\dot{s}_1 \dot{I}_1 \dot{n}_1 \dot{o}_1}
+    \P|C_{\ddot{s}_1 \ddot{I}_1 \ddot{n}_1 \ddot{o}_1}
+  \cdot
+   \sum_{\dot{o}_0 \ddot{o}_0}
+    \P|B_{\dot{S}_0 \dot{I}_0 \dot{n}_0 \dot{o}_0}
+    \P|C_{\ddot{S}_0 \ddot{I}_0 \ddot{n}_0 \ddot{o}_0}
+ = \cr \qquad\qquad =
+  \biggl(
+   \sum_{\dot{s}_\tau \dot{n}_\tau}
+    \P|B_{\dot{s}_\tau \dot{I}_\tau \dot{n}_\tau \dot{o}_\tau} \cdot
+   \sum_{\scriptstyle \dot{s}_{\tau-1} \atop
+         \scriptstyle \dot{o}_{\tau-1}}
+    \P|B_{\dot{s}_{\tau-1} \dot{I}_{\tau-1}
+          \dot{n}_{\tau-1} \dot{o}_{\tau-1}}
+  \cdots \hfill \cr \noalign{\vskip-3\jot} \hfill \cdots
+   \sum_{\dot{s}_1 \dot{o}_1}
+    \P|B_{\dot{s}_1 \dot{I}_1 \dot{n}_1 \dot{o}_1} \cdot
+   \sum_{\dot{o}_0} \P|B_{\dot{S}_0 \dot{I}_0 \dot{n}_0 \dot{o}_0}
+  \biggr)
+  \cdot \qquad\qquad \cr \qquad\qquad\qquad\qquad \cdot
+  \biggl(
+   \sum_{\ddot{s}_\tau \ddot{n}_\tau}
+    \P|C_{\ddot{s}_\tau \ddot{I}_\tau \ddot{n}_\tau \ddot{o}_\tau} \cdot
+   \sum_{\scriptstyle \ddot{s}_{\tau-1} \atop
+         \scriptstyle \ddot{o}_{\tau-1}}
+    \P|C_{\ddot{s}_{\tau-1} \ddot{I}_{\tau-1}
+          \ddot{n}_{\tau-1} \ddot{o}_{\tau-1}}
+    \cdots \hfill \cr \noalign{\vskip-3\jot} \hfill \cdots
+   \sum_{\ddot{s}_1 \ddot{o}_1}
+    \P|C_{\ddot{s}_1 \ddot{I}_1 \ddot{n}_1 \ddot{o}_1} \cdot
+   \sum_{\ddot{o}_0} \P|C_{\ddot{S}_0 \ddot{I}_0 \ddot{n}_0 \ddot{o}_0}
+    \biggr)
+  = \cr \noalign{\vskip3pt}\qquad\qquad =
+   \P|O^{|B}_{\dot{o}_\tau}\!(\dot{S}_0;
+               \dot{I}_0, \dot{I}_1, \ldots, \dot{I}_\tau) \cdot
+   \P|O^{|C}_{\ddot{o}_\tau}\!(\ddot{S}_0;
+               \ddot{I}_0, \ddot{I}_1, \ldots, \ddot{I}_\tau)
+  . \hfill\cr}$$
+De modo que $|O^{\prl\!|B\!|C} = \prl |O^{|B} |O^{|C}$ y, en definitiva:
+ $Z^{\prl\!|B\!|C}_{\prl\!\dot{S}_0 \ddot{S}_0} =
+   Z^{|B}_{\dot{S}_0} \times Z^{|C}_{\ddot{S}_0} $.
+
+\goodpage
+
+Conociendo los valores determinados que toman los vectores |Q, de
+estado-siguiente+salida, podemos aplicar los cálculos paso a paso o
+desacoplados:
+ $$\eqalign{
+ Q^{|B} \leapsfrom |Q^{|B} &=
+  \srl \prl S^{|A}_{\st B\times} I^{|A}_{\inp B\times} \F_B \cr
+ Q^{|C} \leapsfrom |Q^{|C} &=
+  \srl \prl S^{|A}_{\times\st C} I^{|A}_{\times\inp C} \F_C \cr
+ N^{|A} &= \prl N^{|B} N^{|C} =
+  \prl Q^{|B}_{\st B\times} Q^{|C}_{\st C\times} \cr
+ O^{|A} &= \prl O^{|B} O^{|C} =
+  \prl Q^{|B}_{\times\out B} Q^{|C}_{\times\out C} .\cr }$$
+
+
+\title4 Composición de realimentación
+
+Véase que:
+ $$\fdb |B = \fdb \fdb^{\st B} \F_B = \fdb^{\st B+1} \F_B
+   \implies \F_{\fdb\!|B} = \F_B .$$
+La figura muestra la situación.
+% Composición de realimentación
+\MTbeginfigure(90,60);
+ \MT: pickup thick_pen;
+ \MT: x1 = w/2; y1b = 5v; z1lbl = z1;
+ \MT: rectangle(1)(20u,20v); % 1 is F_B
+ \MTlabel(1lbl)"\F_B";
+ \MT: pickup med_pen;
+ \MT: x2o = 0; x2d = x1l; y2o = y2d = 1/4[y1b,y1t];
+ \MT: arrow(2o,2d);
+ \MT: x3o = x1r; x3d = w; y3o = y3d = 1/4[y1b,y1t];
+ \MT: arrow(3o,3d);
+ \MT: z4o = (x1r,3/4[y1b,y1t]);
+ \MT: z4d = (x1l,3/4[y1b,y1t]);
+ \MT: feedback(4,4o,4d)(h-20v,10u,5u);
+ \MT: pickup thin_pen;
+ \MT: x5 = 1/2w; y5b = 0;
+ \MT: rectangle(5)(w-40u,h-15v); % 5 is A = & B
+ \MT: pickup med_pen;
+ \MT: x6o = x5l; x6d = x1l; y6o = y6d = 2/4[y1b,y1t];
+ \MT: % arrow(6o,6d);
+ \MT: x7o = x1r; x7d = x5r; y7o = y7d = 2/4[y1b,y1t];
+ \MT: % draw z7o .. z7d;
+ \MT: % arrowlessfeedback(8,7d,6o)(h,10u,10u);
+ \MT: feedback(8,7o,6d)(h,10u,10u);
+\MTendfigure"Composición\cr de realimentación"Función característica;
+
+Los cálculos desacoplados son, en este caso, sencillos:
+ $$Q \leapsfrom |Q^{\fdb\!|B} =
+   \srl \prl S^{\fdb\!|B} I^{\fdb\!|B} \F_B
+   \belowdisplayskip=0pt plus 3pt .$$
+Y, por lo tanto:
+ $$\abovedisplayskip=\abovedisplayshortskip
+   \belowdisplayskip=\belowdisplayshortskip
+   N^{\fdb\!|B} = Q_{\st B+1\times} \qquad
+   O^{\fdb\!|B} = Q_{\times\out B-1} .$$
+
+\bigskip
+\title4 Teorema
+
+\label{demostración}
+Si $|F(|X)$ es una \definition{función automática} cualquiera, es decir,
+una expresión en la que si sustituimos |X por un autómata resulta un
+autómata, entonces
+ $\forall\! |A, |A': \; |A \nodis |A' \implies |F(|A) \nodis |F(|A')$.
+
+\title4 Demostración
+
+Si $|B \nodis |B'$ entonces
+ $Z^{|B}_{\dot{S}_0} = Z^{|B'}_{\dot{S}'_0}$ y, por tanto,
+ $\vec{Z}^{|B}_{\dot{S}_0} = \vec{Z}^{|B'}_{\dot{S}'_0}$, y si
+ $|C \nodis |C'$ entonces
+ $Z^{|C}_{\ddot{S}_0} = Z^{|C'}_{\ddot{S}'_0}$ y, por consiguiente,
+ $|Z^{|C}_{\ddot{S}_0} = |Z^{|C'}_{\ddot{S}'_0}$. De aquí se sigue que
+ $\vec{Z}^{|B}_{\dot{S}_0} \circ |Z^{|C}_{\ddot{S}_0} =
+  \vec{Z}^{|B'}_{\dot{S}'_0} \circ |Z^{|C'}_{\ddot{S}'_0}$,
+lo cual prueba que:
+ $$ (|B \nodis |B') \land (|C \nodis |C') \implies
+     \srl |B |C \nodis \srl |B' |C' .$$
+
+Si $|B \nodis |B'$ entonces
+ $Z^{|B}_{\dot{S}_0} = Z^{|B'}_{\dot{S}'_0}$,
+y si $|C \nodis |C'$ entonces
+ $Z^{|C}_{\ddot{S}_0} =Z^{|C'}_{\ddot{S}'_0}$.
+De aquí se sigue que
+ $Z^{|B}_{\dot{S}_0} \times Z^{|C}_{\ddot{S}_0} =
+  Z^{|B'}_{\dot{S}'_0} \times Z^{|C'}_{\ddot{S}'_0}$,
+lo cual prueba que:
+ $$ (|B \nodis |B') \land (|C \nodis |C') \implies
+     \prl |B |C \nodis \prl |B' |C' .$$
+
+\goodpage
+
+Si $|B \nodis |B'$ entonces
+ $Z^{|B}_{\dot{S}_0} = Z^{|B'}_{\dot{S}'_0}$ y, por tanto,
+ $|Z^{|B}_{\dot{S}_0} = |Z^{|B'}_{\dot{S}'_0}$,
+lo que significa que cualquier stream de vectores de entrada
+ $|J(0), |J(1), \ldots, |J(\tau)$ aplicado a uno de los autómatas, |B,
+produce el mismo stream de vectores de salida
+ $|O(0), |O(1),\ldots, |O(\tau)$ que aplicado al otro, $|B'$.
+Y puesto que sucede con cualquiera, también ocurrirá con aquellos
+streams de vectores de entrada cuya primera variable repite la primera
+variable de salida. Esto prueba que:
+ $$|B \nodis |B' \implies \fdb |B \nodis \fdb |B' .$$
+
+La conjunción de estas tres pruebas, con
+ $|B = |B' \implies |B \nodis |B'$, permite concluir que:
+ $$|A \nodis |A' \implies |F(|A) \nodis |F(|A') .$$
+
+\title4 Teorema
+
+De modo análogo se prueba que:
+ $$|A \equiv |A' \implies |F(|A) \equiv |F(|A') .$$
+
+\title2 Subálgebras
+
+\title3 El determinismo
+
+Decimos que $\opd A$ es un \definition{autómata determinístico} si se cumple
+que:  $$\no{P}_{\!\!\!\opd A} = 0.$$
+
+Cualquier autómata determinístico $\opd A$ puede ser escrito utilizando,
+únicamente, los constructores:  $\srl$, $\prl$, $\fdb$, $\SINK$, $\FORK$,
+$\ONE$, $\NAND$.  Resumiendo:
+ $$\{ \opd A \} = \Re(\srl, \prl, \fdb, \SINK, \FORK, \ONE, \NAND).$$
+
+La forma canónica de los autómatas determinísticos es análoga a la
+general.  Obsérvese que si bien $\ONE$ puede ser descompuesto en los
+autómatas $\SINK$, $\FORK$, $\PROB$ y $\NAND$, en cambio $\PROB$ no puede
+ser descompuesto en los autómatas $\SINK$, $\FORK$, $\ONE$ y $\NAND$.
+
+Los autómatas determinísticos admiten dos descomposiciones, a saber, la
+de \person{Mealy} y la de \person{Moore}.
+
+La descomposición de \person{Mealy}, o en paralelo, del autómata
+ $\opd A$ queda:
+ $$\opd A = \fdb^{\no{S}_{\!\opd A}}
+   \srl \FORK_{\no{S}_{\!\opd A} + \no{I}_{\!\opd A}}
+   \prl \opd{F}^N  \opd{F}^O$$
+donde $\opd{F}^N$ es la función determinística (véase la
+\S\refsc{encaminamiento}) de estado siguiente y $\opd{F}^O$ la función
+determinística de salida.
+
+La descomposición de \person{Moore}, o en serie, del autómata $\opd A$
+tiene la forma:
+ $$\opd A \equiv  \srl \fdb^{\no{S}_{\!M}}
+   \srl \opd{F}^S \FORK_{\no{S}_{\!M}} \opd{F}^{O'}$$
+donde $\opd{F}^S$ es la función determinística de estado y $\opd{F}^{O'}\!$
+otra función determinística de salida.  Se cumple que: $\no{S}_{\!M} \geq
+\no{S}_{\!\opd A}$.
+
+\title3 Funciones
+
+Una \definition{función} es cualquier autómata |F tal que:
+$\st F = 0$.
+
+Se tiene que:  $\{ |F \} = \Re(\srl, \prl, \SINK, \FORK, \PROB, \NAND)$.
+
+Nótese que ésta es, en general, una función probabilística.  Así
+que una \definition{función determinística} $\opd F$ ha de cumplir:
+ $\no{S}_{\!\opd F} = 0$, $\no{P}_{\!\!\opd F} = 0$.
+
+Se tiene que:
+ $\{ \opd{F} \} = \Re(\srl, \prl, \SINK, \FORK, \ONE, \NAND)$.
+
+Las funciones determinísticas $\opd F$ son funciones, en el sentido
+ordinario, del string de entrada en el string de salida,
+ $\opd{F} : \B^{\no{I}_{\opd F}} \! \to \B^{\no{O}_{\!\opd F}}$.
+
+\label{encaminamiento}
+Una \definition{función de encaminamiento} es una función
+determinística en la que cada variable de salida se limita a repetir el
+valor de alguna de las variables de entrada. En la \S\refsc{La
+construcción} y la \S\refsc{Cross} las figuras muestran las funciones de
+encaminamiento.
+
+La composición en serie de funciones $\srl |F |G$  se corresponde con la
+multiplicación de matrices, $(|F_{\imath v}) \times (|G_{v o})$.
+
+\title3 Vectores y strings
+
+Es un vector todo aquel autómata |V que cumple:
+ $\inp V = 0$, $\st V = 0$.
+
+Los strings son los vectores determinísticos, esto es, aquellos
+autómatas $S$ que cumplen:
+ $\no{I}_{\opd S} = 0$, $\no{S}_{\!\opd S} = 0$, $\no{P}_{\!\!\opd S} = 0$.
+
+Todos los strings se pueden construir componiendo los autómatas $\ONE$ y
+$\ZERO$ en paralelo
+ (véase la \S\refsc{Notación automática de strings}):
+ $\{ S \} = \Re(\prl, \ONE, \ZERO)$.
+
+\title3 El álgebra de Boole
+
+El \definition{álgebra de {\sc Boole}}\ndx{Boole}{1} estudia las funciones
+determinísticas unarias, es decir, los autómatas $\opd B$ tales que:
+ $$\no{O}_{\!\opd B} = 1,\quad
+   \no{S}_{\!\opd B} = 0,\quad
+   \no{P}_{\!\!\opd B} = 0.$$
+
+Puede hacerse la generalización al álgebra automática de una de las
+construcciones típicas del álgebra de \person{Boole}.
+ $$\op{DeMorgan}(|A) = \srl \srl \prl^{\inpA}\NOT |A \prl^{\outA}\NOT.$$
+Se tiene que DeMorgan(OR) = AND, DeMorgan(AND) = OR.  Pero además,
+saliéndonos del álgebra de \person{Boole},
+ $\op{DeMorgan}(\DEL) \equiv \DEL$,
+con la particularidad de que los estados equivalentes son los opuestos.
+
+Cualquier función determinística $\opd F$ puede descomponerse en un paralelo
+de $\no{O}_{\!\opd F}$ funciones booleanas, ${\opd B}_o$:
+ $$ {\opd F} = \srl \op{Mult}_{\no{O}_{\!\opd F},\no{I}_{\opd F}}
+    \bigotimes_o {\opd B}_o$$
+donde $\op{Mult}_{m,n}$ es una función de encaminamiento ya definida (en
+\S\refsc{La construcción}).
+
+\title3 Cadenas de Markov
+
+Una \definition{cadena de {\sc Markov}}\ndx{Markov}{1} (homogénea) es
+cualquier autómata |M tal que:  $$\inp M = 0,\quad \out M = 0.$$
+ De otra manera:  $|M = \fdb^n |F_{\square}$, siendo $|F_{\square}$
+una función cuadrada, o sea:
+ $$|M = \fdb^n |F_{\square} \; : \quad
+   \st{|F_{\square}} = 0 \, , \;
+   \inp{|F_{\square}} = n = \out{|F_{\square}} \, .$$
+Un modelo markoviano $|M_M$ adopta la forma:
+ $|M_M = \fdb^n \srl  |F_{\square} \FORK_n $.
+Y un modelo markoviano oculto $|M_O$ es:
+ $|M_O = \srl  \fdb^n \srl |F_{\square} \FORK_n |F $,
+siendo |F una función cualquiera pero con $\inp F = n$.
+
+\title2 Conclusión
+
+El álgebra automática permite una fácil formalización de la semántica de
+cualquier entidad que admita ser descrita como un autómata finito binario,
+por ejemplo una computadora, un programa o un lenguaje.
+
+\subtitle Agradecimientos
+
+Un trabajo que está en esta misma línea, pero tomando la ruta de
+\person{Church} (el cálculo~$\lambda$) en vez de la de \person{Turing}
+(los autómatas finitos), y que ha servido de inspiración al presente
+Anexo es \person{Delgado}\cite{Delgado1987}. El resto de la inspiración se
+tomó del libro de texto de \person{Fernández} y \person{Sáez
+Vacas}\cite{Fernández1987}.

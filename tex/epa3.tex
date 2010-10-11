@@ -1,0 +1,888 @@
+% EPA3.TEX (RMCG19950910)
+
+\title1 El sujeto
+
+\title2 Una advertencia
+
+El conocedor simbólico marca el final de la evolución física por ser el
+asiento de toda la posterior evolución cognitiva.  No describiremos la
+evolución cognitiva con el mismo nivel de precisión y detalle con el que
+describimos la evolución física, porque todavía es un terreno poco
+explorado.  Más que explicar, esbozaremos una explicación, de manera que no
+será posible implementar un \definition{sujeto}, que así llamaremos al
+conocedor simbólico mejorado, a partir de las ideas aquí esbozadas. Del
+mismo modo, es posible que el desarrollo de la teoría llegue a demostrar que
+desde el conocedor simbólico hasta el sujeto son precisos pasos intermedios,
+pero es más probable que no.  Es incluso posible que no tenga sentido hablar
+de un conocedor simbólico que no sea un sujeto.
+
+\title2 La complejidad
+
+Supondremos que el principal problema que ha de resolver un conocedor
+simbólico es el de manejar un enorme caudal de percepciones.  Esta
+suposición, cuya bondad sólo podrá ser evaluada cuando se complete la
+teoría, se apoya en una intuición, a saber, que la gran complejidad de
+un motor sintáctico sólo puede justificarse si el problema a resolver
+es igualmente complejo.  En un problema aparente la complejidad sólo se
+puede medir por el número de variables aparentes, $\no n$, $\no v$ y
+$\no m$, y su frecuencia de cambio.
+
+Como ya vimos al tratar sobre las lógicas analíticas, la manera de
+disminuir la complejidad de un problema consiste en hacer partes, o sea, en
+hacer una traslación de la que resulte un cierto número de problemas
+trasladados más sencillos.  Esto puede hacerse también con problemas
+aparentes, dividiendo en grupos las variables aparentes, o sea, partiendo
+la apariencia.
+
+Trataremos primero la partición del problema aparente y después la del
+problema simbólico.  Si la complejidad del problema de la supervivencia para
+el sujeto es tan grande como suponemos, es muy posible que ambas sean
+necesarias, aunque la partición del problema aparente suponga una etapa de
+preprocesamiento no simbólico que, teóricamente, podríamos omitir. No la
+omitiremos porque ayuda a entender y explica algunas peculiaridades.
+
+\goodpage
+
+\labeled\title2 La partición aparente
+
+\title3 La modelación analítica
+
+Se puede suponer que el universo es un todo compuesto de varias partes. Para
+representar más claramente la situación tomaremos el álgebra automática como
+base de estos razonamientos.  En este caso se puede suponer que el
+autómata~|R, que es la realidad, o sea, el reflejo interno del universo
+exterior, se compone de una serie de autómatas $|R_i$ conectados de una
+determinada manera.  La modelación puede entonces reconstruirse en la forma
+de dos problemas relacionados.  Uno, el
+\definition{problema de la partición}, consistirá en determinar cómo
+están conectadas las partes $|R_i$, esto es, qué variables de salida de
+cada uno son qué variables de entrada de cada otro.  El otro problema, la
+\definition{particularización}, consistirá en modelar cada parte, esto
+es, determinar cómo es cada uno de los autómatas $|R_i$.
+
+La efectividad de la modelación analítica será mayor si el
+conexionado es tal que la modelación de una parte puede ser hecha
+independientemente de la modelación de la mayoría de las otras partes.
+Esta condición se cumpliría completamente si ninguna variable de salida
+de una parte $|R_j$ fuera una variable de entrada a otra parte $|R_k$; esto
+es, si la realidad~|R fuera, salvo reorganizaciones o encaminamientos de
+las variables, un paralelo de sus partes, $|R = \prl^n |R_i$.
+
+Otra condición que se impone a la modelación analítica es que el
+problema del aprendiz resultante, o sea, el problema de la supervivencia en
+el que la realidad~|R ahora compuesta de varias partes $|R_i$ sustituye al
+universo~|U, pueda ser descompuesto en varios problemas independientes.
+Esta condición se cumpliría completamente en las mismas circunstancias
+que la condición anterior, o sea, si $|R = \prl^n |R_i$.
+
+En general el requisito de independencia luchará contra la condición de
+modelación que requiere que puedan predecirse las reacciones del
+universo.  Cuando prevalece el requisito de independencia sobre la
+condición de modelación ocurre una \definition{ilusión} que es, pues,
+una distorsión que se impone a la realidad para simplificarla.
+
+\title3 La resolución analítica
+
+Hemos tratado los universos partidos, y ahora trataremos las soluciones
+partidas, porque también puede suponerse, si ello proporciona algún
+beneficio, que la solución es un todo partido.
+
+La resolución de un problema por partes, o \definition{resolución
+analítica}, consiste en determinar la disposición y el contenido de las
+partes, de modo que la solución sea un todo adecuadamente partido.  El
+número de partes puede ser uno,~1.
+
+La resolución analítica de un problema, como la modelación analítica, puede
+verse como la resolución de dos subproblemas:  el problema de la partición,
+que consiste en determinar la mejor partición del todo, y la
+particularización, que, en este caso, consiste en determinar el contenido de
+cada parte de manera que el todo solucione el problema.
+
+También en este caso, como en el de la modelación analítica, para
+poder sacar partido de la partición, conviene que la particularización
+de cada parte pueda ser hecha con independencia de la de las demás.
+
+\title3 La partición y la particularización
+
+Dada la naturaleza de las lógicas analíticas, la resolución del
+problema de la partición puede ser hecha gradual o reiteradamente.  Es
+decir, que una vez partido el todo, la particularización de una parte
+puede recomenzar el ciclo, esto es, la parte puede ser partida.
+
+El problema de la partición y la particularización están
+relacionados.  Si vale suponer que la bondad de una partición es igual a
+la bondad de la mejor de sus particularizaciones, entonces es posible una
+resolución a dos velocidades, una lenta en la que se busca la mejor
+partición y otra, más rápida, en la que se busca, para cada
+partición propuesta, la mejor particularización.  Pero también son
+posibles otras modalidades en las que la interacción entre ambos
+problemas es menos jerárquica.  Por ejemplo, puede ser interesante
+modificar una de las partes de la partición, digamos uniéndola a alguna
+otra, cuando se descubre que su particularización es difícil.
+
+\labeled\title3 La atención
+
+A la facultad de resolver una de las partes del problema, y no las otras
+partes, la denominamos \definition{atención}.  Determinar qué partes
+atender, y cuáles no, es resolver un problema que denominamos el
+\definition{problema de la atención}.
+
+La atención permite concentrar el uso de los recursos en una de las
+partes en las que ha quedado partido un problema, lo que, dada la
+inevitable finitud de los recursos disponibles, justifica la necesidad de
+una resolución analítica del problema de la supervivencia.
+
+La atención presupone la independencia de las partes.  La atención
+convierte a la parte en \definition{objeto}.
+
+\goodpage
+
+\title3 Las ilusiones
+
+Hemos visto que algunas ilusiones se deben a que la resolución del
+problema de la partición en la modelación es demasiado rígida,
+tendiendo a hacer objetos donde sería mejor no hacerlos.  Otras ilusiones
+se deberán, seguramente, a fallos en la resolución del problema de la
+atención en la modelación, que provocarán que no se atienda lo que
+efectivamente importa.
+
+\title3 El preproceso
+
+Podemos imaginar un sujeto que efectúe una modelación analítica,
+resolviendo o no, analíticamente o no, algunos de los problemas parciales.
+Los problemas solucionados en esta etapa previa de preprocesamiento no
+necesariamente simbólico, pero sí analítico, no alcanzarán el
+simbolismo.
+
+En el caso de este sujeto con preprocesamiento de la apariencia, lo que
+alcanza la parte simbólica no es la apariencia bruta sino una apariencia
+de objetos.  Esto no es fundamental para la teoría del sujeto, pero puede
+explicar algunas peculiaridades, como las ilusiones, que afectan a las
+personas.
+
+
+\title2 La partición simbólica
+
+\labeled\title3 Un planteamiento general
+
+La partición simbólica se produce al aplicar a la expresión que
+representa un determinado problema, $\problem$, una traslación
+$\traslation$ que la transforma en otra expresión que integra a un cierto
+número de expresiones, cada una de las cuales representa un subproblema, o
+sea, un nuevo problema.  La manera de integrar estas expresiones debe
+indicar los condicionantes que cada subproblema impone sobre el problema
+total, por ejemplo, si solucionar un subproblema concreto es indispensable
+para solucionar el problema total o si con solucionar uno de los
+subproblemas es suficiente.  Podemos suponer que los subproblemas quedan
+integrados en una expresión booleana que indica estas condiciones, y lo
+representaremos así:
+ $$\traslation(\problem) = \land_i \lor_j \lnot_k \; \problem_{ijk} .$$
+
+Este planteamiento es demasiado general y, sobre todo, es demasiado
+rígido, de modo que es posible que no se pueda alcanzar una solución que
+cumpla todas las condiciones, en cuyo caso todo el costoso proceso
+resolutivo sería inútil.
+
+\labeled\title3 La consciencia
+
+A continuación, no siendo capaces de diseñar completamente un sujeto,
+nos limitaremos a apuntar algunas posibilidades.
+
+Para posibilitar la resolución de un gran número de problemas es necesario
+resolver muchos de ellos simultáneamente, en paralelo, y para asegurar la
+coherencia y la armonía de todos se puede erigir una estructura jerárquica
+que controle el proceso.  Sea la \definition{consciencia} el nivel superior
+de esta jerarquía, cuyo objetivo es asegurar la unidad del sujeto y que para
+ello sólo tratará un único problema, en cada momento el más difícil de
+reconciliar con los ya solucionados.  Esto significa que el sujeto tendrá un
+pensamiento básicamente paralelo pero sólo tendrá consciencia de una
+secuencia de pensamiento.
+
+La herramienta de trabajo de la consciencia es el yo.  El yo es la solución
+encontrada hasta el momento, de modo que cuando un nuevo problema alcanza la
+consciencia lo primero es comprobar si el yo, tal como está definido en ese
+momento, soluciona el problema.  Para ello lo más probable es que haya de
+reducirse el yo total a los aspectos, en forma de valores y creencias, que
+son de interés en el problema planteado (véase la
+\S\refsc{creencias}).
+
+La consciencia reconstruye un único problema del cual el yo es la solución
+única. Llamaremos \definition{problema del sujeto} a este problema, que es
+una versión simbólica y resumida del problema interiorizado de la
+supervivencia. Se efectúan tres resúmenes: primero la apariencia bruta se
+simplifica como una apariencia de objetos, después, de entre todos los
+problemas simbólicos a resolver en cada momento, sólo uno alcanza la
+consciencia donde, por último, este problema se unifica con todos los
+problemas que ya la alcanzaron con anterioridad.
+
+La consciencia debe disponer de canales de comunicación con los niveles
+inferiores.  La utilidad principal de estos canales descendentes será la de
+trasladar información relativa al filtrado de los problemas ascendentes. Por
+ejemplo, un problema mecanizado no debe alcanzar la consciencia; y
+recuérdese (en la \S\refsc{mecanización}) que el conocedor simple ya era
+capaz de mecanizar problemas.
+
+Como consecuencia de esta organización del sujeto, si fuera precisa la
+comunicación entre sujetos, entonces lo más eficiente sería comunicar
+los problemas, soluciones y resoluciones que alcanzan la consciencia,
+porque son los más importantes para el sujeto, y utilizando la misma
+sintaxis que utiliza la mente del sujeto, porque al no requerir
+traducción exigiría el mínimo esfuerzo de computación.
+
+\goodpage
+
+\labeled\title3 El yo
+
+El \definition{yo} es la solución del problema del sujeto, por lo que
+sustituye a la incógnita, o sea, ocupa en el problema el lugar de la
+libertad, y por esto el sujeto experimenta el yo como el lugar en donde
+está el \definition{libre albedrío}.  Pero el propósito del yo, como
+el de la consciencia, es dar unidad al sujeto, por lo que el yo ha de ser la
+solución única de todos los problemas que van llegando a la consciencia.
+Así pues, la tarea del yo consiste en facilitar la interacción entre
+distintos problemas, trasladando condiciones desde los ya pasados hasta el
+presente.
+
+Por consiguiente, el yo tiene que ser una solución abierta al futuro, y
+no una solución definitiva, o cerrada. El yo no puede ser un
+comportamiento, ya que si el yo, que compendia el pasado del sujeto, fuera
+un comportamiento, entonces sería imposible determinar, a la llegada de
+cada nuevo problema a la consciencia, las consecuencias que acarrearía
+sobre los problemas previamente solucionados, pero ya olvidados, modificar
+tal comportamiento. La consciencia necesita retener más información que
+la contenida en un comportamiento para resolver su difícil problema.
+
+Por no hacer el problema de la consciencia aún más arduo es por lo que los
+problemas mecanizados, que son aquéllos a los que ya se les ha encontrado
+una solución definitiva, no deben alcanzar la consciencia. Incluso aquellos
+otros problemas para los que el sujeto no ha encontrado el comportamiento
+que los reduce, o sea, no mecanizados, pero de los que conoce un modo de
+resolución que los soluciona definitivamente, también deben ser apartados de
+la consciencia.
+
+Eliminados de la consciencia aquellos problemas para los que el sujeto tiene
+una solución o, al menos, una resolución definitiva, sólo quedan en
+ella los problemas abiertos.  Por esto el sujeto, en vez de codificar el yo
+como una solución, cerrada, codifica el yo como un problema, abierto.  La
+tarea de la consciencia es así factible, ya que si el nuevo problema es
+idéntico al anterior, excepto porque incluye una condición adicional,
+entonces la solución del nuevo problema también es solución del
+anterior.  Además, puesto que el sujeto es un muy potente resolutor de
+problemas simbólicos, la transición desde el problema hasta su
+solución le resulta fácil, y el sujeto puede usar, y usa, el problema
+para referirse perifrásticamente a su solución.  El yo se presenta, a la
+vez, como el problema del sujeto y su solución.
+
+\label{creencias}
+La tarea de la consciencia consiste en reformular el nuevo problema que la
+alcanza como una condición adicional del problema anterior. Denominamos
+\definition{creencias} a las condiciones que definen el yo. Las creencias
+son acumulativas.
+
+La acumulación de condiciones vale hasta que el problema se queda sin
+solución.  Este yo paradójico, que es problema pero no solución (véase la
+\S\refsc{Una digresión paradójica}), es inviable. Para paliar la situación,
+el sujeto limita el ámbito de aplicación de las creencias conflictivas
+estableciendo qué creencias son pertinentes en cada circunstancia. Llamamos
+\definition{valores} a las condiciones que rigen sobre las creencias, o
+sobre otros valores, siendo condiciones de condiciones.  A diferencia de las
+creencias, los valores no son acumulativos, ya que son jerárquicos.
+
+Cuando aparecen contradicciones entre los propios valores tiene lugar una
+crisis de valores.  Entonces el sujeto puede ignorar, momentáneamente, la
+nueva creencia, o alguna de las creencias previas que ésta contradice. A
+la larga, sin embargo, esta negación de la realidad amenaza la coherencia
+del sujeto.  Otra posibilidad, más compleja, consiste en reorganizar el
+sistema de valores. Y si la consciencia no fuera capaz de superar la crisis
+de valores, entonces la reestructuración, que sería aún más
+complicada, habría de alcanzar los dominios del inconsciente, cuyo estudio
+inició \person{Freud}\cite{Freud1900}.
+
+Esas peligrosas situaciones paradójicas en las cuales el problema del
+sujeto se queda sin solución han de ser excepcionales o, dicho de otro
+modo, el problema del sujeto tendrá normalmente muchas soluciones. Luego
+en circunstancias normales, los valores y creencias que delimitan el yo son
+insuficientes para determinar el comportamento consciente del sujeto, y de
+aquí la necesidad de la voluntad.  La \definition{voluntad} es el dato
+libre, o sea, no condicionado por el problema de la supervivencia, que
+utiliza el sujeto para determinar su comportamiento consciente, una vez
+considerados sus valores y sus creencias. Podemos llamar \definition{gustos}
+a las pautas que organizan la voluntad.
+
+Mientras el aprendiz solamente modelaba la apariencia, el sujeto modela
+todo el problema de la supervivencia.  Así que conviene definir la
+realidad como aquella parte de la condición del problema que sustituye
+convenientemente a la apariencia, porque de este modo vale tanto para el
+aprendiz como para el sujeto.  Definida de esta manera, la realidad del
+sujeto es gradual, ya que los valores y las creencias son tanto más
+reales cuanto más útiles resultan en la predicción de la futura
+apariencia.
+
+No iremos más allá.  Lo importante es que conceptos tan escurridizos
+como consciencia y yo pueden corresponder a entidades operativas dentro de
+la teoría presentada.
+
+\goodpage
+
+\labeled sujeto\title2 Conclusión
+
+Un \definition{sujeto} es un conocedor simbólico capaz de enfrentarse a un
+problema de la supervivencia complejo.  Para ello dispone de una estructura
+de resolución jerárquica a cuya cúspide denominamos consciencia.  El
+objetivo de la consciencia es dar unidad al sujeto.  La herramienta de la
+consciencia es el yo.
+
+El yo es la solución del problema que, al resolverse, determina el
+comportamiento consciente del sujeto, pero no cristaliza como
+comportamiento, sino que permanece definido como problema. Por esto, el yo
+es libertad condicionada, siendo los valores y las creencias las
+condiciones que lo definen por delimitación.
+
+El hilo de la consciencia en donde habita el yo del sujeto es el resumen de
+la trama de corrientes inconscientes que se urden con la apariencia de
+objetos resultante del preprocesamiento no simbólico de la apariencia
+bruta.
+
+\wverb\auxf"\iverb\tocf|\goodpage|" % \goodpage in the toc
+
+\labeled La solución\title1 La soluci^^f3n
+
+\title2 Segunda advertencia
+
+Hemos descrito una cierta secuencia resolutiva del problema aparente.  La
+secuencia tiene algún interés en sí misma, pero sería mucho más
+interesante si tuviese alguna relación con la evolución
+darwiniana\cite{Darwin1859} de la que es resultado la persona.
+
+A continuación trataremos de deducir algunos rasgos del sujeto.  Si alguna
+persona piensa que tales rasgos son imposibles en una persona, entonces o
+bien estamos deduciendo incorrectamente la filosofía del sujeto o bien la
+secuencia resolutiva mostrada sólo tiene el interés de ser una de las
+resoluciones teóricas del problema aparente.
+
+Debe advertirse que el contenido de este capítulo es filosófico,
+metafísico según veremos, por lo que sus aseveraciones no pueden ser
+verificadas objetivamente como las de los capítulos precedentes.  Por
+esta razón pasaré a ser beligerante y utilizaré la primera persona
+para expresar mis opiniones.
+
+
+\title2 El subjetivismo
+
+El sujeto no sabe del sujeto, sino que el sujeto se ve como su yo.  Yo soy
+un yo sabiéndome yo.
+
+El yo es libertad ejercitada, o sea, es libertad condicionada por la
+biografía y la necesidad de vivir.  Yo soy libre, dispongo de libre
+albedrío.
+
+El sujeto trata, sin descanso, de no fallar en la resolución del problema
+aparente de la supervivencia.  Yo quiero vivir.
+
+El sujeto tiene una lógica simbólica, con sintaxis y semántica.  La
+sintaxis es lo que permite pasar, de tratar soluciones, a tratar problemas
+y resoluciones.  Hay un problema y yo soy la solución.
+
+Pero algún sujeto, como resolutor general de problemas, puede llegar a
+percatarse de que si el problema de la supervivencia tuviera una
+solución, entonces no le haría falta ser un resolutor general de
+problemas y le bastaría con ser un ejecutor de la solución concreta.
+Yo moriré.
+
+El problema que llega a la consciencia del sujeto, es decir, el problema
+del sujeto, es un resumen extremado del problema de la supervivencia.  Es
+un problema interior, simbólico o sintáctico, que resulta de la
+traslación del problema exterior de la supervivencia.  Yo estoy en un
+mundo sintáctico.
+
+El sujeto no puede representarse algo que no sea representable en su
+lógica.  Por esto el sujeto considera que su lógica puede explicarlo
+todo, es decir, considera que es completa, comprensiva.  Yo puedo saberlo
+todo.
+
+La sintaxis exige una gran cantidad de recursos de computación y tiene
+autonomía, aunque carece de valor en cuanto pierde la referencia
+semántica que, en última instancia, proviene del problema de la
+supervivencia.  Yo puedo saber absurdos, paradojas.
+
+La \definition{filosofía subjetiva} mantiene la primacía de la
+apariencia hasta sus últimas consecuencias.  O sea, la filosofía
+subjetiva postula que puede prescindirse del problema exterior y de la
+lógica externa pero no de la apariencia exterior y, si se mantiene el
+problema interior y la lógica interna, nada cambia visto desde el
+interior.
+
+
+\labeled\title2 El mundo
+
+El sujeto modela, no solamente la apariencia, sino el problema de la
+supervivencia entero.  En el problema del sujeto, la realidad sustituye a
+la apariencia, o sea, al exterior.  El sujeto es libre de hacer su
+voluntad, pero si no somete la realidad a la apariencia, entonces errará
+sus predicciones y sus cálculos serán equivocados.  Entre la libre
+voluntad y la sometida realidad se encuentra la libertad en todos sus
+grados.
+
+Queda el todo, que llamamos \definition{mundo}, partido en
+dos\cite{Schopenhauer1818}: la realidad, exterior y sometida a las leyes de
+la naturaleza; y yo, interior, que residiendo en la libertad me rijo por mi
+voluntad. La realidad no lo es todo.  Yo quedo fuera de la realidad.  La
+libertad es un concepto ajeno a la realidad.
+
+
+\title2 El conocimiento
+
+\title3 La descripción
+
+La realidad es la mejor descripción que tenemos de la apariencia externa.
+Se puede suponer, si ello tiene algún valor epistemológico, que la
+apariencia externa es generada por el \definition{cosmos}.  Si se acepta
+esta suposición, entonces se sigue que la realidad y el cosmos deben de
+ser, aproximadamente, iguales.
+
+La realidad tiene como objetivo inmediato permitir la solución del
+problema del sujeto y como objetivo final permitir la solución del
+problema de la supervivencia.  Para cumplir ambos objetivos, la realidad
+tiene que describir la apariencia externa, ésta es la
+\definition{exigencia descriptiva}.  Interesan las descripciones que
+permitan prever lo que pasará, ya que como vimos en el caso del aprendiz
+(en la \S\refsc{El modelo}), el beneficio de la lógica interna se realiza
+si la realidad adelanta a la apariencia.  En resumen, \definition{conocer}
+es describir y el \definition{conocimiento} individual es la realidad de
+cada uno.
+
+Una realidad determinística facilita la resolución del problema del
+sujeto.  A la exigencia de una realidad determinística la denominamos
+\definition{exigencia determinística} y su campeón fue
+\person{Einstein}.  Pero la exigencia descriptiva es más fuerte que la
+determinística, como arguyó \person{Bohr}, porque la primera atañe al
+problema y la segunda a su resolución.
+
+\label{ciencia}
+La tarea de definir una realidad interpersonal, teniendo en cuenta la
+exigencia descriptiva, es denominada \definition{ciencia}.  El resultado de
+la ciencia, denominado conocimiento científico, es una descripción de la
+apariencia externa de validez social realizada en cierto lenguaje
+simbólico.  Llamaremos \definition{matemáticas} a la rama de la ciencia
+interesada en el lenguaje simbólico descriptivo y \definition{física} a
+la rama de la ciencia interesada por las descripciones.
+
+La realidad es objetiva.  Esto significa que es imposición, que,
+independientemente de la voluntad del yo, se puede comprobar si una
+descripción salva la exigencia descriptiva, o no. El conocimiento es
+objetivo, por serlo cada realidad.  Surgen
+dificultades\cite{Kuhn1970}$^,$\cite{Feyerabend1988} porque la realidad del
+sujeto es gradual y su apariencia no es la apariencia bruta, de manera que
+resulta difícil distinguir la apariencia (la observación) de la realidad (la
+teoría), aunque en la práctica científica no parece imposible valorar el
+alcance predictivo de las teorías.
+
+Ni la realidad ni su versión social, el conocimiento científico, son
+definitivas.  Esto es consecuencia de que el problema de la modelación es
+aparente (véase la \S\refsc{modelación aparente}), y por lo tanto no tiene
+una solución definitiva.
+
+
+\title3 La física
+
+Los fenómenos físicos son, en última instancia, mediciones.  Medir es
+comparar contra cierto patrón elegido convencionalmente.  Como no tiene
+sentido medir el patrón, resulta que cualquier teoría física completa
+ha de ser paradójica.
+
+Convendría tener todo el conocimiento reducido a una única descripción.
+Porque, de haber más, cada descripción proporcionaría una previsión y, no
+siendo coincidentes, no podría asegurarse lo que ocurriría en el futuro.
+
+\labeled\title2 El saber
+
+\title3 La explicación
+
+No todo el saber es conocimiento.  Llamamos \definition{saber} a las
+explicaciones de la filosofía.  Decimos que la \definition{filosofía}
+explica porque llega hasta el final, es decir, hasta mi.
+
+Es \definition{explicación} la solución que yo juzgo buena.  El cambio
+es peligroso, porque morir es cambiar.  El no cambio es bueno, porque no
+cambiar es vivir.  Para hacer bueno lo peligroso ha de convertirse el
+cambio en no cambio.  Por esto, \definition{explicar} es convertir el
+cambio en no cambio.  El no cambio no ha de ser explicado.
+
+Si algo cambia puedo pensar que no cambia, puedo pensar que toma diferentes
+aspectos.  Llamo \definition{ente} a aquello que no cambia sino de aspecto.
+Para que un ente no me perturbe debe ser inmutable y sus cambios de aspecto
+deben ser reducidos a leyes inmutables.  Una ley inmutable enuncia que un
+ente determinado, en determinadas condiciones, siempre sufre un determinado
+cambio de aspecto.  Puesto que ocurre siempre así, el cambio no debe ser
+considerado cambio.  Empero, para poder despreciar el cambio, debe
+concederse una mayor importancia a la ley inmutable que al cambio por ella
+reducido.  Niego el cambio inexplicable, o
+\definition{caos}, porque me asusta.
+
+La explicación es lo que yo tomo por bueno, y tomo la muerte por mala. Por
+esto la urgencia de la explicación es distraer la muerte.  Dentro de la
+explicación estoy yo y mi vida.  Si la explicación es completa y lo cubre
+todo, entonces he eliminado la muerte.  Si hay distintas explicaciones para
+las distintas circunstancias, entonces no hay una explicación completa.  Por
+lo tanto, quien consigue una explicación completa y única niega la muerte y
+su vida no es absurda; pero mi explicación no es completa.
+
+Sé el pasado porque ya lo he convertido en no cambio.  Ignoro el futuro
+porque es imposible eludir la muerte y convertirla en no cambio.  Aunque es
+tan seguro que moriré como que he nacido, no es posible explicar la
+muerte.
+
+\labeled\title3 La metafísica
+
+La ciencia no sabe las explicaciones últimas, porque no me alcanza; la
+ciencia describe.  Una descripción es una explicación, aunque no
+concluyente.  Conocer es convertir la cambiante apariencia en símbolos
+permanentes.  La explicación abarca todo el problema, incluye tanto la
+condición, y en ella la realidad, que es el modelo de la apariencia, como
+la libertad, que soy yo.
+
+Denominamos \definition{saber puro} a aquel saber que no es conocimiento.
+Por ejemplo, los fundamentos del conocimiento no son conocimiento, son
+saber puro.  Denominamos \definition{metafísica} a la parte de la
+filosofía que no es ciencia, es decir, la metafísica es el dominio del
+saber puro.
+
+La realidad es objetiva, puede ser refinada para que describa mejor la
+apariencia externa, pero al abandonar los dominios del conocimiento, y
+penetrar en los del saber puro, se pierde toda referencia externa.  Por
+consiguiente la metafísica, sin posibilidad de contraste contra el
+exterior, no es objetiva, es libre, es subjetiva.  El saber puro se refiere
+a mi, y yo soy libertad y voluntad.
+
+
+\title3 Historia
+
+Desde que \person{Descartes}\cite{Descartes1641} argumentó que el saber
+seguro era el saber dentro del yo, el problema de la epistemología ha sido
+determinar la posibilidad del conocimiento.  La solución del propio
+\person{Descartes} se basa en que yo soy finito pero tengo la idea del
+infinito.  Como lo infinito no cabe en lo finito, tiene que existir lo
+infinito.  Lo infinito es Dios, y Dios quiere que yo conozca el universo por
+Él creado.
+
+Para el empirismo británico el conocimiento es el resultado de aplicar la
+operación de inferir a los datos de la experiencia, o sea, a la apariencia.
+Pero con \person{Hume}\cite{Hume1748} esta posición llega al escepticismo,
+porque ``si hubiera alguna sospecha de que el curso de la naturaleza pudiera
+cambiar, y que el pasado pudiera no ser pauta del futuro, toda experiencia
+se haría inútil, y no podría dar lugar a inferencia o conclusión alguna.  Es
+imposible, por tanto, que argumentos algunos de la experiencia puedan
+demostrar esta semejanza del pasado con el futuro; puesto que todos estos
+argumentos están fundados sobre la suposición de aquella semejanza''.
+
+\person{Kant}\cite{Kant1787} eliminó el {\it Deus ex machina}, superó
+el escepticismo y dio la primera solución al problema de la posibilidad
+del conocimiento. Descubrió que es precisa una lógica del yo o, según
+la expresión de \person{Kant}, descubrió que existen los juicios
+sintéticos {\it a priori}, y entendió que el conocimiento era la
+apariencia del universo reducida a la lógica del yo o, según
+\person{Kant}, reducida a las categorías.
+
+Pero para \person{Kant} las categorías eran necesarias (véase en su
+``Crí\-tica de la razón pura'', edición de 1787, la \S27 de la analítica de
+los conceptos de la lógica transcendental).  Esta proposición metafísica
+tiene como consecuencia, no sólo la posibilidad del conocimiento, sino
+también la posibilidad de un conocimiento absoluto o racional.  La lógica,
+definida por sus categorías, ha de ser única si las categorías son
+necesariamente como son.  Llamaremos \definition{lógica universal}, o
+\definition{razón}, a esta lógica única.
+
+Supuesta la existencia de la lógica universal, si mi conocimiento salva
+la apariencia, como se creía que lo hacía la física de
+\person{Newton}, entonces la realidad es de la única manera racionalmente
+posible.  Mi conocimiento es el conocimiento, no hay otro posible.  La
+ciencia queda así fundada racionalmente, esto es, la ciencia no necesita
+de la metafísica para dar explicaciones completas y concluyentes.
+
+Pero la necesidad de las categorías es un postulado demasiado exigente, y
+sólo es justificable si, por imperativos metafísicos, deseamos tener la
+posibilidad de alcanzar un conocimiento absoluto.
+
+\labeled\title3 El límite
+
+La necesidad de las categorías me coloca en una posición inmerecidamente
+favorable.  ?`Por qué había yo de tener un conocimiento absoluto? (esto es,
+un conocimiento transcendente).  El subjetivismo es pesimista, estima que el
+conocimiento no es absoluto y que las explicaciones últimas, que el
+conocimiento remite al saber puro, son libres e incompletas.  Que mi
+conocimiento no sea absoluto tiene el atractivo de generalizar y congeniar
+con dos convicciones anteriores:  que mi posición no es absoluta, convicción
+impuesta por \person{Galileo}, y que mi tiempo no es absoluto, convicción
+impuesta por \person{Einstein}.
+
+\smallskip
+Explicación subjetivista: Lo primero es el problema de la supervivencia, o
+sea, yo quiero vivir pero yo moriré.  Puesto que el problema de la
+supervivencia se define en apariencias, las mejores soluciones son
+aquéllas capaces de resolver cualquier problema.  Llamamos sujeto al
+resolutor general que, para poder resolver los problemas, ha de ser capaz de
+representarlos en su lógica simbólica.  Un problema es la expresión de
+cierta libertad y cierta condición.  Cuando el sujeto se representa el
+problema, su explicación es que la libertad soy yo y la condición es la
+realidad.  Es entonces cuando el sujeto descubre que lo primero es el
+problema de la supervivencia, o sea, yo quiero vivir pero yo moriré.
+\smallskip
+
+La explicación subjetivista establece que la muerte es la causa de la
+explicación.  La explicación de la muerte sería la explicación de la causa
+de la explicación.  Por consiguiente, para el subjetivismo, ni la muerte ni
+la vida tienen explicación.  El sujeto es un buscador compulsivo de
+explicaciones y, por esto, el sujeto busca explicaciones incluso donde no
+las hay.
+
+Los límites del saber quedan establecidos así por el subjetivismo.  Las
+descripciones del conocimiento pueden seguirse hasta llegar, finalmente, a
+las explicaciones del saber puro.  Esto consiste en ubicar la realidad en el
+más amplio marco del problema de la supervivencia en el que estoy yo. Y las
+explicaciones del saber puro son libres pero incompletas.
+
+El saber puro es libre porque se refiere a mi, que soy libertad.  El saber
+puro es incompleto porque la muerte no puede explicarse.  La muerte es el
+cambio que no puede tornarse no cambio.  La muerte es el cambio.
+
+Si defino el \definition{sentido} como algo que me justifica desde afuera,
+algo cuyo valor es absoluto, o simplemente me transciende, entonces ni el
+mundo exterior ni yo mismo ni mi vida ni mi muerte tienen sentido.
+
+Se explica para vivir, pero vivir no tiene explicación.
+
+Morir tampoco.
+
+\title3 La tolerancia
+
+Para el subjetivismo, el saber puro es libre e incompleto.  En negativo,
+esto significa que la metafísica no tiene condiciones y que la
+metafísica no es completa.  Esta proposición metafísica, el saber
+puro es libre e incompleto, hace al subjetivismo tolerante y resignado.
+
+Si la metafísica es incompleta, entonces no tenemos respuesta a todas las
+preguntas.  Explicarlo todo es útil, pero sólo hasta que queremos
+explicar la causa de la explicación.  Si la metafísica no tiene
+condiciones, entonces cualquier metafísica es posible.  Así que la
+metafísica subjetiva no excluye a ninguna otra metafísica.  Todo mi
+saber es demostrable y patente; pero también lo es el tuyo aunque difiera
+del mío.
+
+Estoy diciendo que si se acepta la metafísica subjetivista, entonces se
+sigue que cualquier metafísica es posible.  Aunque lo parezca, esto no es
+una contradicción, ya que también la metafísica subjetivista es posible.
+Pero es que, además, es un hecho que distintas personas sostienen
+metafísicas diferentes, por lo que cualquier metafísica que excluya a las
+demás es incapaz de acomodar este hecho.
+
+\goodpage
+
+\title3 El individuo
+
+Puesto que mi lógica no es absoluta ni me transciende, mis explicaciones
+de la apariencia no son más valiosas que yo, o más exactamente, mis
+descripciones de la apariencia valen menos que mi vida.
+
+Tú, una flor y el sol recibís significado de mi querer vivir.  Es un
+significado subjetivo, no esencial.  Si yo no tuviera ansia de vivir,
+entonces no necesitaría, ?`para qué?, explicar las apariencias; no
+habría problema ni realidad. Mi vida da significado a las descripciones y,
+en general, a las explicaciones.
+
+El \definition{individuo}, el yo que aparece con el sujeto, hace que
+parezca que la vida, o sea, el problema de la supervivencia, es un problema
+del individuo.  No es así.  Que la consciencia de la vida aparezca en
+individuos, en yoes indivisibles, no implica que la vida del individuo sea
+toda la vida.  Además, ocurre que si yo fuera el único ser vivo,
+entonces moriría rápidamente.
+
+Mi vida es más que yo.  Mi vida está constituida por muchos otros yoes
+y no yoes.  El yo es intransferible, así que el otro yo es
+\definition{él}.  Disponer de una lógica simbólica y de un yo no es
+imprescindible para vivir.  Una flor vive, aunque no se percate de ello.
+
+\label{comunicación}
+Eres \definition{tú\/} aquel otro yo, o él, con el que me estoy
+comunicando.  Tú y yo nos traspasamos significados.  Para ello es
+necesario que tú y yo compartamos la misma semántica.  Compartir la
+sintaxis es útil, pero lo imprescindible es compartir la semántica, de
+manera que es posible comunicarse con animales que no disponen de una
+lógica simbólica, pero que comparten nuestra vida.
+
+Porque mi vida no soy únicamente yo y porque yo puedo comunicarme contigo
+y con vosotros, es inteligente intentar la solución conjunta del problema
+de la supervivencia.  Para que la comunicación sea útil debe eliminar
+aquello que sea peculiar de cada individuo.  Denominamos
+\definition{principio de intersubjetividad} a la eliminación de lo
+peculiar en la comunicación.
+
+Por razones análogas, la ciencia (véase la \S\refsc{ciencia}) también
+debe acatar el principio de intersubjetividad.  Por ejemplo,
+\person{Einstein} usó explícitamente el principio de intersubjetividad
+en su teoría general de la relatividad, al señalar que las leyes físicas
+deben tener la misma forma sin importar cómo se mueva el sistema de
+referencia espaciotemporal respecto al que se efectúan las medidas.
+
+\goodpage
+
+\title3 Varias soluciones
+
+El problema es que yo quiero vivir pero moriré.  El problema tiene varias
+soluciones, o explicaciones, metafísicas.
+
+\title4 Inmortalismo
+
+La primera reacción contra un problema es negarlo.  No hay problema
+cuando la condición, la realidad, se somete al deseo.  Yo quiero vivir y
+yo no moriré.
+
+El cristianismo y muchas otras religiones son inmortalistas.  Yo no
+moriré.  El \definition{alma} no cambia al morir, lo que permite
+convertir a la muerte, de cambio, en no cambio.
+
+El \definition{inmortalismo} niega el problema al negar la muerte.
+
+\title4 Neutralismo
+
+También podría suceder que el problema fuese un problema, que el
+problema no tuviera solución, pero que el problema pudiera ser
+neutralizado.  Para neutralizar un problema basta desestimar su
+valoración.  Es decir, la eliminación del deseo de vivir neutraliza el
+problema.  Yo no quiero vivir y yo moriré.
+
+El budismo es neutralista.  Culpa del sufrimiento y de la muerte al deseo.
+El estoicismo también es neutralista.
+
+Para el \definition{neutralismo} el problema queda neutralizado eliminando
+el deseo.
+
+\title4 Fatalismo
+
+Podría ser que el problema no fuera, a pesar de parecerlo, un problema. Y
+si ocurre que alguien lo tiene por problema, se puede conceder que es un
+pseudoproblema, es decir, un problema ilusorio.  Parece que yo quiero vivir
+y que yo moriré, pero esto es sólo una ilusión, es una manera de
+hablar.
+
+\label{materialismo}
+Según el \definition{materialismo} solamente existe aquello que puede ser
+descrito.  Por lo tanto no hay metafísica, y toda la filosofía se
+reduce a la ciencia.  La muerte no es un problema, porque incluso al morir
+se conserva la energía.  El libre albedrío es ilusión.
+
+Para el \definition{fatalismo} no hay problema, ya que tampoco hay
+libertad.
+
+\title4 Transcendentalismo
+
+La explicación transcendente utiliza el siguiente razonamiento:  yo no
+puedo entender por qué me moriré porque, aunque mi muerte sí tiene
+explicación, ocurre que la explicación de mi muerte queda fuera del
+alcance de mi lógica.
+
+Es difícil, o imposible, descubrir los límites de la lógica, porque ello ha
+de hacerse desde dentro de la lógica, y la lógica es la totalidad de lo que
+me es posible.  Si se sospecha, como lo hace el taoísmo, que las
+limitaciones de la lógica son las causantes de nuestros males, y que el bien
+está más allá de la lógica, entonces la paradoja, lo que no puede ser
+sabido, se convierte en lo bueno.  Dios, que para los cristianos es la
+explicación final, también aúna la bondad completa con la omnipotencia y la
+justicia absoluta, lo cual resulta paradójico. Pero el cristianismo sólo
+recurre a la paradoja para resolver problemas secundarios, por ejemplo para
+explicar la razón del sufrimiento injusto, mientras que el problema
+principal lo resuelve por el expediente de la inmortalidad.
+
+Para el \definition{transcendentalismo} el problema tiene una solución
+desconocida.
+
+\title4 Escapismo
+
+La más común de las soluciones consiste en ignorar o evitar el
+problema.  (Yo quiero vivir pero moriré).
+
+Nótese que el transcendentalismo es una forma razonada de escapismo.
+
+Para el \definition{escapismo} el problema no debe ser planteado.
+
+\title4 Subjetivismo
+
+Para el subjetivismo hay conceptos anteriores a la explicación.  Estos
+conceptos no pueden ser explicados.  Yo quiero vivir pero moriré.
+
+Para el \definition{subjetivismo} el problema no tiene solución.
+
+\title3 La explicación subjetivista
+
+Yo soy subjetivista.  Mi explicación última, aquella explicación de
+la que no doy explicación, es la explicación subjetivista.  La
+explicación subjetivista establece que el problema es anterior a la
+explicación, de manera que el problema primero no puede ser explicado.
+Esto evita, definitivamente, que se pueda intentar explicar la
+explicación, es decir, evita la regresión metafísica infinita.  A
+cambio, no me preguntes por qué acepto la explicación subjetivista.  Te
+lo repito, no explico la explicación subjetivista, la asumo.
+
+Lo primero, el origen y la única fuente de significado, es el problema
+aparente, yo quiero vivir pero moriré.  Si un problema aparente es
+complejo, entonces la evolución puede discurrir hasta el sujeto, o sea,
+puede toparse con un resolutor general organizado jerárquicamente en
+forma de conocedor simbólico provisto de consciencia y con un yo.  Esto
+tiene varias consecuencias.
+
+El sujeto es un conocedor simbólico que se ve, a sí mismo, como su yo.
+El yo es la incógnita del problema, el lugar de la libertad que debe
+rellenar a voluntad.  De este modo, las explicaciones últimas, aquéllas
+que alcanzan el yo, son libres.  El saber es libre.
+
+La otra parte del problema es la realidad.  Es la parte del problema que
+llamábamos condición.  La realidad es objetiva, o sea, ajena a la
+libertad e independiente de la voluntad, y por esto decimos que se rige por
+leyes inmutables.  El conocimiento es objetivo.
+
+El sujeto es un conocedor simbólico cuyo yo vive en un mundo sintáctico. Así
+que, aunque considere que su lógica es completa porque es el conjunto de
+todo lo que puede imaginar (``nada ilógico {\em puede} ser pensado''),
+también puede saber paradojas, esto es, expresiones sintácticas sin relación
+posible con el problema aparente, expresiones sin significado.
+
+\label{inteligencia}
+La lógica del sujeto es contingente, un producto de la historia
+evolutiva, y no necesaria.  No hay una lógica universal o razón.  Esto
+significa que otra \definition{inteligencia}, esto es, otro resolutor
+general tratando de resolver otro problema en otra lógica, no será
+considerada inteligencia.
+
+El sujeto es un resolutor general, un buscador compulsivo de soluciones, de
+explicaciones.  Y el problema más urgente es el primero, eludir la muerte.
+Desgraciadamente los problemas aparentes no tienen una solución
+definitiva, siendo ésa precisamente la razón por la cual la evolución
+puede llegar hasta el sujeto.  Luego el sujeto es una prueba, para el propio
+sujeto, de que la muerte no puede ser explicada, aunque esa explicación
+sería suficiente.
+
+Y aunque el saber es libre y cualquier metafísica es posible, yo creo que
+la explicación tiene límites.  La tentación de explicar la muerte es
+fuerte y, por esto, la explicación absoluta tiene tanta urgencia.  Pero
+yo soy incapaz de negar la libertad, o el deseo, o la muerte.
+
+
+\title3 La muerte
+
+``De lo que no se puede hablar hay que callar'',
+concluyó \person{Wittgenstein}.  Es triste aceptar el consejo de
+\person{Wittgenstein} y continuar elaborando explicaciones.  Porque supone
+aceptar, con resignación, que mi imaginación está necesariamente
+limitada a los objetos de la lógica en la que trabaja.  Porque supone
+entender que las explicaciones no explican.  Que no se debe buscar ni una
+explicación ni un sentido a la vida, porque es para vivir para lo que se
+buscan las explicaciones.  Que saber es sólo un medio, que el fin es
+sobrevivir.  Que la forma que yo le doy a la realidad está al servicio de
+mi ansia compulsiva por sobrevivir.  Y es triste porque, a pesar de todo,
+yo moriré.
+
+\bigskip
+
+Hasta he dado nombres a la muerte. Cada enfermedad es un nombre de la
+muerte. Parece entonces que es la enfermedad quien me mata, pero no es así.
+Simplemente moriré.
+
