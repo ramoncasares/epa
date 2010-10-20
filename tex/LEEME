@@ -2,8 +2,8 @@ Las diferencias entre esta versión de EPA y la de 1999, son:
 
 - He pasado los ficheros de ISO-8859-1 a UTF-8.
 - He usado las fonts Latin Modern, en vez de las Computer Modern.
-- Uso explain.tex, fonts.tex, index.tex y metatex.tex. 
-- He puesto color a la portada y  la contraportada.
+- Uso explain.tex, fonts.tex, index.tex y metatex.tex.
+- He puesto color a la portada y la contraportada.
 - He añadido en la página [2] información sobre esta versión.
 
 - Para obtener epa.pdf basta hacer "wpdf epa".
