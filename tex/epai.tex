@@ -28,7 +28,7 @@
 \def\dopart#1#2#3#4{\def\1{#1}\def\2{^^cdndices}\ifx\1\2\else
  \bigskip\leftline{\lmone#1}\nobreak\smallskip\fi}
 
-\input auxiliar.toc
+\ifauxf\input auxiliar.toc\fi
 
 
 \prolog Bibliografía (BIBLIOGRAFÍA)
@@ -89,7 +89,7 @@ obra está citada, así 128 significa que la cita está en la página~128.
 
 \medskip
 
-\input auxiliar.abc
+\ifauxf\input auxiliar.abc\fi
 
 
 \prolog Índice de definiciones (DEFINICIONES)
@@ -106,7 +106,7 @@ conceptos listados.
 
 \begindoublecolumns
 \parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
-\input auxiliar.abc
+\ifauxf\input auxiliar.abc\fi
 \enddoublecolumns
 
 
@@ -127,7 +127,7 @@ conceptos listados.
 
 \begindoublecolumns
 \parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
-\input auxiliar.abc
+\ifauxf\input auxiliar.abc\fi
 \enddoublecolumns
 
 \catcode`\@=12
@@ -164,7 +164,7 @@ conceptos listados.
 \kern-2pc
 \label{Índice}
 
-\input auxiliar.toc
+\ifauxf\input auxiliar.toc\fi
 
 % \newpage \normalbottom
 
