@@ -1,0 +1,78 @@
+% README (RMCG20110702)
+\input doc \rmcglayout
+
+\title0 README
+
+\title1 English
+
+These are the sources of my book:
+``El problema aparente: Una teoría del conocimiento''.
+The first edition of this book in paperback was published
+by \[Visor Dis.] in 1999 under \[isbn]: 84-7774-877-2.
+
+To build the current digital version of the book,
+that is, the computer file "epa.pdf",
+please follow these instructions:
+
+\beginnumbers
+\item Take a PC with Debian Squeeze.
+ This is not strictly necessary, but,
+ being the system I use,
+ it is the only one where I am sure
+ that everything works properly as being said
+ without any adaptation.
+\item Install "spplain.git"
+ (it is project \URL<https://github.com/ramoncasares/texmf>).
+\item Install "epa.git", this way:
+\begincode
+cd
+git clone git://github.com/ramoncasares/epa.git
+\endcode
+\item Build "epa.pdf", this way:
+\begincode
+cd ~/epa/tex
+wpdf epa
+\endcode
+During "wpdf" passes 2 and 3,
+the proccess will stop complaining of undefined references.
+When this happens, just type "S" (and `Return') to continue.
+\endnumbers
+
+
+\title0 Español
+
+Estas son las fuentes de mi libro:
+``El problema aparente: Una teoría del conocimiento''.
+La primera edición en papel de este libro fue publicada
+por \[Visor Dis.] en 1999 con el \[isbn]: 84-7774-877-2.
+
+Para producir la versión digital actual,
+esto es, el fichero informático "epa.pdf",
+han de seguirse las siguientes instrucciones:
+
+\beginnumbers
+\item Disponer de una computadora con Debian Squeeze.
+ Esto no es estrictamente necesario, pero,
+ como es el entorno que yo uso,
+ es el único en el que estoy seguro de que todo funciona
+ correctamente, y tal y como lo estoy explicando,
+ sin necesidad de adaptaciones.
+\item Instalar "spplain.git"
+ (es el proyecto \URL<https://github.com/ramoncasares/texmf>).
+\item Instalar "epa.git", así:
+\begincode
+cd
+git clone git://github.com/ramoncasares/epa.git
+\endcode
+\item Obtener "epa.pdf", así:
+\begincode
+cd ~/epa/tex
+wpdf epa
+\endcode
+Cuando, en los pases 2 y 3 de "wpdf", el proceso se detenga
+quejándose de que no encuentra ciertas referencias,
+simplemente teclea "S" (y `retorno') para que continue.
+\endnumbers
+
+\bye
+
