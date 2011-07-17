@@ -33,6 +33,9 @@ git clone git://github.com/ramoncasares/epa.git
 cd ~/epa/tex
 wpdf epa
 \endcode
+If dir "~/bin" is not in your "$PATH",
+then the last command should be "~/bin/wpdf edc".
+
 During "wpdf" passes 2 and 3,
 the proccess will stop complaining of undefined references.
 When this happens, just type "S" (and `Return') to continue.
@@ -69,6 +72,9 @@ git clone git://github.com/ramoncasares/epa.git
 cd ~/epa/tex
 wpdf epa
 \endcode
+Si el directorio "~/bin" no está en tu "$PATH",
+entonces este último comando debe ser "~/bin/wpdf edc".
+
 Cuando, en los pases 2 y 3 de "wpdf", el proceso se detenga
 quejándose de que no encuentra ciertas referencias,
 simplemente teclea "S" (y `retorno') para que continue.
