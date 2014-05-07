@@ -238,11 +238,9 @@
 
 \newif\ifappendix
 \outer\def\annex{\appendixtrue \s@one=0 \ninepoint}
-%\def\nosection{\let\section\empty}
-\def\nosection{\def\section{Z}}
+\def\nosection{\def\secid{*}}
 
-%\def\section{\ifnum\s@one>0
-\def\section{\ifnum\s@one=0 0\else
+\def\secid{\ifnum\s@one=0 *\else
   \ifappendix \ifcase\s@one X\or A\or E\or I\or O\or U\else X\fi
    \else \the\s@one \fi
   \ifnum\s@two>0 .\the\s@two \ifnum\s@three>0 .\the\s@three \fi\fi\fi}
@@ -258,18 +256,18 @@
 \def\titlezero#1 \par{\newpage\vglue\prologskip
  \centertitle{\pdflabel\lmzero #1}\parrafalse\nobreak\bigskip}
 \def\titleone#1 \par{\ifparra\newpage\else\bigskip\fi
- \noindent\pdflabel{\lmone\section\quad #1}\toc1{#1}%
+ \noindent\pdflabel{\lmone\secid\quad #1}\toc1{#1}%
  \def\sectionname{\uppercase{#1}}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
 \def\titletwo#1 \par{\ifparra \par\penalty-200\bigskip \else\smallskip\fi
- \noindent\pdflabel{\lmtwo\section\quad #1}\toc2{#1}%
+ \noindent\pdflabel{\lmtwo\secid\quad #1}\toc2{#1}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
 \def\titlethree#1 \par{\ifparra \par\penalty-100\medskip \fi
- \noindent\pdflabel{\bf\section\quad #1}\toc3{#1}%
+ \noindent\pdflabel{\bf\secid\quad #1}\toc3{#1}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
@@ -284,12 +282,15 @@
  \halign{\hfil##\hfil\cr#1\crcr}}}}
 
 \def\newpart#1{\newpage \null
- \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else
-  \uppercase{#1}\hfil\fi}\newoddpage{\let\section\empty\pdflabel\toc0{#1}}}
+ \uppercase{\def\partname{#1}}
+ \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else \partname\hfil\fi}
+ \newoddpage {\pdflabel\def\secid{*}\toc0{#1}}}
 \def\newPart#1#2{\newpage \null
- \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else
-  \uppercase{#2}\hfil\fi}\newoddpage{\def\section{#1}\pdflabel\toc0{#2}}}
+ {\expandafter\def\csname^^b3\endcsname{^^d3}\uppercase{\xdef\partname{#2}}}
+ \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else \partname\hfil\fi}
+ \newoddpage {\pdflabel\def\secid{#1}\toc0{#2}}}
 \def\sectionname{}
+\def\partname{}
 
 % PROLOG
 \def\prolog#1 (#2){\ifparra\newpage
@@ -623,13 +624,15 @@ enddef;
 
 \input epa0.tex
 
-\newPart{I}{Introducci\'on}
+\newPart{I}{Introducción}
+
 \input epi1.tex
 \input epi2.tex
 \input epi3.tex
 \input epi4.tex
 
 \newPart{II}{El problema aparente}
+
 \input epa1.tex
 \input epa2.tex
 \input epa3.tex
@@ -639,8 +642,8 @@ enddef;
 \input epae.tex
 \input epad.tex
 
-\newpart{Índices}
 \nosection
+\newpart{Índices}
 \input epai.tex
 
 \bye
