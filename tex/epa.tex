@@ -10,8 +10,8 @@
 \font\tenbb=msbm10  \let\bbold\tenbb % N, B, T
 \font\ninebb=msbm9
 
-\font\tenrm=rm-lmr10 
-\font\ninerm=rm-lmr9 
+\font\tenrm=rm-lmr10
+\font\ninerm=rm-lmr9
 \font\eightrm=rm-lmr8
 
 \def\tenpoint{\lmfonts \textfont0=\tenrm}
@@ -240,10 +240,10 @@
 \outer\def\annex{\appendixtrue \s@one=0 \ninepoint}
 \def\nosection{\def\secid{*}}
 
-\def\secid{\ifnum\s@one=0 *\else
+\def\sections{\def\secid{\ifnum\s@one=0\else
   \ifappendix \ifcase\s@one X\or A\or E\or I\or O\or U\else X\fi
    \else \the\s@one \fi
-  \ifnum\s@two>0 .\the\s@two \ifnum\s@three>0 .\the\s@three \fi\fi\fi}
+  \ifnum\s@two>0 .\the\s@two \ifnum\s@three>0 .\the\s@three \fi\fi\fi}}
 
 \def\title#1 {\par \incsec#1 \ifcase #1\let\next=\titlezero \or
  \let\next=\titleone \or \let\next=\titletwo \or \let\next=\titlethree
@@ -295,7 +295,7 @@
 % PROLOG
 \def\prolog#1 (#2){\ifparra\newpage
  \hrule height0pt\vskip\prologskip\else\bigskip\bigskip\fi
- \centerline{\pdflabel\toc1{#1}\vbox{\lmone \openup3pt
+ \centerline{\pdflabel\def\secid{*}\toc1{#1}\vbox{\lmone \openup3pt
   \halign{\hfil##\hfil\cr #1\crcr}}}\def\sectionname{#2}%
   \bigskip\bigskip}
 \def\chapter#1 \par{\bigbreak\noindent{\lmtwo#1}\par\nobreak\smallskip}
@@ -594,10 +594,13 @@ enddef;
 \saveplain| \def|{\string|}
 \saveplain\person \def\person{\string\person}
 \saveplain\aut \def\aut{\string\aut\space}
+\saveplain\cr \def\cr{\space}
+\def\pdfout#1#2#3{\ifnum#1>3 #2\else\if*#3#2\else #3 #2\fi\fi}
 \files
 \restoreplain\lmixsc \restoreplain\lmsc 
 \restoreplain| \restoreplain\person
 \restoreplain\aut
+\restoreplain\cr
 
 \catcode`\@=12
 
@@ -632,7 +635,7 @@ enddef;
 \input epi4.tex
 
 \newPart{II}{El problema aparente}
-
+\sections
 \input epa1.tex
 \input epa2.tex
 \input epa3.tex
