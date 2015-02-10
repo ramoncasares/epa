@@ -1,23 +1,38 @@
 % EPA0.TEX (RMCG19950910)
 
-\pdfcode%\begingroup\stringactives
+\ifcase\pdfoutput%\begingroup\stringactives
+ \special{pdf: docinfo <<
+  /Author (Ramón Casares)
+  /Title (El problema aparente)
+  /Subject (Teoría subjetivista del saber (epistemología))
+  /Keywords (problema conocimiento evolución simbolismo autómata
+   lógica adaptación aprendizaje semántica sintaxis)
+ >>}
+\else
  \pdfinfo{
   /Author (Ramón Casares)
   /Title (El problema aparente)
   /Subject (Teoría subjetivista del saber (epistemología))
   /Keywords (problema conocimiento evolución simbolismo autómata
-   lógica adaptación aprendizaje semántica sintaxis)}
+   lógica adaptación aprendizaje semántica sintaxis)
+ }
 %\endgroup
-\pdfendcode
+\fi
 
 % [1] Portada
 
-\nopagenumbers
-\background
-\pdfWhite
+%%\nopagenumbers
+%%\background
+%%\pdfWhite
 
-\hbox{}
-\vskip1.3in
+\ifcase\pdfoutput
+ \special{pdf: bgc [\cmykCinnamon]}\special{pdf: sc [\cmykWhite]}\else
+ \background \pdfliteral{\cmykWhite\space k}\fi
+\hbox{}\vfill
+
+
+%%\hbox{}
+%%\vskip1.3in
 \centerline{\ptitlefont El problema}
 \vskip1pc
 \centerline{\ptitlefont aparente}
@@ -29,9 +44,15 @@
 
 \vskip2pc
 \centerline{\pauthorfont Ramón Casares}
-\pdfBlack
+%%\pdfBlack
 
-\vfil
+\nopagenumbers\break
+\ifcase\pdfoutput
+\special{pdf: bbc [\cmykWhite]}\special{pdf: sc [\cmykBlack]}
+\else \pdfliteral{\cmykBlack\space k}\fi
+
+
+%%\vfil
 
 \break % [2] Créditos versión digital
 
@@ -72,10 +93,15 @@ la paginación varía, aunque nunca en más de una página.\par
  {\sl Una teoría del conocimiento}\par
  Versión digital: \epaversion \par
  \copyright\ {\bf Ramón Casares} 1999, 2010\par
- \leavevmode \pdfcode \pdfstartlink attr{/Border [0 0 0]}
+ \leavevmode
+ \ifcase\pdfoutput
+  \special{html:<a href=\string"http://www.ramoncasares.com/\string">}%
+  {\tt www.ramoncasares.com}\special{html:</a>}\else
+  \pdfstartlink attr{/Border [0 0 0]}
    user{/Subtype /Link /A << /Type /Action
-    /S /URI /URI (http://www.ramoncasares.com/) >>}\pdfendcode
-  {\tt www.ramoncasares.com}\pdfcode \pdfendlink \pdfendcode \par
+    /S /URI /URI (http://www.ramoncasares.com/) >>}%
+  {\tt www.ramoncasares.com}\pdfendlink
+ \fi \par
 
 \break % [3] Colección
 
@@ -111,10 +137,13 @@ la paginación varía, aunque nunca en más de una página.\par
 \centerline{\sc Visor Dis., S.A., 1999}
 \centerline{Tomás Bretón, 55}
 \centerline{28045 Madrid}
-\centerline{\pdfcode \pdfstartlink attr{/Border [0 0 0]}
+\centerline{\ifcase\pdfoutput
+  \special{html:<a href=\string"http://www.visordis.es/\string">}%
+  {\tt www.visordis.es}\special{html:</a>}\else
+ \pdfstartlink attr{/Border [0 0 0]}
    user{/Subtype /Link /A << /Type /Action
-    /S /URI /URI (http://www.visordis.es/) >>}\pdfendcode
-  {\tt www.visordis.es}\pdfcode \pdfendlink \pdfendcode}
+    /S /URI /URI (http://www.visordis.es/) >>}%
+  {\tt www.visordis.es}\pdfendlink \fi}
 \smallskip
 \centerline{ISBN: 84-7774-877-2}
 \centerline{Depósito Legal: M.\ 28.094-1999}

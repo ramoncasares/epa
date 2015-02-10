@@ -32,12 +32,9 @@
 \font\pboldtextfont=texnansi-lmssbx10 at 12pt
 \font\ptextfont=texnansi-lmss10 at 12pt
 
-\def\pdfBlack{\pdfliteral{0 0 0 1 k 0 0 0 1 K}}
-\def\pdfWhite{\pdfliteral{0 0 0 0 k 0 0 0 0 K}}
-\def\pdfRed{\pdfliteral{0 1 1 0 k 0 1 1 0 K}}
-\def\pdfBlue{\pdfliteral{1 1 0 0 k 1 1 0 0 K}}
-\def\pdfGreen{\pdfliteral{1 0 1 0 k 1 0 1 0 K}}
-\def\pdfCinnamon{\pdfliteral{0 0.49 1 0.52 k 0 0.49 1 0.52 K}}
+\def\cmykBlack{0 0 0 1}
+\def\cmykWhite{0 0 0 0}
+\def\cmykCinnamon{0 0.49 1 0.52}
 
 \catcode`\@=11
 
@@ -59,7 +56,8 @@
  \voffset\vpage \advance\voffset-\vsize \advance\voffset-2\baselineskip
  \divide\voffset2 \advance\voffset-1in
 
-\pdfcode \pdfpageheight=\vpage \pdfpagewidth=\hpage \pdfendcode
+\ifcase\pdfoutput \special{papersize=\the\hpage,\the\vpage}%
+\else \pdfpageheight=\vpage \pdfpagewidth=\hpage \fi
 
 %\parskip=0pt plus 0.0001pt minus 0.0001pt
 %\parindent=20pt 
@@ -67,20 +65,21 @@
 
 \def\breakif#1{\vskip#1\baselineskip \penalty-250 \vskip-#1\baselineskip}
 
-\def\background{\pdfcode
+\def\background{\ifcase\pdfoutput\else
   \pdfliteral{q}% save current graphic state in the stack
-  \pdfCinnamon
+  \pdfliteral{\cmykCinnamon\space k}%
   \pdfliteral{-49 -568 m}%
   \pdfliteral{348 -568 l}%
   \pdfliteral{348 57 l}%
   \pdfliteral{-49 57 l}%
   \pdfliteral{-49 -568 l}%
   \pdfliteral{b Q}% close, stroke, fill, and restore graphic state
- \pdfendcode}
+ \fi}
 
 %\colors      % OPTIONAL COLORS
-\def\RED{\ifx\Yellow\relax\else
- \hbox to0pt{\Yellow\vrule width20pt height8pt depth2pt\Black\hss}\fi}
+\def\defrelax{\relax}
+\def\RED{\ifx\defrelax\endcolor\else
+ \hbox to0pt{\color{Yellow}\vrule width20pt height8pt depth2pt\endcolor\hss}\fi}
 
 % Hyphenation
 
@@ -238,7 +237,7 @@
 
 \newif\ifappendix
 \outer\def\annex{\appendixtrue \s@one=0 \ninepoint}
-\def\nosection{\def\secid{*}}
+\def\nosection{\def\secid{}}
 
 \def\sections{\def\secid{\ifnum\s@one=0\else
   \ifappendix \ifcase\s@one X\or A\or E\or I\or O\or U\else X\fi
@@ -254,24 +253,24 @@
 \newskip\prologskip \prologskip=30pt plus12pt minus12pt
 
 \def\titlezero#1 \par{\newpage\vglue\prologskip
- \centertitle{\pdflabel\lmzero #1}\parrafalse\nobreak\bigskip}
+ \centertitle{\dest\lmzero #1}\parrafalse\nobreak\bigskip}
 \def\titleone#1 \par{\ifparra\newpage\else\bigskip\fi
- \noindent\pdflabel{\lmone\secid\quad #1}\toc1{#1}%
+ \noindent\dest{\lmone\secid\quad #1}\toc1{#1}%
  \def\sectionname{\uppercase{#1}}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
 \def\titletwo#1 \par{\ifparra \par\penalty-200\bigskip \else\smallskip\fi
- \noindent\pdflabel{\lmtwo\secid\quad #1}\toc2{#1}%
+ \noindent\dest{\lmtwo\secid\quad #1}\toc2{#1}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
 \def\titlethree#1 \par{\ifparra \par\penalty-100\medskip \fi
- \noindent\pdflabel{\bf\secid\quad #1}\toc3{#1}%
+ \noindent\dest{\bf\secid\quad #1}\toc3{#1}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi
  \par\parrafalse\nobreak\smallskip}
-\def\titlefour#1 \par{\ifparra\smallbreak\fi\noindent\pdflabel{\bf#1}\toc4{#1}%
+\def\titlefour#1 \par{\ifparra\smallbreak\fi\noindent\dest{\bf#1}\toc4{#1}%
  \iflabeled\setbox0=\hbox{\thelabel}\ifdim\wd0=0pt\label{#1}%
   \else\label{\thelabel}\let\thelabel\null\fi\labeledfalse\fi\quad}
 
@@ -284,18 +283,18 @@
 \def\newpart#1{\newpage \null
  \uppercase{\def\partname{#1}}
  \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else \partname\hfil\fi}
- \newoddpage {\pdflabel\def\secid{*}\toc0{#1}}}
+ \newoddpage {\dest\def\secid{}\toc0{#1}}}
 \def\newPart#1#2{\newpage \null
  {\expandafter\def\csname^^b3\endcsname{^^d3}\uppercase{\xdef\partname{#2}}}
  \headline={\lmviiirm\ifodd\pageno \hfil\sectionname \else \partname\hfil\fi}
- \newoddpage {\pdflabel\def\secid{#1}\toc0{#2}}}
+ \newoddpage {\dest\def\secid{#1}\toc0{#2}}}
 \def\sectionname{}
 \def\partname{}
 
 % PROLOG
 \def\prolog#1 (#2){\ifparra\newpage
  \hrule height0pt\vskip\prologskip\else\bigskip\bigskip\fi
- \centerline{\pdflabel\def\secid{*}\toc1{#1}\vbox{\lmone \openup3pt
+ \centerline{\dest\def\secid{}\toc1{#1}\vbox{\lmone \openup3pt
   \halign{\hfil##\hfil\cr #1\crcr}}}\def\sectionname{#2}%
   \bigskip\bigskip}
 \def\chapter#1 \par{\bigbreak\noindent{\lmtwo#1}\par\nobreak\smallskip}
@@ -303,21 +302,21 @@
 
 % Indexing
 
-\def\label#1{\leavevmode\pdflabel\lbl{#1}{}\ignorespaces}
-\def\person#1{\leavevmode\pdflabel\ndx{#1}1\penalty\@M\hskip\z@skip{\sc #1}}
-\def\index#1{\leavevmode\pdflabel\ndx{#1}0\penalty\@M\hskip\z@skip\ignorespaces}
-\def\tocfig#1{\leavevmode\pdflabel\toc9{#1}\global\advance\d@stno1\ignorespaces}
+\def\label#1{\leavevmode\dest\lbl{#1}{}\ignorespaces}
+\def\person#1{\leavevmode\dest\ndx{#1}1\penalty\@M\hskip\z@skip{\sc #1}}
+\def\index#1{\leavevmode\dest\ndx{#1}0\penalty\@M\hskip\z@skip\ignorespaces}
+\def\tocfig#1{\leavevmode\dest\toc9{#1}\global\advance\d@stno1\ignorespaces}
 
 \let\it@d=~
 \def\itc@r{\def\it@b{\it@a}\let\it@c=\/%
  \ifcat\noexpand\it@a\noexpand\it@d\let\it@c=\relax\else
  \ifcat\noexpand\it@a,\setbox0=\hbox{\it@b}%
   \ifdim\ht0<0.3ex \let\it@c=\relax \fi\fi\fi \it@c}
-\def\definition#1{\leavevmode\pdflabel\ndx{#1}0\penalty\@M\hskip\z@skip
+\def\definition#1{\leavevmode\dest\ndx{#1}0\penalty\@M\hskip\z@skip
  {\it #1}\futurelet\it@a\itc@r}
 
 \def\ndxline#1#2#3#4#5{\ifnum#2=1
- \hang\noindent #1\nobreak\quad \pdfgoto{#4}{#5}\par\fi}
+ \hang\noindent #1\nobreak\quad \goto{#4}{#5}\par\fi}
 
 \def\gobblefour#1#2#3#4{\ignorespaces}\def\gobblethree#1#2#3{\ignorespaces}
 
@@ -327,11 +326,13 @@
 \newcount\footnoteno \footnoteno=0
 
 \def\footnote#1{\edef\@sf{\spacefactor\the\spacefactor}%
- \global\advance\d@stno1\pdfgoto{#1}{\number\d@stno}\@sf
+ \global\advance\d@stno1\goto{#1}{\number\d@stno}\@sf
  \insert\footins\bgroup \interlinepenalty100 \eightpt
  \let\par=\endgraf \leftskip=0pt \rightskip=0pt
  \splittopskip=10pt plus 1pt minus 1pt \floatingpenalty=20000
- \smallskip\pdfcode\pdfdest num \number\d@stno fitbh\pdfendcode
+ \smallskip\ifcase\pdfoutput
+  \special{pdf: dest (num \number\d@stno) [@thispage /FitBH @ypos]}\else
+  \pdfdest num \number\d@stno fitbh\fi
  \item{#1}\bgroup\strut\aftergroup\@foot\let\next}
 \skip\footins=\bigskipamount
 \dimen\footins=0.5\vsize
@@ -567,18 +568,18 @@ enddef;
  $$\predisplaypenalty=50 \displaywidth=\hsize \displayindent=0pt
  {\def\cr{\string\cr\space}\def\cite{\string\cite}\def|{\string\aut\space}%
   \def\person{\string\person}\def\Syntax{\string\Syntax}%
-  \pdflabel\toc9{#1\string|#2}}\global\advance\d@stno1
+  \dest\toc9{#1\string|#2}}\global\advance\d@stno1
  \vcenter{\hbox{\box\MTbox}}\qquad
- \vcenter{\hbox{\pdfgoto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
+ \vcenter{\hbox{\goto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
   }{\number\d@stno}}}$$}
 
 \def\MTendfigureX"#1"#2;{\MTendchar; % SUBJETO
  $$\predisplaypenalty=50 \displaywidth=\hsize \displayindent=0pt
  {\def\cr{\string\cr\space}\def\cite{\string\cite}\def|{\string\aut\space}%
   \def\person{\string\person}\def\Syntax{\string\Syntax}%
-  \pdflabel\toc9{#1\string|#2}}\global\advance\d@stno1
+  \dest\toc9{#1\string|#2}}\global\advance\d@stno1
  \vcenter{\hbox{\box\MTbox}}\hss %%%
- \vcenter{\hbox{\pdfgoto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
+ \vcenter{\hbox{\goto{\vbox{\bf\halign{\hfil##\hfil\cr#1\crcr}}%
   }{\number\d@stno}}}$$}
 
 %%%%%%
@@ -595,7 +596,7 @@ enddef;
 \saveplain\person \def\person{\string\person}
 \saveplain\aut \def\aut{\string\aut\space}
 \saveplain\cr \def\cr{\space}
-\def\pdfout#1#2#3{\ifnum#1>3 #2\else\if*#3#2\else #3 #2\fi\fi}
+\def\pdfout#1#2#3{\def\3{#3}\ifnum#1>3 #2\else\ifx\empty\3#2\else #3 #2\fi\fi}
 \files
 \restoreplain\lmixsc \restoreplain\lmsc 
 \restoreplain| \restoreplain\person

@@ -21,10 +21,12 @@
 \def\dofigure#1#2#3#4{\par
  \def\taketover##1|##2|{\def\1{##1}\def\2{##2}}\taketover#1|%
  \count255=#2\advance\count255by1
- \pdfcode \pdfdest num \number\count255 fitbh\pdfendcode
+ \ifcase\pdfoutput
+  \special{pdf: dest (num \number\count255) [@thispage /FitBH @ypos]}\else
+  \pdfdest num \number\count255 fitbh\fi
  \hang\noindent {\let\cr=\space\bf\1}%
  \setbox0=\hbox{\2}\ifdim\wd0=0pt \space\else{\bf:} \2.\fi
- \space\pdfgoto{{#4}}{#2}}
+ \space\goto{{#4}}{#2}}
 \def\dopart#1#2#3#4{\def\1{#1}\def\2{^^cdndices}\ifx\1\2\else
  \bigskip\leftline{\lmone#1}\nobreak\smallskip\fi}
 
@@ -56,12 +58,12 @@ obra está citada, así 128 significa que la cita está en la página~128.
 \def\bibbreak{\ifdim\lastskip<\smallskipamount \removelastskip
  \penalty-200 \vskip3pt plus 2pt \relax\fi} %plus 1.5pt minus 1pt \fi}
 
-\def\bibline#1#2#3{\ifx\newk@y\oldk@y, \pdfgoto{#3}{#1}\else
+\def\bibline#1#2#3{\ifx\newk@y\oldk@y, \goto{#3}{#1}\else
  \bibbreak\cleantoks % \smallbreak\cleantoks
  \def\record##1##2##3{\def\secondk@y{##1}\ifx\newk@y\secondk@y##3\fi}
  \input epa.bdb
  \input auxiliar.bdb
- \hang\noindent\pdflabel{\bf \the\AUTHOR:}%
+ \hang\noindent\dest{\bf \the\AUTHOR:}%
  {\def\em{\string\em\space}\def~{\string~}\def\it{\string\it\space}%
   \lbl{\newk@y}{\string\rm\space\expandafter\expandafter\the\AUTHOR\space
   \expandafter\expandafter(\the\YEAR):\space
@@ -84,7 +86,7 @@ obra está citada, así 128 significa que la cita está en la página~128.
  \setbox0=\hbox{\the\PAGES}\ifdim\wd0=0pt\else, pp.~\the\PAGES\fi
  \setbox0=\hbox{\the\ISBN}\ifdim\wd0=0pt\else, ISBN \the\ISBN\fi.
  \setbox0=\hbox{\the\NOTE}\ifdim\wd0=0pt\else \the\NOTE. \fi
- \pdfgoto{#3}{#1}\fi
+ \goto{#3}{#1}\fi
  \ignorespaces}
 
 \medskip
@@ -100,9 +102,9 @@ conceptos listados.
 \def\ndxline#1#2{\ifnum#2=0 \let\oldk@y=\newk@y \def\newk@y{#1}%
  \let\next=\defline \else \let\next\gobblethree \fi \next}
 
-\def\defline#1#2#3{\ifx\newk@y\oldk@y, \pdfgoto{#3}{#1}\else
+\def\defline#1#2#3{\ifx\newk@y\oldk@y, \goto{#3}{#1}\else
  \par\hang\noindent \newk@y,\nobreak\space\space
-  \pdfgoto{#3}{#1}\fi\ignorespaces}
+  \goto{#3}{#1}\fi\ignorespaces}
 
 \begindoublecolumns
 \parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
@@ -121,9 +123,9 @@ conceptos listados.
 
 \def\ndxone#1#2#3{\let\oldp@ge=\newp@ge\def\newp@ge{#3}%
  \ifx\newk@y\oldk@y
-  \ifx\newp@ge\oldp@ge \else, \pdfgoto{#3}{#1}\fi
+  \ifx\newp@ge\oldp@ge \else, \goto{#3}{#1}\fi
  \else \par\noindent\hang{\sc\newk@y},\space\space
-  \pdfgoto{#3}{#1}\fi\ignorespaces}
+  \goto{#3}{#1}\fi\ignorespaces}
 
 \begindoublecolumns
 \parindent=12pt \rightskip=0pt plus 4pc \hyphenpenalty=250
@@ -143,15 +145,15 @@ conceptos listados.
  \let\next\gobblefour \fi \next}
 
 \def\toclinezero#1#2#3#4{\bigskip\null
- \if*#3\def\1{#1}\else\def\1{#3. #1}\fi
- \centerline{\lmzero\pdfgoto{\1}{#2}}}
+ \def\3{#3}\ifx\empty\3\def\1{#1}\else\def\1{#3. #1}\fi
+ \centerline{\lmzero\goto{\1}{#2}}}
 \def\toclineone#1#2#3#4{\medbreak
- \if*#3\def\1{#1\tocdotfill}\else\def\1{#3\quad#1\hfill}\fi
- \line{{\bf\1\space}\pdfgoto{#4}{#2}}}
+ \def\3{#3}\ifx\empty\3\def\1{#1\tocdotfill}\else\def\1{#3\quad#1\hfill}\fi
+ \line{{\bf\1\space}\goto{#4}{#2}}}
 \def\toclinetwo#1#2#3#4{\line{\let\cr\space #3\quad #1\tocdotfill
- \space\pdfgoto{#4}{#2}}}
+ \space\goto{#4}{#2}}}
 \def\toclinethree#1#2#3#4{\line{\let\cr\space \qquad #3\quad #1\tocdotfill
- \space\pdfgoto{#4}{#2}}}
+ \space\goto{#4}{#2}}}
 \let\toclinefour\gobblefour
 
 \def\tocdotfill{\leaders\hbox to \baselineskip{\bf\hss.\hss}\hfill}
@@ -215,8 +217,12 @@ en mayor o menor grado, por esta epistemología de carácter subjetivista son:
 
 \break % Contraportada
 
-\background
-\pdfWhite
+%%\background
+%%\pdfWhite
+\ifcase\pdfoutput
+ \special{pdf: bgc [\cmykCinnamon]}\special{pdf: sc [\cmykWhite]}\else
+ \background \pdfliteral{\cmykWhite\space k}\fi
+
 \input ean13
 
 \null
@@ -271,16 +277,23 @@ Responde, entre otras, a cuestiones tales como:
  ¿Piensa un perro?\par
  ¿Qué es un vaso?\par
  ¿Qué es la vida?\par
- ¿Qué soy yo?\kern4.4cm\vbox to 0pt{\vss\pdfBlack
+ ¿Qué soy yo?\kern4.4cm\vbox to 0pt{\vss
   \hbox{%
-   \pdfliteral{q}% save current graphic state in the stack
-   \pdfliteral{0 0 0 0 k 0 0 0 1 K}% set black stroke on white fill
-   \pdfliteral{-5 -5 m}% moves to the origin
-   \pdfliteral{110 -5 l}%
-   \pdfliteral{110 92 l}%
-   \pdfliteral{-5 92 l}%
-   \pdfliteral{-5 -5 l}% 
-   \pdfliteral{b Q}% close, stroke, fill, and restore graphic state
+   \ifcase\pdfoutput
+    \special{pdf: sc [\cmykBlack]}%
+    \special{pdf: content
+     q 0 0 0 0 k 0 0 0 1 K -5 -5 m 110 -5 l 110 92 l -5 92 l -5 -5 l b Q}%
+   \else
+    \pdfliteral{\cmykBlack\space k}%
+    \pdfliteral{q}% save current graphic state in the stack
+    \pdfliteral{0 0 0 0 k 0 0 0 1 K}% set black stroke on white fill
+    \pdfliteral{-5 -5 m}% moves to the origin
+    \pdfliteral{110 -5 l}%
+    \pdfliteral{110 92 l}%
+    \pdfliteral{-5 92 l}%
+    \pdfliteral{-5 -5 l}%
+    \pdfliteral{b Q}% close, stroke, fill, and restore graphic state
+   \fi
    \ISBN 978-84-7774-877-9
    \barheight=1in
    \EAN 978-84-7774-877-9
