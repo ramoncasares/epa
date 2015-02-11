@@ -21,18 +21,11 @@
 
 % [1] Portada
 
-%%\nopagenumbers
-%%\background
-%%\pdfWhite
-
 \ifcase\pdfoutput
  \special{pdf: bgc [\cmykCinnamon]}\special{pdf: sc [\cmykWhite]}\else
  \background \pdfliteral{\cmykWhite\space k}\fi
 \hbox{}\vfill
 
-
-%%\hbox{}
-%%\vskip1.3in
 \centerline{\ptitlefont El problema}
 \vskip1pc
 \centerline{\ptitlefont aparente}
@@ -50,9 +43,6 @@
 \ifcase\pdfoutput
 \special{pdf: bbc [\cmykWhite]}\special{pdf: sc [\cmykBlack]}
 \else \pdfliteral{\cmykBlack\space k}\fi
-
-
-%%\vfil
 
 \break % [2] Créditos versión digital
 
